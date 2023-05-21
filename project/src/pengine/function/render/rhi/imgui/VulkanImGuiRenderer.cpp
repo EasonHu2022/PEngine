@@ -6,8 +6,10 @@
 #include "function/render/rhi/vulkan/VulkanSwapchain.h"
 #include "function/render/rhi/vulkan/VulkanFrameBuffer.h"
 #include "function/render/rhi/vulkan/VKWrapper.h"
+#include "function/render/rhi/vulkan/VKHelper.h"
 #include "Application.h"
 #include "core/log/PLog.h"
+#include <map>
 namespace pengine
 {
 	static ImGui_ImplVulkanH_Window g_WindowData;
@@ -53,6 +55,8 @@ namespace pengine
 		init_info.MinImageCount = 2;
 		init_info.ImageCount = (uint32_t)vkSwapChain->getSwapChainBufferCount();
 		ImGui_ImplVulkan_Init(&init_info, wd->RenderPass);
+		
+		
 		// Upload Fonts
 		{
 			rebuildFontTexture();
@@ -72,6 +76,7 @@ namespace pengine
 		g_WindowData.FrameIndex = VulkanContext::get()->getSwapChain()->getCurrentBufferIndex();
 		auto  vkCommnadBuffer = (VulkanCommandBuffer*)commandBuffer;
 		
+		//ImGui_ImplVulkan_CreateDescriptorSets(ImGui::GetDrawData(), g_WindowData.FrameIndex);
 		renderPass->beginRenderPass(commandBuffer, glm::vec4(0.1f, 0.1f, 0.1f, 1.f), frameBuffers[g_WindowData.FrameIndex].get(), SubPassContents::Inline, g_WindowData.Width, g_WindowData.Height, -1, 0);
 		ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), static_cast<VulkanCommandBuffer*>(commandBuffer)->getCommandBuffer());
 		renderPass->endRenderPass(commandBuffer);
@@ -116,15 +121,12 @@ namespace pengine
 	}
 	void VulkanImGuiRenderer::rebuildFontTexture()
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		unsigned char* pixels;
-		int            width, height;
-
-		io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
-		fontTexture = Texture2D::create(width, height, pixels);
-		fontTexture->setName("FontsTextures");
-		io.Fonts->TexID = (ImTextureID)fontTexture->getHandle();
+		auto cb = VKHelper::beginSingleTimeCommands();
+		ImGui_ImplVulkan_CreateFontsTexture(cb);
+		VKHelper::endSingleTimeCommands(cb);
 	}
+
+
 	auto VulkanImGuiRenderer::setupVulkanWindowData(ImGui_ImplVulkanH_Window* wd, VkSurfaceKHR surface, int32_t width, int32_t height) -> void
 	{
 		

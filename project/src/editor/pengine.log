@@ -1,15 +1,15 @@
-[17:58:06] [info] pengine: Vulkan : 1.3.224
-[17:58:06] [info] pengine: GPU : NVIDIA GeForce RTX 3060
-[17:58:06] [info] pengine: Vendor ID : 4318
-[17:58:06] [info] pengine: Device Type : Discrete GPU
-[17:58:06] [info] pengine: Driver Version : 526.188.0
-[17:58:06] [info] pengine: Selected physical device has 173 extensions
-[17:58:06] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer VK_LAYER_KHRONOS_validation (E:\Vulkan\Bin\.\VkLayer_khronos_validation.dll)
-[17:58:06] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer VK_LAYER_NV_optimus (C:\Windows\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_ade64cd54ec2f9ed\.\nvoglv64.dll)
-[17:58:06] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 3060" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_ade64cd54ec2f9ed\.\nvoglv64.dll"
+[19:08:05] [info] pengine: Vulkan : 1.3.224
+[19:08:05] [info] pengine: GPU : NVIDIA GeForce RTX 3060
+[19:08:05] [info] pengine: Vendor ID : 4318
+[19:08:05] [info] pengine: Device Type : Discrete GPU
+[19:08:05] [info] pengine: Driver Version : 526.188.0
+[19:08:05] [info] pengine: Selected physical device has 173 extensions
+[19:08:05] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer VK_LAYER_KHRONOS_validation (E:\Vulkan\Bin\.\VkLayer_khronos_validation.dll)
+[19:08:05] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer VK_LAYER_NV_optimus (C:\Windows\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_ade64cd54ec2f9ed\.\nvoglv64.dll)
+[19:08:05] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 3060" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_ade64cd54ec2f9ed\.\nvoglv64.dll"
 
-[17:58:06] [info] pengine: Create the VulkanCommandBuffer
-[17:58:06] [info] pengine: Create the VulkanCommandBuffer
-[17:58:06] [info] pengine: Create the VulkanCommandBuffer
-[17:58:06] [info] pengine: Add System: class pengine::ImGuiSystem
-[17:58:06] [info] pengine: bufferId : 0
+[19:08:05] [info] pengine: Create the VulkanCommandBuffer
+[19:08:05] [info] pengine: Create the VulkanCommandBuffer
+[19:08:05] [info] pengine: Create the VulkanCommandBuffer
+[19:08:05] [info] pengine: Add System: class pengine::ImGuiSystem
+[19:08:05] [info] pengine: add eidtor view : test test test

@@ -19,7 +19,9 @@ namespace pengine
 		{
 			return descriptorPool;
 		}
-
+		auto clearRenderTarget(const std::shared_ptr<Texture>& texture, CommandBuffer* commandBuffer, 
+			const glm::vec4& clearColor) -> void override;
+		auto clearRenderTarget(const glm::vec4& clearColor = { 0.3f, 0.3f, 0.3f, 1.0f }) -> void override;
 	private:
 		VkDescriptorPool descriptorPool;
 		VkDescriptorSet  descriptorSetPool[16] = {};

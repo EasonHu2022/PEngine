@@ -31,7 +31,7 @@ namespace pengine
 
 		std::vector<std::shared_ptr<FrameBuffer>> frameBuffers;
 		std::shared_ptr<RenderPass>               renderPass;
-
+		std::shared_ptr<DescriptorSet>			  descriptorSet;
 
 	};
 }

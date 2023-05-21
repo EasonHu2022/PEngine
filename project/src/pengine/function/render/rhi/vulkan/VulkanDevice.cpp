@@ -285,11 +285,15 @@ namespace pengine
 	}	
 		
 		commandPool = std::make_shared<VulkanCommandPool>(physicalDevice->indices.graphicsFamily.value(), VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
+		createPipelineCache();
 		return true;
 	}
 	void VulkanDevice::createPipelineCache()
 	{
-
+		VkPipelineCacheCreateInfo pipelineCacheCI{};
+		pipelineCacheCI.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+		pipelineCacheCI.pNext = NULL;
+		vkCreatePipelineCache(device, &pipelineCacheCI, VK_NULL_HANDLE, &pipelineCache);
 	}
 
 	std::shared_ptr<VulkanDevice> VulkanDevice::instance;

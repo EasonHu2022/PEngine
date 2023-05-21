@@ -87,7 +87,6 @@ namespace pengine
 		auto getSupportedDepthFormat(VkPhysicalDevice physicalDevice, VkFormat* depthFormat)->VkBool32;
 		auto getSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features)->VkFormat;
 		auto getDepthFormat(bool stencil = false)->VkFormat;
-
 		inline auto semaphoreCreateInfo()
 		{
 			VkSemaphoreCreateInfo semaphoreCreateInfo{};

@@ -35,11 +35,7 @@ namespace pengine
 		init();
 		//main editor loop
 		while (1)
-		{
-			//                              reset input();
-			//Input::getInput()->resetPressed();
-			 
-			
+		{			
 			//                              set timestep
 			Timestep timestep = timer.stop() / 1000000.f;
 			
@@ -51,11 +47,14 @@ namespace pengine
 				renderDevice->begin();
 
 				onRender();
+
 				imGuiSystem->onRender();
 
 				renderDevice->present();     
 
 				window->swapBuffers();
+				//TODO ： 记一下： 按理说clear rendertarget应该和pipeline绑定，可是当没有加任何pipeline的时候，imgui就不会clear，这里先加一下
+				
 				frames++;
 			}
 			

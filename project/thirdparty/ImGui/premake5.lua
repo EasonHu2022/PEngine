@@ -16,13 +16,14 @@ project "ImGui"
         thirdparty .. "/GLFW/include",
 		thirdparty .. "/GLAD/include",
 		thirdparty .. "/VulkanSDK/include",
-		thirdparty .. "/volk/include"
+		thirdparty .. "/volk/include",
+		thirdparty .. "/glm/include"
     }
 
     filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 	
 
     filter "configurations:Debug"

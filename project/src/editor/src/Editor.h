@@ -1,9 +1,9 @@
 #include "Application.h"
 #include <memory>
 #include <unordered_map>
-
-#include "EditorWindow.h"
-namespace pengine
+#include "view/viewManager.h"
+using namespace pengine;
+namespace peditor
 {
 	class Editor final : public Application
 	{
@@ -13,22 +13,9 @@ namespace pengine
 		void onImGui() override;
 		void onUpdate(const float &delta) override;
 		void onRenderDebug() override;
-		template <class T>
-		void addSubWindow();
-		template <class T>
-		inline auto getEditorWindow()
-		{
-			return std::static_pointer_cast<T>(editorWindows[typeid(T).hash_code()]);
-		}
 	private:
-		std::unordered_map<size_t, std::shared_ptr<EditorWindow>> editorWindows;
+		std::unique_ptr<ViewManager> viewManager;
 
 		
 	};
-	template <class T>
-	auto Editor::addSubWindow() -> void
-	{
-		editorWindows.emplace(typeid(T).hash_code(), std::make_shared<T>());
-	}
-
 }

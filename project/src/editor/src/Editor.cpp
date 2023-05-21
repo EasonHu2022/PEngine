@@ -1,23 +1,26 @@
 #include "Editor.h"
-#include "Main.h"
-namespace pengine
+#include "main.h"
+namespace peditor
 {
 	Editor::Editor() 
 	{
-		
+		viewManager = std::make_unique<ViewManager>();
 	}
 
 	void Editor::init()
 	{
 		Application::init();
 
-
+		viewManager->init();
 
 	}
 
 	void Editor::onImGui()
 	{
+		//later decide the order
+		Application::onImGui();
 		//update each editor window
+		viewManager->onImGui();
 	}
 
 	void Editor::onUpdate(const float& delta)
@@ -26,10 +29,11 @@ namespace pengine
 	}
 	void Editor::onRenderDebug()
 	{
+		Application::onRenderDebug();
 	}
 }
 
-pengine::Application* createApplication()
+Application* createApplication()
 {
-	return new pengine::Editor();
+	return new peditor::Editor();
 }

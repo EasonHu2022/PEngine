@@ -36,7 +36,7 @@ namespace pengine
 		{
 			if (iter->second.asset.use_count() == 1 && (current - iter->second.lastTimestamp) > 12000)
 			{
-				PLOGV("Pipeline clear");
+				PLOGI("Pipeline clear");
 				iter = pipelineCache.erase(iter);
 				continue;
 			}
@@ -47,7 +47,7 @@ namespace pengine
 		{
 			if (iter->second.asset.use_count() == 1 && (current - iter->second.lastTimestamp) > 12000)
 			{
-				PLOGV("FrameBuffer clear");
+				PLOGI("FrameBuffer clear");
 				iter = frameBufferCache.erase(iter);
 				continue;
 			}
