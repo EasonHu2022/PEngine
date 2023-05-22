@@ -1,5 +1,6 @@
 #include "Editor.h"
 #include "main.h"
+#include "view/viewManager.h"
 namespace peditor
 {
 	Editor::Editor() 

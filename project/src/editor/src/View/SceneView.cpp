@@ -1,4 +1,6 @@
 #include "sceneView.h"
+#include "Application.h"
+#include "EditorUIConfig.h"
 namespace peditor
 {
 	SceneView::SceneView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags) : EditorView(_name,_flags)
@@ -6,7 +8,8 @@ namespace peditor
 	}
 	auto SceneView::init() -> void
 	{
-		
+		updateSizeAndPos();
+		drawSizeAndPos();
 	}
 	auto SceneView::onAdd() -> void 
 	{
@@ -16,8 +19,16 @@ namespace peditor
 	{
 		
 	}
+	auto SceneView::updateSizeAndPos() -> void 
+	{
+		pos.x = VIEWMARGINCOMMON;
+		pos.y = VIEWMARGINTOP;
+		size.x = SCENEVIEWWIDTHDEFAULT * Application::getWindow()->getWidth();
+		size.y = SCENEVIEWHEIGHTDEFAULT * Application::getWindow()->getHeight();
+	}
+
 	auto SceneView::onImGui() -> void 
 	{
-		PEngineGUI::button("Test PEngine GUI ", glm::vec2(50, 50));
+		
 	}
 };

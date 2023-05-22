@@ -482,7 +482,7 @@ namespace pengine
 		}
 		else if (description.depthArrayTarget)
 		{
-			/*auto depth = (VulkanTextureDepthArray*)description.depthArrayTarget.get();
+			auto depth = (VulkanTextureDepthArray*)description.depthArrayTarget.get();
 
 			for (uint32_t i = 0; i < depth->getCount(); ++i)
 			{
@@ -492,7 +492,7 @@ namespace pengine
 				frameBufferInfo.attachments = textures;
 
 				framebuffers.emplace_back(FrameBuffer::create(frameBufferInfo));
-			}*/
+			}
 		}
 		else
 		{

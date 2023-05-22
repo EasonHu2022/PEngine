@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorView.h"
+
 namespace peditor
 {
 	class SceneView : public EditorView
@@ -9,6 +10,9 @@ namespace peditor
 		auto init() -> void  override;
 		auto onAdd() -> void override;
 		auto onRemove() -> void override;
+	private:
+		auto updateSizeAndPos() -> void override;
+
 	private:
 		auto onImGui() -> void override;
 	};

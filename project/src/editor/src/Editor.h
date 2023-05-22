@@ -1,10 +1,11 @@
 #include "Application.h"
 #include <memory>
 #include <unordered_map>
-#include "view/viewManager.h"
+
 using namespace pengine;
 namespace peditor
 {
+	class ViewManager;
 	class Editor final : public Application
 	{
 	public:

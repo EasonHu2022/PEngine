@@ -17,8 +17,24 @@ namespace peditor
 		virtual void init() = 0;
 		virtual void onAdd() = 0;
 		virtual void onRemove() = 0;
+		/// <summary>
+		/// override when you want to calculate size and pos 
+		/// </summary>
+		virtual void updateSizeAndPos() {
+			
+		};
+		/// <summary>
+		/// override when you want to set other GUICond or pivot or something
+		/// </summary>
+		virtual void drawSizeAndPos()
+		{
+			//set size and pos
+			PEngineGUI::setNextWindowPos(pos);
+			PEngineGUI::setNextWindowSize(size);
+		};
 		virtual void drawView() final 
 		{
+			
 			PEngineGUI::beginWindow(name, &p_open, flags);
 			onImGui();
 			PEngineGUI::endWindow();
@@ -33,6 +49,10 @@ namespace peditor
 	protected:
 		char* name;
 		bool p_open = true;
+		//default value
+		//if you don't override updateSizeAndPos() the view will be drawed in these params
+		glm::vec2 pos = glm::vec2(0,0);
+		glm::vec2 size = glm::vec2(10,10);
 		PEngineGUI::PEngineGUIWindowFlags flags = 0;
 	};
 

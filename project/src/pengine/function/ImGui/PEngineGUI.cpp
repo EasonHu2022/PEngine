@@ -98,4 +98,13 @@ namespace pengine
 	{
 		return ImGui::GetMousePos();
 	}
+	auto PEngineGUI::setNextWindowPos(glm::vec2& pos, PEngineGUICond cond,glm::vec2& pivot) -> void
+	{
+		ImGui::SetNextWindowPos(pos, cond, pivot);
+	}
+	auto PEngineGUI::setNextWindowSize(glm::vec2& size, PEngineGUICond cond) -> void
+	{
+		ImGui::SetNextWindowSize(size, cond);
+	}
+
 };

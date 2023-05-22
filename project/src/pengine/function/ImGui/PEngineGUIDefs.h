@@ -97,4 +97,13 @@ namespace pengine
         PEngineGUIHoveredFlags_DelayShort = 1 << 12,  // Return true after io.HoverDelayShort elapsed (~0.10 sec)
         PEngineGUIHoveredFlags_NoSharedDelay = 1 << 13,  // Disable shared delay system where moving from one item to the next keeps the previous timer for a short time (standard for tooltips with long delays)
     };
+
+    enum PENGINE_API PEngineGUICond_
+    {
+        PEngineGUICond_None = 0,        // No condition (always set the variable), same as _Always
+        PEngineGUICond_Always = 1 << 0,   // No condition (always set the variable), same as _None
+        PEngineGUICond_Once = 1 << 1,   // Set the variable once per runtime session (only the first call will succeed)
+        PEngineGUICond_FirstUseEver = 1 << 2,   // Set the variable if the object/window has no persistently saved data (no entry in .ini file)
+        PEngineGUICond_Appearing = 1 << 3,   // Set the variable if the object/window is appearing after being hidden/inactive (or the first time)
+    };
 };

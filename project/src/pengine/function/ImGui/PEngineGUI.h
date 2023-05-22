@@ -14,6 +14,8 @@ namespace pengine
 		typedef int  PEngineGUIInputTextFlags;
 		typedef int  PEngineGUIInputTextCallback;
 		typedef int  PEngineGUIHoveredFlags;
+		typedef int  PEngineGUICond;
+
 		typedef unsigned long long  PEngineGUITextureID;//may cause bug when not using vulkan cause may be other backend does not support u64
 
 		public:
@@ -61,7 +63,8 @@ namespace pengine
 			static auto endPopup()-> void;
 			static auto isItemHovered(PEngineGUIHoveredFlags flags = 0) -> bool;
 			static auto getMousePos() -> glm::vec2;
-			
+			static auto setNextWindowPos(glm::vec2& pos, PEngineGUICond cond = 0,glm::vec2& pivot = glm::vec2(0,0)) -> void;
+			static auto setNextWindowSize(glm::vec2& size, PEngineGUICond cond = 0) -> void;
 	};
 
 	

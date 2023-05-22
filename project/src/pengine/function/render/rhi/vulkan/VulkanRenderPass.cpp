@@ -214,6 +214,7 @@ namespace pengine
 		PENGINE_ASSERT(vkCmd->isRecording(), "must recording");
 
 		vkCmdBeginRenderPass(vkCmd->getCommandBuffer(), &info, subPassContentsToVK(contents));
+		
 		commandBuffer->updateViewport(width, height);
 	}
 
