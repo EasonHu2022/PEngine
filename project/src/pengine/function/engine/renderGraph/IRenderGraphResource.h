@@ -22,19 +22,19 @@ namespace pengine
 		//maybe type
 		RenderResouceType type;
 		//index in the real render res table
-		uint32_t index;
+		uint32_t index = -1;
 
 		TextureFormat format = TextureFormat::RGBA16;
 		const std::string name = " ";
 		uint32_t width;
 		uint32_t height;
-		
+		bool b_initialized = false;
 	};
 	class CommandBuffer;
 	class IRenderGraphResource
 	{
 	public:
-		//hold the handle to the real res
+		//hold the handle to the real graphics res
 		virtual auto create(uint32_t width, uint32_t height, CommandBuffer* commandbuffer, const std::string& name, TextureFormat format) -> void = 0;
 		
 	};

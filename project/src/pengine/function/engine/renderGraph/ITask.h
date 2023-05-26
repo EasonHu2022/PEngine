@@ -20,6 +20,7 @@ namespace pengine
 		{
 			PENGINE_ASSERT(index<inputs.size(), "Fatal : inputs index overflow when binding task input" );
 			inputs.at(index) = p_vRes;
+			inputs.at(index)->b_initialized = true;
 		};
 		inline auto getInputType(size_t index) -> RenderResouceType
 		{
