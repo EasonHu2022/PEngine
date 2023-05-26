@@ -18,11 +18,7 @@ namespace pengine
 	}
 	auto RenderGraph::setup() -> void
 	{
-		//bind tasks
-		//bind();
-		//bind();
-		//bind();
-		
+
 	}
 	auto RenderGraph::compile() -> void
 	{
@@ -47,7 +43,7 @@ namespace pengine
 				switch (p_vRes->type)
 				{
 				case RenderResouceType::Res_Texture2D:
-					//resources.emplace_back(std::make_shared<RenderGraphTexture2DResource>())->create(width,height,commandBuffer, p_vRes->name);
+					resources.emplace_back(std::make_shared<RenderGraphTexture2DResource>())->create(p_vRes->width, p_vRes->height,commandBuffer, p_vRes->name, p_vRes->format);
 					break;
 				default:
 					break;
@@ -56,13 +52,13 @@ namespace pengine
 			else
 			{
 				PLOGE("try to bind a nonexistent input task , uid: {0}", inputTask);
+				return false;
 			}
 		}
 		else {
 			PLOGE("try to bind a nonexistent output task , uid: {0}", outputTask);
+			return false;
 		}
-		
-		
-		
+		return true;
 	}
 };

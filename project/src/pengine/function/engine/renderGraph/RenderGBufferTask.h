@@ -5,9 +5,11 @@ namespace pengine
 	class RenderGBufferTask : public ITask
 	{
 	public:
-		RenderGBufferTask();
+		RenderGBufferTask(uint32_t	_uid);
 		~RenderGBufferTask();
-
+		auto init() -> void;
+		auto execute() -> void;
+		auto setup() -> void;
 	private:
 
 	};

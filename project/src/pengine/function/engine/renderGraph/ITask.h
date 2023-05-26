@@ -7,11 +7,12 @@ namespace pengine
 {
 	class ITask
 	{
+	public:
 		ITask(uint32_t	_uid) : uid(_uid) {};
 	public:
-		virtual auto init() -> void;
-		virtual auto execute() -> void;
-		virtual auto setup() -> void;
+		virtual auto init() -> void = 0;
+		virtual auto execute() -> void = 0;
+		virtual auto setup() -> void = 0;
 	public:
 		//don't do any validation here
 		//don't get any task info between task

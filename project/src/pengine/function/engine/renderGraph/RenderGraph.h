@@ -18,12 +18,12 @@ namespace pengine
 		auto bind(uint32_t outputTask, size_t bindpos, uint32_t inputTask, size_t bindPos) -> bool;
 	private:
 		template<class T>
-		auto addTask(uint32_t uid) -> T*
+		auto addTask(uint32_t uid) -> std::shared_ptr<T>
 		{
 			static_assert(std::is_base_of<ITask, T>::value, "class T should extend from ITask");
 			PLOGI("Add Task: {0}", typeid(T).name());
 			taskUids.push_back(uid);
-			std::static_pointer_cast<T>(taskMap.emplace(uid, std::make_shared<T>(uid)).first->second);
+			return std::static_pointer_cast<T>(taskMap.emplace(uid, std::make_shared<T>(uid)).first->second);
 		}
 
 		std::vector<uint32_t> taskUids;

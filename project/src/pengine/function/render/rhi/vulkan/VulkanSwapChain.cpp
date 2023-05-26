@@ -350,7 +350,7 @@ namespace pengine
 
 		if (error == VK_ERROR_OUT_OF_DATE_KHR)
 		{
-			PLOGE("[Vulkan] SwapChain is out of date");
+			PLOGE("[Vulkan] SwapChain is out of date, plz handle window iconify event ASAP!");
 		}
 		else if (error == VK_SUBOPTIMAL_KHR)
 		{
