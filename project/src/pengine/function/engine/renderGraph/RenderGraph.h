@@ -11,7 +11,6 @@ namespace pengine
 	{
 		
 
-
 	};
 
 
@@ -40,7 +39,6 @@ namespace pengine
 		std::vector<uint32_t> taskUids;
 		std::unordered_map<uint32_t,std::shared_ptr<ITask>> taskMap;
 		std::vector<std::shared_ptr<IRenderGraphResource>> resources;
-		CommandBuffer* commandBuffer;
 		//maybe queue?
 		//std::vector<renderQueue> queues;//make it as vertex input
 	};

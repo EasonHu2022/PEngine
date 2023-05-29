@@ -18,7 +18,9 @@ namespace pengine
 	}
 	auto RenderGraph::setup() -> void
 	{
-		//commit CBuffer
+	
+		
+		
 
 	}
 	auto RenderGraph::compile() -> void
@@ -33,7 +35,8 @@ namespace pengine
 
 	auto RenderGraph::createCBuffers() ->void
 	{
-
+		//create descriptorsets
+		//commit CBuffer
 	}
 
 	auto RenderGraph::execute() -> void
