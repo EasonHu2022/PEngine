@@ -30,6 +30,7 @@ project "pengine"
 		thirdparty .. "/volk/include",
 		thirdparty .. "/vulkanmemoryallocator/include",
 		thirdparty .. "/glm/include",
+		thirdparty .. "/entt/include",
 		
 	}
 

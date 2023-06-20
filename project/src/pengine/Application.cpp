@@ -50,6 +50,7 @@ namespace pengine
 
 				imGuiSystem->onRender();
 
+				//end command and submit and swapchain present
 				renderDevice->present();     
 
 				window->swapBuffers();

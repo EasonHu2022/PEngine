@@ -1,8 +1,12 @@
 #include "Scene.h"
+#include "function/engine/renderGraph/RenderGraph.h"
 namespace pengine
 {
-	Scene::Scene()
+	Scene::Scene(const std::string& _name) : name(_name)
 	{
+		//each scene bind with a render graph
+		renderGraph = std::make_shared<RenderGraph>("");
+		renderGraph->init(entityManager->getRegistry(),width, height);
 	}
 	Scene::~Scene()
 	{
@@ -10,21 +14,52 @@ namespace pengine
 	auto Scene::cull() -> void
 	{
 	}
-	auto Scene::setUp() -> void
-	{
-	}
 	auto Scene::onUpdate() -> void
 	{
 	}
-	auto Scene::addEntity() -> size_t
+
+	auto Scene::getRegistry() -> entt::registry&
 	{
-		return size_t();
+		return entityManager->getRegistry();
 	}
-	auto Scene::removeEntity(size_t handle) -> bool
+
+	auto Scene::createEntity() -> Entity
 	{
-		return false;
+		dirty = true;
+		auto entity = entityManager->create();
+		if (onEntityAdd)
+			onEntityAdd(entity);
+		return entity;
 	}
-	auto Scene::updateRenderQueue() -> void
+
+	auto Scene::createEntity(const std::string& name) -> Entity
+	{
+		dirty = true;
+		int32_t i = 0;
+		auto    entity = entityManager->getEntityByName(name);
+		while (entity.valid())
+		{
+			entity = entityManager->getEntityByName(name + "(" + std::to_string(i + 1) + ")");
+			i++;
+		}
+		auto newEntity = entityManager->create(i == 0 ? name : name + "(" + std::to_string(i) + ")");
+		if (onEntityAdd)
+			onEntityAdd(newEntity);
+		return newEntity;
+	}
+
+	auto Scene::duplicateEntity(const Entity& entity, const Entity& parent) -> void
+	{
+		
+	}
+
+	auto Scene::duplicateEntity(const Entity& entity) -> void
 	{
 	}
+
+	auto Scene::removeAllChildren(entt::entity entity) -> void
+	{
+		entityManager->removeAllChildren(entity);
+	}
+	
 };

@@ -36,6 +36,6 @@ namespace pengine
 	public:
 		//hold the handle to the real graphics res
 		virtual auto create(uint32_t width, uint32_t height, CommandBuffer* commandbuffer, const std::string& name, TextureFormat format) -> void = 0;
-		
+		virtual auto getNativeResource() -> std::shared_ptr<Texture> = 0;
 	};
 };

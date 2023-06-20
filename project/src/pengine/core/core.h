@@ -9,6 +9,8 @@
 		}											\
 	}		
 
+#define BIT(x) (1 << x)
+
 #define NO_COPYABLE(TypeName) \
 	TypeName(const TypeName &) = delete;   \
 	TypeName(TypeName &&) = delete;	\

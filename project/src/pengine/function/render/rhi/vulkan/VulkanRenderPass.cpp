@@ -48,7 +48,7 @@ namespace pengine
 		}
 		else if (texture->getType() == TextureType::Cube)
 		{
-				attachment.format        = std::static_pointer_cast<VulkanTextureCube>(texture)->getVkFormat();
+			attachment.format        = std::static_pointer_cast<VulkanTextureCube>(texture)->getVkFormat();
 			attachment.initialLayout = std::static_pointer_cast<VulkanTextureCube>(texture)->getImageLayout();
 			attachment.finalLayout   = attachment.initialLayout;
 			PENGINE_ASSERT(attachment.format != VK_FORMAT_UNDEFINED, "");

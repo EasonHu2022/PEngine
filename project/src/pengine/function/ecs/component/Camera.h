@@ -3,24 +3,28 @@
 #include "glm/glm.hpp"
 namespace pengine
 {
-	struct CameraData
-	{
-		glm::mat4  proj;
-		glm::mat4  view;
-		glm::mat4  projView;
-		glm::mat4  prevProjView;
-		float      nearPlane;
-		float      farPlane;
-		float      fov;
+	namespace component {
 	
-	};
-	class Camera : public Component
-	{
-	public:
-		Camera();
-		~Camera();
+		struct CameraData
+		{
+			glm::mat4  proj;
+			glm::mat4  view;
+			glm::mat4  projView;
+			glm::mat4  prevProjView;
+			float      nearPlane;
+			float      farPlane;
+			float      fov;
 
-	private:
-		CameraData cameraData;
+		};
+		class Camera : public Component
+		{
+		public:
+			Camera();
+			~Camera();
+
+		private:
+			CameraData cameraData;
+		};
 	};
+	
 };

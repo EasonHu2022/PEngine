@@ -10,6 +10,7 @@
 #include "function/ImGui/ImGuiSystem.h"
 #include "core/Timer.h"
 #include "core/core.h"
+
 //后续需要做一个api选择类，这里先无脑vulkan
 
 namespace pengine
@@ -58,6 +59,11 @@ namespace pengine
 		{
 			return get()->timer;
 		}
+
+		/*inline static auto& getSceneManager()
+		{
+			return get()->sceneManager;
+		}*/
 	protected:
 		std::unique_ptr<Window>				window;
 		std::shared_ptr<GraphicsContext>    graphicsContext;
@@ -65,6 +71,7 @@ namespace pengine
 		std::shared_ptr<SystemManager>      systemManager;
 		std::shared_ptr<ImGuiSystem>		imGuiSystem;
 		std::shared_ptr<Cache>              cache;
+		//std::unique_ptr<SceneManager>      sceneManager;
 		//temp
 		Scene* scene;
 		Timer                                                            timer;
