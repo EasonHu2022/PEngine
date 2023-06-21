@@ -1,11 +1,12 @@
 #include "RenderGraph.h"
-#include "RenderGBufferTask.h"
-#include "RenderDeferredLightingTask.h"
+#include "RenderGBufferPass.h"
+#include "RenderDeferredLightingPass.h"
 #include "RenderGraphTexture2DResource.h"
 #include "function/ecs/component/Component.h"
 #include "function/ecs/component/Transform.h"
 #include "function/ecs/component/MeshRenderer.h"
 #include "function/ecs/component/camera.h"
+#include "PassGroup.h"
 namespace pengine
 {
 	RenderGraph::RenderGraph(std::string& _path) : path(_path)
@@ -20,8 +21,8 @@ namespace pengine
 		//temply write to hard code, later load from config file
 		/*################# Add Tasks #######################*/
 		//add with uid, read from config 
-		addTask<RenderGBufferTask>(1) -> init(registry);
-		addTask<RenderDeferredLightingTask>(2) -> init(registry);
+		addPass<RenderGBufferPass>(1) -> init(registry);
+		addPass<RenderDeferredLightingPass>(2) -> init(registry);
 		/*################# */
 	}
 	auto RenderGraph::setup() -> void
@@ -34,10 +35,10 @@ namespace pengine
 	//sink registry, get data each layer
 	auto RenderGraph::update(entt::registry& registry) -> void
 	{
-		auto taskCount = taskUids.size();
+		auto taskCount = passUids.size();
 		for (int i = 0; i < taskCount; i++)
 		{
-			taskMap[taskUids.at(i)]->onUpdate(registry);
+			passMap[passUids.at(i)]->onUpdate(registry);
 		}
 	}
 
@@ -49,35 +50,41 @@ namespace pengine
 		bind(1, 2, 2, 2);
 		bind(1, 3, 2, 3);
 		bind(1, 4, 2, 4);
+		//sort tasks
+		passSorting(passUids);
+		//compile each pass group
+		for (auto& group : groupSet)
+		{
+			group.compile();
+		}
 	}
-
 	auto RenderGraph::execute(CommandBuffer* cmdBuffer) -> void
 	{
 		//execute each task
-		auto taskCount = taskUids.size();
-		for (int i = 0; i < taskCount; i++)
+		auto passCount = passUids.size();
+		for (int i = 0; i < passCount; i++)
 		{
-			taskMap[taskUids.at(i)]->execute(cmdBuffer);
+			passMap[passUids.at(i)]->execute(cmdBuffer);
 		}
+		
 	}
-
 	auto RenderGraph::bind(uint32_t outputTask, size_t OutputBindPos, uint32_t inputTask, size_t inputBindPos) -> bool
 	{
-		if (taskMap.find(outputTask) != taskMap.end()) {
+		if (passMap.find(outputTask) != passMap.end()) {
 			
-			auto p_vRes = taskMap[outputTask]->getOutput(OutputBindPos);
-			if (taskMap.find(inputTask) != taskMap.end())
+			auto p_vRes = passMap[outputTask]->getOutput(OutputBindPos);
+			if (passMap.find(inputTask) != passMap.end())
 			{
-				if (taskMap[outputTask]->getOutputType(OutputBindPos) != taskMap[inputTask]->getInputType(inputBindPos))
+				if (passMap[outputTask]->getOutputType(OutputBindPos) != passMap[inputTask]->getInputType(inputBindPos))
 				{
 					PLOGE("Failed! Try to bind 2 resource with different type !");
 					return false;
 				}
 
-				taskMap[inputTask]->bindInput(inputBindPos, p_vRes);
+				passMap[inputTask]->bindInput(inputBindPos, p_vRes);
 
-				//set dependencies
-				taskMap[inputTask]->setDependency(outputTask);
+				//set dependencies task(used to Topological Sorting)
+				passMap[inputTask]->addDegreeIn(outputTask);
 
 				switch (p_vRes->type)
 				{
@@ -120,5 +127,35 @@ namespace pengine
 			return NULL;
 		}
 		return resources.at(id).get();
+	}
+	auto RenderGraph::passSorting(std::vector<uint32_t> src) -> void
+	{
+		auto count = src.size();
+		if (count == 0) return;
+		PassGroup group_ordered(this);
+		std::vector<uint32_t> unordered;
+		for (int i = 0; i < count; i++)
+		{
+			auto pass = passMap[src[i]];
+			if (pass->getDegree() == 0)
+			{
+				group_ordered.addPass(pass->getUID());
+			}
+			else
+			{
+				unordered.push_back(pass->getUID());
+			}
+		}
+		auto size = group_ordered.getPassesCount();
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < count - size; j++)
+			{
+				auto pass = passMap[unordered[j]];
+				pass->updateDegree(group_ordered.getPass(i));
+			}
+		}
+		groupSet.push_back(group_ordered);
+		passSorting(unordered);
 	}
 };

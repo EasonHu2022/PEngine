@@ -9,10 +9,10 @@ namespace pengine
 {
 	class RenderGraph;
 	struct SharedRenderData;
-	class ITask
+	class IPass
 	{
 	public:
-		ITask(uint32_t	_uid, RenderGraph* renderGraph) : uid(_uid), m_renderGraph(renderGraph){};
+		IPass(uint32_t	_uid, RenderGraph* renderGraph) : uid(_uid), m_renderGraph(renderGraph){};
 	public:
 		virtual auto init(entt::registry& registry) -> void = 0;
 		virtual auto execute(CommandBuffer* commandBuffer) -> void = 0;
@@ -45,18 +45,36 @@ namespace pengine
 		};
 		inline auto getInputCount() -> size_t { return inputs.size(); };
 		inline auto getOutputCount() -> size_t { return outputs.size(); };
-		inline auto getState() -> bool { return b_completed; };
-		inline auto setDependency(uint32_t dp) -> void 
+		inline auto addDegreeIn(uint32_t dp) -> void 
 		{
-			if (std::find(dependencies.begin(), dependencies.end(), dp) == dependencies.end())
+			if (std::find(m_InPasses.begin(), m_InPasses.end(), dp) == m_InPasses.end())
 			{
-				dependencies.push_back(dp);
+				m_InPasses.push_back(dp);
+				m_inDegree = m_InPasses.size();
 			}
 		};
+
+		inline auto updateDegree(uint32_t dp) -> void
+		{
+			if (std::find(m_InPasses.begin(), m_InPasses.end(), dp) != m_InPasses.end())
+			{
+				m_inDegree--;
+			}
+		}
+
+		inline auto getDegree() -> size_t
+		{
+			return m_inDegree;
+		}
+
+		inline auto getUID() -> uint32_t
+		{
+			return uid;
+		}
 	protected:
 		//name
 		char* name;
-		//reads
+		//reads(dependencies res)
 		std::vector <std::shared_ptr<RenderGraphVirtualResource>> inputs;
 		//writes
 		std::vector <std::shared_ptr<RenderGraphVirtualResource>> outputs;
@@ -67,10 +85,12 @@ namespace pengine
 		//avoid update all every frame
 		std::vector<Entity> m_visbileEntity;
 
-		//record dependencies
-		std::vector<uint32_t> dependencies;
+		//record inpasses
+		std::vector<uint32_t> m_InPasses;
 
-		bool b_completed = false;
+		//only used for order
+		size_t m_inDegree = 0;
+
 		RenderGraph* m_renderGraph;
 	};
 

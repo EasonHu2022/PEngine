@@ -287,7 +287,7 @@ namespace pengine
 		shaderCreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		shaderCreateInfo.codeSize = spvCode.size() * 4; // len is same as uint8_t 
 		shaderCreateInfo.pCode = spvCode.data();
-		shaderCreateInfo.pNext = VK_NULL_HANDLE;
+		shaderCreateInfo.pNext = VK_NULL_HANDLE;                                                            
 
 		//	spirv_cross::Compiler        comp(spvCode.data(), spvCode.size());
 		//	spirv_cross::ShaderResources resources = comp.get_shader_resources();

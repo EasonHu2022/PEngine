@@ -1,5 +1,5 @@
 #pragma once
-#include "ITask.h"
+#include "IPass.h"
 namespace pengine
 {
 
@@ -24,11 +24,11 @@ namespace pengine
 	};
 
 	struct SharedRenderData;
-	class RenderGBufferTask : public ITask
+	class RenderGBufferPass : public IPass
 	{
 	public:
-		RenderGBufferTask(uint32_t	_uid, RenderGraph* renderGraph);
-		~RenderGBufferTask();
+		RenderGBufferPass(uint32_t	_uid, RenderGraph* renderGraph);
+		~RenderGBufferPass();
 		
 		auto init(entt::registry& registry) -> void override;
 		//record

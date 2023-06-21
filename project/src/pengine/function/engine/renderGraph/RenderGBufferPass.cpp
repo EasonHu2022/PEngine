@@ -1,4 +1,4 @@
-#include "RenderGBufferTask.h"
+#include "RenderGBufferPass.h"
 #include "RenderGraph.h"
 #include "function/render/rhi/Pipeline.h"
 #include "function/render/rhi/Shader.h"
@@ -24,14 +24,14 @@ namespace pengine
 		defaultMaterial = std::make_shared<Material>(deferredColorShader, properties);
 	}
 
-	RenderGBufferTask::RenderGBufferTask(uint32_t _uid, RenderGraph* renderGraph) : ITask(_uid, renderGraph)
+	RenderGBufferPass::RenderGBufferPass(uint32_t _uid, RenderGraph* renderGraph) : ITask(_uid, renderGraph)
 	{
 		//only for serilization attributions
 	}
-	RenderGBufferTask::~RenderGBufferTask()
+	RenderGBufferPass::~RenderGBufferPass()
 	{
 	}
-	auto RenderGBufferTask::init(entt::registry& registry) -> void
+	auto RenderGBufferPass::init(entt::registry& registry) -> void
 	{
 		//filter the registry entities
 		auto meshes = registry.group<component::MeshRenderer, component::Transform>();
@@ -44,7 +44,7 @@ namespace pengine
 		}
 		m_LocalData = RenderGBufferData();
 	}
-	auto RenderGBufferTask::execute(CommandBuffer* commandBuffer) -> void
+	auto RenderGBufferPass::execute(CommandBuffer* commandBuffer) -> void
 	{
 		std::shared_ptr<Pipeline> pipeline;
 		//traverse queue
@@ -118,10 +118,10 @@ namespace pengine
 			PLOGE("Try to use null cmd buffer! in Task : {0},  execute() ", name);
 		}
 	}
-	auto RenderGBufferTask::setup() -> void
+	auto RenderGBufferPass::setup() -> void
 	{
 	}
-	auto RenderGBufferTask::onUpdate(entt::registry& registry) -> void 
+	auto RenderGBufferPass::onUpdate(entt::registry& registry) -> void
 	{
 		//refill renderqueue
 		m_renderQueue.clear();
@@ -170,10 +170,10 @@ namespace pengine
 		}
 	}
 
-	auto RenderGBufferTask::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
+	auto RenderGBufferPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
 	}
-	auto RenderGBufferTask::onSceneElementChange(Entity& ent) -> void
+	auto RenderGBufferPass::onSceneElementChange(Entity& ent) -> void
 	{
 		if (!ent.hasComponent<component::MeshRenderer>() || !ent.hasComponent<component::Transform>())
 		{

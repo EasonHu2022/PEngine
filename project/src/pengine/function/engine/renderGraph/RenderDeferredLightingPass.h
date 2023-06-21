@@ -1,12 +1,12 @@
 #pragma once
-#include "ITask.h"
+#include "IPass.h"
 namespace pengine
 {
-	class RenderDeferredLightingTask : public ITask
+	class RenderDeferredLightingPass : public IPass
 	{
 	public:
-		RenderDeferredLightingTask(uint32_t uid, RenderGraph* renderGraph);
-		~RenderDeferredLightingTask();
+		RenderDeferredLightingPass(uint32_t uid, RenderGraph* renderGraph);
+		~RenderDeferredLightingPass();
 		auto init(entt::registry& registry) -> void override;
 		auto execute(CommandBuffer* commandBuffer) -> void override;
 		auto setup() -> void override;
