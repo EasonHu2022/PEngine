@@ -17,6 +17,10 @@ namespace pengine
 	auto RenderDeferredLightingPass::setup() -> void
 	{
 	}
+	auto RenderDeferredLightingPass::onUpdate(entt::registry& registry) -> void 
+	{
+		
+	}
 	auto RenderDeferredLightingPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
 	}

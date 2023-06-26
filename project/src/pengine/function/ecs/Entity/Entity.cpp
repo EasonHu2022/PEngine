@@ -8,9 +8,9 @@ namespace pengine
 			return registry->get<component::ActiveComponent>(entityHandle).active;
 		return false;
 	}
-	auto Entity::setActive(bool active) -> void
+	auto Entity::setActive(bool _active) -> void
 	{
-		getOrAddComponent<component::ActiveComponent>().active = isActive;
+		getOrAddComponent<component::ActiveComponent>().active = _active;
 	}
 	auto Entity::setParent(const Entity& entity) -> void
 	{

@@ -11,14 +11,14 @@
 #include "function/engine/Mesh.h"
 #include "entt/entt.hpp"
 #include "function/resource/IResource.h"
+#include "PassGroup.h"
 
 namespace pengine
 {
-
-	class PassGroup;
 	class RenderGraph : public IResource
 	{
 	public:
+		RenderGraph() = default;
 		RenderGraph(std::string& path);
 		~RenderGraph() {};
 		auto init(entt::registry& registry,uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
@@ -33,6 +33,9 @@ namespace pengine
 
 		auto inline getPassByID(uint32_t id) ->std::shared_ptr<IPass> { return passMap[id]; };
 		auto inline getPassCount()->size_t { return passUids.size(); };
+
+		auto getResourceType() const->FileType { return FileType::RenderGraph; };
+		auto getPath() const->std::string { return path; };
 	private:
 		//Topological Sorting
 		auto passSorting(std::vector<uint32_t> src) -> void;
@@ -42,17 +45,18 @@ namespace pengine
 		template<class T>
 		auto addPass(uint32_t uid) -> std::shared_ptr<T>
 		{
-			static_assert(std::is_base_of<ITask, T>::value, "class T should extend from ITask");
+			static_assert(std::is_base_of<IPass, T>::value, "class T should extend from IPass");
 			PLOGI("Add Task: {0}", typeid(T).name());
 			passUids.push_back(uid);
 			return std::static_pointer_cast<T>(passMap.emplace(uid, std::make_shared<T>(uid,this)).first->second);
 		}
 		std::string name;
+		std::string path;
 
 		std::vector<uint32_t> passUids;
 		std::unordered_map<uint32_t,std::shared_ptr<IPass>> passMap;
 		std::vector<std::shared_ptr<IRenderGraphResource>> resources;
-		std::string path;
+	
 		glm::vec2 renderExtend;
 		glm::vec2 outputExtend;
 		//set of group

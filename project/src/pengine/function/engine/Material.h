@@ -2,6 +2,7 @@
 #include "core/core.h"
 #include <vector>
 #include "function/resource/IResource.h"
+#include "glm/glm.hpp"
 namespace pengine
 {
 	class Texture2D;
@@ -23,8 +24,7 @@ namespace pengine
 		float     usingNormalMap = 1.0f;
 		float     usingAOMap = 1.0f;
 		float     usingEmissiveMap = 1.0f;
-		float     workflow = PBR_WORKFLOW_SEPARATE_TEXTURES;
-
+		//float     workflow = PBR_WORKFLOW_SEPARATE_TEXTURES;
 		//padding in vulkan
 		float padding = 0.0f;
 	};
@@ -93,12 +93,16 @@ namespace pengine
 		{
 			return (uint32_t)flag & renderFlags;
 		}
+
+		auto getResourceType() const->FileType { return FileType::Material; };
+		auto getPath() const->std::string { return path; };
 	private:
 		std::shared_ptr<Shader>        shader;
 		std::shared_ptr<UniformBuffer> materialPropertiesBuffer;
 		std::string                    name;
 		std::string                    materialId;
 		std::shared_ptr<DescriptorSet> descriptorSet;
+		std::string					   path;
 	protected:
 		int32_t renderFlags = 0;
 

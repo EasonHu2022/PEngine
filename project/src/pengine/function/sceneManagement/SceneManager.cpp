@@ -14,20 +14,24 @@ namespace pengine
 	auto SceneManager::onUpdate() -> void
 	{
 		//for scene stuffs update accept rendergraph	
-		currentScene->onUpdate();
+		if (currentScene)
+			currentScene->onUpdate();
 	}
 	auto SceneManager::onLateUpdate() -> void
 	{
 		//update rendergraph at a very late stage
-		currentScene->onLateUpdate();
+		if(currentScene)
+			currentScene->onLateUpdate();
 	}
 	auto SceneManager::onRender() -> void
 	{
-		currentScene->onRender();
+		if (currentScene)
+			currentScene->onRender();
 	}
 	auto SceneManager::onResize(uint32_t w, uint32_t h) -> void
 	{
-		currentScene->onResize(w,h);
+		if (currentScene)
+			currentScene->onResize(w,h);
 	}
 	auto SceneManager::loadScene(const std::string& filePath) -> bool
 	{

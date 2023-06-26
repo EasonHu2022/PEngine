@@ -84,7 +84,7 @@ namespace pengine
 		template <typename T>
 		inline auto hasComponent() const -> bool
 		{
-			return registry->has<T>(entityHandle);
+			return registry->try_get<T>(entityHandle) != nullptr ? true : false;
 		}
 
 		template <typename T>

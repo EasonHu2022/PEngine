@@ -9,10 +9,10 @@
 #include "function/ecs/Component/Light.h"
 #include "function/ecs/Component/Camera.h"
 #include "function/resource/IResource.h"
-
+#include "function/engine/renderGraph/RenderGraph.h"
 namespace pengine
 {
-	class RenderGraph;
+
 	class PENGINE_API Scene : public IResource
 	{
 	public:

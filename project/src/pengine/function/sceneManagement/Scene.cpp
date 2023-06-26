@@ -1,5 +1,4 @@
 #include "Scene.h"
-#include "function/engine/renderGraph/RenderGraph.h"
 #include "Application.h"
 #include "function/render/rhi/SwapChain.h"
 namespace pengine
@@ -7,7 +6,8 @@ namespace pengine
 	Scene::Scene(const std::string& _name) : name(_name)
 	{
 		//each scene bind with a render graph
-		renderGraph = std::make_shared<RenderGraph>("");
+		std::string RGPath = "test.rg";
+		renderGraph = std::make_shared<RenderGraph>(RGPath);
 		renderGraph->init(entityManager->getRegistry(),width, height,width,height);
 	}
 	Scene::~Scene()
@@ -19,8 +19,6 @@ namespace pengine
 	auto Scene::onUpdate() -> void
 	{
 
-
-		
 	}
 	auto Scene::onLateUpdate() -> void
 	{

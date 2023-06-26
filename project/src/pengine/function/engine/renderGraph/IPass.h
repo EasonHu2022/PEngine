@@ -19,7 +19,6 @@ namespace pengine
 		virtual auto setup() -> void = 0;
 		virtual auto onUpdate(entt::registry& registry) -> void = 0;
 		virtual auto onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void = 0;
-		virtual auto onSceneElementChange(Entity& ent) -> void = 0;
 	public:
 		//don't do any validation here
 		//don't get any task info between task

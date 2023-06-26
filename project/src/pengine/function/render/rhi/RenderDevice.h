@@ -2,10 +2,13 @@
 #include "core/core.h"
 #include <memory>
 #include "glm/glm.hpp"
+#include "Defs.h"
 namespace pengine
 {
 	class Texture;
 	class CommandBuffer;
+	class DescriptorSet;
+	class Mesh;
 	/// <summary>
 	/// on design, this class gives all of native render relative api to engine use;
 	/// </summary>

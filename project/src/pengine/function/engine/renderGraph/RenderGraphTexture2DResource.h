@@ -1,5 +1,6 @@
 #pragma once
 #include "IRenderGraphResource.h"
+#include "function/render/rhi/Texture.h"
 #include <memory>
 namespace pengine
 {

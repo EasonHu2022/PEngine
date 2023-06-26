@@ -1,16 +1,16 @@
 #pragma once
 #include "core/core.h"
-#include "function/ecs/Entity/Entity.h"
 #include <entt/entt.hpp>
 namespace pengine
 {
+	class Entity;
 	namespace component
 	{
 		class PENGINE_API Component
 		{
 		public:
 			virtual ~Component() = default;
-			Entity       getEntity();
+			auto  getEntity() -> pengine::Entity;
 			inline auto& getEntityId() const
 			{
 				return entity;
