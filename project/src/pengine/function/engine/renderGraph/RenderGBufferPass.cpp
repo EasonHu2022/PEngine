@@ -24,8 +24,9 @@ namespace pengine
 		defaultMaterial = std::make_shared<Material>(deferredColorShader, properties);
 	}
 
-	RenderGBufferPass::RenderGBufferPass(uint32_t _uid, RenderGraph* renderGraph) : ITask(_uid, renderGraph)
+	RenderGBufferPass::RenderGBufferPass(uint32_t _uid, RenderGraph* renderGraph) : IPass(_uid, renderGraph)
 	{
+		prevFrameValid = false;
 		//only for serilization attributions
 	}
 	RenderGBufferPass::~RenderGBufferPass()
@@ -33,19 +34,13 @@ namespace pengine
 	}
 	auto RenderGBufferPass::init(entt::registry& registry) -> void
 	{
-		//filter the registry entities
-		auto meshes = registry.group<component::MeshRenderer, component::Transform>();
-		if (!meshes.empty())
-		{
-			for (const auto& data : meshes.each())
-			{
-				m_visbileEntity.emplace_back(std::get<0>(data), registry);
-			}
-		}
+		
 		m_LocalData = RenderGBufferData();
 	}
 	auto RenderGBufferPass::execute(CommandBuffer* commandBuffer) -> void
 	{
+		m_LocalData.descriptorColorSet[0]->update();
+		m_LocalData.descriptorColorSet[2]->update();
 		std::shared_ptr<Pipeline> pipeline;
 		//traverse queue
 		for (auto unit :m_renderQueue)
@@ -131,6 +126,46 @@ namespace pengine
 		pipelineInfo.blendMode = BlendMode::SrcAlphaOneMinusSrcAlpha;
 		pipelineInfo.clearTargets = false;
 		pipelineInfo.swapChainTarget = false;
+		//acquire camera data
+		auto cameras = registry.group<component::Camera, component::Transform>();
+		if (cameras.empty())
+		{
+			PLOGW("Non Main Camera Detected!");
+		}
+		else
+		{
+			if (cameras.size() > 1)
+			{
+				PLOGW("More than one Main Camera Detected! Random one will be used !");
+			}
+			auto cameraEnt = Entity(cameras.front(), registry);
+			auto cameraData = cameraEnt.getComponent<component::Camera>();
+			auto cameraTransform = cameraEnt.getComponent<component::Transform>();
+			auto project = cameraData.getProjection();
+			auto view = cameraTransform.getWorldMatrixInverse();
+			auto projView = project * view;
+			if (!prevFrameValid)
+				prevFrameProjectView = projView;
+			auto nearPlane = cameraData.getNear();
+			auto farPlane = cameraData.getFar();
+			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "projView", &projView);
+			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "view", &view);
+			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "projViewOld", &prevFrameProjectView);
+			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "view", &view);
+			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "nearPlane", &nearPlane);
+			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "farPlane", &farPlane);
+			prevFrameProjectView = projView;
+		}
+		std::vector<Entity> m_visbileEntity;
+		//filter the registry entities
+		auto meshes = registry.group<component::MeshRenderer, component::Transform>();
+		if (!meshes.empty())
+		{
+			for (const auto& data : meshes.each())
+			{
+				m_visbileEntity.emplace_back(std::get<0>(data), registry);
+			}
+		}
 		for (auto ent : m_visbileEntity)
 		{
 			auto& unit = m_renderQueue.emplace_back();
@@ -168,21 +203,10 @@ namespace pengine
 			unit.pipelineInfo = pipelineInfo;
 			
 		}
+		prevFrameValid = true;
 	}
 
 	auto RenderGBufferPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
-	}
-	auto RenderGBufferPass::onSceneElementChange(Entity& ent) -> void
-	{
-		if (!ent.hasComponent<component::MeshRenderer>() || !ent.hasComponent<component::Transform>())
-		{
-			//not concern
-			return;
-		}
-		else
-		{
-			
-		}
 	}
 };

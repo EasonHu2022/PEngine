@@ -15,6 +15,9 @@ namespace pengine
 		void drawSplashScreen(const std::shared_ptr<Texture>& texture) override;
 		auto presentInternal() -> void ;
 		auto presentInternal(CommandBuffer* commandBuffer) -> void ;
+		auto bindDescriptorSetsInternal(Pipeline* pipeline, CommandBuffer* commandBuffer,
+			uint32_t dynamicOffset, const std::vector<std::shared_ptr<DescriptorSet>>& descriptorSets) -> void;	
+		auto drawIndexedInternal(CommandBuffer* commandBuffer, DrawType type, uint32_t count, uint32_t start = 0) const -> void;
 		inline auto getDescriptorPool() const
 		{
 			return descriptorPool;

@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "function/engine/Timestep.h"
 #include "core/log/PLog.h"
+#include "function/sceneManagement/SceneManager.h"
 
 namespace pengine
 {
@@ -10,9 +11,10 @@ namespace pengine
 		window										= Window::create(WindowData{ 1280, 720, false, "PEngine" });
 		graphicsContext								= GraphicsContext::create();
 		renderDevice								= RenderDevice::create();
-
+		
 		/*############# platform independent ######################*/
 		systemManager								= std::make_unique<SystemManager>();
+		sceneManager								= std::make_unique<SceneManager>();
 	}
 
 	void Application::init()
@@ -65,7 +67,6 @@ namespace pengine
 			if (lastFrameTime - secondTimer > 1.0f)        //tick later
 			{
 				secondTimer += 1.0f;
-				//PLOGI("frames : {0}", frames);
 				frames = 0;
 				updates = 0;
 			}
@@ -74,19 +75,24 @@ namespace pengine
 
 	void Application::onUpdate(const float &delta)
 	{
-		
+		//very first handle window event
+		window->onUpdate();
+
 		systemManager->onImGui();
 
 		onImGui();
 
-		systemManager->onUpdate(delta,scene);
+		sceneManager->onUpdate();
 
-		window->onUpdate();
+		systemManager->onUpdate(delta, sceneManager->getCurrentScene());	
+
+		sceneManager->onLateUpdate();
+
 	}
 
 	void Application::onRender()
 	{
-		
+		sceneManager->onRender();
 	}
 
 	void Application::onImGui()
@@ -103,7 +109,7 @@ namespace pengine
 		graphicsContext->waitIdle();
 		renderDevice->onResize(w, h);
 		imGuiSystem->onResize(w, h);
-		
+		sceneManager->onResize(w, h);
 		graphicsContext->waitIdle();
 	}
 

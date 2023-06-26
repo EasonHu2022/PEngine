@@ -1,12 +1,11 @@
 #pragma once
 #include "Component.h"
 #include "glm/glm.hpp"
+#include <glm/gtc/quaternion.hpp>
 namespace pengine
 {
 	namespace component
 	{
-		class Mesh;
-
 		constexpr glm::vec3 ZERO(0, 0, 0);
 		constexpr glm::vec3 LEFT(-1.0f, 0.0f, 0.0f);
 		constexpr glm::vec3 RIGHT(1.0f, 0.0f, 0.0f);

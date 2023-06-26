@@ -7,6 +7,7 @@
 #include "function/resource/Cache.h"
 #include "function/render/rhi/imgui/ImGuiRenderer.h"
 #include "function/ecs/system/SystemManager.h"
+#include "function/sceneManagement/SceneManager.h"
 #include "function/ImGui/ImGuiSystem.h"
 #include "core/Timer.h"
 #include "core/core.h"
@@ -60,20 +61,20 @@ namespace pengine
 			return get()->timer;
 		}
 
-		/*inline static auto& getSceneManager()
+		inline static auto& getSceneManager()
 		{
 			return get()->sceneManager;
-		}*/
+		}
 	protected:
 		std::unique_ptr<Window>				window;
 		std::shared_ptr<GraphicsContext>    graphicsContext;
 		std::shared_ptr<RenderDevice>       renderDevice;
-		std::shared_ptr<SystemManager>      systemManager;
 		std::shared_ptr<ImGuiSystem>		imGuiSystem;
 		std::shared_ptr<Cache>              cache;
-		//std::unique_ptr<SceneManager>      sceneManager;
+
+		std::unique_ptr<SystemManager>      systemManager;
+		std::unique_ptr<SceneManager>      sceneManager;
 		//temp
-		Scene* scene;
 		Timer                                                            timer;
 		uint64_t                                                         updates = 0;
 		uint64_t                                                         frames = 0;

@@ -19,6 +19,5 @@ namespace pengine
 	private:
 		std::vector<uint32_t> passes;
 		RenderGraph* m_renderGraph;
-		std::unordered_map<uint32_t, std::vector<uint32_t>> dependencyMap;
 	};
 };

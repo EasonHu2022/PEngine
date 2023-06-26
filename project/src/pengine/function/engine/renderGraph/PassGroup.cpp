@@ -6,14 +6,14 @@ namespace pengine
 {
 	auto PassGroup::execute(CommandBuffer* cmdBuffer) -> void
 	{
+		for (auto pass : passes)
+		{
+			m_renderGraph->getPassByID(pass)->execute(cmdBuffer);
+		}
 	}
 	auto PassGroup::compile() -> void
 	{
-		//record group dp map
-		for (auto id : passes)
-		{
-			auto& pass = m_renderGraph->getPassByID(id);
-		}
+		//TODO--
 	}
 	auto PassGroup::addPass(uint32_t id) -> void
 	{

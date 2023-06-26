@@ -3,6 +3,8 @@
 #include "VulkanSwapChain.h"
 #include "VulkanDevice.h"
 #include "VulkanTexture.h"
+#include "VulkanDescriptorSet.h"
+#include "VulkanPipeline.h"
 namespace pengine
 {
 	static constexpr uint32_t MAX_DESCRIPTOR_SET_COUNT = 1500;
@@ -69,6 +71,32 @@ namespace pengine
 	void VulkanRenderDevice::presentInternal(CommandBuffer* commandBuffer)
 	{
 		PLOGW("non implemented func!");
+	}
+
+	auto VulkanRenderDevice::bindDescriptorSetsInternal(Pipeline* pipeline, CommandBuffer* commandBuffer, uint32_t dynamicOffset, const std::vector<std::shared_ptr<DescriptorSet>>& descriptorSets) -> void
+	{
+		uint32_t numDynamicDescriptorSets = 0;
+		uint32_t numDesciptorSets = 0;
+		for (auto& descriptorSet : descriptorSets)
+		{
+			if (descriptorSet)
+			{
+				auto vkDesSet = std::static_pointer_cast<VulkanDescriptorSet>(descriptorSet);
+				if (vkDesSet->isDynamic())
+					numDynamicDescriptorSets++;
+
+				descriptorSetPool[numDesciptorSets] = vkDesSet->getDescriptorSet();
+				numDesciptorSets++;
+			}
+		}
+		vkCmdBindDescriptorSets(static_cast<VulkanCommandBuffer*>(commandBuffer)->getCommandBuffer(),
+			VK_PIPELINE_BIND_POINT_GRAPHICS, static_cast<VulkanPipeline*>(pipeline)->getPipelineLayout(),
+			0, numDesciptorSets, descriptorSetPool, numDynamicDescriptorSets, &dynamicOffset);
+	}
+
+	auto VulkanRenderDevice::drawIndexedInternal(CommandBuffer* commandBuffer, DrawType type, uint32_t count, uint32_t start) const -> void
+	{
+		vkCmdDrawIndexed(static_cast<VulkanCommandBuffer*>(commandBuffer)->getCommandBuffer(), count, 1, 0, 0, 0);
 	}
 
 	auto VulkanRenderDevice::clearRenderTarget(const std::shared_ptr<Texture>& texture, CommandBuffer* commandBuffer, const glm::vec4& clearColor) -> void

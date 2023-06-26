@@ -1,12 +1,14 @@
 #include "Scene.h"
 #include "function/engine/renderGraph/RenderGraph.h"
+#include "Application.h"
+#include "function/render/rhi/SwapChain.h"
 namespace pengine
 {
 	Scene::Scene(const std::string& _name) : name(_name)
 	{
 		//each scene bind with a render graph
 		renderGraph = std::make_shared<RenderGraph>("");
-		renderGraph->init(entityManager->getRegistry(),width, height);
+		renderGraph->init(entityManager->getRegistry(),width, height,width,height);
 	}
 	Scene::~Scene()
 	{
@@ -15,6 +17,23 @@ namespace pengine
 	{
 	}
 	auto Scene::onUpdate() -> void
+	{
+
+
+		
+	}
+	auto Scene::onLateUpdate() -> void
+	{
+		//very last order
+		renderGraph->update(entityManager->getRegistry());
+	}
+
+	auto Scene::onRender() -> void
+	{
+		renderGraph->execute(Application::getGraphicsContext()->getSwapChain()->getCurrentCommandBuffer());
+	}
+
+	auto Scene::onResize(size_t width, size_t height) -> void
 	{
 	}
 

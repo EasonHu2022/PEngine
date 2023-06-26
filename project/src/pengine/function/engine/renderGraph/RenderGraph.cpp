@@ -15,7 +15,7 @@ namespace pengine
 	auto RenderGraph::init(entt::registry& registry, uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
 		renderExtend = { width ,height };
-		displayExtend = { displayWidth ,displayHeight };
+		outputExtend = { displayWidth ,displayHeight };
 		//TODO:init renderData//how?what structure?
 		//renderDatacontext...
 		//temply write to hard code, later load from config file
@@ -50,7 +50,7 @@ namespace pengine
 		bind(1, 2, 2, 2);
 		bind(1, 3, 2, 3);
 		bind(1, 4, 2, 4);
-		//sort tasks
+		//sort passes
 		passSorting(passUids);
 		//compile each pass group
 		for (auto& group : groupSet)
@@ -60,11 +60,10 @@ namespace pengine
 	}
 	auto RenderGraph::execute(CommandBuffer* cmdBuffer) -> void
 	{
-		//execute each task
-		auto passCount = passUids.size();
-		for (int i = 0; i < passCount; i++)
+		//execute each pass group
+		for (auto& group : groupSet)
 		{
-			passMap[passUids.at(i)]->execute(cmdBuffer);
+			group.execute(cmdBuffer);
 		}
 		
 	}
@@ -82,7 +81,6 @@ namespace pengine
 				}
 
 				passMap[inputTask]->bindInput(inputBindPos, p_vRes);
-
 				//set dependencies task(used to Topological Sorting)
 				passMap[inputTask]->addDegreeIn(outputTask);
 
@@ -116,7 +114,7 @@ namespace pengine
 	auto RenderGraph::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
 		renderExtend = { width ,height };
-		displayExtend = { displayWidth ,displayHeight };
+		outputExtend = { displayWidth ,displayHeight };
 		//release and recreate resources
 	}
 	auto RenderGraph::getResourceByID(uint32_t id) -> IRenderGraphResource*

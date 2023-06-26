@@ -10,12 +10,13 @@
 #include "glm/glm.hpp"
 #include "function/engine/Mesh.h"
 #include "entt/entt.hpp"
+#include "function/resource/IResource.h"
 
 namespace pengine
 {
 
 	class PassGroup;
-	class RenderGraph
+	class RenderGraph : public IResource
 	{
 	public:
 		RenderGraph(std::string& path);
@@ -53,7 +54,7 @@ namespace pengine
 		std::vector<std::shared_ptr<IRenderGraphResource>> resources;
 		std::string path;
 		glm::vec2 renderExtend;
-		glm::vec2 displayExtend;
+		glm::vec2 outputExtend;
 		//set of group
 		std::vector<PassGroup> groupSet;
 	};

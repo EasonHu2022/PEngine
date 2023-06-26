@@ -81,10 +81,7 @@ namespace pengine
 		//unique id (unique id in graph)
 		//it should be allocated in the config file. insure it's unique
 		uint32_t uid;
-		//hold the visible entity by each task
-		//avoid update all every frame
-		std::vector<Entity> m_visbileEntity;
-
+		
 		//record inpasses
 		std::vector<uint32_t> m_InPasses;
 
