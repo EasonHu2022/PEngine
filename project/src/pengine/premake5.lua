@@ -31,7 +31,12 @@ project "pengine"
 		thirdparty .. "/vulkanmemoryallocator/include",
 		thirdparty .. "/glm/include",
 		thirdparty .. "/entt/include",
-		
+		thirdparty .. "/tiny_obj_loader",
+		thirdparty .. "/tiny_gltf",
+		thirdparty .. "/openFBX/include",
+		thirdparty .. "/mio",
+		thirdparty .. "/stb",
+		thirdparty .. "/Json",
 	}
 
 
@@ -60,6 +65,7 @@ project "pengine"
 		"spdlog",
 		"Glad",
 		"volk",
+		"OFBX",
 	}
 	postbuildcommands
 		{

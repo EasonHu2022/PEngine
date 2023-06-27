@@ -10,7 +10,9 @@ namespace pengine
 	class Pipeline;
 	class UniformBuffer;
 	class DescriptorSet;
-
+	static constexpr float   PBR_WORKFLOW_SEPARATE_TEXTURES = 0.0f;
+	static constexpr float   PBR_WORKFLOW_METALLIC_ROUGHNESS = 1.0f;
+	static constexpr float   PBR_WORKFLOW_SPECULAR_GLOSINESS = 2.0f;
 	static constexpr int32_t MATERAL_LAYOUT_INDEX = 1;
 	struct MaterialProperties
 	{
@@ -24,7 +26,7 @@ namespace pengine
 		float     usingNormalMap = 1.0f;
 		float     usingAOMap = 1.0f;
 		float     usingEmissiveMap = 1.0f;
-		//float     workflow = PBR_WORKFLOW_SEPARATE_TEXTURES;
+		float     workflow = PBR_WORKFLOW_SEPARATE_TEXTURES;
 		//padding in vulkan
 		float padding = 0.0f;
 	};
@@ -61,8 +63,32 @@ namespace pengine
 		auto createDescriptorSet(int32_t layoutID = MATERAL_LAYOUT_INDEX, bool pbr = true) -> void;
 		auto updateDescriptorSet() -> void;
 		auto updateUniformBuffer() -> void;
-
+		auto setMaterialProperites(const MaterialProperties& properties) -> void;
+		auto setTextures(const PBRMataterialTextures& textures) -> void;
+		auto setAlbedoTexture(const std::string& path) -> void;
+		auto setAlbedo(const std::shared_ptr<Texture2D>& texture) -> void;
+		auto setNormalTexture(const std::string& path) -> void;
+		auto setRoughnessTexture(const std::string& path) -> void;
+		auto setMetallicTexture(const std::string& path) -> void;
+		auto setAOTexture(const std::string& path) -> void;
+		auto setEmissiveTexture(const std::string& path) -> void;
 		auto bind() -> void;
+
+
+		inline auto setRenderFlags(int32_t flags)
+		{
+			renderFlags = flags;
+		}
+
+		inline auto setRenderFlag(Material::RenderFlags flag)
+		{
+			renderFlags |= static_cast<int32_t>(flag);
+		}
+
+		inline auto removeRenderFlag(Material::RenderFlags flag)
+		{
+			renderFlags &= ~static_cast<int32_t>(flag);
+		}
 
 		inline auto getShader() const
 		{

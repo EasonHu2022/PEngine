@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
-// This file is part of the Pengine Engine                              		//
-//////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <cstdint>
 #include <string>
@@ -67,5 +64,4 @@ namespace pengine
 		virtual auto getPath() const->std::string = 0;
 
 	};
-};        // namespace pengine
-
+};      

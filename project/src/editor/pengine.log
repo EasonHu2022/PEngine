@@ -1,20 +1,14 @@
-[17:17:00] [info] pengine: Vulkan : 1.3.242
-[17:17:00] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
-[17:17:00] [info] pengine: Vendor ID : 4318
-[17:17:00] [info] pengine: Device Type : Discrete GPU
-[17:17:00] [info] pengine: Driver Version : 535.392.0
-[17:17:00] [info] pengine: Selected physical device has 190 extensions
-[17:17:00] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.246.1\Bin\.\VkLayer_khronos_validation.dll)
-[17:17:00] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll)
-[17:17:00] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll"
-[17:17:00] [info] pengine: Create the VulkanCommandBuffer
-[17:17:00] [info] pengine: Create the VulkanCommandBuffer
-[17:17:00] [info] pengine: Create the VulkanCommandBuffer
-[17:17:00] [info] pengine: Add System: class pengine::ImGuiSystem
-[17:17:00] [info] pengine: add eidtor view : test test test
-[17:17:12] [info] pengine: FrameBuffer clear
-[17:17:12] [info] pengine: FrameBuffer clear
-[17:17:12] [info] pengine: FrameBuffer clear
-[17:17:22] [info] pengine: FrameBuffer clear
-[17:17:22] [info] pengine: FrameBuffer clear
-[17:17:22] [info] pengine: FrameBuffer clear
+[21:19:48] [info] pengine: Vulkan : 1.3.242
+[21:19:48] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
+[21:19:48] [info] pengine: Vendor ID : 4318
+[21:19:48] [info] pengine: Device Type : Discrete GPU
+[21:19:48] [info] pengine: Driver Version : 535.392.0
+[21:19:48] [info] pengine: Selected physical device has 190 extensions
+[21:19:48] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.246.1\Bin\.\VkLayer_khronos_validation.dll)
+[21:19:48] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll)
+[21:19:48] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll"
+[21:19:48] [info] pengine: Create the VulkanCommandBuffer
+[21:19:48] [info] pengine: Create the VulkanCommandBuffer
+[21:19:48] [info] pengine: Create the VulkanCommandBuffer
+[21:19:48] [info] pengine: Add System: class pengine::ImGuiSystem
+[21:19:48] [info] pengine: add eidtor view : test test test

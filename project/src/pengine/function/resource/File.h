@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
-// This file is part of the Maple Engine                              		//
-//////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "core/core.h"
 #include "IResource.h"
@@ -59,4 +56,4 @@ namespace pengine
 		int64_t     pos     = 0;
 		size_t      fileSize;
 	};
-};        // namespace maple
+};       

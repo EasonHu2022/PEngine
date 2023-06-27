@@ -34,6 +34,42 @@ namespace pengine
 	{
 	}
 
+	auto Material::setMaterialProperites(const MaterialProperties& properties) -> void
+	{
+	}
+
+	auto Material::setTextures(const PBRMataterialTextures& textures) -> void
+	{
+	}
+
+	auto Material::setAlbedoTexture(const std::string& path) -> void
+	{
+	}
+
+	auto Material::setAlbedo(const std::shared_ptr<Texture2D>& texture) -> void
+	{
+	}
+
+	auto Material::setNormalTexture(const std::string& path) -> void
+	{
+	}
+
+	auto Material::setRoughnessTexture(const std::string& path) -> void
+	{
+	}
+
+	auto Material::setMetallicTexture(const std::string& path) -> void
+	{
+	}
+
+	auto Material::setAOTexture(const std::string& path) -> void
+	{
+	}
+
+	auto Material::setEmissiveTexture(const std::string& path) -> void
+	{
+	}
+
 	auto Material::bind() -> void
 	{
 	}

@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
-// This file is part of the Maple Engine                              		//
-//////////////////////////////////////////////////////////////////////////////
 #include "File.h"
 #include <cstdio>
 #include <cstring>
@@ -229,4 +226,4 @@ namespace pengine
 		return file.substr(pos + 1);
 	}
 
-};        // namespace maple
+}; 

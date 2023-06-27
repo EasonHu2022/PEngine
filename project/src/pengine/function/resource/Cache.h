@@ -1,8 +1,4 @@
-//////////////////////////////////////////////////////////////////////////////
-// This file is part of the Maple Engine                              		//
-//////////////////////////////////////////////////////////////////////////////
 #pragma once
-
 #include "IResource.h"
 #include "core/HashCode.h"
 #include <memory>
@@ -43,4 +39,4 @@ namespace pengine
 		std::unordered_map<size_t, std::shared_ptr<IResource>> cache;
 	};
 
-};        // namespace maple
+};      
