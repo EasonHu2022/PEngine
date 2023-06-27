@@ -7,19 +7,24 @@ namespace pengine
 {
 	Application::Application()
 	{
+		//init very first to ensure log
+		PLogger::init();
+
 		/*############# platform related ######################*/
 		window										= Window::create(WindowData{ 1280, 720, false, "PEngine" });
 		graphicsContext								= GraphicsContext::create();
 		renderDevice								= RenderDevice::create();
 		
 		/*############# platform independent ######################*/
+		cache										= std::make_shared<Cache>();
+		loaderFactory								= std::make_shared<ModelLoaderFactory>();
 		systemManager								= std::make_unique<SystemManager>();
 		sceneManager								= std::make_unique<SceneManager>();
 	}
 
 	void Application::init()
 	{
-		PLogger::init();
+		
 		window->init();
 		graphicsContext->init();
 		renderDevice->init();
@@ -29,12 +34,18 @@ namespace pengine
 		/*########### systems register and init ##############*/
 		imGuiSystem = systemManager->addSystem<ImGuiSystem>(false);
 		systemManager->onInit();
+		
 	}
 
 	int32_t Application::start()
 	{
 		double lastFrameTime = 0;
 		init();
+
+		/// test scope
+		sceneManager->doTest();
+
+
 		//main editor loop
 		while (1)
 		{			

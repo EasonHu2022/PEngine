@@ -11,8 +11,7 @@
 #include "function/ImGui/ImGuiSystem.h"
 #include "core/Timer.h"
 #include "core/core.h"
-
-//后续需要做一个api选择类，这里先无脑vulkan
+#include "function/resource/ModelLoader.h"
 
 namespace pengine
 {
@@ -65,15 +64,22 @@ namespace pengine
 		{
 			return get()->sceneManager;
 		}
+
+		inline static auto getLoaderFactory()
+		{
+			return get()->loaderFactory;
+		}
 	protected:
 		std::unique_ptr<Window>				window;
 		std::shared_ptr<GraphicsContext>    graphicsContext;
 		std::shared_ptr<RenderDevice>       renderDevice;
 		std::shared_ptr<ImGuiSystem>		imGuiSystem;
 		std::shared_ptr<Cache>              cache;
+		std::shared_ptr<ModelLoaderFactory> loaderFactory;
 
 		std::unique_ptr<SystemManager>      systemManager;
 		std::unique_ptr<SceneManager>      sceneManager;
+		
 		//temp
 		Timer                                                            timer;
 		uint64_t                                                         updates = 0;

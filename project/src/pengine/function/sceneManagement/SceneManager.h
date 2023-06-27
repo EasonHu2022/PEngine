@@ -17,9 +17,11 @@ namespace pengine
 		auto loadScene(const std::string& filePath) -> bool;
 		auto addScene(const std::string& name, Scene* scene) -> bool;
 		auto getSceneByName(const std::string& scneName) -> Scene*;
+		auto doTest() -> void;
 		inline auto getCurrentScene() const { return currentScene; }
 	private:
 		Scene* currentScene;
+		std::string currentName;
 		std::unordered_map<std::string, std::shared_ptr<Scene>> allScenes;
 	};
 

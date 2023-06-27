@@ -7,7 +7,14 @@
 #include "function/engine/Mesh.h"
 namespace pengine
 {
+
 	class Skeleton;
+
+	namespace ModelLoaderProxy
+	{
+		auto PENGINE_API load(const std::string& obj, std::unordered_map<std::string, std::shared_ptr<Mesh>>&, std::shared_ptr<Skeleton>& skeleton) -> void;
+	};
+
 	class PENGINE_API ModelLoader
 	{
 	public:

@@ -2,11 +2,15 @@
 #include "Scene.h"
 #include "core/utils/StringUtils.h"
 #include "function/ecs/component/Transform.h"
+
+
 namespace pengine
 {
 	SceneManager::SceneManager()
-	{
+	{	
 		currentScene = nullptr;
+		//test
+		
 	}
 	SceneManager::~SceneManager()
 	{
@@ -59,5 +63,13 @@ namespace pengine
 	auto SceneManager::getSceneByName(const std::string& scneName) -> Scene*
 	{
 		return nullptr;
+	}
+	auto SceneManager::doTest() -> void
+	{
+		currentName = "defaultScene";
+		addScene(currentName, new Scene(currentName));
+		currentScene = allScenes[currentName].get();
+		std::string testpath = "F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza.obj";
+		currentScene->addModel(testpath);
 	}
 };

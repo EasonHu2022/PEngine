@@ -33,6 +33,8 @@ namespace pengine
 		auto duplicateEntity(const Entity& entity) -> void;
 		auto removeAllChildren(entt::entity entity) -> void;
 
+		auto addModel(const std::string filePath) -> Entity;
+
 		inline auto& getEntityManager()
 		{
 			return entityManager;

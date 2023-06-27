@@ -5,6 +5,7 @@
 #include "VulkanPipeline.h"
 #include "VulkanDevice.h"
 #include "VKHelper.h"
+#include "spirv_cross.hpp"
 namespace pengine
 {
 	namespace
@@ -44,7 +45,7 @@ namespace pengine
 			return 0;
 		}
 
-		/*inline auto getVulkanFormat(const spirv_cross::SPIRType type)
+		inline auto getVulkanFormat(const spirv_cross::SPIRType type)
 		{
 			VkFormat uintTypes[] =
 			{
@@ -86,7 +87,7 @@ namespace pengine
 			case spirv_cross::SPIRType::Double:
 				return doubleTypes[type.vecsize - 1];
 			default:
-				LOGC("Cannot find VK_Format : {0}", type.basetype);
+				PLOGC("Cannot find VK_Format : {0}", type.basetype);
 				return VK_FORMAT_R32G32B32A32_SFLOAT;
 			}
 		}
@@ -126,16 +127,17 @@ namespace pengine
 			case spirv_cross::SPIRType::Struct:
 				return ShaderDataType::Struct;
 			}
-			LOGW("Unknown spirv type!");
+			PLOGW("Unknown spirv type!");
 			return ShaderDataType::None;
-		}*/
-	}        // namespace
+		}
+	}       
 
 	VulkanShader::VulkanShader(const std::string& path) :
 		filePath(path)
 	{
 		name = StringUtils::getFileName(filePath);
 		auto bytes = File::read(filePath);
+		if (bytes->empty()) return;
 		source = { bytes->begin(), bytes->end() };
 		if (!source.empty())
 		{
@@ -289,141 +291,141 @@ namespace pengine
 		shaderCreateInfo.pCode = spvCode.data();
 		shaderCreateInfo.pNext = VK_NULL_HANDLE;                                                            
 
-		//	spirv_cross::Compiler        comp(spvCode.data(), spvCode.size());
-		//	spirv_cross::ShaderResources resources = comp.get_shader_resources();
+			spirv_cross::Compiler        comp(spvCode.data(), spvCode.size());
+			spirv_cross::ShaderResources resources = comp.get_shader_resources();
 
-		//	if (shaderType == ShaderType::Vertex)
-		//	{
-		//		//Vertex Layout
-		//		vertexInputStride = 0;
+			if (shaderType == ShaderType::Vertex)
+			{
+				//Vertex Layout
+				vertexInputStride = 0;
 
-		//		for (const spirv_cross::Resource& resource : resources.stage_inputs)
-		//		{
-		//			const spirv_cross::SPIRType& InputType = comp.get_type(resource.type_id);
+				for (const spirv_cross::Resource& resource : resources.stage_inputs)
+				{
+					const spirv_cross::SPIRType& InputType = comp.get_type(resource.type_id);
 
-		//			VkVertexInputAttributeDescription description = {};
-		//			description.binding = comp.get_decoration(resource.id, spv::DecorationBinding);
-		//			description.location = comp.get_decoration(resource.id, spv::DecorationLocation);
-		//			description.offset = vertexInputStride;
-		//			description.format = getVulkanFormat(InputType);
-		//			vertexInputAttributeDescriptions.emplace_back(description);
-		//			vertexInputStride += getStrideFromVulkanFormat(description.format);
-		//		}
-		//	}
+					VkVertexInputAttributeDescription description = {};
+					description.binding = comp.get_decoration(resource.id, spv::DecorationBinding);
+					description.location = comp.get_decoration(resource.id, spv::DecorationLocation);
+					description.offset = vertexInputStride;
+					description.format = getVulkanFormat(InputType);
+					vertexInputAttributeDescriptions.emplace_back(description);
+					vertexInputStride += getStrideFromVulkanFormat(description.format);
+				}
+			}
 
-		//	//Descriptor Layout
-		//	for (auto& u : resources.uniform_buffers)
-		//	{
-		//		uint32_t set = comp.get_decoration(u.id, spv::DecorationDescriptorSet);
-		//		uint32_t binding = comp.get_decoration(u.id, spv::DecorationBinding);
-		//		auto& type = comp.get_type(u.type_id);
+			//Descriptor Layout
+			for (auto& u : resources.uniform_buffers)
+			{
+				uint32_t set = comp.get_decoration(u.id, spv::DecorationDescriptorSet);
+				uint32_t binding = comp.get_decoration(u.id, spv::DecorationBinding);
+				auto& type = comp.get_type(u.type_id);
 
-		//		LOGI("Uniform {0} at set = {1}, binding = {2}", u.name, set, binding);
-		//		descriptorLayoutInfo.push_back({ DescriptorType::UniformBuffer, shaderType, binding, set, type.array.size() ? uint32_t(type.array[0]) : 1 });
+				PLOGI("Uniform {0} at set = {1}, binding = {2}", u.name, set, binding);
+				descriptorLayoutInfo.push_back({ DescriptorType::UniformBuffer, shaderType, binding, set, type.array.size() ? uint32_t(type.array[0]) : 1 });
 
-		//		auto& bufferType = comp.get_type(u.base_type_id);
-		//		auto  bufferSize = comp.get_declared_struct_size(bufferType);
-		//		auto  memberCount = (int32_t)bufferType.member_types.size();
+				auto& bufferType = comp.get_type(u.base_type_id);
+				auto  bufferSize = comp.get_declared_struct_size(bufferType);
+				auto  memberCount = (int32_t)bufferType.member_types.size();
 
-		//		auto& descriptorInfo = descriptorInfos[set];
-		//		auto& descriptor = descriptorInfo.emplace_back();
-		//		descriptor.binding = binding;
-		//		descriptor.size = (uint32_t)bufferSize;
-		//		descriptor.name = u.name;
-		//		descriptor.offset = 0;
-		//		descriptor.shaderType = shaderType;
-		//		descriptor.type = DescriptorType::UniformBuffer;
-		//		descriptor.buffer = nullptr;
+				auto& descriptorInfo = descriptorInfos[set];
+				auto& descriptor = descriptorInfo.emplace_back();
+				descriptor.binding = binding;
+				descriptor.size = (uint32_t)bufferSize;
+				descriptor.name = u.name;
+				descriptor.offset = 0;
+				descriptor.shaderType = shaderType;
+				descriptor.type = DescriptorType::UniformBuffer;
+				descriptor.buffer = nullptr;
 
-		//		for (int32_t i = 0; i < memberCount; i++)
-		//		{
-		//			auto        type = comp.get_type(bufferType.member_types[i]);
-		//			const auto& memberName = comp.get_member_name(bufferType.self, i);
-		//			auto        size = comp.get_declared_struct_member_size(bufferType, i);
-		//			auto        offset = comp.type_struct_member_offset(bufferType, i);
+				for (int32_t i = 0; i < memberCount; i++)
+				{
+					auto        type = comp.get_type(bufferType.member_types[i]);
+					const auto& memberName = comp.get_member_name(bufferType.self, i);
+					auto        size = comp.get_declared_struct_member_size(bufferType, i);
+					auto        offset = comp.type_struct_member_offset(bufferType, i);
 
-		//			std::string uniformName = u.name + "." + memberName;
+					std::string uniformName = u.name + "." + memberName;
 
-		//			auto& member = descriptor.members.emplace_back();
-		//			member.name = memberName;
-		//			member.offset = offset;
-		//			member.size = (uint32_t)size;
+					auto& member = descriptor.members.emplace_back();
+					member.name = memberName;
+					member.offset = offset;
+					member.size = (uint32_t)size;
 
-		//			LOGI("{0} - Size {1}, offset {2}", uniformName, size, offset);
-		//		}
-		//	}
+					PLOGI("{0} - Size {1}, offset {2}", uniformName, size, offset);
+				}
+			}
 
-		//	for (auto& u : resources.push_constant_buffers)
-		//	{
-		//		uint32_t set = comp.get_decoration(u.id, spv::DecorationDescriptorSet);
-		//		uint32_t binding = comp.get_decoration(u.id, spv::DecorationBinding);
-		//		uint32_t binding3 = comp.get_decoration(u.id, spv::DecorationOffset);
+			for (auto& u : resources.push_constant_buffers)
+			{
+				uint32_t set = comp.get_decoration(u.id, spv::DecorationDescriptorSet);
+				uint32_t binding = comp.get_decoration(u.id, spv::DecorationBinding);
+				uint32_t binding3 = comp.get_decoration(u.id, spv::DecorationOffset);
 
-		//		auto& type = comp.get_type(u.type_id);
+				auto& type = comp.get_type(u.type_id);
 
-		//		auto ranges = comp.get_active_buffer_ranges(u.id);
+				auto ranges = comp.get_active_buffer_ranges(u.id);
 
-		//		uint32_t size = 0;
-		//		for (auto& range : ranges)
-		//		{
-		//			LOGI("\tAccessing Member {0} offset {1}, size {2}", range.index, range.offset, range.range);
-		//			size += uint32_t(range.range);
-		//		}
+				uint32_t size = 0;
+				for (auto& range : ranges)
+				{
+					PLOGI("\tAccessing Member {0} offset {1}, size {2}", range.index, range.offset, range.range);
+					size += uint32_t(range.range);
+				}
 
-		//		LOGI("Push Constant {0} at set = {1}, binding = {2}", u.name.c_str(), set, binding);
+				PLOGI("Push Constant {0} at set = {1}, binding = {2}", u.name.c_str(), set, binding);
 
-		//		auto& push = pushConstants.emplace_back();
-		//		push.size = size;
-		//		push.shaderStage = shaderType;
-		//		push.data.resize(size);
-		//		push.name = u.name;
+				auto& push = pushConstants.emplace_back();
+				push.size = size;
+				push.shaderStage = shaderType;
+				push.data.resize(size);
+				push.name = u.name;
 
-		//		auto& bufferType = comp.get_type(u.base_type_id);
-		//		auto    bufferSize = comp.get_declared_struct_size(bufferType);
-		//		int32_t memberCount = (int32_t)bufferType.member_types.size();
+				auto& bufferType = comp.get_type(u.base_type_id);
+				auto    bufferSize = comp.get_declared_struct_size(bufferType);
+				int32_t memberCount = (int32_t)bufferType.member_types.size();
 
-		//		for (int32_t i = 0; i < memberCount; i++)
-		//		{
-		//			auto        type = comp.get_type(bufferType.member_types[i]);
-		//			const auto& memberName = comp.get_member_name(bufferType.self, i);
-		//			auto        size = comp.get_declared_struct_member_size(bufferType, i);
-		//			auto        offset = comp.type_struct_member_offset(bufferType, i);
+				for (int32_t i = 0; i < memberCount; i++)
+				{
+					auto        type = comp.get_type(bufferType.member_types[i]);
+					const auto& memberName = comp.get_member_name(bufferType.self, i);
+					auto        size = comp.get_declared_struct_member_size(bufferType, i);
+					auto        offset = comp.type_struct_member_offset(bufferType, i);
 
-		//			std::string uniformName = u.name + "." + memberName;
+					std::string uniformName = u.name + "." + memberName;
 
-		//			auto& member = push.members.emplace_back();
-		//			member.size = (uint32_t)size;
-		//			member.offset = offset;
-		//			member.type = sprivTypeToDataType(type);
-		//			member.fullName = uniformName;
-		//			member.name = memberName;
-		//		}
-		//	}
+					auto& member = push.members.emplace_back();
+					member.size = (uint32_t)size;
+					member.offset = offset;
+					member.type = sprivTypeToDataType(type);
+					member.fullName = uniformName;
+					member.name = memberName;
+				}
+			}
 
-		//	for (auto& u : resources.sampled_images)
-		//	{
-		//		uint32_t set = comp.get_decoration(u.id, spv::DecorationDescriptorSet);
-		//		uint32_t binding = comp.get_decoration(u.id, spv::DecorationBinding);
+			for (auto& u : resources.sampled_images)
+			{
+				uint32_t set = comp.get_decoration(u.id, spv::DecorationDescriptorSet);
+				uint32_t binding = comp.get_decoration(u.id, spv::DecorationBinding);
 
-		//		auto& descriptorInfo = descriptorInfos[set];
-		//		auto& descriptor = descriptorInfo.emplace_back();
+				auto& descriptorInfo = descriptorInfos[set];
+				auto& descriptor = descriptorInfo.emplace_back();
 
-		//		auto& type = comp.get_type(u.type_id);
-		//		LOGI("Found Sampled Image {0} at set = {1}, binding = {2}", u.name.c_str(), set, binding);
+				auto& type = comp.get_type(u.type_id);
+				PLOGI("Found Sampled Image {0} at set = {1}, binding = {2}", u.name.c_str(), set, binding);
 
-		//		descriptorLayoutInfo.push_back({ DescriptorType::ImageSampler, shaderType, binding, set, type.array.size() ? uint32_t(type.array[0]) : 1 });
-		//		descriptor.binding = binding;
-		//		descriptor.name = u.name;
-		//		descriptor.offset = 0;
-		//		descriptor.size = 0;
-		//		descriptor.shaderType = shaderType;
-		//	}
+				descriptorLayoutInfo.push_back({ DescriptorType::ImageSampler, shaderType, binding, set, type.array.size() ? uint32_t(type.array[0]) : 1 });
+				descriptor.binding = binding;
+				descriptor.name = u.name;
+				descriptor.offset = 0;
+				descriptor.size = 0;
+				descriptor.shaderType = shaderType;
+			}
 
-		//	shaderStages[currentShaderStage].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-		//	shaderStages[currentShaderStage].stage = VkConverter::shaderTypeToVK(shaderType);
-		//	shaderStages[currentShaderStage].pName = "main";
-		//	shaderStages[currentShaderStage].pNext = VK_NULL_HANDLE;
+			shaderStages[currentShaderStage].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+			shaderStages[currentShaderStage].stage = VkConverter::shaderTypeToVK(shaderType);
+			shaderStages[currentShaderStage].pName = "main";
+			shaderStages[currentShaderStage].pNext = VK_NULL_HANDLE;
 
-		//	VK_CHECK_RESULT(vkCreateShaderModule(*VulkanDevice::get(), &shaderCreateInfo, nullptr, &shaderStages[currentShaderStage].module));
+			VK_CHECK_RESULT(vkCreateShaderModule(*VulkanDevice::get(), &shaderCreateInfo, nullptr, &shaderStages[currentShaderStage].module));
 	}
 };

@@ -20,7 +20,8 @@ namespace pengine
 			}
 		}
 
-		{        // If texture hasn't been loaded already, load it
+		{   
+			// If texture hasn't been loaded already, load it
 			TextureLoadOptions options(false, true);
 			auto               texture = Texture2D::create(typeName, directory + "/" + name, format, { false,false,false });
 			texturesLoaded.push_back(texture);        // Store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.

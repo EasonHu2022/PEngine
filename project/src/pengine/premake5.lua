@@ -37,6 +37,7 @@ project "pengine"
 		thirdparty .. "/mio",
 		thirdparty .. "/stb",
 		thirdparty .. "/Json",
+		thirdparty .. "/SPIRV-Cross",
 	}
 
 
@@ -66,6 +67,7 @@ project "pengine"
 		"Glad",
 		"volk",
 		"OFBX",
+		"spirv-cross",
 	}
 	postbuildcommands
 		{

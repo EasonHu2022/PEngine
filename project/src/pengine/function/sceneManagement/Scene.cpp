@@ -1,8 +1,28 @@
 #include "Scene.h"
 #include "Application.h"
 #include "function/render/rhi/SwapChain.h"
+#include "core/utils/StringUtils.h"
+#include "function/ecs/component/MeshRenderer.h"
+#include "function/engine/Skeleton.h"
+#include "function/ecs/component/Transform.h"
 namespace pengine
 {
+	namespace
+	{
+		inline auto addEntity(Scene* scene, Entity parent, Skeleton* skeleton, const Bone& bone) -> void
+		{
+			auto entity = scene->createEntity(bone.name);
+			auto& transform = entity.addComponent<component::Transform>();
+			transform.setLocalTransform(bone.offsetMatrix);
+			entity.setParent(parent);
+
+			for (auto child : bone.children)
+			{
+				addEntity(scene, entity, skeleton, skeleton->getBones()[child]);
+			}
+		}
+	}
+
 	Scene::Scene(const std::string& _name) : name(_name)
 	{
 		//each scene bind with a render graph
@@ -77,6 +97,46 @@ namespace pengine
 	auto Scene::removeAllChildren(entt::entity entity) -> void
 	{
 		entityManager->removeAllChildren(entity);
+	}
+
+	auto Scene::addModel(const std::string filePath) -> Entity
+	{
+		auto  name = StringUtils::getFileNameWithoutExtension(filePath);
+		auto modelEntity = createEntity(name);
+		auto& model = modelEntity.addComponent<component::Model>(filePath);
+		//if single mesh
+		if (model.resource->getMeshes().size() == 1)
+		{
+			modelEntity.addComponent<component::MeshRenderer>(model.resource->getMeshes().begin()->second);
+		}
+		else
+		{
+			for (auto& mesh : model.resource->getMeshes())
+			{
+				auto child = createEntity(mesh.first);
+				if (model.resource->getSkeleton())
+				{
+					child.addComponent<component::SkinnedMeshRenderer>(mesh.second);
+				}
+				else
+				{
+					child.addComponent<component::MeshRenderer>(mesh.second);
+
+				}
+				child.setParent(modelEntity);
+			}
+			auto skeleton = model.resource->getSkeleton();
+			if (skeleton)
+			{
+				skeleton->buildRoot();
+				for (auto child : skeleton->getRoots())
+				{
+					addEntity(this, modelEntity, skeleton.get(), skeleton->getBones()[child]);
+				}
+			}
+		}
+		model.type = component::PrimitiveType::File;
+		return modelEntity;
 	}
 	
 };
