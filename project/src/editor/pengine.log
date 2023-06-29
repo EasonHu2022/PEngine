@@ -1,119 +1,139 @@
-[09:40:10] [info] pengine: Vulkan : 1.3.242
-[09:40:10] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
-[09:40:10] [info] pengine: Vendor ID : 4318
-[09:40:10] [info] pengine: Device Type : Discrete GPU
-[09:40:10] [info] pengine: Driver Version : 535.392.0
-[09:40:10] [info] pengine: Selected physical device has 190 extensions
-[09:40:10] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.246.1\Bin\.\VkLayer_khronos_validation.dll)
-[09:40:10] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll)
-[09:40:10] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll"
-[09:40:10] [info] pengine: Create the VulkanCommandBuffer
-[09:40:10] [info] pengine: Create the VulkanCommandBuffer
-[09:40:10] [info] pengine: Create the VulkanCommandBuffer
-[09:40:10] [info] pengine: Add System: class pengine::ImGuiSystem
-[09:40:10] [info] pengine: add eidtor view : test test test
-[09:40:10] [info] pengine: Add Task: class pengine::RenderGBufferPass
-[09:40:10] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.vert.spv
-[09:40:10] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.frag.spv
-[09:40:10] [info] pengine: Loading Shader : DeferredColor.shader
-[09:40:10] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
-[09:40:10] [info] pengine: UniformBufferObject.projView - Size 64, offset 0
-[09:40:10] [info] pengine: UniformBufferObject.view - Size 64, offset 64
-[09:40:10] [info] pengine: UniformBufferObject.projViewOld - Size 64, offset 128
-[09:40:10] [info] pengine: 	Accessing Member 0 offset 0, size 64
-[09:40:10] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
-[09:40:10] [info] pengine: Uniform UniformMaterialData at set = 1, binding = 6
-[09:40:10] [info] pengine: UniformMaterialData.albedoColor - Size 16, offset 0
-[09:40:10] [info] pengine: UniformMaterialData.roughnessColor - Size 16, offset 16
-[09:40:10] [info] pengine: UniformMaterialData.metallicColor - Size 16, offset 32
-[09:40:10] [info] pengine: UniformMaterialData.emissiveColor - Size 16, offset 48
-[09:40:10] [info] pengine: UniformMaterialData.usingAlbedoMap - Size 4, offset 64
-[09:40:10] [info] pengine: UniformMaterialData.usingMetallicMap - Size 4, offset 68
-[09:40:10] [info] pengine: UniformMaterialData.usingRoughnessMap - Size 4, offset 72
-[09:40:10] [info] pengine: UniformMaterialData.usingNormalMap - Size 4, offset 76
-[09:40:10] [info] pengine: UniformMaterialData.usingAOMap - Size 4, offset 80
-[09:40:10] [info] pengine: UniformMaterialData.usingEmissiveMap - Size 4, offset 84
-[09:40:10] [info] pengine: UniformMaterialData.workflow - Size 4, offset 88
-[09:40:10] [info] pengine: UniformMaterialData.padding - Size 4, offset 92
-[09:40:10] [info] pengine: Uniform UBO at set = 2, binding = 0
-[09:40:10] [info] pengine: UBO.view - Size 64, offset 0
-[09:40:10] [info] pengine: UBO.nearPlane - Size 4, offset 64
-[09:40:10] [info] pengine: UBO.farPlane - Size 4, offset 68
-[09:40:10] [info] pengine: UBO.padding - Size 4, offset 72
-[09:40:10] [info] pengine: UBO.padding2 - Size 4, offset 76
-[09:40:10] [info] pengine: Found Sampled Image uAlbedoMap at set = 1, binding = 0
-[09:40:10] [info] pengine: Found Sampled Image uMetallicMap at set = 1, binding = 1
-[09:40:10] [info] pengine: Found Sampled Image uRoughnessMap at set = 1, binding = 2
-[09:40:10] [info] pengine: Found Sampled Image uAOMap at set = 1, binding = 4
-[09:40:10] [info] pengine: Found Sampled Image uEmissiveMap at set = 1, binding = 5
-[09:40:10] [info] pengine: Found Sampled Image uNormalMap at set = 1, binding = 3
-[09:40:10] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[09:40:10] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[09:40:10] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[09:40:10] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[09:40:10] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[09:40:10] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[09:40:10] [info] pengine: Add Task: class pengine::RenderDeferredLightingPass
-[09:40:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_b_diff.tga
-[09:40:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_diff.tga
-[09:40:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_blue_diff.tga
-[09:40:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_flagpole_diff.tga
-[09:40:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_c_diff.tga
-[09:40:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_green_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_floor_a_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/spnza_bricks_a_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_a_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_details_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_hanging.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/chain_texture.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_arch_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_ceiling_a_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_green_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_blue_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_thorn_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_round.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_plant.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/background.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_diff.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/lion.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_dif.tga
-[09:40:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_roof_diff.tga
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
-[09:40:14] [info] pengine: bufferId : 0
+[16:37:39] [info] pengine: Vulkan : 1.3.242
+[16:37:39] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
+[16:37:39] [info] pengine: Vendor ID : 4318
+[16:37:39] [info] pengine: Device Type : Discrete GPU
+[16:37:39] [info] pengine: Driver Version : 535.392.0
+[16:37:39] [info] pengine: Selected physical device has 190 extensions
+[16:37:39] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.246.1\Bin\.\VkLayer_khronos_validation.dll)
+[16:37:39] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll)
+[16:37:39] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll"
+[16:37:39] [info] pengine: Create the VulkanCommandBuffer
+[16:37:39] [info] pengine: Create the VulkanCommandBuffer
+[16:37:39] [info] pengine: Create the VulkanCommandBuffer
+[16:37:39] [info] pengine: Add System: class pengine::ImGuiSystem
+[16:37:39] [info] pengine: add eidtor view : test test test
+[16:37:39] [info] pengine: Add Task: class pengine::RenderGBufferPass
+[16:37:39] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.vert.spv
+[16:37:39] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.frag.spv
+[16:37:39] [info] pengine: Loading Shader : DeferredColor.shader
+[16:37:39] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
+[16:37:39] [info] pengine: UniformBufferObject.projView - Size 64, offset 0
+[16:37:39] [info] pengine: UniformBufferObject.view - Size 64, offset 64
+[16:37:39] [info] pengine: UniformBufferObject.projViewOld - Size 64, offset 128
+[16:37:39] [info] pengine: 	Accessing Member 0 offset 0, size 64
+[16:37:39] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
+[16:37:39] [info] pengine: Uniform UniformMaterialData at set = 1, binding = 6
+[16:37:39] [info] pengine: UniformMaterialData.albedoColor - Size 16, offset 0
+[16:37:39] [info] pengine: UniformMaterialData.roughnessColor - Size 16, offset 16
+[16:37:39] [info] pengine: UniformMaterialData.metallicColor - Size 16, offset 32
+[16:37:39] [info] pengine: UniformMaterialData.emissiveColor - Size 16, offset 48
+[16:37:39] [info] pengine: UniformMaterialData.usingAlbedoMap - Size 4, offset 64
+[16:37:39] [info] pengine: UniformMaterialData.usingMetallicMap - Size 4, offset 68
+[16:37:39] [info] pengine: UniformMaterialData.usingRoughnessMap - Size 4, offset 72
+[16:37:39] [info] pengine: UniformMaterialData.usingNormalMap - Size 4, offset 76
+[16:37:39] [info] pengine: UniformMaterialData.usingAOMap - Size 4, offset 80
+[16:37:39] [info] pengine: UniformMaterialData.usingEmissiveMap - Size 4, offset 84
+[16:37:39] [info] pengine: UniformMaterialData.workflow - Size 4, offset 88
+[16:37:39] [info] pengine: UniformMaterialData.padding - Size 4, offset 92
+[16:37:39] [info] pengine: Uniform UBO at set = 2, binding = 0
+[16:37:39] [info] pengine: UBO.view - Size 64, offset 0
+[16:37:39] [info] pengine: UBO.nearPlane - Size 4, offset 64
+[16:37:39] [info] pengine: UBO.farPlane - Size 4, offset 68
+[16:37:39] [info] pengine: UBO.padding - Size 4, offset 72
+[16:37:39] [info] pengine: UBO.padding2 - Size 4, offset 76
+[16:37:39] [info] pengine: Found Sampled Image uAlbedoMap at set = 1, binding = 0
+[16:37:39] [info] pengine: Found Sampled Image uMetallicMap at set = 1, binding = 1
+[16:37:39] [info] pengine: Found Sampled Image uRoughnessMap at set = 1, binding = 2
+[16:37:39] [info] pengine: Found Sampled Image uAOMap at set = 1, binding = 4
+[16:37:39] [info] pengine: Found Sampled Image uEmissiveMap at set = 1, binding = 5
+[16:37:39] [info] pengine: Found Sampled Image uNormalMap at set = 1, binding = 3
+[16:37:39] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[16:37:39] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[16:37:39] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[16:37:39] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[16:37:39] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[16:37:39] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[16:37:39] [info] pengine: Add Task: class pengine::RenderDeferredLightingPass
+[16:37:39] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredLight.vert.spv
+[16:37:39] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredLight.frag.spv
+[16:37:39] [info] pengine: Loading Shader : DeferredLight.shader
+[16:37:39] [info] pengine: Uniform UniformBufferLight at set = 0, binding = 4
+[16:37:39] [info] pengine: UniformBufferLight.lights - Size 2048, offset 0
+[16:37:39] [info] pengine: UniformBufferLight.viewMatrix - Size 64, offset 2048
+[16:37:39] [info] pengine: UniformBufferLight.cameraPosition - Size 16, offset 2112
+[16:37:39] [info] pengine: UniformBufferLight.lightCount - Size 4, offset 2128
+[16:37:39] [info] pengine: UniformBufferLight.mode - Size 4, offset 2132
+[16:37:39] [info] pengine: UniformBufferLight.enableIndirectLight - Size 4, offset 2136
+[16:37:39] [info] pengine: UniformBufferLight.padding2 - Size 4, offset 2140
+[16:37:39] [info] pengine: Found Sampled Image uColorSampler at set = 0, binding = 0
+[16:37:39] [info] pengine: Found Sampled Image uPositionSampler at set = 0, binding = 1
+[16:37:39] [info] pengine: Found Sampled Image uNormalSampler at set = 0, binding = 2
+[16:37:39] [info] pengine: Found Sampled Image uPBRSampler at set = 0, binding = 3
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_b_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_blue_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_flagpole_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_c_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_green_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_floor_a_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/spnza_bricks_a_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_a_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_details_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_hanging.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/chain_texture.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_arch_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_ceiling_a_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_green_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_blue_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_thorn_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_round.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_plant.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/background.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_diff.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/lion.tga
+[16:37:41] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_dif.tga
+[16:37:42] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_roof_diff.tga
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0
+[16:37:42] [info] pengine: bufferId : 0

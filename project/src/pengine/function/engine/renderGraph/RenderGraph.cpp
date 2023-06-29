@@ -155,7 +155,6 @@ namespace pengine
 		bindInput(1, 1, 2, 1);
 		bindInput(1, 2, 2, 2);
 		bindInput(1, 3, 2, 3);
-		bindInput(1, 4, 2, 4);
 	}
 	auto RenderGraph::createResourceMap() -> void
 	{

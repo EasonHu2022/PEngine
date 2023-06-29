@@ -4,16 +4,20 @@
 #include <glm/gtc/quaternion.hpp>
 namespace pengine
 {
+	
+	constexpr glm::vec3 ZERO(0, 0, 0);
+	constexpr glm::vec3 LEFT(-1.0f, 0.0f, 0.0f);
+	constexpr glm::vec3 RIGHT(1.0f, 0.0f, 0.0f);
+	constexpr glm::vec3 UP(0.0f, 1.0f, 0.0f);
+	constexpr glm::vec3 DOWN(0.0f, -1.0f, 0.0f);
+	constexpr glm::vec3 FORWARD(0.0f, 0.0f, 1.0f);
+	constexpr glm::vec3 BACK(0.0f, 0.0f, -1.0f);
+	constexpr glm::vec3 ONE(1.0f, 1.0f, 1.0f);
+	
+	
 	namespace component
 	{
-		constexpr glm::vec3 ZERO(0, 0, 0);
-		constexpr glm::vec3 LEFT(-1.0f, 0.0f, 0.0f);
-		constexpr glm::vec3 RIGHT(1.0f, 0.0f, 0.0f);
-		constexpr glm::vec3 UP(0.0f, 1.0f, 0.0f);
-		constexpr glm::vec3 DOWN(0.0f, -1.0f, 0.0f);
-		constexpr glm::vec3 FORWARD(0.0f, 0.0f, 1.0f);
-		constexpr glm::vec3 BACK(0.0f, 0.0f, -1.0f);
-		constexpr glm::vec3 ONE(1.0f, 1.0f, 1.0f);
+		
 		class PENGINE_API Transform final: public Component
 		{
 		public:

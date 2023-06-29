@@ -11,7 +11,7 @@ namespace pengine
 			SpotLight = 1,
 			PointLight = 2,
 		};
-
+		//gpu layout data
 		struct LightData
 		{
 			glm::vec4 color;
@@ -27,8 +27,6 @@ namespace pengine
 		public:
 			Light();
 			~Light();
-
-		private:
 			LightData lightData;
 		};
 	};

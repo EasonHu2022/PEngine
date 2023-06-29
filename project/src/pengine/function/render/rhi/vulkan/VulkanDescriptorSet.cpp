@@ -130,6 +130,7 @@ namespace pengine
 						{
 							if (imageInfo.textures[i])
 							{
+								//set barriers 
 								transitionImageLayout(imageInfo.textures[i].get());
 
 								const auto& des = *static_cast<VkDescriptorImageInfo*>(imageInfo.textures[i]->getDescriptorInfo());

@@ -1,7 +1,6 @@
 #version 450
 #extension GL_ARB_separate_shader_objects : enable
 #extension GL_ARB_shading_language_420pack : enable
-#extension GL_KHR_vulkan_glsl : enable
 #define PI 3.1415926535897932384626433832795
 #define GAMMA 2.2
 const float PBR_WORKFLOW_SEPARATE_TEXTURES = 0.0f;
