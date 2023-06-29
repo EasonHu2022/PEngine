@@ -10,8 +10,7 @@ namespace pengine
 {
 	RenderGBufferData::RenderGBufferData()
 	{
-		deferredColorShader = Shader::create("shaders/DeferredColor.shader");
-		stencilShader = Shader::create("shaders/Outline.shader");
+		deferredColorShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
 		MaterialProperties properties;
 		properties.albedoColor = glm::vec4(1.f, 1.f, 1.f, 1.f);
 		properties.roughnessColor = glm::vec4(0);
@@ -22,11 +21,20 @@ namespace pengine
 		properties.usingMetallicMap = 0.0f;
 
 		defaultMaterial = std::make_shared<Material>(deferredColorShader, properties);
+		defaultMaterial->createDescriptorSet();
+		DescriptorInfo info{};
+		descriptorColorSet.resize(3);
+		info.shader = deferredColorShader.get();
+		info.layoutIndex = 0;
+		descriptorColorSet[0] = DescriptorSet::create(info);
+		info.layoutIndex = 2;
+		descriptorColorSet[2] = DescriptorSet::create(info);
 	}
 
 	RenderGBufferPass::RenderGBufferPass(uint32_t _uid, RenderGraph* renderGraph) : IPass(_uid, renderGraph)
 	{
 		prevFrameValid = false;
+		name = "GBUFFER PASS";
 		//only for serilization attributions
 	}
 	RenderGBufferPass::~RenderGBufferPass()
@@ -34,7 +42,10 @@ namespace pengine
 	}
 	auto RenderGBufferPass::init(entt::registry& registry) -> void
 	{
-		
+		//create vresources
+		createVResource();
+
+
 		m_LocalData = RenderGBufferData();
 	}
 	auto RenderGBufferPass::execute(CommandBuffer* commandBuffer) -> void
@@ -82,6 +93,7 @@ namespace pengine
 			else
 			{
 				m_LocalData.descriptorColorSet[1] = unit.material->getDescriptorSet();
+				unit.material->bind();
 				RenderDevice::bindDescriptorSets(pipeline.get(), commandBuffer, 0, m_LocalData.descriptorColorSet);
 				RenderDevice::drawMesh(commandBuffer, pipeline.get(), unit.mesh);
 			}
@@ -127,7 +139,7 @@ namespace pengine
 		pipelineInfo.clearTargets = false;
 		pipelineInfo.swapChainTarget = false;
 		//acquire camera data
-		auto cameras = registry.group<component::Camera, component::Transform>();
+		auto cameras = registry.group<component::Camera>(entt::get<component::Transform>);
 		if (cameras.empty())
 		{
 			PLOGW("Non Main Camera Detected!");
@@ -156,9 +168,10 @@ namespace pengine
 			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "farPlane", &farPlane);
 			prevFrameProjectView = projView;
 		}
+		
 		std::vector<Entity> m_visbileEntity;
 		//filter the registry entities
-		auto meshes = registry.group<component::MeshRenderer, component::Transform>();
+		auto meshes = registry.group<component::MeshRenderer>(entt::get< component::Transform>);
 		if (!meshes.empty())
 		{
 			for (const auto& data : meshes.each())
@@ -173,7 +186,14 @@ namespace pengine
 			unit.transform = ent.getComponent<component::Transform>().getWorldMatrix();
 			if (unit.mesh->getSubMeshCount() <= 1)
 			{
-				unit.material = !unit.mesh->getMaterial().empty() ? unit.mesh->getMaterial()[0].get() : m_LocalData.defaultMaterial.get();
+				if (!unit.mesh->getMaterial().empty())
+				{
+					unit.material = unit.mesh->getMaterial()[0].get();
+				}
+				else
+				{
+					unit.material =  m_LocalData.defaultMaterial.get();
+				}
 				unit.material->bind();
 			}
 			else
@@ -208,5 +228,22 @@ namespace pengine
 
 	auto RenderGBufferPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
+	}
+	auto RenderGBufferPass::createVResource() -> void
+	{
+		inputs.resize(4);
+		outputs.resize(7);
+		//temp all the same
+		for (int i = 0; i < outputs.size(); i++)
+		{
+			auto res = new RenderGraphVirtualResource();
+			res->type = RenderResouceType::Res_Texture2D;
+			res->format = TextureFormat::RGBA16;
+			auto renderExtend = m_renderGraph->getRenderExtend();
+			res->width = renderExtend.x;
+			res->height = renderExtend.y;
+			outputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
+		}
+	
 	}
 };

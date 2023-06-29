@@ -6,6 +6,7 @@
 #include "VulkanCommandBuffer.h"
 #include "function/resource/Image.h"
 #include "VulkanFrameBuffer.h"
+#include "function/resource/ImageLoader.h"
 #include <stdint.h>
 #include <memory>
 namespace pengine
@@ -189,7 +190,7 @@ namespace pengine
 	VulkanTexture2D::VulkanTexture2D(const std::string& name, const std::string& filename, TextureParameters parameters, TextureLoadOptions loadOptions)
 		: parameters(parameters),
 		loadOptions(loadOptions),
-		fileName(fileName)
+		fileName(filename)
 	{
 		this->name = name;
 		deleteImage = load();
@@ -253,7 +254,13 @@ namespace pengine
 		}
 		else if (fileName != "")
 		{
-			//load image //TODO : Loader
+			image = ImageLoader::loadAsset(fileName);
+			width = image->getWidth();
+			height = image->getHeight();
+			imageSize = image->getImageSize();
+			pixel = reinterpret_cast<const uint8_t*>(image->getData());
+			parameters.format = image->getPixelFormat();
+			vkFormat = VkConverter::textureFormatToVK(parameters.format, parameters.srgb);
 		}
 		mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(width, height)))) + 1;
 		//if do not need mipmaps

@@ -6,6 +6,7 @@
 #include "VulkanDevice.h"
 #include "VKHelper.h"
 #include "spirv_cross.hpp"
+
 namespace pengine
 {
 	namespace
@@ -326,7 +327,7 @@ namespace pengine
 				auto& bufferType = comp.get_type(u.base_type_id);
 				auto  bufferSize = comp.get_declared_struct_size(bufferType);
 				auto  memberCount = (int32_t)bufferType.member_types.size();
-
+				auto name = comp.get_name(u.base_type_id);
 				auto& descriptorInfo = descriptorInfos[set];
 				auto& descriptor = descriptorInfo.emplace_back();
 				descriptor.binding = binding;

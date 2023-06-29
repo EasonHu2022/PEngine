@@ -25,9 +25,13 @@ namespace pengine
 
 	Scene::Scene(const std::string& _name) : name(_name)
 	{
+		entityManager = std::make_shared<EntityManager>(this);
 		//each scene bind with a render graph
 		std::string RGPath = "test.rg";
 		renderGraph = std::make_shared<RenderGraph>(RGPath);
+		//temply equal to swapchain extend
+		width = Application::getWindow()->getWidth();
+		height = Application::getWindow()->getHeight();
 		renderGraph->init(entityManager->getRegistry(),width, height,width,height);
 	}
 	Scene::~Scene()

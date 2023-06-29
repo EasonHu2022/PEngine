@@ -9,6 +9,7 @@ namespace pengine
 	EntityManager::EntityManager(Scene* _Scene): scene(_Scene)
 	{
 		//set constraint
+		//attention : dependency means when add left one , automatically add the dependent one
 		addDependency<component::Camera, component::Transform>();
 		addDependency<component::Light, component::Transform>();
 		addDependency<component::MeshRenderer, component::Transform>();

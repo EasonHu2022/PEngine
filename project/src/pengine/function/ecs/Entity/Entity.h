@@ -23,7 +23,10 @@ namespace pengine
 		inline T& addComponent(Args &&...args)
 		{
 			if (hasComponent<T>())
-				PLOGW("Attempting to add extisting component ");
+			{
+				PLOGW("Attempting to add extisting component ");	
+			}
+				
 			T& t = registry->emplace<T>(entityHandle, std::forward<Args>(args)...);
 			if constexpr (std::is_base_of<component::Component, T>::value)
 			{

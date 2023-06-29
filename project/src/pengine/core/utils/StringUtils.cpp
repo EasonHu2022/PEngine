@@ -324,7 +324,7 @@ namespace pengine
 	}
 
 #ifdef _WIN32
-	const std::string  StringUtils::delimiter = "\\";
+	const std::string  StringUtils::delimiter = "/";
 #else						  
 	const std::string  StringUtils::delimiter = "/";
 #endif

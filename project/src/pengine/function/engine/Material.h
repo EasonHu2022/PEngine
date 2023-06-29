@@ -14,6 +14,7 @@ namespace pengine
 	static constexpr float   PBR_WORKFLOW_METALLIC_ROUGHNESS = 1.0f;
 	static constexpr float   PBR_WORKFLOW_SPECULAR_GLOSINESS = 2.0f;
 	static constexpr int32_t MATERAL_LAYOUT_INDEX = 1;
+	static const std::string defaultTexture = "F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png";
 	struct MaterialProperties
 	{
 		glm::vec4 albedoColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -59,6 +60,7 @@ namespace pengine
 		Material(const std::shared_ptr<Shader>& shader, const MaterialProperties& properties = MaterialProperties(), const PBRMataterialTextures& textures = PBRMataterialTextures());
 		Material();
 		~Material();
+		auto loadPBRMaterial(const std::string& name, const std::string& path, const std::string& extension = ".png") -> void;
 		auto loadMaterial(const std::string& name, const std::string& path) -> void;
 		auto createDescriptorSet(int32_t layoutID = MATERAL_LAYOUT_INDEX, bool pbr = true) -> void;
 		auto updateDescriptorSet() -> void;
@@ -73,7 +75,10 @@ namespace pengine
 		auto setAOTexture(const std::string& path) -> void;
 		auto setEmissiveTexture(const std::string& path) -> void;
 		auto bind() -> void;
-
+		inline auto setTexturesUpdated(bool updated)
+		{
+			texturesUpdated = updated;
+		}
 
 		inline auto setRenderFlags(int32_t flags)
 		{
@@ -100,6 +105,17 @@ namespace pengine
 			return name;
 		}
 
+		inline const auto& getProperties() const
+		{
+			return materialProperties;
+		}
+
+		inline auto& getProperties()
+		{
+			return materialProperties;
+		}
+
+
 		inline auto& getMaterialId() const
 		{
 			return materialId;
@@ -119,16 +135,23 @@ namespace pengine
 		{
 			return (uint32_t)flag & renderFlags;
 		}
-
+		auto setShader(const std::string& path) -> void;
+		auto setShader(const std::shared_ptr<Shader>& shader) -> void;
+		auto getShaderPath() const->std::string;
 		auto getResourceType() const->FileType { return FileType::Material; };
-		auto getPath() const->std::string { return path; };
+		auto getPath() const->std::string { return materialId; };
+		static auto create(const std::string& materialId) -> std::shared_ptr<Material>;
+		Material(const std::string& materialId);
 	private:
+		PBRMataterialTextures pbrMaterialTextures;
+		MaterialProperties    materialProperties;
+
 		std::shared_ptr<Shader>        shader;
 		std::shared_ptr<UniformBuffer> materialPropertiesBuffer;
 		std::string                    name;
 		std::string                    materialId;
 		std::shared_ptr<DescriptorSet> descriptorSet;
-		std::string					   path;
+		bool texturesUpdated = false;
 	protected:
 		int32_t renderFlags = 0;
 

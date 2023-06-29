@@ -13,6 +13,7 @@ project "pengine"
 		"**.cpp",
 			
 		"**.lua",
+		assetsdir.."/shaders/**.shader",
 		thirdparty .. "/glm/include/**.hpp",
 		thirdparty .. "/glm/include/**.inl",
 		thirdparty .. "/vulkanmemoryallocator/include/*.h",
@@ -38,6 +39,7 @@ project "pengine"
 		thirdparty .. "/stb",
 		thirdparty .. "/Json",
 		thirdparty .. "/SPIRV-Cross",
+		assetsdir,
 	}
 
 
@@ -58,7 +60,7 @@ project "pengine"
 			"PEGNINE_ENGINE"
 		}
 		
-
+	dependson "shaders"
 	links
 	{
 		"GLFW",

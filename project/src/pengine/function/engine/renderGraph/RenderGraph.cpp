@@ -24,6 +24,7 @@ namespace pengine
 		addPass<RenderGBufferPass>(1) -> init(registry);
 		addPass<RenderDeferredLightingPass>(2) -> init(registry);
 		/*################# */
+		compile();
 	}
 	auto RenderGraph::setup() -> void
 	{
@@ -44,12 +45,9 @@ namespace pengine
 
 	auto RenderGraph::compile() -> void
 	{
-		//bind tasks and create real resources
-		bind(1, 0, 2, 0);
-		bind(1, 1, 2, 1);
-		bind(1, 2, 2, 2);
-		bind(1, 3, 2, 3);
-		bind(1, 4, 2, 4);
+		compileDependency();
+		createResourceMap();
+
 		//sort passes
 		passSorting(passUids);
 		//compile each pass group
@@ -67,7 +65,7 @@ namespace pengine
 		}
 		
 	}
-	auto RenderGraph::bind(uint32_t outputTask, size_t OutputBindPos, uint32_t inputTask, size_t inputBindPos) -> bool
+	auto RenderGraph::bindInput(uint32_t outputTask, size_t OutputBindPos, uint32_t inputTask, size_t inputBindPos) -> bool
 	{
 		if (passMap.find(outputTask) != passMap.end()) {
 			
@@ -83,21 +81,6 @@ namespace pengine
 				passMap[inputTask]->bindInput(inputBindPos, p_vRes);
 				//set dependencies task(used to Topological Sorting)
 				passMap[inputTask]->addDegreeIn(outputTask);
-
-				switch (p_vRes->type)
-				{
-				case RenderResouceType::Res_Texture2D:
-					if (!p_vRes->b_initialized)
-					{		
-						p_vRes->index = resources.size();
-						resources.emplace_back(std::make_shared<RenderGraphTexture2DResource>())->create(p_vRes->width, p_vRes->height,
-							nullptr, p_vRes->name, p_vRes->format);
-						p_vRes->b_initialized = true;
-					}		
-					break;
-				default:
-					break;
-				}
 			}
 			else
 			{
@@ -107,6 +90,35 @@ namespace pengine
 		}
 		else {
 			PLOGE("try to bind a nonexistent output task , uid: {0}", outputTask);
+			return false;
+		}
+		return true;
+	}
+	auto RenderGraph::bindOutput(uint32_t prevPass, size_t prevbindpos, uint32_t postPass, size_t postbindPos) -> bool
+	{
+		if (passMap.find(prevPass) != passMap.end()) {
+
+			auto p_vRes = passMap[prevPass]->getOutput(prevbindpos);
+			if (passMap.find(postPass) != passMap.end())
+			{
+				if (passMap[prevPass]->getOutputType(prevbindpos) != passMap[postPass]->getInputType(postbindPos))
+				{
+					PLOGE("Failed! Try to bind 2 resource with different type !");
+					return false;
+				}
+
+				passMap[postPass]->bindOutput(postbindPos, p_vRes);
+				//set dependencies task(used to Topological Sorting)
+				passMap[postPass]->addDegreeIn(prevPass);			
+			}
+			else
+			{
+				PLOGE("try to bind a nonexistent output pass , uid: {0}", postPass);
+				return false;
+			}
+		}
+		else {
+			PLOGE("try to bind a nonexistent output task , uid: {0}", prevPass);
 			return false;
 		}
 		return true;
@@ -125,6 +137,51 @@ namespace pengine
 			return NULL;
 		}
 		return resources.at(id).get();
+	}
+	auto RenderGraph::checkResource() -> void
+	{
+		for (auto pass : passMap)
+		{
+			auto outputs = pass.second->getOutputCount();
+		}
+
+	}
+	auto RenderGraph::compileDependency() -> void
+	{
+		//-- bindoutput -- WAW
+
+		//-- bindintout -- RAW
+		bindInput(1, 0, 2, 0);
+		bindInput(1, 1, 2, 1);
+		bindInput(1, 2, 2, 2);
+		bindInput(1, 3, 2, 3);
+		bindInput(1, 4, 2, 4);
+	}
+	auto RenderGraph::createResourceMap() -> void
+	{
+		for (auto pass : passMap)
+		{
+			auto n = pass.second->getOutputCount();
+			for (int i = 0; i < n; i++)
+			{
+				auto p_vRes = pass.second->getOutput(i);
+				switch (p_vRes->type)
+				{
+				case RenderResouceType::Res_Texture2D:
+					if (!p_vRes->b_initialized)
+					{
+						p_vRes->index = resources.size();
+						resources.emplace_back(std::make_shared<RenderGraphTexture2DResource>())->create(p_vRes->width, p_vRes->height,
+							nullptr, p_vRes->name, p_vRes->format);
+						p_vRes->b_initialized = true;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		
 	}
 	auto RenderGraph::passSorting(std::vector<uint32_t> src) -> void
 	{

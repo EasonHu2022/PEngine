@@ -15,6 +15,7 @@ workspace "PEngine"
 		}
 	
 thirdparty = "%{wks.location}/project/thirdparty"
+assetsdir = "%{wks.location}/assets"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 startproject "Editor"
 include "project/src/pengine"

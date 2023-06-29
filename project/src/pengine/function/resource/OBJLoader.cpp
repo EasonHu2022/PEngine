@@ -33,6 +33,7 @@ namespace pengine
     {
 		std::string resolvedPath = obj;
 		auto        directory = resolvedPath.substr(0, resolvedPath.find_last_of(StringUtils::delimiter));
+		//could change : set parent directory as name also can 
 		std::string name = directory.substr(directory.find_last_of(StringUtils::delimiter) + 1);
 
 		tinyobj::attrib_t                attrib;
@@ -106,9 +107,9 @@ namespace pengine
 
 				if (mp->bump_texname.length() > 0)
 				{
-					//std::shared_ptr<Texture2D> texture = loadMaterialTextures("Normal", texturesCache, mp->bump_texname, directory, TextureParameters(TextureFilter::Nearest, TextureFilter::Nearest, mp->bump_texopt.clamp ? TextureWrap::ClampToEdge : TextureWrap::Repeat));
-					//if (texture)
-					//	textures.normal = texture;        //pbrMaterial->SetNormalMap(texture);
+					std::shared_ptr<Texture2D> texture = loadMaterialTextures("Normal", texturesCache, mp->bump_texname, directory, TextureParameters(TextureFilter::Nearest, TextureFilter::Nearest, mp->bump_texopt.clamp ? TextureWrap::ClampToEdge : TextureWrap::Repeat));
+					if (texture)
+						textures.normal = texture;        //pbrMaterial->SetNormalMap(texture);
 				}
 
 				if (mp->roughness_texname.length() > 0)
@@ -125,12 +126,12 @@ namespace pengine
 						textures.metallic = texture;
 				}
 
-				/*	if (mp->specular_highlight_texname.length() > 0)
-					{
-						std::shared_ptr<Texture2D> texture = loadMaterialTextures("Metallic", texturesCache, mp->specular_highlight_texname, directory, TextureParameters(TextureFilter::Nearest, TextureFilter::Nearest, mp->specular_texopt.clamp ? TextureWrap::ClampToEdge : TextureWrap::Repeat));
-						if (texture)
-							textures.metallic = texture;
-					}*/
+				if (mp->specular_highlight_texname.length() > 0)
+				{
+					std::shared_ptr<Texture2D> texture = loadMaterialTextures("Metallic", texturesCache, mp->specular_highlight_texname, directory, TextureParameters(TextureFilter::Nearest, TextureFilter::Nearest, mp->specular_texopt.clamp ? TextureWrap::ClampToEdge : TextureWrap::Repeat));
+					if (texture)
+						textures.metallic = texture;
+				}
 			}
 			pbrMaterial->setTextures(textures);
 			auto mesh = std::make_shared<Mesh>(indices, vertices);

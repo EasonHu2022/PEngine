@@ -52,9 +52,8 @@ namespace pengine
 		{
 			auto  entity = scene->createEntity("Main Camera");
 			auto &camera = entity.addComponent<component::Camera>();
-			entity.addComponent<component::Transform>();
 			camera.setFov(45.f);
-			camera.setFar(100);
+			camera.setFar(100); 
 			camera.setNear(0.01);
 			camera.setAspectRatio(4 / 3.f);
 		}
@@ -69,7 +68,7 @@ namespace pengine
 		currentName = "defaultScene";
 		addScene(currentName, new Scene(currentName));
 		currentScene = allScenes[currentName].get();
-		std::string testpath = "F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza.obj";
+		std::string testpath = "F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/sponza.obj";
 		currentScene->addModel(testpath);
 	}
 };

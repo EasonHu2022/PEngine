@@ -27,7 +27,8 @@ namespace pengine
 		auto update(entt::registry& registry) -> void;
 		auto compile() -> void;
 		auto execute(CommandBuffer* cmdBuffer) -> void;
-		auto bind(uint32_t outputTask, size_t bindpos, uint32_t inputTask, size_t bindPos) -> bool;
+		auto bindInput(uint32_t outputTask, size_t bindpos, uint32_t inputTask, size_t bindPos) -> bool;
+		auto bindOutput(uint32_t prevTask, size_t prevbindpos, uint32_t postTask, size_t postbindPos) -> bool;
 		auto onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
 		auto getResourceByID(uint32_t id) -> IRenderGraphResource*;
 
@@ -36,6 +37,11 @@ namespace pengine
 
 		auto getResourceType() const->FileType { return FileType::RenderGraph; };
 		auto getPath() const->std::string { return path; };
+		inline auto getRenderExtend() -> glm::vec2 { return renderExtend; };
+		inline auto getOutputExtend() -> glm::vec2 { return outputExtend; };
+		auto checkResource() -> void;
+		auto compileDependency() -> void;
+		auto createResourceMap() -> void;
 	private:
 		//Topological Sorting
 		auto passSorting(std::vector<uint32_t> src) -> void;

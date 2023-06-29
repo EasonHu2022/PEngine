@@ -223,7 +223,10 @@ namespace pengine
 			deviceExtensions.emplace_back("VK_KHR_portability_subset");
 		}
 #endif
-
+		if (physicalDevice->isExtensionSupported(VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME))
+		{
+			deviceExtensions.emplace_back(VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME);
+		}
 		VkDeviceCreateInfo deviceCreateInfo{};
 		deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 		deviceCreateInfo.queueCreateInfoCount = static_cast<uint32_t>(physicalDevice->queueCreateInfos.size());
