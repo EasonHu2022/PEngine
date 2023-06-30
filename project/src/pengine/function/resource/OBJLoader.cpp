@@ -51,7 +51,7 @@ namespace pengine
 			std::vector<Vertex>                  vertices;
 			std::vector<uint32_t>                indices;
 			std::unordered_map<Vertex, uint32_t> uniqueVertices{};
-
+			//TODO - 兼容不同面使用不同材质的情况->分割成submesh
 			for (const auto& index : shape.mesh.indices)
 			{
 				Vertex vertex{};
@@ -73,7 +73,7 @@ namespace pengine
 						1.0f - attrib.texcoords[2 * index.texcoord_index + 1] };
 
 				vertex.color = { 1.0f, 1.0f, 1.0f, 1.f };
-
+				
 				if (uniqueVertices.count(vertex) == 0)
 				{
 					uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
@@ -95,7 +95,7 @@ namespace pengine
 			if (shape.mesh.material_ids[0] >= 0)
 			{
 				tinyobj::material_t* mp = &materials[shape.mesh.material_ids[0]];
-
+				
 				if (mp->diffuse_texname.length() > 0)
 				{
 					std::shared_ptr<Texture2D> texture = loadMaterialTextures("Albedo",
@@ -132,6 +132,10 @@ namespace pengine
 					if (texture)
 						textures.metallic = texture;
 				}
+				pbrMaterial->getProperties().albedoColor = { mp->diffuse[0], mp->diffuse[1], mp->diffuse[2],1.0f };
+				pbrMaterial->getProperties().roughnessColor = { mp->diffuse[0], mp->diffuse[1], mp->diffuse[2],1.0f };
+				pbrMaterial->getProperties().metallicColor = { mp->specular[0], mp->specular[1], mp->specular[2],1.0f };
+				pbrMaterial->getProperties().emissiveColor = { mp->emission[0], mp->emission[1], mp->emission[2],1.0f };
 			}
 			pbrMaterial->setTextures(textures);
 			auto mesh = std::make_shared<Mesh>(indices, vertices);

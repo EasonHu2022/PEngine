@@ -6,9 +6,10 @@
 #include "function/ecs/component/Transform.h"
 #include "function/ecs/component/MeshRenderer.h"
 #include "function/ecs/component/camera.h"
+#include "function/render/rhi/Texture.h"
 namespace pengine
 {
-	RenderGBufferData::RenderGBufferData()
+	RenderGBufferData::RenderGBufferData(RenderGraph* renderGraph)
 	{
 		deferredColorShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
 		MaterialProperties properties;
@@ -27,8 +28,14 @@ namespace pengine
 		info.shader = deferredColorShader.get();
 		info.layoutIndex = 0;
 		descriptorColorSet[0] = DescriptorSet::create(info);
-		info.layoutIndex = 2;
-		descriptorColorSet[2] = DescriptorSet::create(info);
+		depthTest = true;
+		if (depthTest)
+		{
+			auto renderExtend = renderGraph->getRenderExtend();
+			depthBuffer = TextureDepth::create(renderExtend.x, renderExtend.y, true);
+			depthBuffer->setName("GBuffer-Depth");
+
+		}
 	}
 
 	RenderGBufferPass::RenderGBufferPass(uint32_t _uid, RenderGraph* renderGraph) : IPass(_uid, renderGraph)
@@ -46,12 +53,11 @@ namespace pengine
 		createVResource();
 
 
-		m_LocalData = RenderGBufferData();
+		m_LocalData = RenderGBufferData(m_renderGraph);
 	}
 	auto RenderGBufferPass::execute(CommandBuffer* commandBuffer) -> void
 	{
 		m_LocalData.descriptorColorSet[0]->update();
-		m_LocalData.descriptorColorSet[2]->update();
 		std::shared_ptr<Pipeline> pipeline;
 		//traverse queue
 		for (auto unit :m_renderQueue)
@@ -136,8 +142,9 @@ namespace pengine
 		pipelineInfo.shader = m_LocalData.deferredColorShader;
 		pipelineInfo.polygonMode = PolygonMode::Fill;
 		pipelineInfo.blendMode = BlendMode::SrcAlphaOneMinusSrcAlpha;
-		pipelineInfo.clearTargets = false;
+		pipelineInfo.clearTargets = true;
 		pipelineInfo.swapChainTarget = false;
+		pipelineInfo.depthTest = m_LocalData.depthTest;
 		//acquire camera data
 		auto cameras = registry.group<component::Camera>(entt::get<component::Transform>);
 		if (cameras.empty())
@@ -155,17 +162,18 @@ namespace pengine
 			auto cameraTransform = cameraEnt.getComponent<component::Transform>();
 			auto project = cameraData.getProjection();
 			auto view = cameraTransform.getWorldMatrixInverse();
+			//process for vulkan
+#ifdef PENGINE_VULKAN
+			view[1][1] *= -1.0f;
+			view[2][2] *= -1.0f;
+#endif // 
+
 			auto projView = project * view;
 			if (!prevFrameValid)
 				prevFrameProjectView = projView;
-			auto nearPlane = cameraData.getNear();
-			auto farPlane = cameraData.getFar();
 			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "projView", &projView);
 			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "view", &view);
 			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "projViewOld", &prevFrameProjectView);
-			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "view", &view);
-			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "nearPlane", &nearPlane);
-			m_LocalData.descriptorColorSet[2]->setUniform("UBO", "farPlane", &farPlane);
 			prevFrameProjectView = projView;
 		}
 		
@@ -208,6 +216,7 @@ namespace pengine
 					return;
 				}
 				pipelineInfo.colorTargets[i] = m_renderGraph->getResourceByID(outputs[i]->index)->getNativeResource();		
+				
 			}
 
 			if (unit.material != nullptr)
@@ -220,6 +229,11 @@ namespace pengine
 				pipelineInfo.cullMode = CullMode::Back;
 				pipelineInfo.transparencyEnabled = false;
 			}
+			if (unit.material == nullptr || (m_LocalData.depthTest && unit.material->isFlagOf(Material::RenderFlags::DepthTest)))
+			{
+				pipelineInfo.depthTarget = std::static_pointer_cast<Texture>(m_LocalData.depthBuffer);
+			}
+
 			unit.pipelineInfo = pipelineInfo;
 			
 		}
@@ -232,7 +246,7 @@ namespace pengine
 	auto RenderGBufferPass::createVResource() -> void
 	{
 		inputs.resize(4);
-		outputs.resize(7);
+		outputs.resize(4);
 		//temp all the same
 		for (int i = 0; i < outputs.size(); i++)
 		{
@@ -245,5 +259,8 @@ namespace pengine
 			outputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
 		}
 	
+	}
+	RenderGBufferData::RenderGBufferData()
+	{
 	}
 };

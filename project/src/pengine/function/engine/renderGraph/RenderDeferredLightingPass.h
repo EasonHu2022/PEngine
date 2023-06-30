@@ -32,6 +32,6 @@ namespace pengine
 		auto onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
 		auto createVResource() -> void;
 	private:
-		RenderDeferredLightingData m_RenderDefferredLightingData;
+		RenderDeferredLightingData m_RenderDefferredLightingData{};
 	};
 };

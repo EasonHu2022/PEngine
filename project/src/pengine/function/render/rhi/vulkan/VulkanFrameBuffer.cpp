@@ -17,7 +17,7 @@ namespace pengine
 				attachments.emplace_back(static_cast<VulkanTexture2D*>(attachment.get())->getImageView());
 				break;
 			case TextureType::Depth:
-				//attachments.emplace_back(static_cast<VulkanTextureDepth*>(attachment.get())->getImageView());
+				attachments.emplace_back(static_cast<VulkanTextureDepth*>(attachment.get())->getImageView());
 				break;
 			case TextureType::DepthArray:
 				//attachments.emplace_back(static_cast<VulkanTextureDepthArray*>(attachment.get())->getImageView(info.layer));

@@ -45,10 +45,15 @@ namespace pengine
 
 		auto Camera::updateProjectionMatrix() -> void
 		{
+
+
 			if (orthographic)
 				projMatrix = glm::ortho(aspectRatio * -scale, aspectRatio * scale, -scale, scale, near_, far_);
 			else
 				projMatrix = glm::perspective(glm::radians(fov), aspectRatio, near_, far_);
+
+
+			
 		}
 
 	};

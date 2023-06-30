@@ -12,4 +12,4 @@ project "shaders"
 
 	files( shaders )
 
-	handle_glsl_files( "-g -O", "assets/shaders/spv", {})
+	handle_glsl_files( "-g", "assets/shaders/spv", {})

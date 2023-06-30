@@ -12,6 +12,7 @@ workspace "PEngine"
 	defines
 		{
 			"PENGINE_VULKAN",
+			"GLM_FORCE_DEPTH_ZERO_TO_ONE",
 		}
 	
 thirdparty = "%{wks.location}/project/thirdparty"

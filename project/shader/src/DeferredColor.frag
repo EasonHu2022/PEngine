@@ -55,22 +55,6 @@ layout(location = 1) out vec4 outPosition;
 layout(location = 2) out vec4 outNormal;
 layout(location = 3) out vec4 outPBR;
 
-layout(location = 4) out vec4 outViewPosition;
-layout(location = 5) out vec4 outViewNormal;
-layout(location = 6) out vec4 outVelocity;
-
-vec4 gammaCorrectTexture(vec4 samp)
-{
-	return samp;
-	return vec4(pow(samp.rgb, vec3(GAMMA)), samp.a);
-}
-
-vec3 gammaCorrectTextureRGB(vec4 samp)
-{
-	return samp.xyz;
-	return vec3(pow(samp.rgb, vec3(GAMMA)));
-}
-
 vec4 getAlbedo()
 {
 	return (1.0 - materialProperties.usingAlbedoMap) * materialProperties.albedoColor + materialProperties.usingAlbedoMap * texture(uAlbedoMap, fragTexCoord);
@@ -91,10 +75,6 @@ float getAO()
 	return (1.0 - materialProperties.usingAOMap) + materialProperties.usingAOMap * texture(uAOMap, fragTexCoord).r;
 }
 
-vec3 getEmissive()
-{
-	return (1.0 - materialProperties.usingEmissiveMap) * materialProperties.emissiveColor.rgb + materialProperties.usingEmissiveMap * texture(uEmissiveMap, fragTexCoord).rgb;
-}
 
 vec3 getNormalFromMap()
 {
@@ -116,12 +96,6 @@ vec3 getNormalFromMap()
 	return normalize(TBN * tangentNormal);
 }
 
-
-float linearDepth(float depth)
-{
-	float z = depth * 2.0f - 1.0f; 
-	return (2.0f * ubo.nearPlane * ubo.farPlane) / (ubo.farPlane + ubo.nearPlane - z * (ubo.farPlane - ubo.nearPlane));	
-}
 
 void main()
 {
@@ -151,19 +125,8 @@ void main()
 		metallic = tex.b;
 		roughness = tex.g * materialProperties.roughnessColor.r;
 	}
-
-	vec3 emissive   = getEmissive();
-
-
-    outColor    	= texColor;// + vec4(emissive,0);
-	outPosition		= vec4(fragPosition.xyz, emissive.x);
-	outNormal   	= vec4(getNormalFromMap(), emissive.y);
-	outPBR      	= vec4(metallic, roughness, ao, emissive.z);
-
-	outViewPosition = fragViewPosition;
-	outViewNormal   = vec4(transpose(inverse(mat3(ubo.view))) * outNormal.xyz, 1);
-	//outViewNormal   = ubo.view * outNormal;
-    vec2 a = (fragProjPosition.xy / fragProjPosition.w) * 0.5 + 0.5;
-    vec2 b = (fragOldProjPosition.xy / fragOldProjPosition.w) * 0.5 + 0.5;
-    outVelocity.xy = a - b;
+    outColor    	= texColor;
+	outPosition		= vec4(fragPosition.xyz, 1.0f);
+	outNormal   	= vec4(getNormalFromMap(), 1.0f);
+	outPBR      	= vec4(metallic, roughness, ao, 1.0f);
 }

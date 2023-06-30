@@ -20,7 +20,10 @@ namespace pengine
 		std::shared_ptr<DescriptorSet> stencilDescriptorSet;
 		std::shared_ptr<Shader> deferredColorShader;        //stage 0 get all color information     //stage 1 process lighting
 		std::shared_ptr<Shader> stencilShader;
+		bool depthTest;
+		std::shared_ptr<TextureDepth>                                   depthBuffer;
 		RenderGBufferData();
+		RenderGBufferData(RenderGraph* renderGraph);
 	};
 
 	struct SharedRenderData;
@@ -38,6 +41,7 @@ namespace pengine
 		auto onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void override;
 		auto createVResource() -> void;
 	private:
+		
 		RenderGBufferData m_LocalData;
 		std::vector<RenderUnit> m_renderQueue;
 		glm::mat4 prevFrameProjectView;

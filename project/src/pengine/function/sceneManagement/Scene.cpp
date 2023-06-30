@@ -42,6 +42,15 @@ namespace pengine
 	}
 	auto Scene::onUpdate() -> void
 	{
+		//update for ui/objects/ or sth
+		//set world matrix (parent)
+		//current non parent so just set I.
+		auto views = getRegistry().view<component::Transform>(entt::exclude<component::Hierarchy>);
+		for (auto ent : views)
+		{
+			getRegistry().get<component::Transform>(ent).setWorldMatrix(glm::mat4{ 1.f });
+		}
+		
 
 	}
 	auto Scene::onLateUpdate() -> void

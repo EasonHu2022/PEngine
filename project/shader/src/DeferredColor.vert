@@ -45,7 +45,7 @@ void main()
     fragColor = inColor.xyz;
 	fragTexCoord = inTexCoord;
     fragNormal =  transpose(inverse(mat3(pushConsts.transform))) * normalize(inNormal);
-    
+    fragNormal = inNormal;
     fragTangent = inTangent;
 
     fragProjPosition = pos;

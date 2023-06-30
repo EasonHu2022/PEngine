@@ -56,6 +56,7 @@ namespace pengine
 			passUids.push_back(uid);
 			return std::static_pointer_cast<T>(passMap.emplace(uid, std::make_shared<T>(uid,this)).first->second);
 		}
+
 		std::string name;
 		std::string path;
 
