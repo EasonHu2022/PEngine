@@ -8,6 +8,7 @@
 #include "function/ecs/component/Transform.h"
 #include "function/ecs/component/Camera.h"
 #include "glm/glm.hpp"
+#include <Application.h>
 namespace pengine
 {
 	RenderDeferredLightingPass::RenderDeferredLightingPass(uint32_t uid, RenderGraph* renderGraph) : IPass(uid, renderGraph)
@@ -124,7 +125,9 @@ namespace pengine
 	}
 	RenderDeferredLightingData::RenderDeferredLightingData()
 	{
-		deferredLightShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredLight.shader");
+		//deferredLightShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredLight.shader");
+		std::string tmpPath = "shaders/DeferredLight.shader";
+		deferredLightShader = Shader::create(ASSETS_ABSOLUTE_PATH + tmpPath);
 		descriptorLightSet.resize(1);
 		DescriptorInfo info{};
 		info.shader = deferredLightShader.get();

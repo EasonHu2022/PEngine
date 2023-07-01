@@ -115,11 +115,12 @@ namespace pengine
 	}
 	void VulkanCommandBuffer::updateViewport(uint32_t width, uint32_t height)
 	{
+		int flipHeight = (int)height * -1;//for adapt glm:perspective ;https://www.saschawillems.de/blog/2019/03/29/flipping-the-vulkan-viewport/
 		VkViewport viewport = {};
 		viewport.x = 0.0f;
-		viewport.y = 0.f;
+		viewport.y = static_cast<float>(height);
 		viewport.width = static_cast<float>(width);
-		viewport.height = static_cast<float>(height);
+		viewport.height = static_cast<float>(flipHeight);
 		viewport.minDepth = 0.0f;
 		viewport.maxDepth = 1.0f;
 

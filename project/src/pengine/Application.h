@@ -13,6 +13,9 @@
 #include "core/core.h"
 #include "function/resource/ModelLoader.h"
 
+//temply 
+#define ASSETS_ABSOLUTE_PATH "F:/WorkSpace/PEngine/PEngine/assets/"
+
 namespace pengine
 {
 	class PENGINE_API Application

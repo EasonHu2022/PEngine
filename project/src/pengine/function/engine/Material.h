@@ -14,7 +14,8 @@ namespace pengine
 	static constexpr float   PBR_WORKFLOW_METALLIC_ROUGHNESS = 1.0f;
 	static constexpr float   PBR_WORKFLOW_SPECULAR_GLOSINESS = 2.0f;
 	static constexpr int32_t MATERAL_LAYOUT_INDEX = 1;
-	static const std::string defaultTexture = "F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png";
+	static const std::string defaultTexture = "textures/default.png";
+	//static const std::string defaultTexture = "F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png";
 	struct MaterialProperties
 	{
 		glm::vec4 albedoColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);

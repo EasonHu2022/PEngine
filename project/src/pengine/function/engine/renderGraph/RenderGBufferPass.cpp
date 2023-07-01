@@ -11,7 +11,9 @@ namespace pengine
 {
 	RenderGBufferData::RenderGBufferData(RenderGraph* renderGraph)
 	{
-		deferredColorShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
+		//deferredColorShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
+		std::string tempPath = "shaders/DeferredColor.shader";
+		deferredColorShader = Shader::create(ASSETS_ABSOLUTE_PATH + tempPath);
 		MaterialProperties properties;
 		properties.albedoColor = glm::vec4(1.f, 1.f, 1.f, 1.f);
 		properties.roughnessColor = glm::vec4(0);
@@ -162,12 +164,6 @@ namespace pengine
 			auto cameraTransform = cameraEnt.getComponent<component::Transform>();
 			auto project = cameraData.getProjection();
 			auto view = cameraTransform.getWorldMatrixInverse();
-			//process for vulkan
-#ifdef PENGINE_VULKAN
-			view[1][1] *= -1.0f;
-			view[2][2] *= -1.0f;
-#endif // 
-
 			auto projView = project * view;
 			if (!prevFrameValid)
 				prevFrameProjectView = projView;

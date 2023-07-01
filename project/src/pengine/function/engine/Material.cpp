@@ -58,17 +58,21 @@ namespace pengine
 		{
 			if (isFlagOf(RenderFlags::ForwardRender))
 			{
-				shader = Shader::create("shaders/ForwardPBR.shader");
+				std::string path = "shaders/ForwardPBR.shader";
+				shader = Shader::create(ASSETS_ABSOLUTE_PATH + path);
 			}
 
 			if (isFlagOf(RenderFlags::DeferredRender))
 			{
-				shader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
+				//shader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
+				std::string path = "shaders/DeferredColor.shader";
+				shader = Shader::create(ASSETS_ABSOLUTE_PATH + path);
 			}
 
 			if (isFlagOf(RenderFlags::ForwardPreviewRender))
 			{
-				shader = Shader::create("shaders/ForwardPreview.shader");
+				std::string path = "shaders/DeferredColor.shader";
+				shader = Shader::create(ASSETS_ABSOLUTE_PATH + path);
 			}
 		}
 
@@ -96,7 +100,7 @@ namespace pengine
 		}
 		else
 		{
-			descriptorSet->setTexture("uAlbedoMap", Texture2D::create("albedo",defaultTexture));
+			descriptorSet->setTexture("uAlbedoMap", Texture2D::create("albedo", ASSETS_ABSOLUTE_PATH + defaultTexture));
 			materialProperties.usingAlbedoMap = 0.0f;
 		}
 
@@ -107,7 +111,7 @@ namespace pengine
 		else
 		{
 			materialProperties.usingMetallicMap = 0.0f;
-			descriptorSet->setTexture("uMetallicMap", Texture2D::create("metallic", defaultTexture));
+			descriptorSet->setTexture("uMetallicMap", Texture2D::create("metallic", ASSETS_ABSOLUTE_PATH + defaultTexture));
 		}
 
 		if (pbrMaterialTextures.roughness)
@@ -116,7 +120,7 @@ namespace pengine
 		}
 		else
 		{
-			descriptorSet->setTexture("uRoughnessMap", Texture2D::create("roughness", defaultTexture));
+			descriptorSet->setTexture("uRoughnessMap", Texture2D::create("roughness", ASSETS_ABSOLUTE_PATH + defaultTexture));
 			materialProperties.usingRoughnessMap = 0.0f;
 		}
 
@@ -126,7 +130,7 @@ namespace pengine
 		}
 		else
 		{
-			descriptorSet->setTexture("uNormalMap", Texture2D::create("normal", defaultTexture));
+			descriptorSet->setTexture("uNormalMap", Texture2D::create("normal", ASSETS_ABSOLUTE_PATH + defaultTexture));
 			materialProperties.usingNormalMap = 0.0f;
 		}
 
@@ -136,7 +140,7 @@ namespace pengine
 		}
 		else
 		{
-			descriptorSet->setTexture("uAOMap", Texture2D::create("ao", defaultTexture));
+			descriptorSet->setTexture("uAOMap", Texture2D::create("ao", ASSETS_ABSOLUTE_PATH + defaultTexture));
 			materialProperties.usingAOMap = 0.0f;
 		}
 
@@ -146,7 +150,7 @@ namespace pengine
 		}
 		else
 		{
-			descriptorSet->setTexture("uEmissiveMap", Texture2D::create("emissive", defaultTexture));
+			descriptorSet->setTexture("uEmissiveMap", Texture2D::create("emissive", ASSETS_ABSOLUTE_PATH + defaultTexture));
 			materialProperties.usingEmissiveMap = 0.0f;
 		}
 
