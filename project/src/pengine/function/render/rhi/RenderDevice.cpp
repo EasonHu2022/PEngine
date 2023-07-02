@@ -2,6 +2,7 @@
 #include "vulkan/VulkanRenderDevice.h"
 #include "Application.h"
 #include "function/engine/Mesh.h"
+#include "Texture.h"
 namespace pengine
 {
 	std::shared_ptr<RenderDevice> RenderDevice::create()
@@ -21,6 +22,15 @@ namespace pengine
 		drawIndexed(cmdBuffer, DrawType::Triangle, mesh->getIndexBuffer()->getCount());
 		mesh->getVertexBuffer()->unbind();
 		mesh->getIndexBuffer()->unbind();
+	}
+
+	auto RenderDevice::copyImage(CommandBuffer* commandBuffer, Texture* src, Texture* dst) -> void
+	{
+		Application::getRenderDevice()->copyImageInternal(commandBuffer,src,dst);
+	}
+
+	auto RenderDevice::blitImage()
+	{
 	}
 
 	auto RenderDevice::present() -> void

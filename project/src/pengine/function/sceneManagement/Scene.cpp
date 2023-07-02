@@ -5,6 +5,7 @@
 #include "function/ecs/component/MeshRenderer.h"
 #include "function/engine/Skeleton.h"
 #include "function/ecs/component/Transform.h"
+#include "function/render/rhi/Texture.h"
 namespace pengine
 {
 	namespace
@@ -21,6 +22,18 @@ namespace pengine
 				addEntity(scene, entity, skeleton, skeleton->getBones()[child]);
 			}
 		}
+	}
+
+	Scene::Scene(const std::string& name, uint32_t _width, uint32_t _height, std::shared_ptr<Texture> renderTarget)
+	{
+		entityManager = std::make_shared<EntityManager>(this);
+		//each scene bind with a render graph
+		std::string RGPath = "test.rg";
+		renderGraph = std::make_shared<RenderGraph>(RGPath);
+		width = _width;
+		height = _height;
+		renderGraph->init(entityManager->getRegistry(), width, height, width, height);
+		renderGraph->setOutputTexture(renderTarget);
 	}
 
 	Scene::Scene(const std::string& _name) : name(_name)

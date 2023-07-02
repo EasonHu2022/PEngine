@@ -18,6 +18,7 @@ namespace pengine
 		auto bindDescriptorSetsInternal(Pipeline* pipeline, CommandBuffer* commandBuffer,
 			uint32_t dynamicOffset, const std::vector<std::shared_ptr<DescriptorSet>>& descriptorSets) -> void;	
 		auto drawIndexedInternal(CommandBuffer* commandBuffer, DrawType type, uint32_t count, uint32_t start = 0) const -> void;
+		auto copyImageInternal(CommandBuffer* commandBuffer, Texture* src, Texture* dst) const -> void;
 		inline auto getDescriptorPool() const
 		{
 			return descriptorPool;

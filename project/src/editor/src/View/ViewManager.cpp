@@ -11,7 +11,7 @@ namespace peditor
 	void ViewManager::init()
 	{
 
-		addView<SceneView>("test test test",PEngineGUIWindowFlags_::PEngineGUIWindowFlags_Modal);
+		addView<SceneView>("Scene",PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoResize | PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoMove | PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoCollapse);
 
 		for (auto it = editorViews.begin(); it != editorViews.end(); ++it) {
 			it->second->init();

@@ -26,7 +26,7 @@ namespace pengine
 		defaultMaterial = std::make_shared<Material>(deferredColorShader, properties);
 		defaultMaterial->createDescriptorSet();
 		DescriptorInfo info{};
-		descriptorColorSet.resize(3);
+		descriptorColorSet.resize(2);
 		info.shader = deferredColorShader.get();
 		info.layoutIndex = 0;
 		descriptorColorSet[0] = DescriptorSet::create(info);

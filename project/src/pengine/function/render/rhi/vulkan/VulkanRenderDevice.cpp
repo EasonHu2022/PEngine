@@ -5,6 +5,8 @@
 #include "VulkanTexture.h"
 #include "VulkanDescriptorSet.h"
 #include "VulkanPipeline.h"
+
+#include <memory>
 namespace pengine
 {
 	static constexpr uint32_t MAX_DESCRIPTOR_SET_COUNT = 1500;
@@ -97,6 +99,84 @@ namespace pengine
 	auto VulkanRenderDevice::drawIndexedInternal(CommandBuffer* commandBuffer, DrawType type, uint32_t count, uint32_t start) const -> void
 	{
 		vkCmdDrawIndexed(static_cast<VulkanCommandBuffer*>(commandBuffer)->getCommandBuffer(), count, 1, 0, 0, 0);
+	}
+
+	auto VulkanRenderDevice::copyImageInternal(CommandBuffer* commandBuffer, Texture* src, Texture* dst) const -> void
+	{
+		PENGINE_ASSERT(src->getWidth() == dst->getWidth() && src->getHeight() == dst->getHeight(),"Fatal: try to copy texture with different extend !");
+		PENGINE_ASSERT(src->getFormat() == dst->getFormat(), "Fatal: try to copy texture with different format !");
+		if (src->getType() == TextureType::Color)
+		{
+			if (dst->getType() == TextureType::Color)
+			{
+
+				VulkanTexture2D* srcTexture = static_cast<VulkanTexture2D*>(src);
+				VulkanTexture2D* dstTexture = static_cast<VulkanTexture2D*>(dst);
+
+				//set dst as transfer-dst
+				{
+					dstTexture->transitionImage(VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<VulkanCommandBuffer*>(commandBuffer));
+				}
+				//set the src as TRANSFER-src
+				{
+					srcTexture->transitionImage(VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, static_cast<VulkanCommandBuffer*>(commandBuffer));
+					static_cast<VulkanCommandBuffer*>(commandBuffer);
+				}
+				VkImageCopy copyRegion = {};
+
+				copyRegion.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+				copyRegion.srcSubresource.baseArrayLayer = 0;
+				copyRegion.srcSubresource.mipLevel = 0;
+				copyRegion.srcSubresource.layerCount = 1;
+				copyRegion.srcOffset = { 0, 0, 0 };
+
+				copyRegion.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+				copyRegion.dstSubresource.baseArrayLayer = 0;
+				copyRegion.dstSubresource.mipLevel = 0;
+				copyRegion.dstSubresource.layerCount = 1;
+				copyRegion.dstOffset = { 0, 0, 0 };
+				copyRegion.extent.width = src->getWidth();
+				copyRegion.extent.height = src->getHeight();
+				copyRegion.extent.depth = 1;
+
+				// Put image copy into command buffer
+				vkCmdCopyImage(
+					static_cast<VulkanCommandBuffer*>(commandBuffer)->getCommandBuffer(),
+					srcTexture->getImage(),
+					VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+					dstTexture->getImage(),
+					VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+					1,
+					&copyRegion);
+
+				//  for next copy
+				dstTexture->transitionImage(VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, static_cast<VulkanCommandBuffer*>(commandBuffer));
+				//  for next render
+				srcTexture->transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, static_cast<VulkanCommandBuffer*>(commandBuffer));
+			}
+			else
+			{
+				PLOGE("different type between src : type : {0}, dst : type : {1}", src->getType(), dst->getType());
+				return;
+			}
+		}
+		else if (src->getType() == TextureType::Depth)
+		{
+			if (dst->getType() == TextureType::Depth)
+			{
+
+			}
+			else
+			{
+				PLOGE("different type between src : type : {0}, dst : type : {1}", src->getType(), dst->getType());
+				return;
+			}
+		}
+		else
+		{
+			PLOGE("Unsupported copy type!");
+			return;
+		}
 	}
 
 	auto VulkanRenderDevice::clearRenderTarget(const std::shared_ptr<Texture>& texture, CommandBuffer* commandBuffer, const glm::vec4& clearColor) -> void

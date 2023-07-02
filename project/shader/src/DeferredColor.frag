@@ -40,15 +40,6 @@ layout(set = 1,binding = 6) uniform UniformMaterialData
 } materialProperties;
 
 
-layout(set = 2,binding = 0) uniform UBO
-{
-	mat4 view;
-	float nearPlane;
-	float farPlane;
-	float padding;
-	float padding2;
-}ubo;
-
 //bind to framebuffer
 layout(location = 0) out vec4 outColor;
 layout(location = 1) out vec4 outPosition;

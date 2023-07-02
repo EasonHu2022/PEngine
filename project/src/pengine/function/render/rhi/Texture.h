@@ -4,7 +4,7 @@
 #include "function/resource/IResource.h"
 namespace pengine
 {
-	class Texture : public IResource
+	class PENGINE_API Texture : public IResource
 	{
 	public:
 		virtual ~Texture()
@@ -80,7 +80,7 @@ namespace pengine
 		std::string name;
 	};
 
-	class Texture2D : public Texture
+	class PENGINE_API Texture2D : public Texture
 	{
 	public:
 		virtual auto setData(const void* data) -> void = 0;
@@ -100,7 +100,7 @@ namespace pengine
 		};
 	};
 
-	class Texture3D : public Texture2D
+	class PENGINE_API Texture3D : public Texture2D
 	{
 	public:
 		static auto create(uint32_t width, uint32_t height, uint32_t depth, TextureParameters parameters = {}, TextureLoadOptions loadOptions = {}) -> std::shared_ptr<Texture3D>;
@@ -128,7 +128,7 @@ namespace pengine
 		virtual auto clear() -> void {};
 	};
 
-	class TextureCube : public Texture
+	class PENGINE_API TextureCube : public Texture
 	{
 	protected:
 		enum class InputFormat
@@ -153,7 +153,7 @@ namespace pengine
 		};
 	};
 
-	class TextureDepth : public Texture
+	class PENGINE_API TextureDepth : public Texture
 	{
 	public:
 		static auto create(uint32_t width, uint32_t height, bool stencil = false) -> std::shared_ptr<TextureDepth>;
@@ -164,7 +164,7 @@ namespace pengine
 		virtual auto resize(uint32_t width, uint32_t height, CommandBuffer* commandBuffer = nullptr) -> void = 0;
 	};
 
-	class TextureDepthArray : public Texture
+	class PENGINE_API TextureDepthArray : public Texture
 	{
 	public:
 		static auto create(uint32_t width, uint32_t height, uint32_t count) -> std::shared_ptr<TextureDepthArray>;

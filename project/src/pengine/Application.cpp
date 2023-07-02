@@ -42,8 +42,6 @@ namespace pengine
 		double lastFrameTime = 0;
 		init();
 
-		/// test scope
-		sceneManager->doTest();
 
 
 		//main editor loop

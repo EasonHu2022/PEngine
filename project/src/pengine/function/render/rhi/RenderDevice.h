@@ -27,6 +27,7 @@ namespace pengine
 		virtual auto presentInternal() -> void {};
 		virtual auto presentInternal(CommandBuffer* commandBuffer) -> void {};
 		virtual auto drawIndexedInternal(CommandBuffer* commandBuffer, DrawType type, uint32_t count, uint32_t start = 0) const -> void {};
+		virtual auto copyImageInternal(CommandBuffer* commandBuffer, Texture* src, Texture* dst) const -> void {};
 		//static interfaces
 		static auto present() -> void;
 		static auto present(CommandBuffer* commandBuffer) -> void;
@@ -34,6 +35,8 @@ namespace pengine
 		static auto drawIndexed(CommandBuffer* commandBuffer, DrawType type, uint32_t count, uint32_t start = 0) -> void;
 		static auto create() -> std::shared_ptr<RenderDevice>;
 		static auto drawMesh(CommandBuffer* cmdBuffer, Pipeline* pipeline, Mesh* mesh) -> void;
+		static auto copyImage(CommandBuffer* commandBuffer,Texture* src,  Texture* dst) -> void;//todo-subregion...
+		static auto blitImage();
 	private:
 
 	};

@@ -22,8 +22,9 @@ namespace pengine
 	auto ImGuiSystem::onInit() -> void
 	{
 		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
 		ImGuiIO& io = ImGui::GetIO();
+		io.IniFilename = "";
+		ImGui::StyleColorsDark();
 		io.DisplaySize = ImVec2(
 			static_cast<float>(Application::getWindow()->getWidth()),
 			static_cast<float>(Application::getWindow()->getHeight()));

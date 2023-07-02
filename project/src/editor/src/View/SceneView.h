@@ -1,6 +1,7 @@
 #pragma once
 #include "EditorView.h"
-
+#include "function/render/rhi/Texture.h"
+using namespace pengine;
 namespace peditor
 {
 	class SceneView : public EditorView
@@ -15,6 +16,7 @@ namespace peditor
 
 	private:
 		auto onImGui() -> void override;
+		std::shared_ptr<Texture2D> sceneRenderTarget;
 	};
 
 	

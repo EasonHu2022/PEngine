@@ -34,7 +34,7 @@ namespace peditor
 		};
 		virtual void drawView() final 
 		{
-			
+			drawSizeAndPos();
 			PEngineGUI::beginWindow(name, &p_open, flags);
 			onImGui();
 			PEngineGUI::endWindow();
@@ -44,6 +44,7 @@ namespace peditor
 		virtual bool isOpen() { return p_open; }
 		virtual void show() { p_open = true; }
 		virtual void hide() { p_open = false; }
+
 	private:
 		virtual void onImGui() = 0;
 	protected:

@@ -1,6 +1,7 @@
 #include "sceneView.h"
 #include "Application.h"
 #include "EditorUIConfig.h"
+
 namespace peditor
 {
 	SceneView::SceneView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags) : EditorView(_name,_flags)
@@ -9,7 +10,10 @@ namespace peditor
 	auto SceneView::init() -> void
 	{
 		updateSizeAndPos();
-		drawSizeAndPos();
+		sceneRenderTarget = Texture2D::create();
+		sceneRenderTarget->setName(name);
+		sceneRenderTarget->buildTexture(pengine::TextureFormat::RGBA16, size.x, size.y, false, false, false);
+		Application::getSceneManager()->addDefaultScene(size.x,size.y, sceneRenderTarget);
 	}
 	auto SceneView::onAdd() -> void 
 	{
@@ -29,6 +33,12 @@ namespace peditor
 
 	auto SceneView::onImGui() -> void 
 	{
-		
+		glm::vec2 uv_min = { 0.0f, 1.0f };                 // bottom-left
+		glm::vec2 uv_max = { 1.0f, 0.0f };                 // top-right
+		glm::vec4 tint_col = { 1.0f, 1.0f, 1.0f, 1.0f };   // No tint
+		glm::vec4 border_col = { 1.0f, 1.0f, 1.0f, 0.5f }; // 50% opaque white
+		//PEngineGUI::image(sceneRenderTarget->getHandle(),glm::vec2(size.x,size.y), uv_min,uv_max);
+		//unsigned int texture = pengine::Application::Instance->renderContext->get_renderTexture();
+		//ImGui::Image((ImTextureID)texture, ImVec2(1120, 630), uv_min, uv_max, tint_col, border_col);
 	}
 };

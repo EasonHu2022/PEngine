@@ -12,6 +12,7 @@
 #include "entt/entt.hpp"
 #include "function/resource/IResource.h"
 #include "PassGroup.h"
+#include "OutputPass.h"
 
 namespace pengine
 {
@@ -42,12 +43,12 @@ namespace pengine
 		auto checkResource() -> void;
 		auto compileDependency() -> void;
 		auto createResourceMap() -> void;
+		auto setOutputTexture(std::shared_ptr<Texture> texture) ->void { outputTexture = texture; };
+		
 	private:
 		//Topological Sorting
 		auto passSorting(std::vector<uint32_t> src) -> void;
-	private:
-
-		
+	private:	
 		template<class T>
 		auto addPass(uint32_t uid) -> std::shared_ptr<T>
 		{
@@ -68,6 +69,11 @@ namespace pengine
 		glm::vec2 outputExtend;
 		//set of group
 		std::vector<PassGroup> groupSet;
+
+		//target output texture : set by application (offscreen/swapchain image)
+		std::shared_ptr<Texture> outputTexture;
+		auto getOutputTexture() -> std::shared_ptr<Texture> { return outputTexture; };
+		friend class OutputPass;
 	};
 
 };

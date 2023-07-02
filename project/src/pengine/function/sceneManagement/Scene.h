@@ -16,6 +16,7 @@ namespace pengine
 	class PENGINE_API Scene : public IResource
 	{
 	public:
+		Scene(const std::string& name, uint32_t width, uint32_t height, std::shared_ptr<Texture> renderTarget);
 		Scene(const std::string &name);
 		~Scene();
 		auto getResourceType() const->FileType override { return FileType::Scene; };

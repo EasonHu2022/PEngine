@@ -3,7 +3,7 @@
 #include "core/utils/StringUtils.h"
 #include "function/ecs/component/Transform.h"
 #include <Application.h>
-
+#include "function/render/rhi/Texture.h"
 
 namespace pengine
 {
@@ -70,13 +70,12 @@ namespace pengine
 	{
 		return nullptr;
 	}
-	auto SceneManager::doTest() -> void
+	auto SceneManager::addDefaultScene(uint32_t width, uint32_t height, std::shared_ptr<Texture> renderTarget) -> void
 	{
 		currentName = "defaultScene";
-		addScene(currentName, new Scene(currentName));
+		addScene(currentName, new Scene(currentName,width,height,renderTarget));
 		currentScene = allScenes[currentName].get();
 		std::string testpath = "models/cubes/cube.obj";
-		//std::string testpath = "F:/workspace/YizhouHu/PEngine/PEngine/assets/models/cubes/cube.obj";
 		currentScene->addModel(ASSETS_ABSOLUTE_PATH+testpath);
 	}
 };

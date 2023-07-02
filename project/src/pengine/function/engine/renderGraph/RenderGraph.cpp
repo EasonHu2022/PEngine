@@ -1,6 +1,7 @@
 #include "RenderGraph.h"
 #include "RenderGBufferPass.h"
 #include "RenderDeferredLightingPass.h"
+#include "OutputPass.h"
 #include "RenderGraphTexture2DResource.h"
 #include "function/ecs/component/Component.h"
 #include "function/ecs/component/Transform.h"
@@ -23,6 +24,7 @@ namespace pengine
 		//add with uid, read from config 
 		addPass<RenderGBufferPass>(1) -> init(registry);
 		addPass<RenderDeferredLightingPass>(2) -> init(registry);
+		addPass<OutputPass>(3)->init(registry);
 		/*################# */
 		compile();
 	}
@@ -155,6 +157,7 @@ namespace pengine
 		bindInput(1, 1, 2, 1);
 		bindInput(1, 2, 2, 2);
 		bindInput(1, 3, 2, 3);
+		bindInput(2, 0, 3, 0);
 	}
 	auto RenderGraph::createResourceMap() -> void
 	{
