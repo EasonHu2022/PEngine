@@ -3,6 +3,8 @@
 #include "function/render/rhi/RenderDevice.h"
 #include "function/render/rhi/Shader.h"
 #include "function/render/rhi/Pipeline.h"
+#include "function/render/rhi/Texture.h"
+#include "function/render/rhi/vulkan/VulkanTexture.h"
 #include "Application.h"
 namespace pengine
 {
@@ -28,7 +30,6 @@ namespace pengine
 			return;
 		}
 		//tmply
-		//RenderDevice::copyImage(commandBuffer,m_renderGraph->getResourceByID(inputs[0]->index)->getNativeResource().get(), texture);
 		//todo-do a screen shader do nothing just sampling
 		auto color = m_renderGraph->getResourceByID(inputs[0]->index)->getNativeResource();
 		m_outputPassData.descriptorOutputSet[0]->setTexture("outputColor", color);
@@ -46,7 +47,16 @@ namespace pengine
 		pipeline->bind(commandBuffer);
 		RenderDevice::bindDescriptorSets(pipeline.get(), commandBuffer, 0, m_outputPassData.descriptorOutputSet);
 		RenderDevice::drawMesh(commandBuffer, pipeline.get(), m_outputPassData.screenQuad.get());
+
 		pipeline->end(commandBuffer);
+
+#ifdef PENGINE_VULKAN
+		//temp code
+		//transition the texture to shader readonly for imgui
+		auto outTexure2d = (VulkanTexture2D*)outTexture.get();
+		outTexure2d->transitionImage(VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, (VulkanCommandBuffer*)commandBuffer);
+
+#endif // PENGINE_VULKAN
 	}
 	auto OutputPass::setup() -> void 
 	{

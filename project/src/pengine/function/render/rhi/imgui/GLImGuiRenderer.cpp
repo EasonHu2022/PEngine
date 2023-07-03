@@ -3,6 +3,7 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#include "function/render/rhi/Texture.h"
 #include "core/log/PLog.h"
 namespace pengine
 {
@@ -46,6 +47,10 @@ namespace pengine
 	{
 		ImGui_ImplOpenGL3_DestroyFontsTexture();
 		ImGui_ImplOpenGL3_CreateFontsTexture();
+	}
+	ImTextureID GLImGuiRenderer::addTexture(Texture2D* texture)
+	{
+		return texture->getHandle();
 	}
 }
 

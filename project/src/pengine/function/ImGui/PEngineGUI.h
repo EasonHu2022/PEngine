@@ -2,9 +2,10 @@
 #include "core/core.h"
 #include "PEngineGUIDefs.h"
 #include "glm/glm.hpp"
+
 namespace pengine
 {
-
+	class Texture2D;
 	class PENGINE_API PEngineGUI
 	{
 	
@@ -16,7 +17,7 @@ namespace pengine
 		typedef int  PEngineGUIHoveredFlags;
 		typedef int  PEngineGUICond;
 
-		typedef unsigned long long  PEngineGUITextureID;//may cause bug when not using vulkan cause may be other backend does not support u64
+		typedef void*  PEngineGUITextureID;//may cause bug when not using vulkan cause may be other backend does not support u64
 
 		public:
 			/// <summary>
@@ -55,7 +56,7 @@ namespace pengine
 				float step_fast = 1.0f, const char* format = "%.3f", PEngineGUIInputTextFlags flags = 0)-> bool;
 			static auto text(const char* fmt, ...)-> void;
 			static auto textColored(const glm::vec4 & col, const char* fmt, ...)-> void;
-			static auto image(PEngineGUITextureID user_texture_id, const glm::vec2& size, const glm::vec2& uv0 = glm::vec2(0,0),
+			static auto image(Texture2D* user_texture, const glm::vec2& size, const glm::vec2& uv0 = glm::vec2(0,0),
 				const glm::vec2& uv1 = glm::vec2(1,1), const glm::vec4& tint_col = glm::vec4(1,1,1,1), 
 				const glm::vec4& border_col = glm::vec4(0,0,0,0))-> void;
 			static auto openPopup(const char* str_id)-> void;

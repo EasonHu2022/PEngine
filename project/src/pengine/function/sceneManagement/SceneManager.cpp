@@ -58,7 +58,7 @@ namespace pengine
 			camera.setNear(0.01);
 			camera.setAspectRatio(4 / 3.f);
 			auto& transform = entity.getComponent<component::Transform>();
-			transform.setLocalPosition({0.0f,0.0f,3.0f});
+			transform.setLocalPosition({0.0f,100.0f,3.0f});
 			//test
 			auto light = scene->createEntity("Light");
 			light.addComponent<component::Light>();
@@ -75,7 +75,7 @@ namespace pengine
 		currentName = "defaultScene";
 		addScene(currentName, new Scene(currentName,width,height,renderTarget));
 		currentScene = allScenes[currentName].get();
-		std::string testpath = "models/cubes/cube.obj";
+		std::string testpath = "models/sponza/sponza.obj";
 		currentScene->addModel(ASSETS_ABSOLUTE_PATH+testpath);
 	}
 };

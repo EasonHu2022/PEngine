@@ -53,6 +53,7 @@ namespace pengine
 			//push paint loop
 			imGuiSystem->newFrame(timestep);
 			{
+				
 				onUpdate(timestep);
 
 				renderDevice->begin();
@@ -106,7 +107,7 @@ namespace pengine
 
 	void Application::onImGui()
 	{
-		systemManager->onImGui();
+		//systemManager->onImGui();
 	}
 
 	void Application::onWindowResized(uint32_t w, uint32_t h)

@@ -14,7 +14,7 @@
 #include "function/resource/ModelLoader.h"
 
 //temply 
-#define ASSETS_ABSOLUTE_PATH "F:/WorkSpace/PEngine/PEngine/assets/"
+#define ASSETS_ABSOLUTE_PATH "F:/workspace/YizhouHu/PEngine/PEngine/assets/"
 
 namespace pengine
 {
@@ -67,7 +67,10 @@ namespace pengine
 		{
 			return get()->sceneManager;
 		}
-
+		inline static auto& getimGuiSystem()
+		{
+			return get()->imGuiSystem;
+		}
 		inline static auto getLoaderFactory()
 		{
 			return get()->loaderFactory;

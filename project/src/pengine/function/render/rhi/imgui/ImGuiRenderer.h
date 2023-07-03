@@ -3,6 +3,7 @@
 #include <imgui.h>
 namespace pengine
 {
+	class Texture2D;
 	class CommandBuffer;
 	class ImGuiRenderer
 	{
@@ -15,6 +16,6 @@ namespace pengine
 		virtual void onResize(uint32_t width, uint32_t height) = 0;
 		virtual void rebuildFontTexture() = 0;
 		virtual void clear() {};
-
+		virtual ImTextureID addTexture(Texture2D* texture) = 0;
 	};
 }

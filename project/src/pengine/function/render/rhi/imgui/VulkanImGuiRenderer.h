@@ -20,6 +20,8 @@ namespace pengine
 		virtual void onResize(uint32_t width, uint32_t height) override;
 
 		virtual void rebuildFontTexture() override;
+
+		virtual ImTextureID addTexture(Texture2D* texture) override;
 	private:
 		auto setupVulkanWindowData(ImGui_ImplVulkanH_Window* wd, VkSurfaceKHR surface, int32_t width, int32_t height) -> void;
 

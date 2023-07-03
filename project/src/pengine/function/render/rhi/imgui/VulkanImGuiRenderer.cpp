@@ -7,6 +7,8 @@
 #include "function/render/rhi/vulkan/VulkanFrameBuffer.h"
 #include "function/render/rhi/vulkan/VKWrapper.h"
 #include "function/render/rhi/vulkan/VKHelper.h"
+#include "function/render/rhi/vulkan/VulkanTexture.h"
+#include "function/render/rhi/vulkan/VulkanCommandBuffer.h"
 #include "Application.h"
 #include "core/log/PLog.h"
 #include <map>
@@ -124,6 +126,19 @@ namespace pengine
 		auto cb = VKHelper::beginSingleTimeCommands();
 		ImGui_ImplVulkan_CreateFontsTexture(cb);
 		VKHelper::endSingleTimeCommands(cb);
+	}
+
+	ImTextureID VulkanImGuiRenderer::addTexture(Texture2D* texture)
+	{
+		VulkanTexture2D* vkTexture = static_cast<VulkanTexture2D*>(texture);
+		VkDescriptorImageInfo* info = (VkDescriptorImageInfo*)(vkTexture->getDescriptorInfo());
+		if (info == NULL)
+		{
+			PLOGE(" Wrong texture!");
+			return nullptr;
+		}
+		
+		return ImGui_ImplVulkan_AddTexture(info->sampler, info->imageView, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 	}
 
 

@@ -20,5 +20,6 @@ namespace pengine
 
 		virtual void rebuildFontTexture() override;
 
+		virtual ImTextureID addTexture(Texture2D* texture) override;
 	};
 }
