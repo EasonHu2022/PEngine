@@ -2,7 +2,7 @@
 #include "function/engine/Timestep.h"
 #include "core/log/PLog.h"
 #include "function/sceneManagement/SceneManager.h"
-
+#include "function/engine/Input.h"
 namespace pengine
 {
 	Application::Application()
@@ -66,8 +66,8 @@ namespace pengine
 				renderDevice->present();     
 
 				window->swapBuffers();
-				//TODO ： 记一下： 按理说clear rendertarget应该和pipeline绑定，可是当没有加任何pipeline的时候，imgui就不会clear，这里先加一下
 				
+				Input::reset_state();
 				frames++;
 			}
 			

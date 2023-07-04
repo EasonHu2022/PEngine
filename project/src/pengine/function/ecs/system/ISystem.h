@@ -14,6 +14,7 @@ namespace pengine
 		/// <returns></returns>
 		virtual auto onImGui() -> void = 0;
 		virtual auto onUpdate(float dt, Scene* scene) -> void = 0;
+		virtual auto release() -> void = 0;
 	};
 
 	

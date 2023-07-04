@@ -52,13 +52,14 @@ namespace pengine
 		if (cameras.empty())
 		{
 			auto  entity = scene->createEntity("Main Camera");
+			
 			auto &camera = entity.addComponent<component::Camera>();
 			camera.setFov(45.f);
-			camera.setFar(10000); 
-			camera.setNear(0.01);
+			camera.setFar(10000.0f); 
+			camera.setNear(0.1);
 			camera.setAspectRatio(4 / 3.f);
 			auto& transform = entity.getComponent<component::Transform>();
-			transform.setLocalPosition({0.0f,100.0f,3.0f});
+			transform.setLocalPosition({0.0f,100.0f,100.0f});
 			//test
 			auto light = scene->createEntity("Light");
 			light.addComponent<component::Light>();

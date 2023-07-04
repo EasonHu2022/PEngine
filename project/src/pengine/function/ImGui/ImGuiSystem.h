@@ -13,7 +13,7 @@ namespace pengine
 		auto newFrame(const Timestep& step) -> void;
 		auto onInit() -> void override;
 		auto onUpdate(float dt, Scene* scene) -> void override;
-
+		auto release() -> void override;
 		
 		auto onImGui() -> void override {};
 

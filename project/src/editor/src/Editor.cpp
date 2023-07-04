@@ -27,6 +27,7 @@ namespace peditor
 	void Editor::onUpdate(const float& delta)
 	{
 		Application::onUpdate(delta);
+		viewManager->onUpdate(delta);
 	}
 	void Editor::onRenderDebug()
 	{

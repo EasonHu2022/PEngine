@@ -75,10 +75,10 @@ namespace pengine
 		ImGui::TextColoredV(col, fmt, args);
 		va_end(args);
 	}
-	auto PEngineGUI::image(Texture2D* texture, const glm::vec2& size, const glm::vec2& uv0, const glm::vec2& uv1, const glm::vec4& tint_col, const glm::vec4& border_col) -> void
+	auto PEngineGUI::image(void* texture, const glm::vec2& size, const glm::vec2& uv0, const glm::vec2& uv1, const glm::vec4& tint_col, const glm::vec4& border_col) -> void
 	{
-		auto user_texture_id = Application::getimGuiSystem()->getImguiRenderer()->addTexture(texture);
-		ImGui::Image(user_texture_id, size, uv0, uv1, tint_col, border_col);
+		
+		ImGui::Image(texture, size, uv0, uv1, tint_col, border_col);
 	}
 	
 	auto PEngineGUI::openPopup(const char* str_id) -> void

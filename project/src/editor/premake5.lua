@@ -15,6 +15,7 @@ project "Editor"
 		thirdparty .. "/GLFW/include",
 		thirdparty .. "/ImGui",
 		thirdparty .. "/glm/include",
+		thirdparty .. "/entt/include",
 	}
 
 

@@ -11,12 +11,23 @@ namespace peditor
 		auto init() -> void  override;
 		auto onAdd() -> void override;
 		auto onRemove() -> void override;
+		auto onUpdate(const Timestep& dt) -> void override;
 	private:
 		auto updateSizeAndPos() -> void override;
-
+		auto handleInputForSceneCamera(float dt) -> void;
 	private:
 		auto onImGui() -> void override;
 		std::shared_ptr<Texture2D> sceneRenderTarget;
+		void* sceneRenderTargetImId;
+		//for cameraControl
+		float mouseSensitivity = 0.1f;
+		float zoomDampeningFactor = 0.00001f;
+		float dampeningFactor = 0.00001f;
+		float rotateDampeningFactor = 0.001f;
+
+		float zoomVelocity = 0.0f;
+		glm::vec3 velocity = { 0,0,0 };
+		glm::vec2 rotateVelocity = { 0,0 };
 	};
 
 	

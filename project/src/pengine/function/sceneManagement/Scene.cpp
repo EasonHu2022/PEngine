@@ -125,6 +125,22 @@ namespace pengine
 		entityManager->removeAllChildren(entity);
 	}
 
+	auto Scene::getCamera() -> std::pair<component::Camera*, component::Transform*>
+	{
+		auto cameraView = getRegistry().group<component::Camera>(entt::get<component::Transform>);
+		if (!cameraView.empty())
+		{
+			Entity     entity(cameraView.front(), getRegistry());
+			component::Camera& sceneCam = entity.getComponent<component::Camera>();
+			component::Transform& sceneCamTr = entity.getComponent<component::Transform>();
+			return { &sceneCam, &sceneCamTr };
+		}
+		else
+		{
+			return { nullptr,nullptr };
+		}
+	}
+
 	auto Scene::addModel(const std::string filePath) -> Entity
 	{
 		auto  name = StringUtils::getFileNameWithoutExtension(filePath);

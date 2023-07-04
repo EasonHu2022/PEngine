@@ -1,6 +1,7 @@
 #pragma once
 #include "function/ImGui/PEngineGUI.h"
 #include "function/ImGui/PEngineGUIDefs.h"
+#include "function/engine/Timestep.h"
 using namespace pengine;
 namespace peditor
 {
@@ -17,6 +18,7 @@ namespace peditor
 		virtual void init() = 0;
 		virtual void onAdd() = 0;
 		virtual void onRemove() = 0;
+		virtual void onUpdate(const Timestep& dt) = 0;
 		/// <summary>
 		/// override when you want to calculate size and pos 
 		/// </summary>

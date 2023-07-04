@@ -1,5 +1,6 @@
 #include "WindowWin.h"
 #include "core/log/PLog.h"
+#include "function/engine/Input.h"
 #include "Application.h"
 #ifdef PENGINE_VULKAN// PENGINE_VULKAN
 #	define GLFW_INCLUDE_VULKAN
@@ -106,9 +107,9 @@ namespace pengine
 
 	auto WindowWin::swapBuffers() -> void
 	{
-#ifdef MAPLE_OPENGL
+#ifdef PENGINE_OPENGL
 		glfwSwapBuffers(nativeInterface);
-#endif        // MAPLE_OPENGL
+#endif        // PENGINE_OPENGL
 	}
 
 	auto WindowWin::registerNativeEvent(const WindowData& data) -> void
@@ -116,7 +117,44 @@ namespace pengine
 		glfwSetWindowSizeCallback(handle, [](GLFWwindow* win, int32_t w, int32_t h) {
 			Application::get()->onWindowResized(w, h);
 			});
-		//do event register use event sys
+
+		glfwSetMouseButtonCallback(handle, [](GLFWwindow* window, int32_t btnId, int32_t state, int32_t mods) {
+			auto w = (WindowWin*)glfwGetWindowUserPointer(window);
+
+			double x;
+			double y;
+			glfwGetCursorPos(window, &x, &y);
+
+			if (state == GLFW_PRESS )
+			{
+				Input::set_mouse_clicked(btnId);
+			}
+			if (state == GLFW_RELEASE)
+			{
+				Input::set_mouse_released(btnId);
+			}
+			});
+
+		glfwSetCursorPosCallback(handle, [](GLFWwindow* window, double x, double y) {
+			Input::set_mouse_move(x, y);
+			});
+
+		glfwSetKeyCallback(handle, [](GLFWwindow*, int32_t key, int32_t scancode, int32_t action, int32_t mods) {
+			switch (action)
+			{
+			case GLFW_PRESS: {
+				Input::set_key_pressed(key);
+				break;
+			}
+			case GLFW_RELEASE: {
+				Input::set_key_released(key);
+				break;
+			}
+			}
+			});
+		glfwSetScrollCallback(handle, [](GLFWwindow* win, double xOffset, double yOffset) {
+			Input::set_mouse_scroll(xOffset,yOffset);
+			});
 	}
 }
 

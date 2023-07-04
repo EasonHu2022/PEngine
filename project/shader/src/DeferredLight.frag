@@ -5,7 +5,6 @@
 #define GAMMA 2.2
 #define MAX_LIGHTS 32
 #define NUM_VPL 256
-
 const float EPSILON = 0.00001;
 
 // Constant normal incidence Fresnel factor for all dielectrics.
@@ -129,8 +128,14 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 			L = normalize(L);
 			
 			// Attenuation
-			float atten = light.radius / (pow(dist, 2.0) + 1.0);
-			
+			float radius = light.radius;  
+			float attenuationDistance = radius * 2.0;  
+
+			float constant = 1.0;
+			float linear = 2.0 / attenuationDistance;  
+			float quadratic = 1.0 / (attenuationDistance * attenuationDistance);
+			float atten = 1.0f/(constant +  dist * linear + pow(dist, 2.0) * quadratic);
+
 			value = atten;
 			
 			light.direction = vec4(L,1.0);
@@ -174,12 +179,12 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		
 		vec3 directShading = (diffuseBRDF + specularBRDF) * Lradiance * cosLi * value;
 		vec3 indirectShading = (diffuseBRDF + specularBRDF) * indirect * cosLi;
-
-		result += directShading + indirectShading;
+		vec3 ambient = material.albedo.xyz * vec3(0.1f,0.1f,0.1f);
+		result += directShading + indirectShading + ambient;
 		//result += indirect;
 	}
-
-	return result ;
+	//ambient
+	return result;
 }
 
 vec3 gammaCorrectTextureRGB(vec3 texCol)
@@ -229,7 +234,7 @@ void main()
 
 	vec3 finalColor = (lightContribution ) * material.ao * material.ssao;
 
-	outColor = vec4(finalColor, 1.0);
+	outColor = vec4(finalColor, 1.0) ;
 
 }
 

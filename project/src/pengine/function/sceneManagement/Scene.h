@@ -8,6 +8,7 @@
 #include "function/ecs/Entity/EntityManager.h"
 #include "function/ecs/Component/Light.h"
 #include "function/ecs/Component/Camera.h"
+#include "function/ecs/component/Transform.h"
 #include "function/resource/IResource.h"
 #include "function/engine/renderGraph/RenderGraph.h"
 namespace pengine
@@ -33,7 +34,7 @@ namespace pengine
 		auto duplicateEntity(const Entity& entity, const Entity& parent) -> void;
 		auto duplicateEntity(const Entity& entity) -> void;
 		auto removeAllChildren(entt::entity entity) -> void;
-
+		auto getCamera() -> std::pair<component::Camera*,component::Transform*>;
 		auto addModel(const std::string filePath) -> Entity;
 
 		inline auto& getEntityManager()
@@ -41,7 +42,6 @@ namespace pengine
 			return entityManager;
 		}
 	protected:
-		std::vector<std::shared_ptr<Entity>> entitys;
 		std::shared_ptr<EntityManager> entityManager;
 		std::string                    name;
 		std::string                    path;

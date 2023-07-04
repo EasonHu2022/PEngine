@@ -56,7 +56,7 @@ namespace pengine
 				float step_fast = 1.0f, const char* format = "%.3f", PEngineGUIInputTextFlags flags = 0)-> bool;
 			static auto text(const char* fmt, ...)-> void;
 			static auto textColored(const glm::vec4 & col, const char* fmt, ...)-> void;
-			static auto image(Texture2D* user_texture, const glm::vec2& size, const glm::vec2& uv0 = glm::vec2(0,0),
+			static auto image(void* user_texture, const glm::vec2& size, const glm::vec2& uv0 = glm::vec2(0,0),
 				const glm::vec2& uv1 = glm::vec2(1,1), const glm::vec4& tint_col = glm::vec4(1,1,1,1), 
 				const glm::vec4& border_col = glm::vec4(0,0,0,0))-> void;
 			static auto openPopup(const char* str_id)-> void;

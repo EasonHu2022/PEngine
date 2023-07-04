@@ -2,6 +2,7 @@
 #include <memory>
 #include <unordered_map>
 #include "editorView.h"
+#include "function/engine/Timestep.h"
 namespace peditor
 {
 	class ViewManager
@@ -11,6 +12,7 @@ namespace peditor
 		~ViewManager();
 		void init();
 		void onImGui();
+		void onUpdate(const Timestep& delta);
 		template<class T>
 		inline void addView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags = 0)
 		{

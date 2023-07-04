@@ -43,6 +43,11 @@ namespace pengine
 		ImGui::Render();
 	}
 
+	auto ImGuiSystem::release() -> void 
+	{
+
+	}
+
 	auto ImGuiSystem::onRender() -> void
 	{
 		imguiRender->render(Application::getGraphicsContext()->getSwapChain()->getCurrentCommandBuffer());
