@@ -63,8 +63,8 @@ namespace peditor
 			}
 			if (Input::get_mouse(1))//rotate
 			{
-				mouseSensitivity = 0.01f;
-				rotateVelocity = rotateVelocity + Input::mouseMotion * mouseSensitivity;
+				mouseSensitivity = 0.2f;
+				rotateVelocity = rotateVelocity + Input::mouseMotion * mouseSensitivity * dt;
 			}
 			glm::vec3 euler = glm::degrees(transform->getLocalOrientation());
 			float pitch = euler.x - rotateVelocity.y;

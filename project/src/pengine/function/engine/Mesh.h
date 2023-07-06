@@ -5,6 +5,7 @@
 #include <string>
 #include "function/render/rhi/IndexBuffer.h"
 #include "function/render/rhi/VertexBuffer.h"
+#include "function/engine/BoundingBox.h"
 namespace pengine
 {
 	class DescriptorSet;
@@ -87,6 +88,10 @@ namespace pengine
 		{
 			this->active = active;
 		}
+		inline auto& getBoundingBox()
+		{
+			return boundingBox;
+		}
 		static auto createQuad(bool screen = false) -> std::shared_ptr<Mesh>;
 		static auto createQuaterScreenQuad(bool screen = false) -> std::shared_ptr<Mesh>;
 		static auto createCube() -> std::shared_ptr<Mesh>;
@@ -99,6 +104,7 @@ namespace pengine
 		std::string name;
 		uint32_t    size = 0;
 		bool        active = true;
+		std::shared_ptr<BoundingBox> boundingBox;
 		std::shared_ptr<IndexBuffer>   indexBuffer;
 		std::shared_ptr<VertexBuffer>  vertexBuffer;
 		std::vector<std::shared_ptr<Material>> materials;

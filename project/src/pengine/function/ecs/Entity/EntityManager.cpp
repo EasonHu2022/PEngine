@@ -6,7 +6,7 @@
 #include "function/sceneManagement/Scene.h"
 namespace pengine
 {
-	EntityManager::EntityManager(Scene* _Scene): scene(_Scene)
+	EntityManager::EntityManager()
 	{
 		//set constraint
 		//attention : dependency means when add left one , automatically add the dependent one
@@ -16,13 +16,13 @@ namespace pengine
 	}
 	auto EntityManager::create() -> Entity
 	{
-		return Entity(registry.create(), scene->getRegistry());
+		return Entity(registry.create(), getRegistry());
 	}
 	auto EntityManager::create(const std::string& name) -> Entity
 	{
 		auto e = registry.create();
 		registry.emplace<component::NameComponent>(e, name);
-		return Entity(e, scene->getRegistry());
+		return Entity(e, getRegistry());
 	}
 	auto EntityManager::getEntityByName(const std::string& name) -> Entity
 	{
@@ -32,7 +32,7 @@ namespace pengine
 			auto& comp = registry.get<component::NameComponent>(view);
 			if (comp.name == name)
 			{
-				return { view, scene->getRegistry() };
+				return { view, getRegistry() };
 			}
 		}
 		return {};

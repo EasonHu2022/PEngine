@@ -43,6 +43,17 @@ namespace pengine
 			return prevProjMatrix;
 		}
 
+		auto Camera::getFrustum(const glm::mat4& viewMatrix) -> const Frustum&
+		{
+			if (projectionDirty)
+			{
+				updateProjectionMatrix();
+				projectionDirty = false;
+			}
+			frustum.from(projMatrix * viewMatrix);
+			return frustum;
+		}
+
 		auto Camera::updateProjectionMatrix() -> void
 		{
 

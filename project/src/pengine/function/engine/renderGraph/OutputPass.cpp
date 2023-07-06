@@ -62,7 +62,7 @@ namespace pengine
 	{
 		//simply do nothing
 	}
-	auto OutputPass::onUpdate(entt::registry& registry) -> void 
+	auto OutputPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
 		//simply do nothing
 	}

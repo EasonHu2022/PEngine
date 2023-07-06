@@ -6,6 +6,7 @@
 #include "function/engine/Skeleton.h"
 #include "function/ecs/component/Transform.h"
 #include "function/render/rhi/Texture.h"
+#include "SceneGraph.h"
 namespace pengine
 {
 	namespace
@@ -26,7 +27,8 @@ namespace pengine
 
 	Scene::Scene(const std::string& name, uint32_t _width, uint32_t _height, std::shared_ptr<Texture> renderTarget)
 	{
-		entityManager = std::make_shared<EntityManager>(this);
+		entityManager = std::make_shared<EntityManager>();
+		sceneGraph = std::make_shared<SceneGraph>(entityManager);
 		//each scene bind with a render graph
 		std::string RGPath = "test.rg";
 		renderGraph = std::make_shared<RenderGraph>(RGPath);
@@ -38,7 +40,8 @@ namespace pengine
 
 	Scene::Scene(const std::string& _name) : name(_name)
 	{
-		entityManager = std::make_shared<EntityManager>(this);
+		entityManager = std::make_shared<EntityManager>();
+		sceneGraph = std::make_shared<SceneGraph>(entityManager);
 		//each scene bind with a render graph
 		std::string RGPath = "test.rg";
 		renderGraph = std::make_shared<RenderGraph>(RGPath);
@@ -53,6 +56,10 @@ namespace pengine
 	}
 	auto Scene::cull() -> void
 	{
+		auto [camera, transform] = getCamera();
+		auto& frustum = camera->getFrustum(glm::inverse(transform->getWorldMatrix()));
+		culledEntities.clear();
+		sceneGraph->frustumCull(frustum,culledEntities);
 	}
 	auto Scene::onUpdate() -> void
 	{
@@ -69,8 +76,10 @@ namespace pengine
 	}
 	auto Scene::onLateUpdate() -> void
 	{
+		//do cull
+		cull();
 		//very last order
-		renderGraph->update(entityManager->getRegistry());
+		renderGraph->update(entityManager->getRegistry(),culledEntities);
 	}
 
 	auto Scene::onRender() -> void
@@ -182,7 +191,13 @@ namespace pengine
 			}
 		}
 		model.type = component::PrimitiveType::File;
+		//tmply build here
+		sceneGraph->build();
 		return modelEntity;
+	}
+
+	auto Scene::release() -> void
+	{
 	}
 	
 };

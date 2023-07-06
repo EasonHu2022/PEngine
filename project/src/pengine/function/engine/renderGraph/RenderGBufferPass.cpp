@@ -136,7 +136,7 @@ namespace pengine
 	auto RenderGBufferPass::setup() -> void
 	{
 	}
-	auto RenderGBufferPass::onUpdate(entt::registry& registry) -> void
+	auto RenderGBufferPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
 		//refill renderqueue
 		m_renderQueue.clear();
@@ -174,16 +174,25 @@ namespace pengine
 		}
 		
 		std::vector<Entity> m_visbileEntity;
-		//filter the registry entities
-		auto meshes = registry.group<component::MeshRenderer>(entt::get< component::Transform>);
-		if (!meshes.empty())
+		if (!culledEnts.empty())
 		{
-			for (const auto& data : meshes.each())
+			for (const auto& data : culledEnts)
 			{
-				m_visbileEntity.emplace_back(std::get<0>(data), registry);
+				m_visbileEntity.emplace_back(data, registry);
 			}
 		}
-		for (auto ent : m_visbileEntity)
+		else
+		{
+			auto meshes = registry.group<component::MeshRenderer>(entt::get< component::Transform>);
+			if (!meshes.empty())
+			{
+				for (const auto& data : meshes.each())
+				{
+					m_visbileEntity.emplace_back(std::get<0>(data), registry);
+				}
+			}
+		}
+		for (auto &ent : m_visbileEntity)
 		{
 			auto& unit = m_renderQueue.emplace_back();
 			unit.mesh = ent.getComponent<component::MeshRenderer>().getMesh().get();

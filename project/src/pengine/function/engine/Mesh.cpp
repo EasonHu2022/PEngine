@@ -11,6 +11,11 @@ namespace pengine {
 
 	Mesh::Mesh(const std::vector<uint32_t>& indices, const std::vector<Vertex>& vertices)
 	{
+		boundingBox = std::make_shared<BoundingBox>();
+		for (auto& vertex : vertices)
+		{
+			boundingBox->merge(vertex.pos);
+		}
 		vertexBuffer = VertexBuffer::create();
 		vertexBuffer->setData(sizeof(Vertex) * vertices.size(), vertices.data());
 		indexBuffer = IndexBuffer::create(indices.data(), indices.size());

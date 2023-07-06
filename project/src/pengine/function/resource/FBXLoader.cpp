@@ -313,7 +313,6 @@ namespace pengine
 			tempVertices.resize(vertexCount);
 			std::vector<uint32_t> indicesArray;
 			indicesArray.resize(numIndices);
-			auto boundingBox = std::make_shared<BoundingBox>();
 
 			const auto indices = geom->getFaceIndices();
 
@@ -332,7 +331,6 @@ namespace pengine
 				auto& vertex = tempVertices[i];
 				vertex.pos = transform.getWorldMatrix() * glm::vec4(float(cp.x), float(cp.y), float(cp.z), 1.0);
 				fixOrientation(vertex.pos, orientation);
-				boundingBox->merge(vertex.pos);
 
 				if (normals)
 				{

@@ -17,7 +17,7 @@ namespace pengine
 		virtual auto init(entt::registry& registry) -> void = 0;
 		virtual auto execute(CommandBuffer* commandBuffer) -> void = 0;
 		virtual auto setup() -> void = 0;
-		virtual auto onUpdate(entt::registry& registry) -> void = 0;
+		virtual auto onUpdate(entt::registry& registry,std::vector<entt::entity>& culledEnts) -> void = 0;
 		virtual auto onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void = 0;
 	public:
 		//don't do any validation here

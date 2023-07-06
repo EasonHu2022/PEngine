@@ -44,12 +44,12 @@ namespace pengine
 
 	}
 	//sink registry, get data each layer
-	auto RenderGraph::update(entt::registry& registry) -> void
+	auto RenderGraph::update(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
 		auto taskCount = passUids.size();
 		for (int i = 0; i < taskCount; i++)
 		{
-			passMap[passUids.at(i)]->onUpdate(registry);
+			passMap[passUids.at(i)]->onUpdate(registry, culledEnts);
 		}
 	}
 

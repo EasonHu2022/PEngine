@@ -25,7 +25,7 @@ namespace pengine
 		auto init(entt::registry& registry,uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
 		auto setup() -> void;
 		//update cpu data for render
-		auto update(entt::registry& registry) -> void;
+		auto update(entt::registry& registry,std::vector<entt::entity>& culledEnts) -> void;
 		auto compile() -> void;
 		auto execute(CommandBuffer* cmdBuffer) -> void;
 		auto bindInput(uint32_t outputTask, size_t bindpos, uint32_t inputTask, size_t bindPos) -> bool;

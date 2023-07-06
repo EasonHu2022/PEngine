@@ -7,7 +7,7 @@ namespace pengine
 	class PENGINE_API EntityManager
 	{
 	public:
-		EntityManager(Scene* _Scene);
+		EntityManager();
 		auto create() -> Entity;
 		auto create(const std::string& name) -> Entity;
 
@@ -42,7 +42,6 @@ namespace pengine
 		auto removeAllChildren(entt::entity entity, bool root = true) -> void;
 		auto removeEntity(entt::entity entity) -> void;
 	private:
-		Scene* scene = nullptr;
 		entt::registry registry;
 	};
 }

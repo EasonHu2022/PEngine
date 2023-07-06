@@ -13,7 +13,7 @@
 #include "function/engine/renderGraph/RenderGraph.h"
 namespace pengine
 {
-
+	class SceneGraph;
 	class PENGINE_API Scene : public IResource
 	{
 	public:
@@ -52,6 +52,8 @@ namespace pengine
 		bool     dirty = false;
 		
 		std::shared_ptr <RenderGraph> renderGraph;
+		std::shared_ptr <SceneGraph> sceneGraph;
+		std::vector<entt::entity> culledEntities;
 
 		
 	};

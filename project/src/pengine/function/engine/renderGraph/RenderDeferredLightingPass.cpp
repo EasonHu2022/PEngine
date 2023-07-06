@@ -51,7 +51,7 @@ namespace pengine
 	auto RenderDeferredLightingPass::setup() -> void
 	{
 	}
-	auto RenderDeferredLightingPass::onUpdate(entt::registry& registry) -> void 
+	auto RenderDeferredLightingPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
 		//acquire camera data
 		auto cameras = registry.group<component::Camera>(entt::get<component::Transform>);

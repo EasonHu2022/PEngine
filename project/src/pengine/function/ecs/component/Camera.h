@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "glm/glm.hpp"
+#include "function/engine/Frustum.h"
 namespace pengine
 {
 	namespace component {
@@ -75,6 +76,8 @@ namespace pengine
 				this->fov = fov;
 				projectionDirty = true;
 			}
+
+			auto Camera::getFrustum(const glm::mat4& viewMatrix) -> const Frustum&;
 		protected:
 			auto updateProjectionMatrix() -> void;
 
@@ -92,6 +95,8 @@ namespace pengine
 			float fov = 0.0f;
 			float near_ = 0.0f;
 			float far_ = 0.0f;
+
+			Frustum frustum;
 		};
 	};
 	
