@@ -56,6 +56,7 @@ namespace pengine
 		VulkanDevice();
 		~VulkanDevice();
 		bool init();
+		void release();
 		void createPipelineCache();
 		static auto get() -> std::shared_ptr<VulkanDevice>
 		{

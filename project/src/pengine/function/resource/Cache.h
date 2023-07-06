@@ -13,7 +13,7 @@ namespace pengine
 		friend class Material;
 
 		virtual ~Cache() = default;
-
+		auto  release() -> void { cache.clear(); };
 		template <typename T, typename... Args>
 		inline auto emplace(Args &&...args) -> std::shared_ptr<T>
 		{

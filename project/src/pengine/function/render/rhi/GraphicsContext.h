@@ -42,6 +42,7 @@ namespace pengine
 			return GraphicsAPI::NONE;
 		}
 		virtual void init() = 0;
+		virtual void release() = 0;
 		virtual void present() = 0;
 		virtual void waitIdle() const = 0;
 		virtual void onImGui() = 0;

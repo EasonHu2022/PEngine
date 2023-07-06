@@ -19,12 +19,8 @@ namespace peditor
 		virtual void onAdd() = 0;
 		virtual void onRemove() = 0;
 		virtual void onUpdate(const Timestep& dt) = 0;
-		/// <summary>
-		/// override when you want to calculate size and pos 
-		/// </summary>
-		virtual void updateSizeAndPos() {
-			
-		};
+		virtual auto release() -> void = 0;
+
 		/// <summary>
 		/// override when you want to set other GUICond or pivot or something
 		/// </summary>

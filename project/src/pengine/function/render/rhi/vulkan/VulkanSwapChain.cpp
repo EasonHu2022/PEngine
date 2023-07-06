@@ -27,6 +27,11 @@ namespace pengine
 
 	VulkanSwapChain::~VulkanSwapChain()
 	{
+		
+	}
+	auto VulkanSwapChain::release() -> void
+	{
+		swapChainBuffers.clear();
 		for (uint32_t i = 0; i < swapChainBufferCount; i++)
 		{
 			vkDestroySemaphore(*VulkanDevice::get(), frames[i].presentSemaphore, nullptr);
@@ -34,13 +39,10 @@ namespace pengine
 			frames[i].commandBuffer = nullptr;
 		}
 		vkDestroySwapchainKHR(*VulkanDevice::get(), swapChain, VK_NULL_HANDLE);
-
 		if (surface != VK_NULL_HANDLE)
 		{
 			vkDestroySurfaceKHR(VulkanContext::get()->getVkInstance(), surface, nullptr);
 		}
-
-		vkDestroySwapchainKHR(*VulkanDevice::get(), swapChain, VK_NULL_HANDLE);
 	}
 	bool VulkanSwapChain::init(bool vsync, Window* window)
 	{

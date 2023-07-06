@@ -49,6 +49,7 @@ namespace pengine
 	}
 	Scene::~Scene()
 	{
+		renderGraph.reset();
 	}
 	auto Scene::cull() -> void
 	{
@@ -79,6 +80,9 @@ namespace pengine
 
 	auto Scene::onResize(size_t width, size_t height) -> void
 	{
+		auto [camera,transform] = getCamera();
+		camera->setAspectRatio(static_cast<float>(width)/height);
+		renderGraph->onResize(width,height,width,height);
 	}
 
 	auto Scene::getRegistry() -> entt::registry&

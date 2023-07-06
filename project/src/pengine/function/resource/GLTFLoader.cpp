@@ -526,5 +526,9 @@ namespace pengine
 		}
 		stbi_set_flip_vertically_on_load(1);
 	}
+	auto GLTFLoader::release() -> void
+	{
+		
+	}
 };
 

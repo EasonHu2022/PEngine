@@ -110,4 +110,39 @@ namespace pengine
 		ImGui::SetNextWindowSize(size, cond);
 	}
 
+	glm::vec2 PEngineGUI::GetWindowContentRegionMin()
+	{
+		return ImGui::GetWindowContentRegionMin();
+	}
+
+	glm::vec2 PEngineGUI::GetWindowContentRegionMax()
+	{
+		return ImGui::GetWindowContentRegionMax();
+	}
+
+	bool PEngineGUI::isWindowHovered(PEngineGUIHoveredFlags flag)
+	{
+		return ImGui::IsWindowHovered(flag);
+	}
+
+	bool PEngineGUI::isWindowFocused(PEngineGuiFocusedFlags flag)
+	{
+		return  ImGui::IsWindowHovered(flag);
+	}
+
+	glm::vec2 PEngineGUI::getWindowSize()
+	{
+		return ImGui::GetWindowSize();
+	}
+
+	glm::vec2 PEngineGUI::getWindowPos()
+	{
+		return ImGui::GetWindowPos();
+	}
+
+	void PEngineGUI::setWindowFocus()
+	{
+		ImGui::SetWindowFocus();
+	}
+
 };

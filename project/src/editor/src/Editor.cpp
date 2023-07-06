@@ -33,6 +33,11 @@ namespace peditor
 	{
 		Application::onRenderDebug();
 	}
+	void Editor::shutdown()
+	{
+		viewManager->release();
+		Application::shutdown();
+	}
 }
 
 Application* createApplication()

@@ -1,135 +1,1310 @@
-[21:04:11] [info] pengine: Vulkan : 1.3.242
-[21:04:11] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
-[21:04:11] [info] pengine: Vendor ID : 4318
-[21:04:11] [info] pengine: Device Type : Discrete GPU
-[21:04:11] [info] pengine: Driver Version : 535.392.0
-[21:04:11] [info] pengine: Selected physical device has 190 extensions
-[21:04:11] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.246.1\Bin\.\VkLayer_khronos_validation.dll)
-[21:04:11] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll)
-[21:04:11] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll"
-[21:04:11] [info] pengine: Create the VulkanCommandBuffer
-[21:04:11] [info] pengine: Create the VulkanCommandBuffer
-[21:04:11] [info] pengine: Create the VulkanCommandBuffer
-[21:04:11] [info] pengine: Add System: class pengine::ImGuiSystem
-[21:04:11] [info] pengine: add eidtor view : Scene
-[21:04:11] [info] pengine: Add Task: class pengine::RenderGBufferPass
-[21:04:11] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.vert.spv
-[21:04:11] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.frag.spv
-[21:04:11] [info] pengine: Loading Shader : DeferredColor.shader
-[21:04:11] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
-[21:04:11] [info] pengine: UniformBufferObject.projView - Size 64, offset 0
-[21:04:11] [info] pengine: UniformBufferObject.view - Size 64, offset 64
-[21:04:11] [info] pengine: UniformBufferObject.projViewOld - Size 64, offset 128
-[21:04:11] [info] pengine: 	Accessing Member 0 offset 0, size 64
-[21:04:11] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
-[21:04:11] [info] pengine: Uniform UniformMaterialData at set = 1, binding = 6
-[21:04:11] [info] pengine: UniformMaterialData.albedoColor - Size 16, offset 0
-[21:04:11] [info] pengine: UniformMaterialData.roughnessColor - Size 16, offset 16
-[21:04:11] [info] pengine: UniformMaterialData.metallicColor - Size 16, offset 32
-[21:04:11] [info] pengine: UniformMaterialData.emissiveColor - Size 16, offset 48
-[21:04:11] [info] pengine: UniformMaterialData.usingAlbedoMap - Size 4, offset 64
-[21:04:11] [info] pengine: UniformMaterialData.usingMetallicMap - Size 4, offset 68
-[21:04:11] [info] pengine: UniformMaterialData.usingRoughnessMap - Size 4, offset 72
-[21:04:11] [info] pengine: UniformMaterialData.usingNormalMap - Size 4, offset 76
-[21:04:11] [info] pengine: UniformMaterialData.usingAOMap - Size 4, offset 80
-[21:04:11] [info] pengine: UniformMaterialData.usingEmissiveMap - Size 4, offset 84
-[21:04:11] [info] pengine: UniformMaterialData.workflow - Size 4, offset 88
-[21:04:11] [info] pengine: UniformMaterialData.padding - Size 4, offset 92
-[21:04:11] [info] pengine: Found Sampled Image uAlbedoMap at set = 1, binding = 0
-[21:04:11] [info] pengine: Found Sampled Image uMetallicMap at set = 1, binding = 1
-[21:04:11] [info] pengine: Found Sampled Image uRoughnessMap at set = 1, binding = 2
-[21:04:11] [info] pengine: Found Sampled Image uAOMap at set = 1, binding = 4
-[21:04:11] [info] pengine: Found Sampled Image uNormalMap at set = 1, binding = 3
-[21:04:11] [info] pengine: Found Sampled Image uEmissiveMap at set = 1, binding = 5
-[21:04:11] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[21:04:11] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[21:04:11] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[21:04:11] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[21:04:11] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[21:04:11] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
-[21:04:11] [info] pengine: Add Task: class pengine::RenderDeferredLightingPass
-[21:04:11] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredLight.vert.spv
-[21:04:11] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredLight.frag.spv
-[21:04:11] [info] pengine: Loading Shader : DeferredLight.shader
-[21:04:11] [info] pengine: Uniform UniformBufferLight at set = 0, binding = 4
-[21:04:11] [info] pengine: UniformBufferLight.lights - Size 2048, offset 0
-[21:04:11] [info] pengine: UniformBufferLight.viewMatrix - Size 64, offset 2048
-[21:04:11] [info] pengine: UniformBufferLight.cameraPosition - Size 16, offset 2112
-[21:04:11] [info] pengine: UniformBufferLight.lightCount - Size 4, offset 2128
-[21:04:11] [info] pengine: UniformBufferLight.mode - Size 4, offset 2132
-[21:04:11] [info] pengine: UniformBufferLight.enableIndirectLight - Size 4, offset 2136
-[21:04:11] [info] pengine: UniformBufferLight.padding2 - Size 4, offset 2140
-[21:04:11] [info] pengine: Found Sampled Image uColorSampler at set = 0, binding = 0
-[21:04:11] [info] pengine: Found Sampled Image uPositionSampler at set = 0, binding = 1
-[21:04:11] [info] pengine: Found Sampled Image uNormalSampler at set = 0, binding = 2
-[21:04:11] [info] pengine: Found Sampled Image uPBRSampler at set = 0, binding = 3
-[21:04:11] [info] pengine: Add Task: class pengine::OutputPass
-[21:04:11] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/FinalOutput.vert.spv
-[21:04:11] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/FinalOutput.frag.spv
-[21:04:11] [info] pengine: Loading Shader : FinalOutput.shader
-[21:04:11] [info] pengine: Found Sampled Image outputColor at set = 0, binding = 0
-[21:04:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_b_diff.tga
-[21:04:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_diff.tga
-[21:04:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_blue_diff.tga
-[21:04:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_flagpole_diff.tga
-[21:04:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_c_diff.tga
-[21:04:12] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_green_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_floor_a_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/spnza_bricks_a_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_a_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_details_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_hanging.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/chain_texture.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_arch_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_ceiling_a_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_green_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_blue_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_thorn_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_round.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_plant.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/background.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_diff.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/lion.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_dif.tga
-[21:04:13] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_roof_diff.tga
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:14] [info] pengine: bufferId : 0
-[21:04:26] [info] pengine: Pipeline clear
-[21:04:26] [info] pengine: Pipeline clear
-[21:04:26] [info] pengine: FrameBuffer clear
-[21:04:26] [info] pengine: FrameBuffer clear
+[11:39:32] [info] pengine: Vulkan : 1.3.242
+[11:39:32] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
+[11:39:32] [info] pengine: Vendor ID : 4318
+[11:39:32] [info] pengine: Device Type : Discrete GPU
+[11:39:32] [info] pengine: Driver Version : 535.392.0
+[11:39:32] [info] pengine: Selected physical device has 190 extensions
+[11:39:32] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.246.1\Bin\.\VkLayer_khronos_validation.dll)
+[11:39:32] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll)
+[11:39:32] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_3c2bd4a1ec6d228e\.\nvoglv64.dll"
+[11:39:32] [info] pengine: Create the VulkanCommandBuffer
+[11:39:32] [info] pengine: Create the VulkanCommandBuffer
+[11:39:32] [info] pengine: Create the VulkanCommandBuffer
+[11:39:32] [info] pengine: Add System: class pengine::ImGuiSystem
+[11:39:32] [info] pengine: add eidtor view : Scene
+[11:39:32] [info] pengine: Add Task: class pengine::RenderGBufferPass
+[11:39:32] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.vert.spv
+[11:39:32] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredColor.frag.spv
+[11:39:32] [info] pengine: Loading Shader : DeferredColor.shader
+[11:39:32] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
+[11:39:32] [info] pengine: UniformBufferObject.projView - Size 64, offset 0
+[11:39:32] [info] pengine: UniformBufferObject.view - Size 64, offset 64
+[11:39:32] [info] pengine: UniformBufferObject.projViewOld - Size 64, offset 128
+[11:39:32] [info] pengine: 	Accessing Member 0 offset 0, size 64
+[11:39:32] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
+[11:39:32] [info] pengine: Uniform UniformMaterialData at set = 1, binding = 6
+[11:39:32] [info] pengine: UniformMaterialData.albedoColor - Size 16, offset 0
+[11:39:32] [info] pengine: UniformMaterialData.roughnessColor - Size 16, offset 16
+[11:39:32] [info] pengine: UniformMaterialData.metallicColor - Size 16, offset 32
+[11:39:32] [info] pengine: UniformMaterialData.emissiveColor - Size 16, offset 48
+[11:39:32] [info] pengine: UniformMaterialData.usingAlbedoMap - Size 4, offset 64
+[11:39:32] [info] pengine: UniformMaterialData.usingMetallicMap - Size 4, offset 68
+[11:39:32] [info] pengine: UniformMaterialData.usingRoughnessMap - Size 4, offset 72
+[11:39:32] [info] pengine: UniformMaterialData.usingNormalMap - Size 4, offset 76
+[11:39:32] [info] pengine: UniformMaterialData.usingAOMap - Size 4, offset 80
+[11:39:32] [info] pengine: UniformMaterialData.usingEmissiveMap - Size 4, offset 84
+[11:39:32] [info] pengine: UniformMaterialData.workflow - Size 4, offset 88
+[11:39:32] [info] pengine: UniformMaterialData.padding - Size 4, offset 92
+[11:39:32] [info] pengine: Found Sampled Image uAlbedoMap at set = 1, binding = 0
+[11:39:32] [info] pengine: Found Sampled Image uMetallicMap at set = 1, binding = 1
+[11:39:32] [info] pengine: Found Sampled Image uRoughnessMap at set = 1, binding = 2
+[11:39:32] [info] pengine: Found Sampled Image uAOMap at set = 1, binding = 4
+[11:39:32] [info] pengine: Found Sampled Image uNormalMap at set = 1, binding = 3
+[11:39:32] [info] pengine: Found Sampled Image uEmissiveMap at set = 1, binding = 5
+[11:39:32] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[11:39:32] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[11:39:32] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[11:39:32] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[11:39:32] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[11:39:32] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/textures/default.png
+[11:39:32] [info] pengine: Add Task: class pengine::RenderDeferredLightingPass
+[11:39:32] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredLight.vert.spv
+[11:39:32] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/DeferredLight.frag.spv
+[11:39:32] [info] pengine: Loading Shader : DeferredLight.shader
+[11:39:32] [info] pengine: Uniform UniformBufferLight at set = 0, binding = 4
+[11:39:32] [info] pengine: UniformBufferLight.lights - Size 2048, offset 0
+[11:39:32] [info] pengine: UniformBufferLight.viewMatrix - Size 64, offset 2048
+[11:39:32] [info] pengine: UniformBufferLight.cameraPosition - Size 16, offset 2112
+[11:39:32] [info] pengine: UniformBufferLight.lightCount - Size 4, offset 2128
+[11:39:32] [info] pengine: UniformBufferLight.mode - Size 4, offset 2132
+[11:39:32] [info] pengine: UniformBufferLight.enableIndirectLight - Size 4, offset 2136
+[11:39:32] [info] pengine: UniformBufferLight.padding2 - Size 4, offset 2140
+[11:39:32] [info] pengine: Found Sampled Image uColorSampler at set = 0, binding = 0
+[11:39:32] [info] pengine: Found Sampled Image uPositionSampler at set = 0, binding = 1
+[11:39:32] [info] pengine: Found Sampled Image uNormalSampler at set = 0, binding = 2
+[11:39:32] [info] pengine: Found Sampled Image uPBRSampler at set = 0, binding = 3
+[11:39:32] [info] pengine: Add Task: class pengine::OutputPass
+[11:39:32] [info] pengine: #Vertex : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/FinalOutput.vert.spv
+[11:39:32] [info] pengine: #Fragment : F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/FinalOutput.frag.spv
+[11:39:32] [info] pengine: Loading Shader : FinalOutput.shader
+[11:39:32] [info] pengine: Found Sampled Image outputColor at set = 0, binding = 0
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_b_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_blue_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_flagpole_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_c_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_curtain_green_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_floor_a_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/spnza_bricks_a_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_column_a_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_details_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_hanging.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/chain_texture.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_arch_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_ceiling_a_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_green_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_blue_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_thorn_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_round.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_plant.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/background.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_fabric_diff.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/lion.tga
+[11:39:34] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/vase_dif.tga
+[11:39:35] [info] pengine: load image : F:/workspace/YizhouHu/PEngine/PEngine/assets/models/sponza/textures/sponza_roof_diff.tga
+[11:39:35] [info] pengine: Pipeline clear
+[11:39:35] [info] pengine: Pipeline clear
+[11:39:35] [info] pengine: FrameBuffer clear
+[11:39:35] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: Pipeline clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:43] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: Pipeline clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:44] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: Pipeline clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:56] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: Pipeline clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:57] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: Pipeline clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:58] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: Pipeline clear
+[11:39:59] [info] pengine: FrameBuffer clear
+[11:39:59] [info] pengine: FrameBuffer clear

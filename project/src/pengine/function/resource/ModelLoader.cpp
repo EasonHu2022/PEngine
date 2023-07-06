@@ -12,6 +12,14 @@ namespace pengine
 		addModelLoader<OBJLoader>();
 		addModelLoader<FBXLoader>();
 	}
+	auto ModelLoaderFactory::release() -> void
+	{
+		for (auto& ld : loaders)
+		{
+			ld.second->release();
+		}
+		loaders.clear();
+	}
 	auto ModelLoaderFactory::load(const std::string& obj, std::unordered_map<std::string, std::shared_ptr<Mesh>>& meshes, std::shared_ptr<Skeleton>& skeleton) -> void
 	{
 		auto extension = StringUtils::getExtension(obj);

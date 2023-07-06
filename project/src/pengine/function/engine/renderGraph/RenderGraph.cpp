@@ -13,6 +13,14 @@ namespace pengine
 	RenderGraph::RenderGraph(std::string& _path) : path(_path)
 	{
 	}
+	RenderGraph::~RenderGraph()
+	{
+		//release passes and resources
+		resources.clear();
+		passMap.clear();
+
+
+	}
 	auto RenderGraph::init(entt::registry& registry, uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
 		renderExtend = { width ,height };
@@ -130,6 +138,13 @@ namespace pengine
 		renderExtend = { width ,height };
 		outputExtend = { displayWidth ,displayHeight };
 		//release and recreate resources
+		auto passCount = passMap.size();
+		for (int i = 0; i < passCount; i++)
+		{
+			passMap[passUids.at(i)]->onResize(width,height,displayWidth,displayHeight);
+		}
+		resources.clear();
+		createResourceMap();
 	}
 	auto RenderGraph::getResourceByID(uint32_t id) -> IRenderGraphResource*
 	{
@@ -139,14 +154,6 @@ namespace pengine
 			return NULL;
 		}
 		return resources.at(id).get();
-	}
-	auto RenderGraph::checkResource() -> void
-	{
-		for (auto pass : passMap)
-		{
-			auto outputs = pass.second->getOutputCount();
-		}
-
 	}
 	auto RenderGraph::compileDependency() -> void
 	{

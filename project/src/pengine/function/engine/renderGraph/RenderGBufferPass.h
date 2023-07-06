@@ -23,6 +23,7 @@ namespace pengine
 		bool depthTest;
 		std::shared_ptr<TextureDepth>                                   depthBuffer;
 		RenderGBufferData();
+		~RenderGBufferData();
 		RenderGBufferData(RenderGraph* renderGraph);
 	};
 

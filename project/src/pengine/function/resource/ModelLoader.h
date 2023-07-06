@@ -20,6 +20,7 @@ namespace pengine
 	public:
 		virtual auto load(const std::string& obj, const std::string& extension, std::unordered_map<std::string,
 			std::shared_ptr<Mesh>>&, std::shared_ptr<Skeleton>& skeleton) -> void = 0;
+		virtual auto release() -> void = 0;
 	};
 
 	class PENGINE_API ModelLoaderFactory
@@ -28,6 +29,7 @@ namespace pengine
 		ModelLoaderFactory();
 		template<typename T>
 		auto addModelLoader() -> void;
+		auto release() -> void;
 		auto load(const std::string& obj,
 			std::unordered_map<std::string, std::shared_ptr<Mesh>>& meshes,
 			std::shared_ptr<Skeleton>& skeleton) -> void;

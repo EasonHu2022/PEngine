@@ -13,6 +13,12 @@ namespace pengine
 			system.second->onUpdate(dt, scene);
 	}
 
+	auto SystemManager::release() -> void
+	{
+		for (auto& system : systems)
+			system.second->release();
+	}
+
 	auto SystemManager::onImGui()-> void
 	{
 		for (auto& system : systems)

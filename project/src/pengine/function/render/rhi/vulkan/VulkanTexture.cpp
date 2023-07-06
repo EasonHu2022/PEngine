@@ -192,6 +192,8 @@ namespace pengine
 		loadOptions(loadOptions),
 		fileName(filename)
 	{
+		
+		
 		this->name = name;
 		deleteImage = load();
 		if (!deleteImage)
@@ -268,6 +270,7 @@ namespace pengine
 		{
 			mipLevels = 1;
 		}
+		this->name = fileName;
 		VKHelper::createImage(width, height, mipLevels, VkConverter::textureFormatToVK(parameters.format, parameters.srgb),
 			VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
 			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 1, 0, allocation);
@@ -370,9 +373,10 @@ namespace pengine
 		if (deleteImage)
 		{
 			auto image = textureImage;
-
+			auto m_name = name;
 			auto alloc = allocation;
-			deletionQueue.emplace([image, alloc] { vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc); });
+			deletionQueue.emplace([image, alloc,m_name] { vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc);
+				});
 		}
 	}
 

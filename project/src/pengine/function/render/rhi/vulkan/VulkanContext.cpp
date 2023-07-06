@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "VulkanDevice.h"
 #include "function/render/rhi/SwapChain.h"
+#include "VulkanRenderDevice.h"
 
 #define VK_LAYER_LUNARG_STANDARD_VALIDATION_NAME "VK_LAYER_LUNARG_standard_validation"
 #define VK_LAYER_LUNARG_ASSISTENT_LAYER_NAME "VK_LAYER_LUNARG_assistant_layer"
@@ -163,21 +164,7 @@ namespace pengine
 	}
 	VulkanContext::~VulkanContext()
 	{
-		for (int32_t i = 0; i < 3; i++)
-		{
-			getDeletionQueue(i).flush();
-		}
-
-	//	vkDestroyDescriptorPool(*VulkanDevice::get(), std::static_pointer_cast<VulkanRenderDevice>(Application::getRenderDevice())->getDescriptorPool(), VK_NULL_HANDLE);
-
-		if (reportCallback)
-		{
-			PFN_vkDestroyDebugReportCallbackEXT destoryCallback = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(vkInstance, "vkDestroyDebugReportCallbackEXT");
-
-			destoryCallback(vkInstance, reportCallback, VK_NULL_HANDLE);
-		}
-
-		vkDestroyInstance(vkInstance, nullptr);
+		
 	}
 
 	auto VulkanContext::setupDebug() -> void
@@ -206,6 +193,27 @@ namespace pengine
 		auto& window = Application::getWindow();
 		swapChain = SwapChain::create(window->getWidth(), window->getHeight());
 		swapChain->init(false, window.get());
+	}
+	void VulkanContext::release()
+	{
+		pipelineCache.clear();
+		frameBufferCache.clear();
+		swapChain->release();
+		for (int32_t i = 0; i < 3; i++)
+		{
+			deletionQueue[i].flush();
+		}
+		swapChain.reset();
+		vkDestroyDescriptorPool(*VulkanDevice::get(), std::static_pointer_cast<VulkanRenderDevice>(Application::getRenderDevice())->getDescriptorPool(), VK_NULL_HANDLE);
+
+		if (reportCallback)
+		{
+			PFN_vkDestroyDebugReportCallbackEXT destoryCallback = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(vkInstance, "vkDestroyDebugReportCallbackEXT");
+			destoryCallback(vkInstance, reportCallback, VK_NULL_HANDLE);
+		}
+		VulkanDevice::get()->release();
+		
+		vkDestroyInstance(vkInstance, nullptr);
 	}
 	void VulkanContext::present()
 	{

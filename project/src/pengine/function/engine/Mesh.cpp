@@ -18,6 +18,10 @@ namespace pengine {
 
 	Mesh::~Mesh()
 	{
+		indexBuffer.reset();
+		vertexBuffer.reset();
+		descriptorSet.reset();
+		materials.clear();
 	}
 
 	void Mesh::generateNormals(std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices)

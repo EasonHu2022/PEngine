@@ -141,6 +141,39 @@ namespace pengine
 		return ImGui_ImplVulkan_AddTexture(info->sampler, info->imageView, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 	}
 
+	void VulkanImGuiRenderer::removeTexture(ImTextureID image)
+	{
+		ImGui_ImplVulkan_RemoveTexture((VkDescriptorSet)image);
+	}
+
+	void VulkanImGuiRenderer::release()
+	{
+		fontTexture.reset();
+		frameBuffers.clear();
+		renderPass.reset();
+		descriptorSet.reset();
+		//clear context
+		auto& deletionQueue = VulkanContext::getDeletionQueue();
+
+		for (int i = 0; i < VulkanContext::get()->getSwapChain()->getSwapChainBufferCount(); i++)
+		{
+			ImGui_ImplVulkanH_Frame* fd = &g_WindowData.Frames[i];
+			auto                     fence = fd->Fence;
+			auto                     alloc = g_Allocator;
+			auto                     commandPool = fd->CommandPool;
+
+			deletionQueue.emplace([fence, commandPool, alloc] {
+				vkDestroyFence(*VulkanDevice::get(), fence, alloc);
+				vkDestroyCommandPool(*VulkanDevice::get(), commandPool, alloc);
+				});
+		}
+		auto descriptorPool = g_DescriptorPool;
+		deletionQueue.emplace([descriptorPool] {
+			vkDestroyDescriptorPool(*VulkanDevice::get(), descriptorPool, nullptr);
+			ImGui_ImplVulkan_Shutdown();
+			});
+	}
+
 
 	auto VulkanImGuiRenderer::setupVulkanWindowData(ImGui_ImplVulkanH_Window* wd, VkSurfaceKHR surface, int32_t width, int32_t height) -> void
 	{

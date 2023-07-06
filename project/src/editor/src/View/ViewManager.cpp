@@ -11,8 +11,7 @@ namespace peditor
 	void ViewManager::init()
 	{
 
-		addView<SceneView>("Scene",PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoResize |
-			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoScrollWithMouse | PEngineGUIWindowFlags_ ::PEngineGUIWindowFlags_NoScrollbar|PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoMove | PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoCollapse);
+		addView<SceneView>("Scene");
 
 		for (auto it = editorViews.begin(); it != editorViews.end(); ++it) {
 			it->second->init();
@@ -23,6 +22,13 @@ namespace peditor
 		for (auto it = editorViews.begin(); it != editorViews.end(); ++it) {
 			it->second->drawView();
 		}
+	}
+	auto ViewManager::release() -> void
+	{
+		for (auto it = editorViews.begin(); it != editorViews.end(); ++it) {
+			it->second->release();
+		}
+		editorViews.clear();
 	}
 	void ViewManager::onUpdate(const Timestep& delta)
 	{

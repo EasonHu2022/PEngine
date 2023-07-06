@@ -16,6 +16,8 @@ namespace pengine
 		virtual void onResize(uint32_t width, uint32_t height) = 0;
 		virtual void rebuildFontTexture() = 0;
 		virtual void clear() {};
+		virtual void release() = 0;
 		virtual ImTextureID addTexture(Texture2D* texture) = 0;
+		virtual void removeTexture(ImTextureID img) = 0;
 	};
 }

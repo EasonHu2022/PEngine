@@ -16,6 +16,7 @@ namespace pengine
 		typedef int  PEngineGUIInputTextCallback;
 		typedef int  PEngineGUIHoveredFlags;
 		typedef int  PEngineGUICond;
+		typedef int  PEngineGuiFocusedFlags;      // -> enum ImGuiFocusedFlags_    // Flags: for IsWindowFocused()
 
 		typedef void*  PEngineGUITextureID;//may cause bug when not using vulkan cause may be other backend does not support u64
 
@@ -66,6 +67,13 @@ namespace pengine
 			static auto getMousePos() -> glm::vec2;
 			static auto setNextWindowPos(glm::vec2& pos, PEngineGUICond cond = 0,glm::vec2& pivot = glm::vec2(0,0)) -> void;
 			static auto setNextWindowSize(glm::vec2& size, PEngineGUICond cond = 0) -> void;
+			static glm::vec2 GetWindowContentRegionMin();
+			static glm::vec2 GetWindowContentRegionMax();
+			static bool isWindowHovered(PEngineGUIHoveredFlags flag = PEngineGUIHoveredFlags_::PEngineGUIHoveredFlags_None);
+			static bool isWindowFocused(PEngineGuiFocusedFlags flag = PEngineGuiFocusedFlags_::PEngineGuiFocusedFlags_None);
+			static glm::vec2 getWindowSize();
+			static glm::vec2 getWindowPos();
+			static void setWindowFocus();
 	};
 
 	

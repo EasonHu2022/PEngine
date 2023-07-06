@@ -117,7 +117,7 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		float value = 1.0;
 		vec3 lightColor = light.color.xyz * light.intensity;
 		vec3 indirect = vec3(0,0,0);
-		if(light.type == 2.0)
+		if(light.type == 2.0)//pointlight
 		{
 		    // Vector to light
 			vec3 L = light.position.xyz - wsPos;
@@ -140,7 +140,7 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 			
 			light.direction = vec4(L,1.0);
 		}
-		if (light.type == 1.0)
+		if (light.type == 1.0)//spotlight
 		{
 			vec3 L = light.position.xyz - wsPos;
 			float cutoffAngle   = 1.0f - light.angle;      

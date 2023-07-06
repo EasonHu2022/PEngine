@@ -19,6 +19,7 @@ namespace pengine
 		virtual ~RenderDevice() = default;
 		virtual void init() = 0;
 		virtual void begin() = 0;
+		virtual auto release() -> void = 0;
 		virtual void onResize(uint32_t width, uint32_t height) = 0;
 		virtual void drawSplashScreen(const std::shared_ptr<Texture>& texture)  {};
 		virtual auto clearRenderTarget(const std::shared_ptr<Texture>& texture, CommandBuffer* commandBuffer, const glm::vec4& clearColor = { 0.3f, 0.3f, 0.3f, 1.0f }) -> void {};

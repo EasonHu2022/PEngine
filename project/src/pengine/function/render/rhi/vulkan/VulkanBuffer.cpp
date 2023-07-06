@@ -72,7 +72,6 @@ namespace pengine
 			auto  bufferId = VulkanContext::get()->getSwapChain()->getCurrentBufferIndex();
 			auto alloc = allocation;
 			queue.emplace([buffer, alloc, bufferId] {
-				PLOGI("bufferId : {0}", bufferId);
 				vmaDestroyBuffer(VulkanDevice::get()->getAllocator(), buffer, alloc); });
 		}
 	}

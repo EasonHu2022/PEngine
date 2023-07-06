@@ -19,7 +19,7 @@ namespace pengine
 		virtual uint32_t getCurrentBufferIndex() const = 0;
 		virtual uint32_t getCurrentImageIndex() const = 0;
 		virtual size_t getSwapChainBufferCount() const = 0;
-
+		virtual auto release() -> void = 0;
 		virtual auto getCurrentCommandBuffer() -> CommandBuffer*
 		{
 			return nullptr;

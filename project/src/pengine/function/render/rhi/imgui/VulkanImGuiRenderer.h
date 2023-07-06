@@ -22,6 +22,8 @@ namespace pengine
 		virtual void rebuildFontTexture() override;
 
 		virtual ImTextureID addTexture(Texture2D* texture) override;
+		virtual void removeTexture(ImTextureID image) override;
+		virtual void release() override ;
 	private:
 		auto setupVulkanWindowData(ImGui_ImplVulkanH_Window* wd, VkSurfaceKHR surface, int32_t width, int32_t height) -> void;
 

@@ -11,7 +11,16 @@ namespace peditor
 	}
 	auto SceneView::init() -> void
 	{
-		updateSizeAndPos();
+		flags = PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoScrollWithMouse |
+			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoScrollbar |
+			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoMove |
+			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoCollapse;
+			
+		//set init size and pos
+		pos.x = VIEWMARGINCOMMON;
+		pos.y = VIEWMARGINTOP;
+		size.x = SCENEVIEWWIDTHDEFAULT * Application::getWindow()->getWidth();
+		size.y = SCENEVIEWHEIGHTDEFAULT * Application::getWindow()->getHeight();
 		sceneRenderTarget = Texture2D::create();
 		sceneRenderTarget->setName(name);
 		sceneRenderTarget->buildTexture(pengine::TextureFormat::RGBA16, size.x, size.y, false, false, false);
@@ -32,16 +41,15 @@ namespace peditor
 		handleInputForSceneCamera(dt);
 	}
 
-	auto SceneView::updateSizeAndPos() -> void 
+	auto SceneView::release() -> void 
 	{
-		pos.x = VIEWMARGINCOMMON;
-		pos.y = VIEWMARGINTOP;
-		size.x = SCENEVIEWWIDTHDEFAULT * Application::getWindow()->getWidth();
-		size.y = SCENEVIEWHEIGHTDEFAULT * Application::getWindow()->getHeight();
-	}
+		sceneRenderTarget.reset();
 
+	}
 	auto SceneView::handleInputForSceneCamera(float dt) -> void
 	{
+		if (!m_bFocused || !m_bHovered)
+			return;
 		auto [camera,transform] = Application::getSceneManager()->getCurrentScene()->getCamera();
 		if (Input::get_key(P_KEY_LEFT_CONTROL))
 		{
@@ -85,8 +93,31 @@ namespace peditor
 		}
 	}
 
+	auto SceneView::onResize(float width, float height) -> void
+	{
+		Application::getGraphicsContext()->waitIdle();
+		if (sceneRenderTargetImId)
+			Application::getimGuiSystem()->getImguiRenderer()->removeTexture(sceneRenderTargetImId);
+		sceneRenderTarget->buildTexture(pengine::TextureFormat::RGBA16, size.x, size.y, false, false, false);
+		sceneRenderTargetImId = Application::getimGuiSystem()->getImguiRenderer()->addTexture(sceneRenderTarget.get());
+		Application::getSceneManager()->getCurrentScene()->onResize(width,height);
+	}
+
 	auto SceneView::onImGui() -> void	
 	{
+		//update state
+		m_bFocused = PEngineGUI::isWindowFocused();
+		m_bHovered = PEngineGUI::isWindowHovered();
+		auto newsize = PEngineGUI::getWindowSize();
+		pos = PEngineGUI::getWindowPos();
+		if (size != newsize)
+		{
+			size = newsize;
+			//update size
+			auto w = size.x - (static_cast<int>(size.x) % 2 != 0 ? 1.0f : 0.0f);
+			auto h = size.y - (static_cast<int>(size.y) % 2 != 0 ? 1.0f : 0.0f);
+			onResize(w, h);
+		}
 		glm::vec2 uv_min = { 0.0f, 0.0f };                 // bottom-left
 		glm::vec2 uv_max = { 1.0f, 1.0f };                 // top-right
 		glm::vec4 tint_col = { 1.0f, 1.0f, 1.0f, 1.0f };   // No tint

@@ -19,6 +19,7 @@ namespace pengine
 	public:
 		VulkanSwapChain(uint32_t width, uint32_t height);
 		virtual ~VulkanSwapChain();
+		auto release() -> void;
 		NO_COPYABLE(VulkanSwapChain);
 		bool init(bool vsync, Window* window);
 		bool init(bool vsync);

@@ -66,6 +66,7 @@ namespace pengine
 		auto onInit()-> void;
 		auto onImGui()-> void;
 		auto onUpdate(float dt, Scene* scene) -> void ;
+		auto release() -> void;
 	private:
 		std::unordered_map<size_t, std::shared_ptr<ISystem>> systems;
 	};

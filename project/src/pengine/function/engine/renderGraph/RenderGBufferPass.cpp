@@ -238,6 +238,19 @@ namespace pengine
 
 	auto RenderGBufferPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
+		//temp all the same
+		for (int i = 0; i < outputs.size(); i++)
+		{
+			auto res = outputs[i];
+			res->onResize(width, height);
+		}
+
+		if (m_LocalData.depthTest)
+		{
+			m_LocalData.depthBuffer.reset();
+			m_LocalData.depthBuffer = TextureDepth::create(width, height, true);
+			m_LocalData.depthBuffer->setName("GBuffer-Depth");
+		}
 	}
 	auto RenderGBufferPass::createVResource() -> void
 	{
@@ -258,5 +271,14 @@ namespace pengine
 	}
 	RenderGBufferData::RenderGBufferData()
 	{
+	}
+	RenderGBufferData::~RenderGBufferData()
+	{
+		defaultMaterial.reset();
+		descriptorColorSet.clear();
+		stencilDescriptorSet.reset();
+		deferredColorShader.reset();
+		stencilShader.reset();
+		depthBuffer.reset();
 	}
 };

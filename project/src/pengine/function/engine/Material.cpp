@@ -26,8 +26,6 @@ namespace pengine
 	Material::Material(const std::string& materialId) :
 		materialId(materialId)
 	{
-
-
 		setRenderFlag(RenderFlags::DepthTest);
 	}
 

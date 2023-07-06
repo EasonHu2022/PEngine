@@ -143,5 +143,10 @@ namespace pengine
 			mesh->setName(shape.name);
 			meshes.emplace(shape.name, mesh);
 		}
+
     }
+	auto OBJLoader::release() -> void
+	{
+		texturesCache.clear();
+	}
 };

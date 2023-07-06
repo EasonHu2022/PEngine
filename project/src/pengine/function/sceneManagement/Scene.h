@@ -36,11 +36,14 @@ namespace pengine
 		auto removeAllChildren(entt::entity entity) -> void;
 		auto getCamera() -> std::pair<component::Camera*,component::Transform*>;
 		auto addModel(const std::string filePath) -> Entity;
-
+		auto release() -> void;
 		inline auto& getEntityManager()
 		{
 			return entityManager;
 		}
+
+		uint32_t width = 0;
+		uint32_t height = 0;
 	protected:
 		std::shared_ptr<EntityManager> entityManager;
 		std::string                    name;
@@ -50,7 +53,6 @@ namespace pengine
 		
 		std::shared_ptr <RenderGraph> renderGraph;
 
-		uint32_t width = 0;
-		uint32_t height = 0;
+		
 	};
 }

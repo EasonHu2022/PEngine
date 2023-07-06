@@ -12,9 +12,10 @@ namespace peditor
 		auto onAdd() -> void override;
 		auto onRemove() -> void override;
 		auto onUpdate(const Timestep& dt) -> void override;
+		auto release() -> void override;
 	private:
-		auto updateSizeAndPos() -> void override;
 		auto handleInputForSceneCamera(float dt) -> void;
+		auto onResize(float width, float height) -> void;
 	private:
 		auto onImGui() -> void override;
 		std::shared_ptr<Texture2D> sceneRenderTarget;
@@ -28,6 +29,10 @@ namespace peditor
 		float zoomVelocity = 0.0f;
 		glm::vec3 velocity = { 0,0,0 };
 		glm::vec2 rotateVelocity = { 0,0 };
+
+		//state
+		bool m_bFocused = true;
+		bool m_bHovered = true;
 	};
 
 	

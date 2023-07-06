@@ -12,6 +12,7 @@ namespace peditor
 		~ViewManager();
 		void init();
 		void onImGui();
+		auto release() -> void;
 		void onUpdate(const Timestep& delta);
 		template<class T>
 		inline void addView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags = 0)

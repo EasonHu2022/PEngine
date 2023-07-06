@@ -14,6 +14,7 @@ namespace peditor
 		void onImGui() override;
 		void onUpdate(const float &delta) override;
 		void onRenderDebug() override;
+		void shutdown() override;
 	private:
 		std::unique_ptr<ViewManager> viewManager;
 

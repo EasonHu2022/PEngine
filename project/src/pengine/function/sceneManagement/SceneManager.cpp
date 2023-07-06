@@ -15,6 +15,11 @@ namespace pengine
 	}
 	SceneManager::~SceneManager()
 	{
+		
+	}
+	auto SceneManager::release() -> void
+	{
+		allScenes.clear();
 	}
 	auto SceneManager::onUpdate() -> void
 	{
@@ -56,8 +61,10 @@ namespace pengine
 			auto &camera = entity.addComponent<component::Camera>();
 			camera.setFov(45.f);
 			camera.setFar(10000.0f); 
-			camera.setNear(0.1);
-			camera.setAspectRatio(4 / 3.f);
+			camera.setNear(10);
+			auto w = scene->width == 0 ? 4.0f : scene->width;
+			auto h = scene->height == 0 ? 3.0f : scene->height;
+			camera.setAspectRatio(w / h);
 			auto& transform = entity.getComponent<component::Transform>();
 			transform.setLocalPosition({0.0f,100.0f,100.0f});
 			//test

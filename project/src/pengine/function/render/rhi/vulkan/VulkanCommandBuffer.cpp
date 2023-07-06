@@ -40,10 +40,10 @@ namespace pengine
 		fence = std::make_shared<VulkanFence>(false);
 		return true;
 	}
-	bool VulkanCommandBuffer::init(bool primary, VkCommandPool commandPool)
+	bool VulkanCommandBuffer::init(bool primary, VkCommandPool _commandPool)
 	{
 		this->primary = primary;
-		commandPool = commandPool;
+		commandPool = _commandPool;
 		VkCommandBufferAllocateInfo cmdBufferCI{};
 		cmdBufferCI.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
 		cmdBufferCI.commandPool = commandPool;

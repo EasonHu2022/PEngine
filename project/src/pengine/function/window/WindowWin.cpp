@@ -117,6 +117,13 @@ namespace pengine
 		glfwSetWindowSizeCallback(handle, [](GLFWwindow* win, int32_t w, int32_t h) {
 			Application::get()->onWindowResized(w, h);
 			});
+		glfwSetWindowIconifyCallback(handle, [](GLFWwindow* win, int minimized) {
+			Application::get()->onWindowIconified(minimized);
+			});
+
+		glfwSetWindowCloseCallback(handle, [](GLFWwindow* win) {
+			Application::get()->onWindowClosed();
+			});
 
 		glfwSetMouseButtonCallback(handle, [](GLFWwindow* window, int32_t btnId, int32_t state, int32_t mods) {
 			auto w = (WindowWin*)glfwGetWindowUserPointer(window);

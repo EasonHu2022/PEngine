@@ -68,6 +68,11 @@ namespace pengine
 	}
 	auto OutputPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
+		for (int i = 0; i < inputs.size(); i++)
+		{
+			auto res = inputs[i];
+			res->onResize(width,height);
+		}
 		//simply do nothing
 	}
 	auto OutputPass::createVResource() -> void

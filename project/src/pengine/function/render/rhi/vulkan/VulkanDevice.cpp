@@ -191,10 +191,7 @@ namespace pengine
 
 	VulkanDevice::~VulkanDevice()
 	{
-		vkDestroyPipelineCache(device, pipelineCache, VK_NULL_HANDLE);
-		vmaDestroyAllocator(allocator);
-		if (device != nullptr)
-			vkDestroyDevice(device, nullptr);
+		
 	}
 
 	bool VulkanDevice::init()
@@ -290,6 +287,18 @@ namespace pengine
 		commandPool = std::make_shared<VulkanCommandPool>(physicalDevice->indices.graphicsFamily.value(), VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
 		createPipelineCache();
 		return true;
+	}
+	void VulkanDevice::release()
+	{
+		commandPool.reset();
+		if (commandPool.use_count() != 0)
+		{
+			PLOGE("Error CommandPool refcount > 0 !");
+		}
+		vkDestroyPipelineCache(device, pipelineCache, VK_NULL_HANDLE);
+		vmaDestroyAllocator(allocator);
+		if (device != nullptr)
+			vkDestroyDevice(device, nullptr);
 	}
 	void VulkanDevice::createPipelineCache()
 	{

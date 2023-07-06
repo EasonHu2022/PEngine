@@ -11,6 +11,7 @@ namespace pengine
 		~VulkanRenderDevice();
 		void begin() override;
 		void init() override;
+		void release() override;
 		void onResize(uint32_t width, uint32_t height) override;
 		void drawSplashScreen(const std::shared_ptr<Texture>& texture) override;
 		auto presentInternal() -> void ;

@@ -604,6 +604,7 @@ namespace pengine
 		allocInfovma.memoryTypeBits = 0;
 		allocInfovma.pool = nullptr;
 		allocInfovma.pUserData = nullptr;
+		
 		vmaCreateImage(VulkanDevice::get()->getAllocator(), &imageInfo, &allocInfovma, &image, &allocation, nullptr);
 	}
 

@@ -106,4 +106,16 @@ namespace pengine
         PEngineGUICond_FirstUseEver = 1 << 2,   // Set the variable if the object/window has no persistently saved data (no entry in .ini file)
         PEngineGUICond_Appearing = 1 << 3,   // Set the variable if the object/window is appearing after being hidden/inactive (or the first time)
     };
+
+    // Flags for ImGui::IsWindowFocused()
+    enum PEngineGuiFocusedFlags_
+    {
+        PEngineGuiFocusedFlags_None = 0,
+        PEngineGuiFocusedFlags_ChildWindows = 1 << 0,   // Return true if any children of the window is focused
+        PEngineGuiFocusedFlags_RootWindow = 1 << 1,   // Test from root window (top most parent of the current hierarchy)
+        PEngineGuiFocusedFlags_AnyWindow = 1 << 2,   // Return true if any window is focused. Important: If you are trying to tell how to dispatch your low-level inputs, do NOT use this. Use 'io.WantCaptureMouse' instead! Please read the FAQ!
+        PEngineGuiFocusedFlags_NoPopupHierarchy = 1 << 3,   // Do not consider popup hierarchy (do not treat popup emitter as parent of popup) (when used with _ChildWindows or _RootWindow)
+        //ImGuiFocusedFlags_DockHierarchy               = 1 << 4,   // Consider docking hierarchy (treat dockspace host as parent of docked window) (when used with _ChildWindows or _RootWindow)
+        PEngineGuiFocusedFlags_RootAndChildWindows = PEngineGuiFocusedFlags_RootWindow | PEngineGuiFocusedFlags_ChildWindows,
+    };
 };

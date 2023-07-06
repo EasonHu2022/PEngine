@@ -45,7 +45,8 @@ namespace pengine
 
 	auto ImGuiSystem::release() -> void 
 	{
-
+		imguiRender->release();
+		imguiRender.reset();
 	}
 
 	auto ImGuiSystem::onRender() -> void

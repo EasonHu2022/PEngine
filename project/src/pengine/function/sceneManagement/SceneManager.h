@@ -12,6 +12,7 @@ namespace pengine
 	public:
 		SceneManager();
 		~SceneManager();
+		auto release() -> void;
 		auto onUpdate() -> void;
 		auto onLateUpdate() -> void;
 		auto onRender() -> void;

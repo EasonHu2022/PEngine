@@ -22,6 +22,11 @@ namespace pengine
 		sceneManager								= std::make_unique<SceneManager>();
 	}
 
+	Application::~Application()
+	{
+		
+	}
+
 	void Application::init()
 	{
 		
@@ -41,9 +46,6 @@ namespace pengine
 	{
 		double lastFrameTime = 0;
 		init();
-
-
-
 		//main editor loop
 		while (1)
 		{			
@@ -55,6 +57,12 @@ namespace pengine
 			{
 				
 				onUpdate(timestep);
+
+
+				//window state
+				
+				if (m_bMinimized) 
+					continue;
 
 				renderDevice->begin();
 
@@ -80,7 +88,14 @@ namespace pengine
 				frames = 0;
 				updates = 0;
 			}
+			if (m_bshouldClose)
+			{
+				shutdown();
+				break;
+			}
+				
 		}
+		return 0;
 	}
 
 	void Application::onUpdate(const float &delta)
@@ -107,7 +122,6 @@ namespace pengine
 
 	void Application::onImGui()
 	{
-		//systemManager->onImGui();
 	}
 
 	void Application::onWindowResized(uint32_t w, uint32_t h)
@@ -123,8 +137,30 @@ namespace pengine
 		graphicsContext->waitIdle();
 	}
 
+	void Application::onWindowIconified(int minimized)
+	{
+		m_bMinimized = minimized == 1;
+	}
+
+	void Application::onWindowClosed()
+	{
+		m_bshouldClose = true;
+	}
+
+
 	void Application::onRenderDebug()
 	{
+	}
+
+	void Application::shutdown()
+	{
+		graphicsContext->waitIdle();
+		sceneManager->release();
+		systemManager->release();
+		loaderFactory->release();
+		cache->release();
+		renderDevice->release();
+		graphicsContext->release();
 	}
 
 

@@ -408,4 +408,8 @@ namespace pengine
 			delete skeletonPtr;
 		}
 	}
+	auto FBXLoader::release() -> void 
+	{
+		
+	}
 };

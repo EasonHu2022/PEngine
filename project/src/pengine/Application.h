@@ -22,6 +22,7 @@ namespace pengine
 	{
 	public:
 		Application();
+		~Application();
 		int32_t start();
 
 		virtual void init();
@@ -29,7 +30,10 @@ namespace pengine
 		virtual void onRender();
 		virtual void onImGui();
 		virtual void onWindowResized(uint32_t w, uint32_t h);
+		virtual void onWindowIconified(int minimized);
+		virtual void onWindowClosed();
 		virtual void onRenderDebug();
+		virtual void shutdown();
 
 		static Application* app;
 		inline static Application* get()
@@ -77,15 +81,24 @@ namespace pengine
 		}
 	protected:
 		std::unique_ptr<Window>				window;
-		std::shared_ptr<GraphicsContext>    graphicsContext;
-		std::shared_ptr<RenderDevice>       renderDevice;
+		std::unique_ptr<SystemManager>      systemManager;
+		std::unique_ptr<SceneManager>		sceneManager;
+
+		
 		std::shared_ptr<ImGuiSystem>		imGuiSystem;
 		std::shared_ptr<Cache>              cache;
 		std::shared_ptr<ModelLoaderFactory> loaderFactory;
 
-		std::unique_ptr<SystemManager>      systemManager;
-		std::unique_ptr<SceneManager>      sceneManager;
+
+
+
+
+		std::shared_ptr<GraphicsContext>    graphicsContext;
+		std::shared_ptr<RenderDevice>       renderDevice;
 		
+		//app state
+		bool								m_bshouldClose = false;
+		bool								m_bMinimized = false;
 		//temp
 		Timer                                                            timer;
 		uint64_t                                                         updates = 0;

@@ -15,7 +15,7 @@ namespace pengine
 	}
 	VulkanRenderDevice::~VulkanRenderDevice()
 	{
-		vkDestroyDescriptorPool(*VulkanDevice::get(), descriptorPool, VK_NULL_HANDLE);
+		//vkDestroyDescriptorPool(*VulkanDevice::get(), descriptorPool, VK_NULL_HANDLE);
 	}
 	void VulkanRenderDevice::begin()
 	{
@@ -43,6 +43,9 @@ namespace pengine
 
 		// Pool
 		VK_CHECK_RESULT(vkCreateDescriptorPool(*VulkanDevice::get(), &poolCreateInfo, nullptr, &descriptorPool));
+	}
+	void VulkanRenderDevice::release()
+	{
 	}
 	void VulkanRenderDevice::onResize(uint32_t width, uint32_t height)
 	{

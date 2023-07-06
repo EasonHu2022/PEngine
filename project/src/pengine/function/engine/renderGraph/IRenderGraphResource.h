@@ -19,6 +19,11 @@ namespace pengine
 	class RenderGraphVirtualResource
 	{
 	public:
+		void onResize(float w, float h) {
+			width = w;
+			height = h;
+			b_initialized = false;
+		};
 		//maybe type
 		RenderResouceType type;
 		//index in the real render res table

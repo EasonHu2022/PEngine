@@ -13,7 +13,7 @@ namespace pengine
 		~VulkanContext();
 		NO_COPYABLE(VulkanContext);
 		void init() override;
-
+		void release() override;
 		void present() override;
 
 		void waitIdle() const override;

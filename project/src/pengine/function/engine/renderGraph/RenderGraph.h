@@ -21,7 +21,7 @@ namespace pengine
 	public:
 		RenderGraph() = default;
 		RenderGraph(std::string& path);
-		~RenderGraph() {};
+		~RenderGraph();
 		auto init(entt::registry& registry,uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
 		auto setup() -> void;
 		//update cpu data for render
@@ -40,7 +40,6 @@ namespace pengine
 		auto getPath() const->std::string { return path; };
 		inline auto getRenderExtend() -> glm::vec2 { return renderExtend; };
 		inline auto getOutputExtend() -> glm::vec2 { return outputExtend; };
-		auto checkResource() -> void;
 		auto compileDependency() -> void;
 		auto createResourceMap() -> void;
 		auto setOutputTexture(std::shared_ptr<Texture> texture) ->void { outputTexture = texture; };

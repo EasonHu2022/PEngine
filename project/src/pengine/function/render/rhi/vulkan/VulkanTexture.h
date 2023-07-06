@@ -7,7 +7,6 @@
 #include "function/render/rhi/FrameBuffer.h"
 namespace pengine
 {
-
 	class VulkanTexture
 	{
 	public:
