@@ -3,6 +3,7 @@
 #include "function/ecs/component/MeshRenderer.h"
 #include "function/ecs/Entity/Entity.h"
 #include "function/engine/Frustum.h"
+#include "function/profile/profiler.h"
 namespace pengine
 {
 	OCT::OCT()
@@ -13,6 +14,7 @@ namespace pengine
 	}
 	void OCT::build(entt::registry& registry)
 	{
+		PROFILE_FUNCTION();
 		//create rootNode
 		rootNode = std::make_shared<SceneTreeNode>();
 		rootNode->depth = 0;
@@ -73,11 +75,12 @@ namespace pengine
 	}
 	void OCT::frustumCull(const Frustum& frustum, std::vector<entt::entity>& out_ent)
 	{
+		PROFILE_FUNCTION();
 		getInside(rootNode, frustum, out_ent);
 	}
 	void OCT::recursiveBuild(std::shared_ptr<SceneTreeNode> node, entt::registry& registry)
 	{
-		if (node->depth >= 8 || node->entHandles.size() < 2) return;
+		if (node->depth >= maxDepth || node->entHandles.size() < 2) return;
 		for (int i = 0; i < 8; i++)
 		{
 			auto child = std::make_shared<SceneTreeNode>();

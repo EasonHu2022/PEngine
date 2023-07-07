@@ -12,6 +12,7 @@
 #include "core/Timer.h"
 #include "core/core.h"
 #include "function/resource/ModelLoader.h"
+#include "function/engine/EngineOptions.h"
 
 //temply 
 #define ASSETS_ABSOLUTE_PATH "F:/workspace/YizhouHu/PEngine/PEngine/assets/"
@@ -79,6 +80,11 @@ namespace pengine
 		{
 			return get()->loaderFactory;
 		}
+
+		inline static auto& getEngineOptions()
+		{
+			return get()->engineOptions;
+		}
 	protected:
 		std::unique_ptr<Window>				window;
 		std::unique_ptr<SystemManager>      systemManager;
@@ -104,5 +110,6 @@ namespace pengine
 		uint64_t                                                         updates = 0;
 		uint64_t                                                         frames = 0;
 		float                                                            secondTimer = 0.0f;
+		EngineOptions													 engineOptions{};
 	};
 }

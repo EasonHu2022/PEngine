@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "VulkanDevice.h"
 #include "function/render/rhi/SwapChain.h"
+#include "function/render/rhi/vulkan/VulkanCommandBuffer.h"
 #include "VulkanRenderDevice.h"
 
 #define VK_LAYER_LUNARG_STANDARD_VALIDATION_NAME "VK_LAYER_LUNARG_standard_validation"
@@ -193,6 +194,13 @@ namespace pengine
 		auto& window = Application::getWindow();
 		swapChain = SwapChain::create(window->getWidth(), window->getHeight());
 		swapChain->init(false, window.get());
+
+		//create tracy ctx
+		//if tracy
+		VkPhysicalDevice pd = *(VulkanDevice::get()->getPhysicalDevice().get());
+		VkDevice d = *(VulkanDevice::get().get());
+		VkCommandBuffer cb = ((VulkanCommandBuffer*)swapChain->getCurrentCommandBuffer())->getCommandBuffer();
+		tracyCtx = TracyVkContext(pd, d, VulkanDevice::get()->getGraphicsQueue(), cb);
 	}
 	void VulkanContext::release()
 	{
@@ -247,6 +255,10 @@ namespace pengine
 	{
 		PENGINE_ASSERT(index < 3, "Unsupported Frame Index");
 		return get()->deletionQueue[index];
+	}
+	auto VulkanContext::getTracyCtx() -> TracyVkCtx
+	{
+		return get()->tracyCtx;
 	}
 	void VulkanContext::createInstance()
 	{

@@ -4,6 +4,7 @@
 #include "VKHelper.h"
 #include <deque>
 #include <functional>
+#include "function/profile/GPUProfiler.h"
 namespace pengine
 {
 	class VulkanContext : public GraphicsContext
@@ -63,7 +64,7 @@ namespace pengine
 		};
 		static auto getDeletionQueue()->CommandQueue&;
 		static auto getDeletionQueue(uint32_t index)->CommandQueue&;
-
+		static auto getTracyCtx() -> TracyVkCtx;
 	private:
 		//bind to triple buffer
 		CommandQueue deletionQueue[3];
@@ -74,6 +75,7 @@ namespace pengine
 		std::vector<VkLayerProperties>     instanceLayers;
 		std::vector<VkExtensionProperties> instanceExtensions;
 		VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
+		TracyVkCtx tracyCtx;
 		void createInstance();
 	};
 }

@@ -3,6 +3,7 @@
 #include "core/log/PLog.h"
 #include "function/sceneManagement/SceneManager.h"
 #include "function/engine/Input.h"
+#include "function/profile/profiler.h"
 namespace pengine
 {
 	Application::Application()
@@ -49,6 +50,7 @@ namespace pengine
 		//main editor loop
 		while (1)
 		{			
+			
 			//                              set timestep
 			Timestep timestep = timer.stop() / 1000000.f;
 			
@@ -93,7 +95,7 @@ namespace pengine
 				shutdown();
 				break;
 			}
-				
+			PROFILE_FRAMEMARKER();
 		}
 		return 0;
 	}

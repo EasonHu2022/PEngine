@@ -27,6 +27,6 @@ namespace pengine
 		virtual void frustumCull(const Frustum& frustum, std::vector<entt::entity>& out_ent) = 0;
 	protected:
 		std::shared_ptr<SceneTreeNode> rootNode;
-		uint32_t maxDepth = 6;
+		uint32_t maxDepth = 8;
 	};
 }

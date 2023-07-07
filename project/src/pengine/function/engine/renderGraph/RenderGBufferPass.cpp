@@ -7,6 +7,13 @@
 #include "function/ecs/component/MeshRenderer.h"
 #include "function/ecs/component/camera.h"
 #include "function/render/rhi/Texture.h"
+#include "function/profile/profiler.h"
+#include "function/profile/GPUProfiler.h"
+#ifdef PENGINE_VULKAN
+#include "function/render/rhi/vulkan/VulkanContext.h"
+#include "function/render/rhi/vulkan/VulkanCommandBuffer.h"
+#endif // PENGINE_VULKAN
+
 namespace pengine
 {
 	RenderGBufferData::RenderGBufferData(RenderGraph* renderGraph)
@@ -66,7 +73,12 @@ namespace pengine
 		{
 			pipeline = Pipeline::get(unit.pipelineInfo);
 			if (commandBuffer)
+			{
+				auto vkcb = (VulkanCommandBuffer*)commandBuffer;
+				GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(),"gbuffer bind pipeline");
 				commandBuffer->bindPipeline(pipeline.get());
+			}
+				
 			else
 			{
 				PLOGE("Try to use null cmd buffer! Task : {0} execute() ", name);
@@ -74,6 +86,8 @@ namespace pengine
 			//cbuffer
 			auto& pushConstants = m_LocalData.deferredColorShader->getPushConstants()[0];
 			pushConstants.setValue("transform", &unit.transform);
+			auto vkcb = (VulkanCommandBuffer*)commandBuffer;
+			//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind pushconstants");
 			m_LocalData.deferredColorShader->bindPushConstants(commandBuffer, pipeline.get());
 			//deal with submesh
 			if (unit.mesh->getSubMeshCount() > 1)
@@ -81,7 +95,10 @@ namespace pengine
 				auto& materials = unit.mesh->getMaterial();
 				auto& indices = unit.mesh->getSubMeshIndex();
 				auto start = 0;
+				//auto vkcb = (VulkanCommandBuffer*)commandBuffer;
+				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind vtx buffer");
 				unit.mesh->getVertexBuffer()->bind(commandBuffer, pipeline.get());
+				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind indx pipeline");
 				unit.mesh->getIndexBuffer()->bind(commandBuffer);
 				for (auto i = 0; i <= indices.size(); i++)
 				{
@@ -89,7 +106,9 @@ namespace pengine
 					auto end = i == indices.size() ? unit.mesh->getIndexBuffer()->getCount() : indices[i];
 					m_LocalData.descriptorColorSet[1] = material->getDescriptorSet();
 					material->bind();
+					//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind dcs");
 					RenderDevice::bindDescriptorSets(pipeline.get(), commandBuffer, 0, m_LocalData.descriptorColorSet);
+					//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer draw");
 					RenderDevice::drawIndexed(commandBuffer, DrawType::Triangle, end - start, start);
 
 					start = end;
@@ -102,7 +121,9 @@ namespace pengine
 			{
 				m_LocalData.descriptorColorSet[1] = unit.material->getDescriptorSet();
 				unit.material->bind();
+				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind dcs o");
 				RenderDevice::bindDescriptorSets(pipeline.get(), commandBuffer, 0, m_LocalData.descriptorColorSet);
+				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer draw o");
 				RenderDevice::drawMesh(commandBuffer, pipeline.get(), unit.mesh);
 			}
 			//if stencil
@@ -127,6 +148,8 @@ namespace pengine
 		if (commandBuffer)
 		{
 			commandBuffer->unbindPipeline();
+			auto vkcb = (VulkanCommandBuffer*)commandBuffer;
+			GPU_EVENTCOLLECT(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer());
 		}
 		else
 		{
@@ -138,6 +161,7 @@ namespace pengine
 	}
 	auto RenderGBufferPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
+		PROFILE_FUNCTION();
 		//refill renderqueue
 		m_renderQueue.clear();
 		PipelineInfo pipelineInfo{};

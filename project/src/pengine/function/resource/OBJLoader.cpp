@@ -2,6 +2,7 @@
 #include "function/render/rhi/Texture.h"
 #include "core/utils/StringUtils.h"
 #include "function/engine/Material.h"
+#include "function/profile/profiler.h"
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 namespace pengine
@@ -31,6 +32,7 @@ namespace pengine
 
     auto OBJLoader::load(const std::string& obj, const std::string& extension, std::unordered_map<std::string, std::shared_ptr<Mesh>>& meshes, std::shared_ptr<Skeleton>& skeleton) -> void
     {
+		PROFILE_FUNCTION();
 		std::string resolvedPath = obj;
 		auto        directory = resolvedPath.substr(0, resolvedPath.find_last_of(StringUtils::delimiter));
 		//could change : set parent directory as name also can 

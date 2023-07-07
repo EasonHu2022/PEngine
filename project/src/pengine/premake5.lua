@@ -39,6 +39,7 @@ project "pengine"
 		thirdparty .. "/stb",
 		thirdparty .. "/Json",
 		thirdparty .. "/SPIRV-Cross",
+		thirdparty .. "/tracy",
 		assetsdir,
 	}
 
@@ -57,7 +58,8 @@ project "pengine"
 			"_CONSOLE",
 			"GLFW_INCLUDE_NONE",
 			"PEGNINE_WINDOWS",
-			"PEGNINE_ENGINE"
+			"PEGNINE_ENGINE",
+			"TRACY_ENABLE",
 		}
 		
 	dependson "shaders"
@@ -70,6 +72,7 @@ project "pengine"
 		"volk",
 		"OFBX",
 		"spirv-cross",
+		"tracy",
 	}
 	postbuildcommands
 		{
@@ -81,6 +84,7 @@ project "pengine"
 		defines "PENGINE_GENERATE_DEBUG"
 		runtime "Debug"
 		symbols "on"
+		editandcontinue "Off"
 
 	filter "configurations:Release"
 		defines "PENGINE_GENERATE_RELEASE"

@@ -54,6 +54,7 @@ project "Editor"
 		defines "TO_DEBUG"
 		runtime "Debug"
 		symbols "on"
+		editandcontinue "Off"
 
 	filter "configurations:Release"
 		defines "TO_RELEASE"

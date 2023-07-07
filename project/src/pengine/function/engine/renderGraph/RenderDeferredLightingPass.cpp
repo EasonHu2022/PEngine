@@ -9,6 +9,7 @@
 #include "function/ecs/component/Camera.h"
 #include "glm/glm.hpp"
 #include <Application.h>
+#include "function/profile/profiler.h"
 namespace pengine
 {
 	RenderDeferredLightingPass::RenderDeferredLightingPass(uint32_t uid, RenderGraph* renderGraph) : IPass(uid, renderGraph)
@@ -53,6 +54,7 @@ namespace pengine
 	}
 	auto RenderDeferredLightingPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
+		PROFILE_FUNCTION();
 		//acquire camera data
 		auto cameras = registry.group<component::Camera>(entt::get<component::Transform>);
 		if (cameras.empty())

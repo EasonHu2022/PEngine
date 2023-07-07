@@ -224,6 +224,17 @@ namespace pengine
 		{
 			deviceExtensions.emplace_back(VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME);
 		}
+		
+		if (physicalDevice->isExtensionSupported(VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME))
+		{
+			deviceExtensions.emplace_back(VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME);
+		}
+		else
+		{
+			PLOGI(" current device unsupport extension : {0}", VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME);
+		}
+
+
 		VkDeviceCreateInfo deviceCreateInfo{};
 		deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 		deviceCreateInfo.queueCreateInfoCount = static_cast<uint32_t>(physicalDevice->queueCreateInfos.size());
