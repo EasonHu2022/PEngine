@@ -55,6 +55,22 @@ namespace pengine
 		}
 	}
 
+	auto GraphicsContext::forceClearImmediately() -> void
+	{
+		for (auto iter = pipelineCache.begin(); iter != pipelineCache.end();)
+		{		
+			PLOGI("Pipeline clear Immediately");
+			iter = pipelineCache.erase(iter);
+			continue;	
+		}
+		for (auto iter = frameBufferCache.begin(); iter != frameBufferCache.end();)
+		{
+			PLOGI("FrameBuffer clear Immediately");
+			iter = frameBufferCache.erase(iter);
+			continue;	
+		}
+	}
+
 	std::shared_ptr<SwapChain> SwapChain::create(uint32_t width, uint32_t height) 
 	{
 #ifdef PENGINE_VULKAN

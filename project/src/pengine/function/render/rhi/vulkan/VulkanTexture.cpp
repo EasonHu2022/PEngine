@@ -311,6 +311,8 @@ namespace pengine
 			0.0f, static_cast<float>(mipLevels), true, VulkanDevice::get()->getPhysicalDevice()->getProperties().limits.maxSamplerAnisotropy,
 			VkConverter::textureWrapToVK(parameters.wrap), VkConverter::textureWrapToVK(parameters.wrap), VkConverter::textureWrapToVK(parameters.wrap)
 			);
+
+		PLOGE("build image");
 		imageLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 		transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 		updateDescriptor();
@@ -375,8 +377,8 @@ namespace pengine
 			auto image = textureImage;
 			auto m_name = name;
 			auto alloc = allocation;
-			deletionQueue.emplace([image, alloc,m_name] { vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc);
-				});
+			deletionQueue.emplace([image, alloc, m_name] { vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc);
+			PLOGE("delete image : {0}", m_name);	});
 		}
 	}
 
@@ -408,7 +410,7 @@ namespace pengine
 		}
 		auto image = textureImage;
 		auto alloc = allocation;
-		deletionQueue.emplace([image, alloc] { vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc); });
+		deletionQueue.emplace([image, alloc] { PLOGE("delete depth image"); vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc); });
 	}
 
 	auto VulkanTextureDepth::resize(uint32_t width, uint32_t height, CommandBuffer* commandBuffer) -> void
@@ -677,7 +679,8 @@ namespace pengine
 		auto depthFormat = VKHelper::getDepthFormat();
 
 
-		VKHelper::createImage(width, height, 1, depthFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, count, 0, allocation);
+		VKHelper::createImage(width, height, 1, depthFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, count, 0, allocation);
 
 		textureImageView = VKHelper::createImageView(textureImage, depthFormat, 1, VK_IMAGE_VIEW_TYPE_2D_ARRAY, VK_IMAGE_ASPECT_DEPTH_BIT, count);
 		for (uint32_t i = 0; i < count; i++)

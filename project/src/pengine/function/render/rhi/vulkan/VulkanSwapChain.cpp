@@ -31,19 +31,24 @@ namespace pengine
 	}
 	auto VulkanSwapChain::release() -> void
 	{
-		swapChainBuffers.clear();
-		for (uint32_t i = 0; i < swapChainBufferCount; i++)
-		{
-			vkDestroySemaphore(*VulkanDevice::get(), frames[i].presentSemaphore, nullptr);
-			frames[i].commandBuffer->flush();
-			frames[i].commandBuffer = nullptr;
-		}
+		releaseResources();
 		vkDestroySwapchainKHR(*VulkanDevice::get(), swapChain, VK_NULL_HANDLE);
 		if (surface != VK_NULL_HANDLE)
 		{
 			vkDestroySurfaceKHR(VulkanContext::get()->getVkInstance(), surface, nullptr);
 		}
 	}
+	auto VulkanSwapChain::releaseResources() -> void 
+	{
+		swapChainBuffers.clear();
+		for (uint32_t i = 0; i < swapChainBufferCount; i++)
+		{
+			vkDestroySemaphore(*VulkanDevice::get(), frames[i].presentSemaphore, nullptr);
+			frames[i].commandBuffer->flush();
+			frames[i].commandBuffer = nullptr;
+		}	
+	}
+
 	bool VulkanSwapChain::init(bool vsync, Window* window)
 	{
 		this->vsync = vsync;
@@ -296,10 +301,8 @@ namespace pengine
 
 			swapChainBuffers[i].reset();
 		}
-
 		swapChainBuffers.clear();
 		oldSwapChain = swapChain;
-
 		swapChain = VK_NULL_HANDLE;
 
 		if (windowHandle)
@@ -362,8 +365,8 @@ namespace pengine
 		{
 			VK_CHECK_RESULT(error);
 		}
-
-		VulkanContext::getDeletionQueue(currentBuffer).flush();
+		//wait
+		//VulkanContext::getDeletionQueue(currentBuffer).flush();
 		//update current buffer
 		currentBuffer = (currentBuffer + 1) % swapChainBufferCount;
 	}

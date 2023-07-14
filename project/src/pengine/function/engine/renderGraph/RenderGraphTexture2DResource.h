@@ -10,9 +10,12 @@ namespace pengine
 	class RenderGraphTexture2DResource: public IRenderGraphResource
 	{
 	public:
-		auto create(uint32_t width, uint32_t height, CommandBuffer* commandbuffer, const std::string& name, TextureFormat format) -> void override;
+		RenderGraphTexture2DResource() ;
+		~RenderGraphTexture2DResource();
+		auto create(uint32_t width, uint32_t height, CommandBuffer* commandbuffer, const std::string& name, TextureFormat format, size_t layer = 1) -> void override;
 		auto getNativeResource() -> std::shared_ptr<Texture>
 		{
+			//PLOGV("get texture2d res use count : {0}",tex2D.use_count());
 			return  std::static_pointer_cast<Texture>(tex2D);
 		}
 	private:

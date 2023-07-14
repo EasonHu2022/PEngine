@@ -54,6 +54,7 @@ namespace pengine
 	{
 		renderGraph.reset();
 	}
+	//cull camera
 	auto Scene::cull() -> void
 	{
 		auto [camera, transform] = getCamera();
@@ -89,9 +90,13 @@ namespace pengine
 
 	auto Scene::onResize(size_t width, size_t height) -> void
 	{
+		Application::getGraphicsContext()->forceClearImmediately();
+		Application::getGraphicsContext()->forceFlushDeletionQueue();
+		//resize renderGraph
 		auto [camera,transform] = getCamera();
 		camera->setAspectRatio(static_cast<float>(width)/height);
 		renderGraph->onResize(width,height,width,height);
+		Application::getGraphicsContext()->delayFlushDeletionQueue();
 	}
 
 	auto Scene::getRegistry() -> entt::registry&

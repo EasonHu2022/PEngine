@@ -4,15 +4,6 @@ namespace pengine
 {
 
 	//for local use
-	struct RenderUnit
-	{
-		Mesh* mesh = nullptr;
-		Material* material = nullptr;
-		PipelineInfo pipelineInfo;
-		PipelineInfo stencilPipelineInfo;
-		glm::mat4 transform;
-	};
-	//for local use
 	struct RenderGBufferData
 	{
 		std::shared_ptr<Material>                   defaultMaterial;
@@ -26,8 +17,7 @@ namespace pengine
 		~RenderGBufferData();
 		RenderGBufferData(RenderGraph* renderGraph);
 	};
-
-	struct SharedRenderData;
+	struct RenderUnit;
 	class RenderGBufferPass : public IPass
 	{
 	public:

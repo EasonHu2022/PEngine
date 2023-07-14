@@ -2,12 +2,16 @@
 #include "RenderGBufferPass.h"
 #include "RenderDeferredLightingPass.h"
 #include "OutputPass.h"
+#include "RenderShadowMapPass.h"
 #include "RenderGraphTexture2DResource.h"
+#include "RenderGraphDepthTextureArrayResource.h"
 #include "function/ecs/component/Component.h"
 #include "function/ecs/component/Transform.h"
 #include "function/ecs/component/MeshRenderer.h"
 #include "function/ecs/component/camera.h"
 #include "PassGroup.h"
+#include "function/render/rhi/GraphicsContext.h"
+#include "Application.h"
 namespace pengine
 {
 	RenderGraph::RenderGraph(std::string& _path) : path(_path)
@@ -33,6 +37,7 @@ namespace pengine
 		addPass<RenderGBufferPass>(1) -> init(registry);
 		addPass<RenderDeferredLightingPass>(2) -> init(registry);
 		addPass<OutputPass>(3)->init(registry);
+		addPass<RenderShadowMapPass>(4)->init(registry);
 		/*################# */
 		compile();
 	}
@@ -82,9 +87,11 @@ namespace pengine
 			auto p_vRes = passMap[outputTask]->getOutput(OutputBindPos);
 			if (passMap.find(inputTask) != passMap.end())
 			{
-				if (passMap[outputTask]->getOutputType(OutputBindPos) != passMap[inputTask]->getInputType(inputBindPos))
+				auto outputType = passMap[outputTask]->getOutputType(OutputBindPos);
+				auto inputType = passMap[inputTask]->getInputType(inputBindPos);
+				if (outputType != inputType)
 				{
-					PLOGE("Failed! Try to bind 2 resource with different type !");
+					PLOGE("Failed! Try to bind 2 resource with different type ! out : {0}, in : {1}", outputType,inputType);
 					return false;
 				}
 
@@ -143,17 +150,23 @@ namespace pengine
 		{
 			passMap[passUids.at(i)]->onResize(width,height,displayWidth,displayHeight);
 		}
+		for (auto &r : resources)
+		{
+			auto i = r.use_count();
+			PLOGE("use count : {0}",i);
+		}
 		resources.clear();
+		
 		createResourceMap();
 	}
-	auto RenderGraph::getResourceByID(uint32_t id) -> IRenderGraphResource*
+	auto RenderGraph::getResourceByID(uint32_t id) -> std::shared_ptr<IRenderGraphResource>
 	{
 		if (id >= resources.size())
 		{
 			PLOGE("try to get resource id : {0}£¬ but only {1} resources in the map ! ",id,resources.size());
 			return NULL;
 		}
-		return resources.at(id).get();
+		return resources.at(id);
 	}
 	auto RenderGraph::compileDependency() -> void
 	{
@@ -165,6 +178,7 @@ namespace pengine
 		bindInput(1, 2, 2, 2);
 		bindInput(1, 3, 2, 3);
 		bindInput(2, 0, 3, 0);
+		bindInput(4, 0, 2, 4);
 	}
 	auto RenderGraph::createResourceMap() -> void
 	{
@@ -182,6 +196,15 @@ namespace pengine
 						p_vRes->index = resources.size();
 						resources.emplace_back(std::make_shared<RenderGraphTexture2DResource>())->create(p_vRes->width, p_vRes->height,
 							nullptr, p_vRes->name, p_vRes->format);
+						p_vRes->b_initialized = true;
+					}
+					break;
+				case RenderResouceType::Res_DepthArray:
+					if (!p_vRes->b_initialized)
+					{
+						p_vRes->index = resources.size();
+						resources.emplace_back(std::make_shared<RenderGraphDepthTextureArrayResource>())->create(p_vRes->width, p_vRes->height,
+							nullptr, p_vRes->name, p_vRes->format, p_vRes->layer);
 						p_vRes->b_initialized = true;
 					}
 					break;

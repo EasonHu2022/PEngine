@@ -70,7 +70,9 @@ namespace pengine
 			//test
 			auto light = scene->createEntity("Light");
 			light.addComponent<component::Light>();
-			light.getOrAddComponent<component::Transform>().setLocalPosition({1000.0f,1000.0f,1000.0f});
+			auto& lightTransform = light.getOrAddComponent<component::Transform>();
+			lightTransform.setLocalPosition({ 1000.0f,1000.0f,1000.0f });
+			lightTransform.setLocalOrientation(glm::radians(glm::vec3( 90.0f,0.0f,0.0f )));
 		}
 		return false;
 	}

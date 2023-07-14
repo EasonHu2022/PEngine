@@ -567,7 +567,8 @@ namespace pengine
 		return actualExtent;
 	}
 
-	VkImageView VKHelper::createImageView(VkImage image, VkFormat format, uint32_t mipLevels, VkImageViewType viewType, VkImageAspectFlags aspectMask, uint32_t layerCount, uint32_t baseArrayLayer, uint32_t baseMipLevel) 
+	VkImageView VKHelper::createImageView(VkImage image, VkFormat format, uint32_t mipLevels,
+		VkImageViewType viewType, VkImageAspectFlags aspectMask, uint32_t layerCount, uint32_t baseArrayLayer, uint32_t baseMipLevel) 
 	{
 		VkImageViewCreateInfo viewInfo = {};
 		viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;

@@ -25,7 +25,7 @@ namespace pengine
 		friend class GeometryRenderer;
 		static constexpr uint32_t FRUSTUM_VERTICES = 8;
 
-		Frustum() noexcept = default;
+		Frustum() {};
 
 		auto from(const glm::mat4 &projection) -> void;
 
@@ -38,7 +38,7 @@ namespace pengine
 			return planes[id];
 		}
 
-		inline auto getVertices() -> glm::vec3 *
+		inline auto getVertices() -> glm::vec3*
 		{
 			return vertices;
 		}

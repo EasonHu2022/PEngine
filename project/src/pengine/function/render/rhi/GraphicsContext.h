@@ -49,6 +49,8 @@ namespace pengine
 		virtual size_t getMinUniformBufferOffsetAlignment() const = 0;
 		virtual float getGPUMemoryUsed() = 0;
 		virtual float getTotalGPUMemory() = 0;
+		virtual void forceFlushDeletionQueue() = 0;
+		virtual void delayFlushDeletionQueue() = 0;
 		static std::shared_ptr<GraphicsContext> create();
 		inline auto getSwapChain() -> std::shared_ptr<SwapChain>
 		{
@@ -67,7 +69,8 @@ namespace pengine
 		}
 
 		auto clearUnused() -> void;
-
+		//forcely clear all caches at once
+		auto forceClearImmediately() -> void;
 	protected:
 		std::shared_ptr<SwapChain>                               swapChain;
 		std::unordered_map<std::size_t, CacheAsset<Pipeline>>    pipelineCache;

@@ -14,6 +14,7 @@ namespace pengine
 {
 	RenderDeferredLightingPass::RenderDeferredLightingPass(uint32_t uid, RenderGraph* renderGraph) : IPass(uid, renderGraph)
 	{
+		name = "Deferred Lighting Pass";
 	}
 	RenderDeferredLightingPass::~RenderDeferredLightingPass()
 	{
@@ -26,14 +27,26 @@ namespace pengine
 	auto RenderDeferredLightingPass::execute(CommandBuffer* commandBuffer) -> void
 	{
 		auto descriptorSet = m_RenderDefferredLightingData.descriptorLightSet[0];
+		//common data part
+		auto& commonData = m_renderGraph->getCommonData();
+		descriptorSet->setUniform("UniformBufferLight","viewMatrix", &commonData.lightView);
+		descriptorSet->setUniform("UniformBufferLight", "shadowTransform", commonData.shadowTransforms);
+		descriptorSet->setUniform("UniformBufferLight", "splitDepths", commonData.splitDepth);
+		descriptorSet->setUniform("UniformBufferLight", "shadowMapSize", &commonData.shadowMapSize);
+		descriptorSet->setUniform("UniformBufferLight", "shadowCount", &commonData.shadowMapNum);
+
 		auto color = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::COLOR]->index)->getNativeResource();
+		//PLOGE("color first excute pre : {0}",color.use_count());
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::COLOR], color);
+		//PLOGE("color first excute post : {0}", color.use_count());
 		auto positon = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::POSITION]->index)->getNativeResource();
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::POSITION], positon);
 		auto normal = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::NORMALS]->index)->getNativeResource();
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::NORMALS], normal);
 		auto pbr = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::PBR]->index)->getNativeResource();
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::PBR], pbr);
+		auto shadowMap = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::ShadowMap]->index)->getNativeResource();
+		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::ShadowMap], shadowMap);
 		descriptorSet->update();
 		PipelineInfo pipeInfo;
 		pipeInfo.shader = m_RenderDefferredLightingData.deferredLightShader;
@@ -54,7 +67,7 @@ namespace pengine
 	}
 	auto RenderDeferredLightingPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
-		PROFILE_FUNCTION();
+		//PROFILE_FUNCTION();
 		//acquire camera data
 		auto cameras = registry.group<component::Camera>(entt::get<component::Transform>);
 		if (cameras.empty())
@@ -81,14 +94,15 @@ namespace pengine
 			{
 				auto& [ent, light, transform] = data;
 				light.lightData.position = {transform.getWorldPosition(), 1.0f};
-				light.lightData.direction = { glm::normalize(transform.getWorldOrientation() * pengine::FORWARD), 1.f };
+				auto worldOrientation = transform.getWorldOrientation();
+				light.lightData.direction = { glm::normalize(worldOrientation * pengine::FORWARD), 1.f };
 				if (static_cast<component::LightType>(light.lightData.type) == component::LightType::DirectionalLight)
 					directionaLight = &light;
 				lightdatas[numLights] = light.lightData;
 				numLights++;
 			}
 		}
-		//upload
+		//upload //non common part
 		int32_t renderMode = 0;
 		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "lights", lightdatas, sizeof(component::LightData) * numLights, false);
 		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "cameraPosition", &cameraPos);
@@ -98,6 +112,7 @@ namespace pengine
 	}
 	auto RenderDeferredLightingPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
+		//m_RenderDefferredLightingData = RenderDeferredLightingData();
 		//temp all the same
 		for (int i = 0; i < inputs.size(); i++)
 		{
@@ -112,17 +127,22 @@ namespace pengine
 	}
 	auto RenderDeferredLightingPass::createVResource() -> void
 	{
-		inputs.resize(4);
+		inputs.resize(5);
 		outputs.resize(1);
 		//temp all the same
 		for (int i = 0; i < inputs.size(); i++)
 		{
 			auto res = new RenderGraphVirtualResource();
-			res->type = RenderResouceType::Res_Texture2D;
-			res->format = TextureFormat::RGBA16;
+			res->type = typeMap[i];;
+			res->format = formatMap[i];
 			auto renderExtend = m_renderGraph->getRenderExtend();
 			res->width = renderExtend.x;
 			res->height = renderExtend.y;
+			if (i == 4)
+			{
+				res->width = m_renderGraph->getCommonData().shadowMapSize;
+				res->height = m_renderGraph->getCommonData().shadowMapSize;
+			}
 			inputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
 		}
 		for (int i = 0; i < outputs.size(); i++)

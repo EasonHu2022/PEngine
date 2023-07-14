@@ -73,9 +73,7 @@ namespace pengine
 		{
 			pipeline = Pipeline::get(unit.pipelineInfo);
 			if (commandBuffer)
-			{
-				auto vkcb = (VulkanCommandBuffer*)commandBuffer;
-				GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(),"gbuffer bind pipeline");
+			{			
 				commandBuffer->bindPipeline(pipeline.get());
 			}
 				
@@ -86,8 +84,6 @@ namespace pengine
 			//cbuffer
 			auto& pushConstants = m_LocalData.deferredColorShader->getPushConstants()[0];
 			pushConstants.setValue("transform", &unit.transform);
-			auto vkcb = (VulkanCommandBuffer*)commandBuffer;
-			//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind pushconstants");
 			m_LocalData.deferredColorShader->bindPushConstants(commandBuffer, pipeline.get());
 			//deal with submesh
 			if (unit.mesh->getSubMeshCount() > 1)
@@ -95,10 +91,7 @@ namespace pengine
 				auto& materials = unit.mesh->getMaterial();
 				auto& indices = unit.mesh->getSubMeshIndex();
 				auto start = 0;
-				//auto vkcb = (VulkanCommandBuffer*)commandBuffer;
-				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind vtx buffer");
 				unit.mesh->getVertexBuffer()->bind(commandBuffer, pipeline.get());
-				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind indx pipeline");
 				unit.mesh->getIndexBuffer()->bind(commandBuffer);
 				for (auto i = 0; i <= indices.size(); i++)
 				{
@@ -106,9 +99,9 @@ namespace pengine
 					auto end = i == indices.size() ? unit.mesh->getIndexBuffer()->getCount() : indices[i];
 					m_LocalData.descriptorColorSet[1] = material->getDescriptorSet();
 					material->bind();
-					//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind dcs");
+		
 					RenderDevice::bindDescriptorSets(pipeline.get(), commandBuffer, 0, m_LocalData.descriptorColorSet);
-					//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer draw");
+					
 					RenderDevice::drawIndexed(commandBuffer, DrawType::Triangle, end - start, start);
 
 					start = end;
@@ -121,9 +114,9 @@ namespace pengine
 			{
 				m_LocalData.descriptorColorSet[1] = unit.material->getDescriptorSet();
 				unit.material->bind();
-				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer bind dcs o");
+				
 				RenderDevice::bindDescriptorSets(pipeline.get(), commandBuffer, 0, m_LocalData.descriptorColorSet);
-				//GPU_PROFILE(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer(), "gbuffer draw o");
+				
 				RenderDevice::drawMesh(commandBuffer, pipeline.get(), unit.mesh);
 			}
 			//if stencil
@@ -148,8 +141,6 @@ namespace pengine
 		if (commandBuffer)
 		{
 			commandBuffer->unbindPipeline();
-			auto vkcb = (VulkanCommandBuffer*)commandBuffer;
-			GPU_EVENTCOLLECT(VulkanContext::getTracyCtx(), vkcb->getCommandBuffer());
 		}
 		else
 		{
@@ -161,7 +152,7 @@ namespace pengine
 	}
 	auto RenderGBufferPass::onUpdate(entt::registry& registry, std::vector<entt::entity>& culledEnts) -> void
 	{
-		PROFILE_FUNCTION();
+		//PROFILE_FUNCTION();
 		//refill renderqueue
 		m_renderQueue.clear();
 		PipelineInfo pipelineInfo{};
@@ -171,6 +162,16 @@ namespace pengine
 		pipelineInfo.clearTargets = true;
 		pipelineInfo.swapChainTarget = false;
 		pipelineInfo.depthTest = m_LocalData.depthTest;
+		for (int i = 0; i < outputs.size(); i++)
+		{
+			if (!outputs[i]->b_initialized)
+			{
+				PLOGE("Error when setting render targets : task : {0} : outputs : {1} uninitialized !", name, i);
+				return;
+			}
+			pipelineInfo.colorTargets[i] = m_renderGraph->getResourceByID(outputs[i]->index)->getNativeResource();
+
+		}
 		//acquire camera data
 		auto cameras = registry.group<component::Camera>(entt::get<component::Transform>);
 		if (cameras.empty())
@@ -237,16 +238,7 @@ namespace pengine
 			{
 				unit.material = nullptr;
 			}
-			for (int i = 0; i< outputs.size(); i ++)
-			{
-				if (!outputs[i]->b_initialized)
-				{
-					PLOGE("Error when setting render targets : task : {0} : outputs : {1} uninitialized !",name, i);
-					return;
-				}
-				pipelineInfo.colorTargets[i] = m_renderGraph->getResourceByID(outputs[i]->index)->getNativeResource();		
-				
-			}
+			
 
 			if (unit.material != nullptr)
 			{
@@ -271,6 +263,8 @@ namespace pengine
 
 	auto RenderGBufferPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
 	{
+		m_renderQueue.clear();
+	
 		//temp all the same
 		for (int i = 0; i < outputs.size(); i++)
 		{

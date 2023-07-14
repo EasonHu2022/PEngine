@@ -20,10 +20,10 @@ namespace pengine
 				attachments.emplace_back(static_cast<VulkanTextureDepth*>(attachment.get())->getImageView());
 				break;
 			case TextureType::DepthArray:
-				//attachments.emplace_back(static_cast<VulkanTextureDepthArray*>(attachment.get())->getImageView(info.layer));
+				attachments.emplace_back(static_cast<VulkanTextureDepthArray*>(attachment.get())->getImageView(info.layer));
 				break;
 			case TextureType::Cube: //TODO
-				//attachments.emplace_back(static_cast<VulkanTextureCube *>(attachment.get())->getImageView());
+				attachments.emplace_back(static_cast<VulkanTextureCube *>(attachment.get())->getImageView());
 				break;
 			}
 		}

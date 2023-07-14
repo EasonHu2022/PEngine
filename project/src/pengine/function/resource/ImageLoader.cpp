@@ -17,7 +17,7 @@ namespace pengine
 	{
 		bool hdr = stbi_is_hdr(name.c_str());
 		PLOGI("load image : {0}", name);
-		stbi_set_flip_vertically_on_load(flipY);
+		stbi_set_flip_vertically_on_load(0);
 		int32_t       width;
 		int32_t       height;
 		int32_t       channels;

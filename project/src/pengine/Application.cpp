@@ -95,7 +95,7 @@ namespace pengine
 				shutdown();
 				break;
 			}
-			PROFILE_FRAMEMARKER();
+			//PROFILE_FRAMEMARKER();
 		}
 		return 0;
 	}
@@ -131,11 +131,19 @@ namespace pengine
 		if (w == 0 || h == 0)
 		{
 			return;
+		
 		}
+		//set deletion mode to immediately
+		Application::getGraphicsContext()->forceFlushDeletionQueue();
+
+		//flush all caches
 		graphicsContext->waitIdle();
+		//resize
+		graphicsContext->forceClearImmediately();
 		renderDevice->onResize(w, h);
 		imGuiSystem->onResize(w, h);
-		sceneManager->onResize(w, h);
+		//set deletion mode back
+		Application::getGraphicsContext()->delayFlushDeletionQueue();
 		graphicsContext->waitIdle();
 	}
 

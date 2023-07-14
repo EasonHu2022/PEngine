@@ -22,6 +22,8 @@ namespace pengine
 		void onImGui() override;
 		static auto get()->std::shared_ptr<VulkanContext>;
 		auto setupDebug() -> void;
+		auto forceFlushDeletionQueue() -> void override;
+		auto delayFlushDeletionQueue() -> void override;
 		inline const auto getVkInstance() const
 		{
 			return vkInstance;
@@ -39,18 +41,33 @@ namespace pengine
 		{
 			return 0;
 		}
+		enum class CommandMode
+		{
+			DELAY = 0,
+			IMMEDIATELY,
+		};
+
 		struct CommandQueue
 		{
 			CommandQueue() = default;
 			CommandQueue(const CommandQueue&) = delete;
 			auto operator=(const CommandQueue&)->CommandQueue & = delete;
-
+			
 			std::deque<std::function<void()>> deletors;
+			CommandMode m_mode = CommandMode::DELAY;
+			inline auto setMode(CommandMode mode)
+			{
+				m_mode = mode;
+			}
 
 			template <typename F>
 			inline auto emplace(F&& function)
 			{
 				deletors.emplace_back(function);
+				if (m_mode == CommandMode::IMMEDIATELY)
+				{
+					flush();
+				}		
 			}
 
 			inline auto flush()

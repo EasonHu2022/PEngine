@@ -16,6 +16,28 @@
 
 namespace pengine
 {
+	struct RenderUnit
+	{
+		Mesh* mesh = nullptr;
+		Material* material = nullptr;
+		PipelineInfo pipelineInfo;
+		PipelineInfo stencilPipelineInfo;
+		glm::mat4 transform;
+	};
+	//datas be shared between each pass
+	//must write in onUpdate 
+	//must read in execute
+	//because no dependency will be recorded here
+	struct CommonRenderData
+	{
+		glm::mat4* shadowTransforms;
+		glm::vec4* splitDepth;
+		uint32_t  shadowMapSize;
+		uint32_t  shadowMapNum;
+		glm::mat4 lightView;
+		glm::mat4 biasMatrix;//used for caculate shadow coords//https://blog.csdn.net/qq_35312463/article/details/117912599
+	};
+
 	class RenderGraph : public IResource
 	{
 	public:
@@ -31,7 +53,7 @@ namespace pengine
 		auto bindInput(uint32_t outputTask, size_t bindpos, uint32_t inputTask, size_t bindPos) -> bool;
 		auto bindOutput(uint32_t prevTask, size_t prevbindpos, uint32_t postTask, size_t postbindPos) -> bool;
 		auto onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
-		auto getResourceByID(uint32_t id) -> IRenderGraphResource*;
+		auto getResourceByID(uint32_t id) -> std::shared_ptr<IRenderGraphResource>;
 
 		auto inline getPassByID(uint32_t id) ->std::shared_ptr<IPass> { return passMap[id]; };
 		auto inline getPassCount()->size_t { return passUids.size(); };
@@ -42,8 +64,8 @@ namespace pengine
 		inline auto getOutputExtend() -> glm::vec2 { return outputExtend; };
 		auto compileDependency() -> void;
 		auto createResourceMap() -> void;
+		inline auto getCommonData() -> CommonRenderData& { return m_commonData; }
 		auto setOutputTexture(std::shared_ptr<Texture> texture) ->void { outputTexture = texture; };
-		
 	private:
 		//Topological Sorting
 		auto passSorting(std::vector<uint32_t> src) -> void;
@@ -68,6 +90,8 @@ namespace pengine
 		glm::vec2 outputExtend;
 		//set of group
 		std::vector<PassGroup> groupSet;
+		//common render data
+		CommonRenderData m_commonData;
 
 		//target output texture : set by application (offscreen/swapchain image)
 		std::shared_ptr<Texture> outputTexture;

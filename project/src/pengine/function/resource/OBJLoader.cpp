@@ -32,7 +32,7 @@ namespace pengine
 
     auto OBJLoader::load(const std::string& obj, const std::string& extension, std::unordered_map<std::string, std::shared_ptr<Mesh>>& meshes, std::shared_ptr<Skeleton>& skeleton) -> void
     {
-		PROFILE_FUNCTION();
+		//PROFILE_FUNCTION();
 		std::string resolvedPath = obj;
 		auto        directory = resolvedPath.substr(0, resolvedPath.find_last_of(StringUtils::delimiter));
 		//could change : set parent directory as name also can 

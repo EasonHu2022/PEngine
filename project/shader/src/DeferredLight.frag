@@ -5,6 +5,7 @@
 #define GAMMA 2.2
 #define MAX_LIGHTS 32
 #define NUM_VPL 256
+#define MAX_SHADOWMAPS 4
 const float EPSILON = 0.00001;
 
 // Constant normal incidence Fresnel factor for all dielectrics.
@@ -41,18 +42,27 @@ layout(set = 0, binding = 0)  uniform sampler2D uColorSampler;
 layout(set = 0, binding = 1)  uniform sampler2D uPositionSampler;
 layout(set = 0, binding = 2)  uniform sampler2D uNormalSampler;
 layout(set = 0, binding = 3)  uniform sampler2D uPBRSampler;
-layout(set = 0, binding = 4) uniform UniformBufferLight
+layout(set = 0, binding = 4)  uniform sampler2DArray uShadowMap;
+layout(set = 0, binding = 5) uniform UniformBufferLight
 {
 	Light lights[MAX_LIGHTS];
 	mat4 viewMatrix;
+	mat4 shadowTransform[MAX_SHADOWMAPS];
+	mat4 biasMatrix;
 	vec4 cameraPosition;
+	vec4 splitDepths[MAX_SHADOWMAPS];
+	float shadowMapSize;
+	float maxShadowDistance;
 	int lightCount;
 	int mode;
 	int enableIndirectLight;
+	int shadowCount;
 	int padding2;
 } ubo;
-
-
+int calculateCascadeIndex(vec3 wsPos);//caculate which layer is the fragment on
+float textureProj(vec4 shadowCoord, vec2 offset, int cascadeIndex);
+float PCSS(vec4 shadowCoords, int cascadeIndex);
+float PCF(vec4 shadowCoords, int cascadeIndex);
 float rand(vec2 co)
 {
     float a = 12.9898;
@@ -69,8 +79,61 @@ float random(vec4 seed4)
     return fract(sin(dotProduct) * 43758.5453);
 }
 
+float textureProj(vec4 shadowCoord, vec2 offset, int cascadeIndex)
+{
+	float shadow = 1.0;
+	float ambient = 0.1;
+	float initialBias = 0.005f;
+	if ( shadowCoord.z > -1.0 && shadowCoord.z < 1.0 && shadowCoord.w > 0)
+	{
+		float dist = texture(uShadowMap, vec3(shadowCoord.st + offset, cascadeIndex)).r;
+		if (dist < (shadowCoord.z - initialBias))
+		{
+			shadow = ambient;//in;
+		}
+	}
+	return shadow;
+}
 
+int calculateCascadeIndex(vec3 wsPos)
+{
+	int cascadeIndex = 0;
+	vec4 viewPos = ubo.viewMatrix * vec4(wsPos, 1.0) ;
+	
+	for(int i = 0; i < ubo.shadowCount; ++i)
+	{
+		if(viewPos.z < ubo.splitDepths[i].x)
+		{
+			cascadeIndex = i + 1;
+		}
+	}
+	return cascadeIndex;
+}
 
+float PCSS(vec4 shadowCoords, int cascadeIndex)
+{
+	return 1.0f;
+}
+//https://blog.csdn.net/qq_35312463/article/details/117912599
+float PCF(vec4 shadowCoords, int cascadeIndex)
+{
+	ivec2 texDim = textureSize(uShadowMap, 0).xy;
+	float scale = 0.75;
+	float dx = scale * 1.0 / float(texDim.x);
+	float dy = scale * 1.0 / float(texDim.y);
+
+	float shadowFactor = 0.0;
+	int count = 0;
+	int range = 1;
+	//Penumbra  sample/fake
+	for (int x = -range; x <= range; x++) {
+		for (int y = -range; y <= range; y++) {
+			shadowFactor += textureProj(shadowCoords, vec2(dx*x, dy*y), cascadeIndex);
+			count++;
+		}
+	}
+	return shadowFactor / count;
+}
 // GGX/Towbridge-Reitz normal distribution function.
 // Uses Disney's reparametrization of alpha = roughness^2
 float ndfGGX(float cosLh, float roughness)
@@ -140,7 +203,7 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 			
 			light.direction = vec4(L,1.0);
 		}
-		if (light.type == 1.0)//spotlight
+		else if (light.type == 1.0)//spotlight
 		{
 			vec3 L = light.position.xyz - wsPos;
 			float cutoffAngle   = 1.0f - light.angle;      
@@ -155,6 +218,16 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 			intensity *= step(theta, cutoffAngle);
 			value = clamp(attenuation, 0.0, 1.0);
 		}
+		else//0 directional light
+		{
+			int cascadeIndex = calculateCascadeIndex(wsPos);
+			vec4 shadowCoord = (ubo.biasMatrix * ubo.shadowTransform[cascadeIndex]) * vec4(wsPos,1.0f);
+			shadowCoord = shadowCoord * ( 1.0 / shadowCoord.w);
+			//if enable PCF
+			value = PCF(shadowCoord,cascadeIndex);
+			//if normal shadow
+			//value = textureProj(shadowCoord,vec2(0.0),cascadeIndex);
+		}
 	
 		
 		vec3 Li = light.direction.xyz;
@@ -162,7 +235,7 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		vec3 Lh = normalize(Li + material.view);
 		
 		// Calculate angles between surface normal and various light vectors.
-		float cosLi = max(0.0, dot(material.normal, Li));
+		float cosLi = max(0.0, dot(material.normal, -1.0f *Li));
 		float cosLh = max(0.0, dot(material.normal, Lh));
 		
 		//vec3 F = fresnelSchlick(F0, max(0.0, dot(Lh, material.view)));
@@ -235,7 +308,6 @@ void main()
 	vec3 finalColor = (lightContribution ) * material.ao * material.ssao;
 
 	outColor = vec4(finalColor, 1.0) ;
-
 }
 
 

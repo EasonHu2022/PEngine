@@ -10,8 +10,25 @@ namespace pengine
 		POSITION = 1,
 		NORMALS = 2,
 		PBR = 3,
+		ShadowMap = 4,
+		_count = 5,
 	};
-	static const std::string InputName[] = {"uColorSampler","uPositionSampler","uNormalSampler","uPBRSampler"};
+	constexpr RenderResouceType typeMap[] = {
+		RenderResouceType::Res_Texture2D,//color
+		RenderResouceType::Res_Texture2D,//position
+		RenderResouceType::Res_Texture2D, //normals
+		RenderResouceType::Res_Texture2D, //pbr
+		RenderResouceType::Res_DepthArray//shadowMap };
+	};
+
+	constexpr TextureFormat formatMap[] = {
+		TextureFormat::RGBA16,//color
+		TextureFormat::RGBA16,//position
+		TextureFormat::RGBA16, //normals
+		TextureFormat::RGBA16, //pbr
+		TextureFormat::DEPTH //shadowMap };
+	};
+	constexpr char* InputName[] = {"uColorSampler","uPositionSampler","uNormalSampler","uPBRSampler","uShadowMap"};
 	//for local use
 	struct RenderDeferredLightingData
 	{

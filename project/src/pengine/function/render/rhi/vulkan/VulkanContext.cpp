@@ -183,6 +183,15 @@ namespace pengine
 			}
 		}
 	}
+	auto VulkanContext::forceFlushDeletionQueue() -> void 
+	{
+
+		getDeletionQueue().setMode(CommandMode::IMMEDIATELY);
+	}
+	auto VulkanContext::delayFlushDeletionQueue() -> void 
+	{
+		getDeletionQueue().setMode(CommandMode::DELAY);
+	}
 	void VulkanContext::init()
 	{
 		
@@ -200,7 +209,7 @@ namespace pengine
 		VkPhysicalDevice pd = *(VulkanDevice::get()->getPhysicalDevice().get());
 		VkDevice d = *(VulkanDevice::get().get());
 		VkCommandBuffer cb = ((VulkanCommandBuffer*)swapChain->getCurrentCommandBuffer())->getCommandBuffer();
-		tracyCtx = TracyVkContext(pd, d, VulkanDevice::get()->getGraphicsQueue(), cb);
+		//tracyCtx = TracyVkContext(pd, d, VulkanDevice::get()->getGraphicsQueue(), cb);
 	}
 	void VulkanContext::release()
 	{
@@ -213,7 +222,7 @@ namespace pengine
 		}
 		swapChain.reset();
 		vkDestroyDescriptorPool(*VulkanDevice::get(), std::static_pointer_cast<VulkanRenderDevice>(Application::getRenderDevice())->getDescriptorPool(), VK_NULL_HANDLE);
-
+		//TracyVkDestroy(tracyCtx);
 		if (reportCallback)
 		{
 			PFN_vkDestroyDebugReportCallbackEXT destoryCallback = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(vkInstance, "vkDestroyDebugReportCallbackEXT");

@@ -14,7 +14,7 @@ namespace pengine
 	}
 	void OCT::build(entt::registry& registry)
 	{
-		PROFILE_FUNCTION();
+		//PROFILE_FUNCTION();
 		//create rootNode
 		rootNode = std::make_shared<SceneTreeNode>();
 		rootNode->depth = 0;
@@ -75,7 +75,7 @@ namespace pengine
 	}
 	void OCT::frustumCull(const Frustum& frustum, std::vector<entt::entity>& out_ent)
 	{
-		PROFILE_FUNCTION();
+		//PROFILE_FUNCTION();
 		getInside(rootNode, frustum, out_ent);
 	}
 	void OCT::recursiveBuild(std::shared_ptr<SceneTreeNode> node, entt::registry& registry)
