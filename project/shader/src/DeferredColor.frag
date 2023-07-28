@@ -117,6 +117,7 @@ void main()
 		roughness = tex.g * materialProperties.roughnessColor.r;
 	}
     outColor    	= texColor;
+	//fragPosition.xyz = getWorldPos(UV, Depth, InverseVP);
 	outPosition		= vec4(fragPosition.xyz, 1.0f);
 	outNormal   	= vec4(getNormalFromMap(), 1.0f);
 	outPBR      	= vec4(metallic, roughness, ao, 1.0f);

@@ -20,8 +20,11 @@ layout(location = 2) in vec2 inTexCoord;
 layout(location = 3) in vec3 inNormal;
 layout(location = 4) in vec3 inTangent;
 
-
+layout(location = 0) out vec2 fragTexCoord;
 void main() 
 {
-    gl_Position = ubo.projView[pushConsts.cascadeIndex] * pushConsts.transform *  vec4(inPosition, inColor.x);// avoid optimize 
+   
+    gl_Position = ubo.projView[pushConsts.cascadeIndex] * pushConsts.transform *  vec4(inPosition, 1 );// avoid optimize 
+    fragTexCoord = inTexCoord;
+    //fragTexCoord.y = 1-inTexCoord.y;
 }

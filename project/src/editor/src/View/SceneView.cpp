@@ -55,7 +55,7 @@ namespace peditor
 		{
 			if (Input::get_mouse(0))//translate
 			{
-				mouseSensitivity = 1.f;
+				mouseSensitivity = 1.0f;
 				auto position = transform->getLocalPosition();
 				position.x -= Input::mouseMotion.x * mouseSensitivity * 0.5f;
 				position.y += Input::mouseMotion.y * mouseSensitivity * 0.5f;

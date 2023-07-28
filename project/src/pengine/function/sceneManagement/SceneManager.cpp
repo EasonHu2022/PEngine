@@ -62,16 +62,18 @@ namespace pengine
 			camera.setFov(45.f);
 			camera.setFar(10000.0f); 
 			camera.setNear(10);
+			//camera.setOrthographic(true);
 			auto w = scene->width == 0 ? 4.0f : scene->width;
 			auto h = scene->height == 0 ? 3.0f : scene->height;
 			camera.setAspectRatio(w / h);
 			auto& transform = entity.getComponent<component::Transform>();
-			transform.setLocalPosition({0.0f,100.0f,100.0f});
+			transform.setLocalPosition({0.0f,1000.0f,0.0f});
+			transform.setLocalOrientation(glm::radians(glm::vec3(-89.0f, 0.0f, 0.0f)));
 			//test
 			auto light = scene->createEntity("Light");
 			light.addComponent<component::Light>();
 			auto& lightTransform = light.getOrAddComponent<component::Transform>();
-			lightTransform.setLocalPosition({ 1000.0f,1000.0f,1000.0f });
+			lightTransform.setLocalPosition({ 1000.0f,5000.0f,0.0f });
 			lightTransform.setLocalOrientation(glm::radians(glm::vec3( 90.0f,0.0f,0.0f )));
 		}
 		return false;

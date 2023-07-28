@@ -112,7 +112,7 @@ namespace pengine
 
 			rs.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 			rs.polygonMode = VkConverter::polygonModeToVk(info.polygonMode);
-			rs.cullMode = VkConverter::cullModeToVk(info.cullMode);
+			rs.cullMode = VkConverter::cullModeToVk(info.cullMode);//VK_CULL_MODE_NONE;//VkConverter::cullModeToVk(info.cullMode);
 
 			//TODO there is a bug here.
 			//because vulkan Y axis is up to down and different with opengl

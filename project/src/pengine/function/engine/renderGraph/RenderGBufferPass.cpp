@@ -43,7 +43,7 @@ namespace pengine
 			auto renderExtend = renderGraph->getRenderExtend();
 			depthBuffer = TextureDepth::create(renderExtend.x, renderExtend.y, true);
 			depthBuffer->setName("GBuffer-Depth");
-
+			renderGraph->depthBuffer = depthBuffer;
 		}
 	}
 
@@ -190,6 +190,8 @@ namespace pengine
 			auto project = cameraData.getProjection();
 			auto view = cameraTransform.getWorldMatrixInverse();
 			auto projView = project * view;
+			m_renderGraph->getCommonData().inverseCameraVP = glm::inverse(projView);
+			auto testMat = projView * m_renderGraph->getCommonData().inverseCameraVP;
 			if (!prevFrameValid)
 				prevFrameProjectView = projView;
 			m_LocalData.descriptorColorSet[0]->setUniform("UniformBufferObject", "projView", &projView);
@@ -294,6 +296,7 @@ namespace pengine
 			res->height = renderExtend.y;
 			outputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
 		}
+	
 	
 	}
 	RenderGBufferData::RenderGBufferData()

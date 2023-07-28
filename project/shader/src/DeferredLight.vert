@@ -17,7 +17,8 @@ out gl_PerVertex
 
 void main() 
 {
+   
     gl_Position = vec4(inPosition, inColor.x);//avoid optimize
-    
-	fragTexCoord = inTexCoord;
+    fragTexCoord = inTexCoord;
+	//fragTexCoord.y = 1.0f - fragTexCoord.y;
 }

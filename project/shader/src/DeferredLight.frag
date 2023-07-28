@@ -43,12 +43,14 @@ layout(set = 0, binding = 1)  uniform sampler2D uPositionSampler;
 layout(set = 0, binding = 2)  uniform sampler2D uNormalSampler;
 layout(set = 0, binding = 3)  uniform sampler2D uPBRSampler;
 layout(set = 0, binding = 4)  uniform sampler2DArray uShadowMap;
-layout(set = 0, binding = 5) uniform UniformBufferLight
+layout(set = 0, binding = 5)  uniform sampler2D uDepthSampler;
+layout(set = 0, binding = 6) uniform UniformBufferLight
 {
 	Light lights[MAX_LIGHTS];
 	mat4 viewMatrix;
 	mat4 shadowTransform[MAX_SHADOWMAPS];
 	mat4 biasMatrix;
+	mat4 inverseVP;
 	vec4 cameraPosition;
 	vec4 splitDepths[MAX_SHADOWMAPS];
 	float shadowMapSize;
@@ -59,6 +61,9 @@ layout(set = 0, binding = 5) uniform UniformBufferLight
 	int shadowCount;
 	int padding2;
 } ubo;
+
+
+vec4 debugColor;
 int calculateCascadeIndex(vec3 wsPos);//caculate which layer is the fragment on
 float textureProj(vec4 shadowCoord, vec2 offset, int cascadeIndex);
 float PCSS(vec4 shadowCoords, int cascadeIndex);
@@ -86,7 +91,7 @@ float textureProj(vec4 shadowCoord, vec2 offset, int cascadeIndex)
 	float initialBias = 0.005f;
 	if ( shadowCoord.z > -1.0 && shadowCoord.z < 1.0 && shadowCoord.w > 0)
 	{
-		float dist = texture(uShadowMap, vec3(shadowCoord.st + offset, cascadeIndex)).r;
+		float dist = texture(uShadowMap, vec3(shadowCoord.xy + offset, cascadeIndex)).r;
 		if (dist < (shadowCoord.z - initialBias))
 		{
 			shadow = ambient;//in;
@@ -173,13 +178,14 @@ vec3 fresnelSchlickRoughness(vec3 F0, float cosTheta, float roughness)
 vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 {
 	vec3 result = vec3(0.0);
-	
+	int cascadeIndex = 0;
 	for(int i = 0; i < ubo.lightCount; i++)
 	{
 		Light light = ubo.lights[i];
 		float value = 1.0;
 		vec3 lightColor = light.color.xyz * light.intensity;
 		vec3 indirect = vec3(0,0,0);
+		
 		if(light.type == 2.0)//pointlight
 		{
 		    // Vector to light
@@ -220,9 +226,19 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		}
 		else//0 directional light
 		{
-			int cascadeIndex = calculateCascadeIndex(wsPos);
-			vec4 shadowCoord = (ubo.biasMatrix * ubo.shadowTransform[cascadeIndex]) * vec4(wsPos,1.0f);
-			shadowCoord = shadowCoord * ( 1.0 / shadowCoord.w);
+			cascadeIndex = calculateCascadeIndex(wsPos);
+			mat4 st =  (ubo.shadowTransform[cascadeIndex]);
+			mat4 biasMat = mat4( 
+	0.5, 0.0, 0.0, 0.0,
+	0.0, 0.5, 0.0, 0.0,
+	0.0, 0.0, 1.0, 0.0,
+	0.5, 0.5, 0.0, 1.0 
+);
+			vec4 shadowCoord = (ubo.biasMatrix* st  ) * vec4(wsPos,1.0f);
+			//shadowCoord.xy = shadowCoord.xy * 2 - 1;
+			debugColor = shadowCoord;
+
+			debugColor = texture(uShadowMap, vec3(shadowCoord.st, 1));
 			//if enable PCF
 			value = PCF(shadowCoord,cascadeIndex);
 			//if normal shadow
@@ -256,6 +272,24 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		result += directShading + indirectShading + ambient;
 		//result += indirect;
 	}
+
+	//debug 
+	#if 0
+	switch(cascadeIndex){
+			case 0 : 
+				result.rgb *= vec3(1.0f, 0.25f, 0.25f);
+				break;
+			case 1 : 
+				result.rgb *= vec3(0.25f, 1.0f, 0.25f);
+				break;
+			case 2 : 
+				result.rgb *= vec3(0.25f, 0.25f, 1.0f);
+				break;
+			case 3 : 
+				result.rgb *= vec3(1.0f, 1.0f, 0.25f);
+				break;
+		}
+		#endif
 	//ambient
 	return result;
 }
@@ -274,14 +308,22 @@ float attentuate( vec3 lightData, float dist )
 
 void main()
 {
-	vec4 albedo = texture(uColorSampler, fragTexCoord);
+	float _z = texture(uDepthSampler, fragTexCoord).r;
+	vec2 uv = fragTexCoord.xy;
+	uv.y = 1 - uv.y;
+	vec4 Pos = (ubo.inverseVP * vec4((uv.xy * 2.0f - 1.0),_z,1.0f));
+	uv.y = 1 - uv.y;
+	Pos/=Pos.w;
+	vec3 wsPos = Pos .xyz;
+	wsPos.z *= -1.0f;
+	vec4 albedo = texture(uColorSampler, uv);
 	if (albedo.a < 0.1) {
-		discard;
+		//discard;
 	}
-	vec4 fragPosXyzw = texture(uPositionSampler, fragTexCoord);
-	vec4 normalTex	 = texture(uNormalSampler, fragTexCoord);
-	vec4 pbr		 = texture(uPBRSampler,	fragTexCoord);
-	
+	vec4 fragPosXyzw = texture(uPositionSampler, uv);
+	vec4 normalTex	 = texture(uNormalSampler, uv);
+	vec4 pbr		 = texture(uPBRSampler,	uv);
+	//wsPos = texture(uPositionSampler,	uv).xyz;
 	Material material;
     material.albedo			= albedo;
     material.metallic		= vec3(pbr.x);
@@ -290,24 +332,31 @@ void main()
 	material.ao				= pbr.z;
 	material.ssao			= 1;
 
-	vec3 wsPos = fragPosXyzw.xyz;
+	
 	material.view 			= normalize(ubo.cameraPosition.xyz -wsPos);
 	material.normalDotView  = max(dot(material.normal, material.view), 0.0);
 
-	
-	vec4 viewPos = ubo.viewMatrix * vec4(wsPos, 1.0);
-	
-	float distance = length(viewPos);	
+
 	vec3 Lr =  reflect(-material.view,material.normal); 
 	//2.0 * material.normalDotView * material.normal - material.view;
 	// Fresnel reflectance, metals use albedo
 	vec3 F0 = mix(Fdielectric, material.albedo.xyz, material.metallic.x);
 	
-	vec3 lightContribution = lighting(F0, wsPos, material,fragTexCoord);
+	vec3 lightContribution = lighting(F0, wsPos, material,uv);
 
 	vec3 finalColor = (lightContribution ) * material.ao * material.ssao;
 
 	outColor = vec4(finalColor, 1.0) ;
+	//outColor.xyz = debugColor.xyz;
+	//outColor.z = 0;
+	//outColor.xyz = wsPos / 1000.0f;
+	//outColor.rgb = vec3(outColor.z); 
+	//outColor.xyz = debugColor.xxx;
+	//debug shadowmap
+#if 0
+	float depth = texture(uShadowMap, vec3(uv.xy,1)).r;
+	outColor = vec4(depth,0.0,0.0,1.0);
+#endif
 }
 
 

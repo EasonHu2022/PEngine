@@ -34,7 +34,7 @@ namespace pengine
 		glm::vec4* splitDepth;
 		uint32_t  shadowMapSize;
 		uint32_t  shadowMapNum;
-		glm::mat4 lightView;
+		glm::mat4 inverseCameraVP;
 		glm::mat4 biasMatrix;//used for caculate shadow coords//https://blog.csdn.net/qq_35312463/article/details/117912599
 	};
 
@@ -69,6 +69,9 @@ namespace pengine
 	private:
 		//Topological Sorting
 		auto passSorting(std::vector<uint32_t> src) -> void;
+	public:
+		//
+		std::shared_ptr<TextureDepth>                                   depthBuffer;
 	private:	
 		template<class T>
 		auto addPass(uint32_t uid) -> std::shared_ptr<T>
@@ -92,7 +95,7 @@ namespace pengine
 		std::vector<PassGroup> groupSet;
 		//common render data
 		CommonRenderData m_commonData;
-
+		
 		//target output texture : set by application (offscreen/swapchain image)
 		std::shared_ptr<Texture> outputTexture;
 		auto getOutputTexture() -> std::shared_ptr<Texture> { return outputTexture; };

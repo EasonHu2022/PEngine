@@ -12,9 +12,7 @@ namespace pengine
 		float cascadeSplitLambda;
 		glm::vec4 splitDepth[SHADOW_MAP_CASCADE_COUNT] = {};
 		glm::mat4 shadowProjView[SHADOW_MAP_CASCADE_COUNT] = {};
-		glm::mat4 lightMatrix;
 		glm::mat4 shadowProj;
-		glm::vec3 lightDir;
 		
 
 		std::vector<std::shared_ptr<DescriptorSet>> descriptorSet;

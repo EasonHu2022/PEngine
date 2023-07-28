@@ -10,6 +10,7 @@
 #include "glm/glm.hpp"
 #include <Application.h>
 #include "function/profile/profiler.h"
+#include "function/render/rhi/Texture.h"
 namespace pengine
 {
 	RenderDeferredLightingPass::RenderDeferredLightingPass(uint32_t uid, RenderGraph* renderGraph) : IPass(uid, renderGraph)
@@ -29,12 +30,12 @@ namespace pengine
 		auto descriptorSet = m_RenderDefferredLightingData.descriptorLightSet[0];
 		//common data part
 		auto& commonData = m_renderGraph->getCommonData();
-		descriptorSet->setUniform("UniformBufferLight","viewMatrix", &commonData.lightView);
 		descriptorSet->setUniform("UniformBufferLight", "shadowTransform", commonData.shadowTransforms);
 		descriptorSet->setUniform("UniformBufferLight", "splitDepths", commonData.splitDepth);
 		descriptorSet->setUniform("UniformBufferLight", "shadowMapSize", &commonData.shadowMapSize);
 		descriptorSet->setUniform("UniformBufferLight", "shadowCount", &commonData.shadowMapNum);
-
+		descriptorSet->setUniform("UniformBufferLight", "biasMatrix", &commonData.biasMatrix);
+		descriptorSet->setUniform("UniformBufferLight", "inverseVP", &commonData.inverseCameraVP);
 		auto color = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::COLOR]->index)->getNativeResource();
 		//PLOGE("color first excute pre : {0}",color.use_count());
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::COLOR], color);
@@ -47,6 +48,7 @@ namespace pengine
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::PBR], pbr);
 		auto shadowMap = m_renderGraph->getResourceByID(inputs[(int)DeferredLightingInput::ShadowMap]->index)->getNativeResource();
 		descriptorSet->setTexture(InputName[(int)DeferredLightingInput::ShadowMap], shadowMap);
+		descriptorSet->setTexture("uDepthSampler", std::static_pointer_cast<Texture>(m_renderGraph->depthBuffer));
 		descriptorSet->update();
 		PipelineInfo pipeInfo;
 		pipeInfo.shader = m_RenderDefferredLightingData.deferredLightShader;
@@ -80,8 +82,8 @@ namespace pengine
 			PLOGW("More than one Main Camera Detected! Random one will be used !");
 		}	
 		auto cameraEnt = Entity(cameras.front(), registry);
-		auto camTransform = cameraEnt.getComponent<component::Transform>();
-		auto viewProj = camTransform.getWorldMatrixInverse();
+		auto& camTransform = cameraEnt.getComponent<component::Transform>();
+		auto& view = camTransform.getWorldMatrixInverse();
 		auto cameraPos = glm::vec4{ camTransform.getWorldPosition(), 1.f };
 		//acquire lighting data
 		uint32_t  numLights = 0;
@@ -106,7 +108,7 @@ namespace pengine
 		int32_t renderMode = 0;
 		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "lights", lightdatas, sizeof(component::LightData) * numLights, false);
 		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "cameraPosition", &cameraPos);
-		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "viewMatrix", &viewProj);
+		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "viewMatrix", &view);
 		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "lightCount", &numLights);
 		m_RenderDefferredLightingData.descriptorLightSet[0]->setUniform("UniformBufferLight", "mode", &renderMode);
 	}

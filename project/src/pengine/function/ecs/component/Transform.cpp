@@ -101,9 +101,15 @@ namespace pengine
 		}
 		auto Transform::updateLocalMatrix() -> void
 		{
-			localMatrix = glm::translate(glm::mat4(1), localPosition);
-			localMatrix *= glm::toMat4(glm::quat(localOrientation));
-			localMatrix = glm::scale(localMatrix, localScale);
+			glm::mat4 t = glm::translate(glm::mat4(1), localPosition);
+			glm::mat4 r = glm::toMat4(glm::quat(localOrientation));
+			glm::mat4 s = glm::scale(glm::mat4(1), localScale);
+			//localMatrix = glm::translate(glm::mat4(1), localPosition);
+			//localMatrix *= glm::toMat4(glm::quat(localOrientation));
+			//localMatrix = glm::scale(localMatrix, localScale);
+			
+			localMatrix = t * r * s;
+			
 			dirty = false;
 			hasUpdate = true;
 		}

@@ -106,8 +106,7 @@ namespace pengine
 		if (!meshes.empty())
 		{
 			for (int i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++)
-			{
-				
+			{			
 				//build light frustum
 				Frustum lightFrusum{};
 				lightFrusum.from(m_localData.shadowProjView[i]);
@@ -131,12 +130,10 @@ namespace pengine
 						}
 					}
 				}
-
 			}
 			m_localData.descriptorSet[0]->setUniform("UniformBufferObject","projView", m_localData.shadowProjView);
 			//fill the shared datas
 			auto& commonData = m_renderGraph->getCommonData();
-			commonData.lightView = m_localData.lightMatrix;
 			commonData.shadowMapNum = SHADOW_MAP_CASCADE_COUNT;
 			commonData.shadowMapSize = SHADOW_MAP_MAX_SIZE;
 			commonData.shadowTransforms = m_localData.shadowProjView;
@@ -189,10 +186,11 @@ namespace pengine
 			cascadeSplits[i] = (d - nearClip) / clipRange;
 		}
 		float lastSplitDist = 0.0f;
-		for (uint32_t i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++)
+		auto& iWorldMatrix = cameraTransform.getWorldMatrixInverse();
+		for (uint32_t l = 0; l < SHADOW_MAP_CASCADE_COUNT; l++)
 		{
-			float splitDist = cascadeSplits[i];
-			Frustum camFrustum = cameraC.getFrustum(cameraTransform.getWorldMatrixInverse());
+			float splitDist = cascadeSplits[l];		
+			Frustum camFrustum = cameraC.getFrustum(iWorldMatrix);
 			glm::vec3* frustumCorners = camFrustum.getVertices();
 			for (uint32_t i = 0; i < 4; i++)
 			{
@@ -200,6 +198,7 @@ namespace pengine
 				frustumCorners[i + 4] = frustumCorners[i] + (dist * splitDist);
 				frustumCorners[i] = frustumCorners[i] + (dist * lastSplitDist);
 			}
+		
 			glm::vec3 frustumCenter = glm::vec3(0.0f);
 			for (uint32_t i = 0; i < 8; i++)
 			{
@@ -215,27 +214,26 @@ namespace pengine
 			radius = std::ceil(radius * 16.0f) / 16.0f;
 
 			glm::vec3 maxExtents = glm::vec3(radius);
-			glm::vec3 minExtents = -maxExtents;
+			glm::vec3 minExtents = -maxExtents;//use frustum center as light frustum center
+			
+			//I want the eye posite at the same plane with light def(at least higher than the hightest object of the scene);
+			//generally, the pos should be determined by BB of scene(most height)
+			//temply use light height
+			auto& worldOrientation = lightTransform.getWorldOrientation();
+			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD);
 
-			glm::vec3 lightDir = glm::normalize(glm::vec3(lightC.lightData.direction));
-			glm::mat4 lightViewMatrix = glm::lookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, UP);
-			glm::mat4 lightOrthoMatrix = glm::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
-			m_localData.splitDepth[i] = glm::vec4(nearClip + splitDist * clipRange) * -1.f;
-			m_localData.shadowProjView[i] = lightOrthoMatrix * lightViewMatrix;
+
+			glm::mat4 lightViewMatrix = glm::lookAt(frustumCenter - lightDir * -minExtents.z * 10.0f , frustumCenter, UP);
+			glm::mat4 lightOrthoMatrix = glm::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.1f, (maxExtents.z - minExtents.z) * 10.0f );
+			m_localData.splitDepth[l] = glm::vec4(nearClip + splitDist * clipRange) * -1.f;
+			m_localData.shadowProjView[l] = lightOrthoMatrix * lightViewMatrix;
 			lastSplitDist = splitDist;
-			if (i == 0)
-			{
-				m_localData.lightMatrix = lightViewMatrix;
-				m_localData.lightDir = lightDir;
-			}
 		}
 	}
 	RenderShadowMapData::RenderShadowMapData()
 	{	
 		cascadeSplitLambda = 0.995f;
-		lightMatrix = {};
 		shadowProj = {};
-		lightDir = {};
 		std::string tempPath = "shaders/CascadeShadow.shader";
 		shader = Shader::create(ASSETS_ABSOLUTE_PATH + tempPath);
 		DescriptorInfo createInfo{};
