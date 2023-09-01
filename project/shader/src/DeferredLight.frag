@@ -37,6 +37,7 @@ struct Material
 
 layout(location = 0) in vec2 fragTexCoord;
 layout(location = 0) out vec4 outColor;
+layout(location = 1) out vec4 _debugColor;
 
 layout(set = 0, binding = 0)  uniform sampler2D uColorSampler;
 layout(set = 0, binding = 1)  uniform sampler2D uPositionSampler;
@@ -228,17 +229,18 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		{
 			cascadeIndex = calculateCascadeIndex(wsPos);
 			mat4 st =  (ubo.shadowTransform[cascadeIndex]);
-			mat4 biasMat = mat4( 
-	0.5, 0.0, 0.0, 0.0,
-	0.0, 0.5, 0.0, 0.0,
-	0.0, 0.0, 1.0, 0.0,
-	0.5, 0.5, 0.0, 1.0 
-);
-			vec4 shadowCoord = (ubo.biasMatrix* st  ) * vec4(wsPos,1.0f);
-			//shadowCoord.xy = shadowCoord.xy * 2 - 1;
-			debugColor = shadowCoord;
+			vec4 shadowCoord = st * vec4(wsPos,1.0f);
+			vec4 posInLightVP = st * vec4(wsPos,1.0f);
 
-			debugColor = texture(uShadowMap, vec3(shadowCoord.st, 1));
+
+			shadowCoord = ubo.biasMatrix * shadowCoord;
+
+			//debugColor = vec4(shadowCoord.z,shadowCoord.z,shadowCoord.z,1.0);
+
+			//shadowCoord.xy = shadowCoord.xy * 2 - 1;
+			//debugColor = shadowCoord;
+
+			//debugColor = texture(uShadowMap, vec3(shadowCoord.st, 1));
 			//if enable PCF
 			value = PCF(shadowCoord,cascadeIndex);
 			//if normal shadow
@@ -315,7 +317,8 @@ void main()
 	uv.y = 1 - uv.y;
 	Pos/=Pos.w;
 	vec3 wsPos = Pos .xyz;
-	wsPos.z *= -1.0f;
+
+	_debugColor = vec4(wsPos,1.0f);
 	vec4 albedo = texture(uColorSampler, uv);
 	if (albedo.a < 0.1) {
 		//discard;
@@ -348,6 +351,7 @@ void main()
 
 	outColor = vec4(finalColor, 1.0) ;
 	//outColor.xyz = debugColor.xyz;
+	//outColor.z = 0.;
 	//outColor.z = 0;
 	//outColor.xyz = wsPos / 1000.0f;
 	//outColor.rgb = vec3(outColor.z); 

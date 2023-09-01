@@ -487,7 +487,8 @@ namespace pengine
 			{
 				frameBufferInfo.layer = i;
 				frameBufferInfo.screenFBO = false;
-				textures[0] = description.depthArrayTarget;
+				//auto indDepthArray = textures.size() - 1;
+				//textures[indDepthArray] = description.depthArrayTarget;
 				frameBufferInfo.attachments = textures;
 
 				framebuffers.emplace_back(FrameBuffer::create(frameBufferInfo));

@@ -58,6 +58,7 @@ namespace pengine
 		pipeInfo.depthBiasEnabled = false;
 		pipeInfo.clearTargets = false;
 		pipeInfo.colorTargets[0] = m_renderGraph->getResourceByID(outputs[0]->index)->getNativeResource();
+		pipeInfo.colorTargets[1] = m_renderGraph->getResourceByID(outputs[1]->index)->getNativeResource();
 		auto deferredLightPipeline = Pipeline::get(pipeInfo);
 		deferredLightPipeline->bind(commandBuffer);
 		RenderDevice::bindDescriptorSets(deferredLightPipeline.get(), commandBuffer, 0, m_RenderDefferredLightingData.descriptorLightSet);
@@ -97,7 +98,7 @@ namespace pengine
 				auto& [ent, light, transform] = data;
 				light.lightData.position = {transform.getWorldPosition(), 1.0f};
 				auto worldOrientation = transform.getWorldOrientation();
-				light.lightData.direction = { glm::normalize(worldOrientation * pengine::FORWARD), 1.f };
+				light.lightData.direction = { glm::normalize(worldOrientation * pengine::FORWARD) * -1.0f, 1.f };
 				if (static_cast<component::LightType>(light.lightData.type) == component::LightType::DirectionalLight)
 					directionaLight = &light;
 				lightdatas[numLights] = light.lightData;
@@ -130,7 +131,7 @@ namespace pengine
 	auto RenderDeferredLightingPass::createVResource() -> void
 	{
 		inputs.resize(5);
-		outputs.resize(1);
+		outputs.resize(2);
 		//temp all the same
 		for (int i = 0; i < inputs.size(); i++)
 		{
@@ -157,6 +158,8 @@ namespace pengine
 			res->height = renderExtend.y;
 			outputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
 		}
+		//temp
+		outputs[1]->format = TextureFormat::RGBA32;
 	}
 	RenderDeferredLightingData::RenderDeferredLightingData()
 	{

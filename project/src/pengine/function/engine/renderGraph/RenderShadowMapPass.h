@@ -36,6 +36,7 @@ namespace pengine
 		auto createVResource() -> void;
 	private:
 		void updateCascades(Entity& camera,Entity& light);
+		void updateStaticShadows(Entity& camera, Entity& light);
 	private:
 		RenderShadowMapData m_localData;
 		bool b_hasDirectionalLight;
@@ -48,7 +49,7 @@ namespace pengine
 		0.0, 0.5, 0.0, 0.0,
 		0.0, 0.0, 0.5, 0.0,
 		0.5, 0.5, 0.5, 1.0 };
-#endif        // MAPLE_OPENGL
+#endif        
 
 #ifdef PENGINE_VULKAN
 	constexpr glm::mat4 BIAS_MATRIX = {

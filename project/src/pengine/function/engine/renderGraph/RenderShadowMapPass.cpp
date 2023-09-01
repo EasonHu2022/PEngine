@@ -25,6 +25,7 @@ namespace pengine
 		b_hasDirectionalLight = false;
 		m_renderQueues.resize(SHADOW_MAP_CASCADE_COUNT);
 		m_localData = RenderShadowMapData();
+		
 	}
 	auto RenderShadowMapPass::execute(CommandBuffer* commandBuffer) -> void 
 	{
@@ -37,6 +38,7 @@ namespace pengine
 		pipelineInfo.transparencyEnabled = false;
 		pipelineInfo.depthBiasEnabled = false;
 		pipelineInfo.depthArrayTarget = m_renderGraph->getResourceByID(outputs[0]->index)->getNativeResource();
+		pipelineInfo.colorTargets[0] = m_renderGraph->getResourceByID(outputs[1]->index)->getNativeResource();
 		pipelineInfo.clearTargets = true;
 		pipelineInfo.depthTest = true;
 		auto pipeline = Pipeline::get(pipelineInfo);
@@ -99,6 +101,7 @@ namespace pengine
 		}
 		if (!b_hasDirectionalLight) return;//no directional light
 		updateCascades(cameraEnt, lightEnt);
+		//updateStaticShadows(cameraEnt, lightEnt);
 		//query meshes
 		//cull for each light frustum for each level and fill render queue
 		//so we need SHADOW_MAP_CASCADE_COUNT render queues for each level
@@ -149,7 +152,7 @@ namespace pengine
 	}
 	auto RenderShadowMapPass::createVResource() -> void
 	{
-		outputs.resize(1);
+		outputs.resize(2);
 		for (int i = 0; i < outputs.size(); i++)
 		{
 			auto res = new RenderGraphVirtualResource();
@@ -160,7 +163,23 @@ namespace pengine
 			res->layer = SHADOW_MAP_CASCADE_COUNT;
 			outputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
 		}
+		//temp
+		outputs[1]->type = RenderResouceType::Res_Texture2D;
+		outputs[1]->format = TextureFormat::RGBA32;
+		outputs[1]->layer = 1;
+
 	}
+	void RenderShadowMapPass::updateStaticShadows(Entity& camera, Entity& light)//https://developer.nvidia.com/gpugems/gpugems3
+	{
+		auto& lightTransform = light.getComponent<component::Transform>();
+		auto& worldOrientation = lightTransform.getWorldOrientation();
+		auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD);
+		glm::mat4 lightViewMatrix = glm::lookAt(glm::vec3(0.0f) - lightDir * 5000.0f, glm::vec3(0.0f), pengine::UP);
+		glm::mat4 lightOrthoMatrix = glm::ortho(-1024.0f, 1024.0f, -1024.0f, 1024.0f, 0.1f, (2048) * 3.0f);
+		m_localData.splitDepth[0] = glm::vec4(1.0f) * -1.f;
+		m_localData.shadowProjView[0] = lightOrthoMatrix * lightViewMatrix;
+	}
+	
 	void RenderShadowMapPass::updateCascades(Entity& camera, Entity& light)//https://developer.nvidia.com/gpugems/gpugems3
 	{
 		auto& cameraC = camera.getComponent<component::Camera>();
@@ -220,10 +239,13 @@ namespace pengine
 			//generally, the pos should be determined by BB of scene(most height)
 			//temply use light height
 			auto& worldOrientation = lightTransform.getWorldOrientation();
-			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD);
+			
+			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD) * -1.0f;
 
-
-			glm::mat4 lightViewMatrix = glm::lookAt(frustumCenter - lightDir * -minExtents.z * 10.0f , frustumCenter, UP);
+			lightTransform.setLocalPosition(frustumCenter - lightDir * -minExtents.z * 10.0f);
+			lightTransform.setWorldMatrix(glm::mat4{ 1.f });
+			//glm::mat4 lightViewMatrix = glm::lookAt(frustumCenter - lightDir * -minExtents.z * 10.0f , frustumCenter, lightTransform.getUpDirection());
+			glm::mat4 lightViewMatrix = lightTransform.getWorldMatrixInverse();
 			glm::mat4 lightOrthoMatrix = glm::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.1f, (maxExtents.z - minExtents.z) * 10.0f );
 			m_localData.splitDepth[l] = glm::vec4(nearClip + splitDist * clipRange) * -1.f;
 			m_localData.shadowProjView[l] = lightOrthoMatrix * lightViewMatrix;
