@@ -74,7 +74,7 @@ namespace pengine
 			light.addComponent<component::Light>();
 			auto& lightTransform = light.getOrAddComponent<component::Transform>();
 			lightTransform.setLocalPosition({ 1000.0f,5000.0f,0.0f });
-			lightTransform.setLocalOrientation(glm::radians(glm::vec3( -89.0f,0.0f,0.0f )));
+			lightTransform.setLocalOrientation(glm::radians(glm::vec3( -90.0f,0.0f,0.0f )));
 		}
 		return false;
 	}

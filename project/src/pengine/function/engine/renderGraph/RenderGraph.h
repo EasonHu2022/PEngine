@@ -37,14 +37,14 @@ namespace pengine
 		glm::mat4 inverseCameraVP;
 		glm::mat4 biasMatrix;//used for caculate shadow coords//https://blog.csdn.net/qq_35312463/article/details/117912599
 	};
-
+	class SceneGraph;
 	class RenderGraph : public IResource
 	{
 	public:
 		RenderGraph() = default;
 		RenderGraph(std::string& path);
 		~RenderGraph();
-		auto init(entt::registry& registry,uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void;
+		auto init(entt::registry& registry,uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight, std::shared_ptr<SceneGraph> m_sceneGraph) -> void;
 		auto setup() -> void;
 		//update cpu data for render
 		auto update(entt::registry& registry,std::vector<entt::entity>& culledEnts) -> void;
@@ -96,6 +96,9 @@ namespace pengine
 		//common render data
 		CommonRenderData m_commonData;
 		
+		//hold a scene graph
+		std::shared_ptr<SceneGraph> m_sceneGraph;
+
 		//target output texture : set by application (offscreen/swapchain image)
 		std::shared_ptr<Texture> outputTexture;
 		auto getOutputTexture() -> std::shared_ptr<Texture> { return outputTexture; };

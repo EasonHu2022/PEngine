@@ -12,6 +12,7 @@ namespace pengine
 		std::vector<std::shared_ptr<SceneTreeNode>> children;
 	};
 	class Frustum;
+	class BoundingBox;
 	class SceneTree
 	{
 	public:
@@ -25,6 +26,7 @@ namespace pengine
 		virtual void rebuild(entt::registry& reg) = 0;
 		virtual void getInside(std::shared_ptr<SceneTreeNode> node, const Frustum& frustum,std::vector<entt::entity>& ent) = 0;
 		virtual void frustumCull(const Frustum& frustum, std::vector<entt::entity>& out_ent) = 0;
+		virtual std::shared_ptr<BoundingBox> getBoundingBox() = 0;
 	protected:
 		std::shared_ptr<SceneTreeNode> rootNode;
 		uint32_t maxDepth = 8;

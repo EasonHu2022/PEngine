@@ -3,6 +3,7 @@
 
 #define SHADOW_MAP_CASCADE_COUNT  4
 #define SHADOW_MAP_MAX_SIZE  2048
+#define SHADOW_MAP_CASCADE_TRANSITION_RANGE 0.5f
 namespace pengine
 {
 	//for local use
@@ -12,8 +13,8 @@ namespace pengine
 		float cascadeSplitLambda;
 		glm::vec4 splitDepth[SHADOW_MAP_CASCADE_COUNT] = {};
 		glm::mat4 shadowProjView[SHADOW_MAP_CASCADE_COUNT] = {};
-		glm::mat4 shadowProj;
-		
+		/*glm::mat4 shadowProj[SHADOW_MAP_CASCADE_COUNT] = {};
+		glm::mat4 shadowView[SHADOW_MAP_CASCADE_COUNT] = {};*/
 
 		std::vector<std::shared_ptr<DescriptorSet>> descriptorSet;
 

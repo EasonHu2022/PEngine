@@ -206,56 +206,76 @@ namespace pengine
 		}
 		float lastSplitDist = 0.0f;
 		auto& iWorldMatrix = cameraTransform.getWorldMatrixInverse();
+		auto& identityMatrix = glm::mat4(1.0f);
 		for (uint32_t l = 0; l < SHADOW_MAP_CASCADE_COUNT; l++)
 		{
 			float splitDist = cascadeSplits[l];		
-			Frustum camFrustum = cameraC.getFrustum(iWorldMatrix);
+			Frustum camFrustum = cameraC.getFrustum(identityMatrix);//do in camera space
 			glm::vec3* frustumCorners = camFrustum.getVertices();
 			for (uint32_t i = 0; i < 4; i++)
 			{
 				glm::vec3 dist = frustumCorners[i + 4] - frustumCorners[i];
 				frustumCorners[i + 4] = frustumCorners[i] + (dist * splitDist);
 				frustumCorners[i] = frustumCorners[i] + (dist * lastSplitDist);
+				//push back near plane a little to do layers transition
+				if (i < 3)
+				{
+					frustumCorners[i + 4] += (frustumCorners[i + 4] - frustumCorners[i]) * SHADOW_MAP_CASCADE_TRANSITION_RANGE;
+				}
 			}
-		
-			glm::vec3 frustumCenter = glm::vec3(0.0f);
-			for (uint32_t i = 0; i < 8; i++)
-			{
-				frustumCenter += frustumCorners[i];
-			}
-			frustumCenter /= 8.0f;
+			
+
+			//calculate circumcircle center of the subfrustum
+			float a = glm::length((frustumCorners[3] - frustumCorners[0]));
+			float b = glm::length((frustumCorners[7] - frustumCorners[4]));
+			float lengthNF = abs(frustumCorners[4].z - frustumCorners[0].z);
+			float center2Near = lengthNF * 0.5f - (a * a - b * b) / (8.0f * lengthNF);
+			float length2Camera = abs(frustumCorners[0].z) + center2Near;
+			glm::vec3 frustumCenter = glm::vec3(0.0f,0.0f, -length2Camera);
+			//fix center
+			auto cameraPos = cameraTransform.getWorldPosition();
+			glm::vec3 wsFrustumCenter = cameraPos + glm::normalize(cameraTransform.getForwardDirection()) * length2Camera * -1.0f;
+			glm::vec4 homoWsFrustumCenter = { wsFrustumCenter.x,wsFrustumCenter.y,wsFrustumCenter.z,1.0f };
+			////fix frustum center
+			////https://learn.microsoft.com/en-us/windows/win32/dxtecharts/common-techniques-to-improve-shadow-depth-maps#moving-the-light-in-texel-sized-increments
+			////https://zhuanlan.zhihu.com/p/515385379
+			//keep trans in same space
+			lightTransform.setLocalPosition({ 0.0f,2000.0f,0.0f });
+			lightTransform.setWorldMatrix(glm::mat4{ 1.f });
+			auto& lightViewMat = lightTransform.getWorldMatrixInverse();
+			glm::vec4 homoLsFrustumCenter = lightViewMat * homoWsFrustumCenter;			
 			float radius = 0.0f;
 			for (uint32_t i = 0; i < 8; i++)
 			{
 				float distance = glm::length(frustumCorners[i] - frustumCenter);
 				radius = glm::max(radius, distance);
 			}
-			radius = std::ceil(radius * 16.0f) / 16.0f;
-
-			glm::vec3 maxExtents = glm::vec3(radius);
-			glm::vec3 minExtents = -maxExtents;//use frustum center as light frustum center
-			
-			//I want the eye posite at the same plane with light def(at least higher than the hightest object of the scene);
-			//generally, the pos should be determined by BB of scene(most height)
-			//temply use light height
-			auto& worldOrientation = lightTransform.getWorldOrientation();
-			
+			float fCascadeBound = radius * 2.0f;
+			float fWorldUnitsPerTexel = fCascadeBound / SHADOW_MAP_MAX_SIZE;
+			float fXmod = fmod( homoLsFrustumCenter.x , fWorldUnitsPerTexel);
+			float fYmod = fmod(homoLsFrustumCenter.y, fWorldUnitsPerTexel);
+			homoLsFrustumCenter = { homoLsFrustumCenter.x - fXmod,homoLsFrustumCenter.y - fYmod,homoLsFrustumCenter.z,homoLsFrustumCenter.w };
+			//get frustumcenter back to world space
+			auto& lightWorldMat = lightTransform.getWorldMatrix();
+			homoWsFrustumCenter = lightWorldMat * homoLsFrustumCenter;
+			frustumCenter = { homoWsFrustumCenter.x,homoWsFrustumCenter.y,homoWsFrustumCenter.z };
+				
+			//calculate light vp
+			auto& worldOrientation = lightTransform.getWorldOrientation();			
 			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD) * -1.0f;
-
-			lightTransform.setLocalPosition(frustumCenter - lightDir * -minExtents.z * 10.0f);
+			lightTransform.setLocalPosition(frustumCenter - lightDir * radius * 10.0f);
 			lightTransform.setWorldMatrix(glm::mat4{ 1.f });
-			//glm::mat4 lightViewMatrix = glm::lookAt(frustumCenter - lightDir * -minExtents.z * 10.0f , frustumCenter, lightTransform.getUpDirection());
 			glm::mat4 lightViewMatrix = lightTransform.getWorldMatrixInverse();
-			glm::mat4 lightOrthoMatrix = glm::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.1f, (maxExtents.z - minExtents.z) * 10.0f );
+			glm::mat4 lightOrthoMatrix = glm::ortho(-radius, radius, -radius, radius, 0.f, 2.0f* radius *10 );
 			m_localData.splitDepth[l] = glm::vec4(nearClip + splitDist * clipRange) * -1.f;
 			m_localData.shadowProjView[l] = lightOrthoMatrix * lightViewMatrix;
 			lastSplitDist = splitDist;
+			m_localData.splitDepth[l].y += l == 0 ? (m_localData.splitDepth[l].x + nearClip) * SHADOW_MAP_CASCADE_TRANSITION_RANGE : (m_localData.splitDepth[l].x - m_localData.splitDepth[l - 1].x) * SHADOW_MAP_CASCADE_TRANSITION_RANGE;
 		}
 	}
 	RenderShadowMapData::RenderShadowMapData()
 	{	
 		cascadeSplitLambda = 0.995f;
-		shadowProj = {};
 		std::string tempPath = "shaders/CascadeShadow.shader";
 		shader = Shader::create(ASSETS_ABSOLUTE_PATH + tempPath);
 		DescriptorInfo createInfo{};

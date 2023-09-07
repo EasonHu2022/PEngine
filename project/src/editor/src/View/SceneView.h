@@ -27,9 +27,9 @@ namespace peditor
 		float rotateDampeningFactor = 0.001f;
 
 		float zoomVelocity = 0.0f;
-		glm::vec3 velocity = { 0,0,0 };
+		glm::vec3 moveDirection = { 0,0,0 };
 		glm::vec2 rotateVelocity = { 0,0 };
-
+		float moveVelocity = 50.0f;
 		//state
 		bool m_bFocused = true;
 		bool m_bHovered = true;

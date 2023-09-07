@@ -14,6 +14,7 @@ namespace pengine
 	class Frustum;
 	class EntityManager;
 	class SceneTree;
+	class BoundingBox;
 	class SceneGraph
 	{
 	public:
@@ -26,6 +27,7 @@ namespace pengine
 		auto addEntity();
 		auto removeEntity();
 		auto frustumCull(const Frustum& frustum, std::vector<entt::entity> &ents) -> void;
+		auto getSceneBoundingBox() -> std::shared_ptr<BoundingBox>;
 	private:
 		std::shared_ptr<EntityManager> entityManager;
 		std::shared_ptr<SceneTree> m_tree;

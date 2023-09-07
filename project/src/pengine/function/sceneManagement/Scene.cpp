@@ -34,7 +34,7 @@ namespace pengine
 		renderGraph = std::make_shared<RenderGraph>(RGPath);
 		width = _width;
 		height = _height;
-		renderGraph->init(entityManager->getRegistry(), width, height, width, height);
+		renderGraph->init(entityManager->getRegistry(), width, height, width, height,sceneGraph);
 		renderGraph->setOutputTexture(renderTarget);
 	}
 
@@ -48,7 +48,7 @@ namespace pengine
 		//temply equal to swapchain extend
 		width = Application::getWindow()->getWidth();
 		height = Application::getWindow()->getHeight();
-		renderGraph->init(entityManager->getRegistry(),width, height,width,height);
+		renderGraph->init(entityManager->getRegistry(),width, height,width,height, sceneGraph);
 	}
 	Scene::~Scene()
 	{

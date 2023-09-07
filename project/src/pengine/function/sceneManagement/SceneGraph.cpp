@@ -39,4 +39,8 @@ namespace pengine
 	{
 		m_tree->frustumCull(frustum, ents);
 	}
+	auto SceneGraph::getSceneBoundingBox() -> std::shared_ptr<BoundingBox>
+	{
+		return m_tree->getBoundingBox();
+	}
 };

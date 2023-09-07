@@ -25,10 +25,11 @@ namespace pengine
 
 
 	}
-	auto RenderGraph::init(entt::registry& registry, uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void
+	auto RenderGraph::init(entt::registry& registry, uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight, std::shared_ptr<SceneGraph> _sceneGraph) -> void
 	{
 		renderExtend = { width ,height };
 		outputExtend = { displayWidth ,displayHeight };
+		m_sceneGraph = _sceneGraph;
 		//TODO:init renderData//how?what structure?
 		//renderDatacontext...
 		//temply write to hard code, later load from config file

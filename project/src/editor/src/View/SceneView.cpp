@@ -52,15 +52,7 @@ namespace peditor
 			return;
 		auto [camera,transform] = Application::getSceneManager()->getCurrentScene()->getCamera();
 		if (Input::get_key(P_KEY_LEFT_CONTROL))
-		{
-			if (Input::get_mouse(0))//translate
-			{
-				mouseSensitivity = 1.0f;
-				auto position = transform->getLocalPosition();
-				position.x -= Input::mouseMotion.x * mouseSensitivity * 0.5f;
-				position.y += Input::mouseMotion.y * mouseSensitivity * 0.5f;
-				transform->setLocalPosition(position);
-			}
+		{			
 			if (Input::get_mouse(1))//rotate
 			{
 				mouseSensitivity = 0.2f;
@@ -91,6 +83,59 @@ namespace peditor
 
 			transform->setLocalPosition(pos);
 		}
+		//handle key control
+		glm::vec3 moveDir = { 0.0f,0.0f,0.0f };
+		if (Input::get_key(P_KEY_W))//translate
+		{
+			moveDir = transform->getForwardDirection() * -1.0f;
+		}
+		if (Input::get_key(P_KEY_S))//translate
+		{
+			moveDir = transform->getForwardDirection() * 1.0f;
+		}
+		if (Input::get_key(P_KEY_A))//translate
+		{
+			moveDir = transform->getRightDirection() * -1.0f;
+		}
+		if (Input::get_key(P_KEY_D))//translate
+		{
+			moveDir = transform->getRightDirection() * 1.0f;
+		}
+		if (Input::get_key(P_KEY_Q))//translate
+		{
+			moveDir = transform->getUpDirection() * 1.0f;
+		}
+		if (Input::get_key(P_KEY_E))//translate
+		{
+			moveDir = transform->getUpDirection() * -1.0f;
+		}
+		auto position = transform->getLocalPosition();
+		position += moveDir * moveVelocity * dt;
+		transform->setLocalPosition(position);
+		//if (Input::get_key(P_KEY_A))//translate
+		//{
+		//	mouseSensitivity = 1.0f;
+		//	auto position = transform->getLocalPosition();
+		//	position.x -= Input::mouseMotion.x * mouseSensitivity * 0.5f;
+		//	position.y += Input::mouseMotion.y * mouseSensitivity * 0.5f;
+		//	transform->setLocalPosition(position);
+		//}
+		//if (Input::get_key(P_KEY_S))//translate
+		//{
+		//	mouseSensitivity = 1.0f;
+		//	auto position = transform->getLocalPosition();
+		//	position.x -= Input::mouseMotion.x * mouseSensitivity * 0.5f;
+		//	position.y += Input::mouseMotion.y * mouseSensitivity * 0.5f;
+		//	transform->setLocalPosition(position);
+		//}
+		//if (Input::get_key(P_KEY_D))//translate
+		//{
+		//	mouseSensitivity = 1.0f;
+		//	auto position = transform->getLocalPosition();
+		//	position.x -= Input::mouseMotion.x * mouseSensitivity * 0.5f;
+		//	position.y += Input::mouseMotion.y * mouseSensitivity * 0.5f;
+		//	transform->setLocalPosition(position);
+		//}
 	}
 
 	auto SceneView::onResize(float width, float height) -> void

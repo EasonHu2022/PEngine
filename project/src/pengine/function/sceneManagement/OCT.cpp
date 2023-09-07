@@ -78,6 +78,10 @@ namespace pengine
 		//PROFILE_FUNCTION();
 		getInside(rootNode, frustum, out_ent);
 	}
+	std::shared_ptr<BoundingBox> OCT::getBoundingBox()
+	{
+		return rootNode->boundingBox;
+	}
 	void OCT::recursiveBuild(std::shared_ptr<SceneTreeNode> node, entt::registry& registry)
 	{
 		if (node->depth >= maxDepth || node->entHandles.size() < 2) return;

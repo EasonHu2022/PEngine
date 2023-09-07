@@ -65,7 +65,8 @@ layout(set = 0, binding = 6) uniform UniformBufferLight
 
 
 vec4 debugColor;
-int calculateCascadeIndex(vec3 wsPos);//caculate which layer is the fragment on
+float calculateShadow(vec3 wsPos);
+float calculateCascadeIndex(vec3 wsPos);//caculate which layer is the fragment on
 float textureProj(vec4 shadowCoord, vec2 offset, int cascadeIndex);
 float PCSS(vec4 shadowCoords, int cascadeIndex);
 float PCF(vec4 shadowCoords, int cascadeIndex);
@@ -101,19 +102,68 @@ float textureProj(vec4 shadowCoord, vec2 offset, int cascadeIndex)
 	return shadow;
 }
 
-int calculateCascadeIndex(vec3 wsPos)
+float calculateShadow(vec3 wsPos)
 {
+	float value = 0.0f;	
+	int floorCascadeIndex = 0;
+	int ceilCascadeIndex = 0;
+	float fCascadeIndex = calculateCascadeIndex(wsPos);
+	floorCascadeIndex = int(floor(fCascadeIndex));
+	ceilCascadeIndex = int(ceil(fCascadeIndex));
+	if( floorCascadeIndex == ceilCascadeIndex)
+	{
+		mat4 st =  (ubo.shadowTransform[floorCascadeIndex]);
+		vec4 shadowCoord = st * vec4(wsPos,1.0f);
+		shadowCoord = ubo.biasMatrix * shadowCoord;
+		shadowCoord.y = 1-shadowCoord.y;
+		value = PCF(shadowCoord,floorCascadeIndex);
+	}
+	else
+	{
+		mat4 st =  (ubo.shadowTransform[floorCascadeIndex]);
+		mat4 stNext =  (ubo.shadowTransform[ceilCascadeIndex]);
+		vec4 shadowCoord = st * vec4(wsPos,1.0f);
+		vec4 shadowCoordNext = stNext * vec4(wsPos,1.0f);
+		//shadowCoord.xy = shadowCoord.yx;
+		shadowCoord = ubo.biasMatrix * shadowCoord;
+		shadowCoordNext = ubo.biasMatrix * shadowCoordNext;	
+		//debugColor = vec4(shadowCoord.z,shadowCoord.z,shadowCoord.z,1.0);
+
+		//shadowCoord.xy = (shadowwwCoord.xy + vec2(1.0f,1.0f)) / 2.0f;
+		//because we set viewport height < 0, so here we need to flip y mannually
+		shadowCoord.y = 1-shadowCoord.y;
+		shadowCoordNext.y = 1-shadowCoordNext.y;
+
+		//debugColor = texture(uShadowMap, vec3(shadowCoord.st, 1));
+		//if enable PCF
+		value = PCF(shadowCoord,floorCascadeIndex) * (ceilCascadeIndex - fCascadeIndex) + PCF(shadowCoordNext,ceilCascadeIndex) * (fCascadeIndex - floorCascadeIndex);
+	}
+	
+	return value;
+}
+
+float calculateCascadeIndex(vec3 wsPos)
+{
+	float res = 0;
 	int cascadeIndex = 0;
 	vec4 viewPos = ubo.viewMatrix * vec4(wsPos, 1.0) ;
 	
 	for(int i = 0; i < ubo.shadowCount; ++i)
 	{
-		if(viewPos.z < ubo.splitDepths[i].x)
+		if(viewPos.z < ubo.splitDepths[i].y)
 		{
 			cascadeIndex = i + 1;
 		}
 	}
-	return cascadeIndex;
+	if(viewPos.z < ubo.splitDepths[cascadeIndex].x)
+	{
+		res = cascadeIndex + (viewPos.z - ubo.splitDepths[cascadeIndex].x) / ( ubo.splitDepths[cascadeIndex].y -  ubo.splitDepths[cascadeIndex].x);
+	}	
+	else
+	{
+		res = cascadeIndex;
+	}
+	return res;
 }
 
 float PCSS(vec4 shadowCoords, int cascadeIndex)
@@ -124,13 +174,13 @@ float PCSS(vec4 shadowCoords, int cascadeIndex)
 float PCF(vec4 shadowCoords, int cascadeIndex)
 {
 	ivec2 texDim = textureSize(uShadowMap, 0).xy;
-	float scale = 0.75;
+	float scale = 0.3f;
 	float dx = scale * 1.0 / float(texDim.x);
 	float dy = scale * 1.0 / float(texDim.y);
 
 	float shadowFactor = 0.0;
 	int count = 0;
-	int range = 1;
+	int range = 3;
 	//Penumbra  sample/fake
 	for (int x = -range; x <= range; x++) {
 		for (int y = -range; y <= range; y++) {
@@ -179,7 +229,8 @@ vec3 fresnelSchlickRoughness(vec3 F0, float cosTheta, float roughness)
 vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 {
 	vec3 result = vec3(0.0);
-	int cascadeIndex = 0;
+	float fCascadeIndex = 0;
+	int iCascadeIndex = 0;
 	for(int i = 0; i < ubo.lightCount; i++)
 	{
 		Light light = ubo.lights[i];
@@ -227,22 +278,9 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		}
 		else//0 directional light
 		{
-			cascadeIndex = calculateCascadeIndex(wsPos);
-			mat4 st =  (ubo.shadowTransform[cascadeIndex]);
-			vec4 shadowCoord = st * vec4(wsPos,1.0f);
-			vec4 posInLightVP = st * vec4(wsPos,1.0f);
-
-
-			shadowCoord = ubo.biasMatrix * shadowCoord;
-
-			//debugColor = vec4(shadowCoord.z,shadowCoord.z,shadowCoord.z,1.0);
-
-			//shadowCoord.xy = shadowCoord.xy * 2 - 1;
-			//debugColor = shadowCoord;
-
 			//debugColor = texture(uShadowMap, vec3(shadowCoord.st, 1));
 			//if enable PCF
-			value = PCF(shadowCoord,cascadeIndex);
+			value = calculateShadow(wsPos);
 			//if normal shadow
 			//value = textureProj(shadowCoord,vec2(0.0),cascadeIndex);
 		}
@@ -313,6 +351,7 @@ void main()
 	float _z = texture(uDepthSampler, fragTexCoord).r;
 	vec2 uv = fragTexCoord.xy;
 	uv.y = 1 - uv.y;
+	//because we use minus viewport height
 	vec4 Pos = (ubo.inverseVP * vec4((uv.xy * 2.0f - 1.0),_z,1.0f));
 	uv.y = 1 - uv.y;
 	Pos/=Pos.w;
@@ -350,7 +389,9 @@ void main()
 	vec3 finalColor = (lightContribution ) * material.ao * material.ssao;
 
 	outColor = vec4(finalColor, 1.0) ;
-	//outColor.xyz = debugColor.xyz;
+	//outColor =  texture(uShadowMap, vec3(fragTexCoord, 1));
+//	outColor.xyz = debugColor.xyz;
+//	outColor.z = 0;
 	//outColor.z = 0.;
 	//outColor.z = 0;
 	//outColor.xyz = wsPos / 1000.0f;
