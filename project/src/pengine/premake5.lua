@@ -40,6 +40,7 @@ project "pengine"
 		thirdparty .. "/Json",
 		thirdparty .. "/SPIRV-Cross",
 		thirdparty .. "/tracy",
+		thirdparty .. "/Eigen",
 		assetsdir,
 	}
 
