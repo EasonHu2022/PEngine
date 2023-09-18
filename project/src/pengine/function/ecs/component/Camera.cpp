@@ -57,12 +57,37 @@ namespace pengine
 		auto Camera::updateProjectionMatrix() -> void
 		{
 
+			//here process vulkan with other graphics api
+#if PENGINE_VULKAN
+			if (orthographic)
+				projMatrix = glm::ortho(aspectRatio * -scale, aspectRatio * scale, scale, -scale, near_, far_);
+			else
+			{
+				float fov_rad = fov * 2.0f * 3.1415926 / 360.0f;
+				float focal_length = 1.0f / std::tan(fov_rad / 2.0f);
 
+				float x = focal_length / aspectRatio;
+				float y = -focal_length;
+				float A = far_ / (near_ - far_);
+				float B = near_ * A;
+				//auto projMatrixTest = glm::perspective(glm::radians(fov), aspectRatio, near_, far_);
+				
+				projMatrix = { x,    0.0f,  0.0f, 0.0f,
+		0.0f,    y,  0.0f, 0.0f,
+		0.0f, 0.0f,     A,    -1.0f,
+		0.0f, 0.0f, B, 0.0f, };
+			}
+				
+
+#else
 			if (orthographic)
 				projMatrix = glm::ortho(aspectRatio * -scale, aspectRatio * scale, -scale, scale, near_, far_);
 			else
 				projMatrix = glm::perspective(glm::radians(fov), aspectRatio, near_, far_);
 
+#endif // PENGINE_VULKAN
+
+			
 
 			
 		}

@@ -28,5 +28,5 @@ void main()
     gl_Position = ubo.projView[pushConsts.cascadeIndex] * pushConsts.transform *  vec4(inPosition, 1 );// avoid optimize 
     fragTexCoord = inTexCoord;
     worldPosition = vec4(inPosition,1.0f);
-    fragTexCoord.y = 1-inTexCoord.y;
+    //fragTexCoord.y = 1-inTexCoord.y;
 }

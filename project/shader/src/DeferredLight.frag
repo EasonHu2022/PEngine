@@ -37,7 +37,6 @@ struct Material
 
 layout(location = 0) in vec2 fragTexCoord;
 layout(location = 0) out vec4 outColor;
-layout(location = 1) out vec4 _debugColor;
 
 layout(set = 0, binding = 0)  uniform sampler2D uColorSampler;
 layout(set = 0, binding = 1)  uniform sampler2D uPositionSampler;
@@ -115,7 +114,7 @@ float calculateShadow(vec3 wsPos)
 		mat4 st =  (ubo.shadowTransform[floorCascadeIndex]);
 		vec4 shadowCoord = st * vec4(wsPos,1.0f);
 		shadowCoord = ubo.biasMatrix * shadowCoord;
-		shadowCoord.y = 1-shadowCoord.y;
+		//shadowCoord.y = 1-shadowCoord.y;
 		value = PCF(shadowCoord,floorCascadeIndex);
 	}
 	else
@@ -131,14 +130,14 @@ float calculateShadow(vec3 wsPos)
 
 		//shadowCoord.xy = (shadowwwCoord.xy + vec2(1.0f,1.0f)) / 2.0f;
 		//because we set viewport height < 0, so here we need to flip y mannually
-		shadowCoord.y = 1-shadowCoord.y;
-		shadowCoordNext.y = 1-shadowCoordNext.y;
+		//shadowCoord.y = 1-shadowCoord.y;
+		//shadowCoordNext.y = 1-shadowCoordNext.y;
 
 		//debugColor = texture(uShadowMap, vec3(shadowCoord.st, 1));
 		//if enable PCF
 		value = PCF(shadowCoord,floorCascadeIndex) * (ceilCascadeIndex - fCascadeIndex) + PCF(shadowCoordNext,ceilCascadeIndex) * (fCascadeIndex - floorCascadeIndex);
 	}
-	
+
 	return value;
 }
 
@@ -313,23 +312,53 @@ vec3 lighting(vec3 F0, vec3 wsPos, Material material,vec2 fragTexCoord)
 		//result += indirect;
 	}
 
-	//debug 
-	#if 0
-	switch(cascadeIndex){
-			case 0 : 
-				result.rgb *= vec3(1.0f, 0.25f, 0.25f);
-				break;
-			case 1 : 
-				result.rgb *= vec3(0.25f, 1.0f, 0.25f);
-				break;
-			case 2 : 
-				result.rgb *= vec3(0.25f, 0.25f, 1.0f);
-				break;
-			case 3 : 
-				result.rgb *= vec3(1.0f, 1.0f, 0.25f);
-				break;
+		//debug 
+#if 0
+{
+		float cascadeIndex = calculateCascadeIndex(wsPos);
+	if(cascadeIndex >= 0 && cascadeIndex <1)
+	{
+		if(floor(cascadeIndex) == ceil(cascadeIndex))
+		{
+			result.rgb *= vec3(1.0f, 0.25f, 0.25f);
 		}
-		#endif
+		else
+		{
+			result.rgb *= vec3(0.625f, 0.625f, 0.25f);
+		}
+		
+	}
+	if(cascadeIndex >= 1 && cascadeIndex < 2)
+	{
+		if(floor(cascadeIndex) == ceil(cascadeIndex))
+		{
+			result.rgb *= vec3(0.25f, 1.0f, 0.25f);
+		}
+		else
+		{
+			result.rgb *= vec3( 0.25f,0.625f, 0.625f);
+		}
+	}
+	if(cascadeIndex >= 2 && cascadeIndex < 3)
+	{
+		if(floor(cascadeIndex) == ceil(cascadeIndex))
+		{
+			result.rgb *= vec3(0.25f, 0.25f, 1.0f);
+		}
+		else
+		{
+			result.rgb *= vec3(0.625f, 0.625f, 0.625f);
+		}
+	}
+	if(int(cascadeIndex) == 3)
+	{
+
+		result.rgb *= vec3(1.0f, 1.0f, 0.25f);
+
+
+	}
+}	
+#endif
 	//ambient
 	return result;
 }
@@ -350,14 +379,13 @@ void main()
 {
 	float _z = texture(uDepthSampler, fragTexCoord).r;
 	vec2 uv = fragTexCoord.xy;
-	uv.y = 1 - uv.y;
+	//uv.y = 1 - uv.y;
 	//because we use minus viewport height
 	vec4 Pos = (ubo.inverseVP * vec4((uv.xy * 2.0f - 1.0),_z,1.0f));
-	uv.y = 1 - uv.y;
+	//uv.y = 1 - uv.y;
 	Pos/=Pos.w;
 	vec3 wsPos = Pos .xyz;
 
-	_debugColor = vec4(wsPos,1.0f);
 	vec4 albedo = texture(uColorSampler, uv);
 	if (albedo.a < 0.1) {
 		//discard;
@@ -379,7 +407,7 @@ void main()
 	material.normalDotView  = max(dot(material.normal, material.view), 0.0);
 
 
-	vec3 Lr =  reflect(-material.view,material.normal); 
+	//vec3 Lr =  reflect(-material.view,material.normal); 
 	//2.0 * material.normalDotView * material.normal - material.view;
 	// Fresnel reflectance, metals use albedo
 	vec3 F0 = mix(Fdielectric, material.albedo.xyz, material.metallic.x);

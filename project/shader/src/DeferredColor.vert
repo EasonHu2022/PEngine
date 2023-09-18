@@ -38,11 +38,6 @@ out gl_PerVertex
 
 void main() 
 {
-     mat4 localToWorld = mat4(   1,0,0,0,
-                                 0,1,0,0,
-                                 0,0,1,0,
-                                 0,0,0,1);
-	//fragPosition = vec4(inPosition, 1.0) * localToWorld;
 	fragPosition = pushConsts.transform * vec4(inPosition, 1.0);
     vec4 pos =  ubo.projView * fragPosition;
     gl_Position = pos;

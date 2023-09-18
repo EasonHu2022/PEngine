@@ -38,7 +38,6 @@ namespace pengine
 		pipelineInfo.transparencyEnabled = false;
 		pipelineInfo.depthBiasEnabled = false;
 		pipelineInfo.depthArrayTarget = m_renderGraph->getResourceByID(outputs[0]->index)->getNativeResource();
-		pipelineInfo.colorTargets[0] = m_renderGraph->getResourceByID(outputs[1]->index)->getNativeResource();
 		pipelineInfo.clearTargets = true;
 		pipelineInfo.depthTest = true;
 		auto pipeline = Pipeline::get(pipelineInfo);
@@ -152,7 +151,7 @@ namespace pengine
 	}
 	auto RenderShadowMapPass::createVResource() -> void
 	{
-		outputs.resize(2);
+		outputs.resize(1);
 		for (int i = 0; i < outputs.size(); i++)
 		{
 			auto res = new RenderGraphVirtualResource();
@@ -163,10 +162,6 @@ namespace pengine
 			res->layer = SHADOW_MAP_CASCADE_COUNT;
 			outputs[i] = std::shared_ptr<RenderGraphVirtualResource>(res);
 		}
-		//temp
-		outputs[1]->type = RenderResouceType::Res_Texture2D;
-		outputs[1]->format = TextureFormat::RGBA32;
-		outputs[1]->layer = 1;
 
 	}
 	void RenderShadowMapPass::updateStaticShadows(Entity& camera, Entity& light)//https://developer.nvidia.com/gpugems/gpugems3
@@ -180,14 +175,13 @@ namespace pengine
 		m_localData.shadowProjView[0] = lightOrthoMatrix * lightViewMatrix;
 	}
 	
-	void RenderShadowMapPass::updateCascades(Entity& camera, Entity& light)//https://developer.nvidia.com/gpugems/gpugems3
+	void RenderShadowMapPass::updateCascades(Entity& camera, Entity& light)
 	{
 		auto& cameraC = camera.getComponent<component::Camera>();
 		auto& cameraTransform = camera.getComponent<component::Transform>();
 		auto& lightC = light.getComponent<component::Light>();
 		auto& lightTransform = light.getComponent<component::Transform>();
-
-		float cascadeSplits[SHADOW_MAP_CASCADE_COUNT];
+		float cascadeSplits[SHADOW_MAP_CASCADE_COUNT]{};
 		float nearClip = cameraC.getNear();
 		float farClip = cameraC.getFar();
 		float clipRange = farClip - nearClip;
@@ -223,8 +217,6 @@ namespace pengine
 					frustumCorners[i + 4] += (frustumCorners[i + 4] - frustumCorners[i]) * SHADOW_MAP_CASCADE_TRANSITION_RANGE;
 				}
 			}
-			
-
 			//calculate circumcircle center of the subfrustum
 			float a = glm::length((frustumCorners[3] - frustumCorners[0]));
 			float b = glm::length((frustumCorners[7] - frustumCorners[4]));
@@ -236,37 +228,49 @@ namespace pengine
 			auto cameraPos = cameraTransform.getWorldPosition();
 			glm::vec3 wsFrustumCenter = cameraPos + glm::normalize(cameraTransform.getForwardDirection()) * length2Camera * -1.0f;
 			glm::vec4 homoWsFrustumCenter = { wsFrustumCenter.x,wsFrustumCenter.y,wsFrustumCenter.z,1.0f };
-			////fix frustum center
-			////https://learn.microsoft.com/en-us/windows/win32/dxtecharts/common-techniques-to-improve-shadow-depth-maps#moving-the-light-in-texel-sized-increments
+			
+			
+#if 1
+			////fix frustum center		
 			////https://zhuanlan.zhihu.com/p/515385379
 			//keep trans in same space
 			lightTransform.setLocalPosition({ 0.0f,2000.0f,0.0f });
 			lightTransform.setWorldMatrix(glm::mat4{ 1.f });
 			auto& lightViewMat = lightTransform.getWorldMatrixInverse();
-			glm::vec4 homoLsFrustumCenter = lightViewMat * homoWsFrustumCenter;			
+			glm::vec4 homoLsFrustumCenter = lightViewMat * homoWsFrustumCenter;
 			float radius = 0.0f;
 			for (uint32_t i = 0; i < 8; i++)
 			{
 				float distance = glm::length(frustumCorners[i] - frustumCenter);
 				radius = glm::max(radius, distance);
 			}
+			
 			float fCascadeBound = radius * 2.0f;
 			float fWorldUnitsPerTexel = fCascadeBound / SHADOW_MAP_MAX_SIZE;
-			float fXmod = fmod( homoLsFrustumCenter.x , fWorldUnitsPerTexel);
+			float fXmod = fmod(homoLsFrustumCenter.x, fWorldUnitsPerTexel);
 			float fYmod = fmod(homoLsFrustumCenter.y, fWorldUnitsPerTexel);
 			homoLsFrustumCenter = { homoLsFrustumCenter.x - fXmod,homoLsFrustumCenter.y - fYmod,homoLsFrustumCenter.z,homoLsFrustumCenter.w };
 			//get frustumcenter back to world space
 			auto& lightWorldMat = lightTransform.getWorldMatrix();
 			homoWsFrustumCenter = lightWorldMat * homoLsFrustumCenter;
 			frustumCenter = { homoWsFrustumCenter.x,homoWsFrustumCenter.y,homoWsFrustumCenter.z };
-				
+#else
+			frustumCenter = wsFrustumCenter;
+#endif // 1
+#if 0
+			//texel-sized-increments
+			//https://learn.microsoft.com/en-us/windows/win32/dxtecharts/common-techniques-to-improve-shadow-depth-maps#moving-the-light-in-texel-sized-increments
+
+#endif // 0
+
+			
 			//calculate light vp
 			auto& worldOrientation = lightTransform.getWorldOrientation();			
-			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD) * -1.0f;
+			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD) * 1.0f;
 			lightTransform.setLocalPosition(frustumCenter - lightDir * radius * 10.0f);
 			lightTransform.setWorldMatrix(glm::mat4{ 1.f });
 			glm::mat4 lightViewMatrix = lightTransform.getWorldMatrixInverse();
-			glm::mat4 lightOrthoMatrix = glm::ortho(-radius, radius, -radius, radius, 0.f, 2.0f* radius *10 );
+			glm::mat4 lightOrthoMatrix = glm::ortho(-radius, radius, radius, -radius, 0.f, 2.0f* radius *10 );
 			m_localData.splitDepth[l] = glm::vec4(nearClip + splitDist * clipRange) * -1.f;
 			m_localData.shadowProjView[l] = lightOrthoMatrix * lightViewMatrix;
 			lastSplitDist = splitDist;

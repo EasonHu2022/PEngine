@@ -38,7 +38,7 @@ namespace pengine
 		}
 		else
 		{
-			PLOGE("wrong event : click a held key !");
+			PLOGE("wrong event : clicked a held key !");
 		}
 	}
 
@@ -59,7 +59,7 @@ namespace pengine
 		}
 		else
 		{
-			PLOGE("wrong event : release a unheld key !");
+			PLOGE("wrong event : released an unheld key !");
 		}	
 	}
 
@@ -87,7 +87,7 @@ namespace pengine
 		}
 		else
 		{
-			PLOGE("wrong event : click a held mouse !");
+			PLOGE("wrong event : clicked a held mouse !");
 		}
 	}
 
@@ -109,7 +109,7 @@ namespace pengine
 		}
 		else
 		{
-			PLOGE("wrong event : release a unheld key !");
+			PLOGE("wrong event : released an unheld key !");
 		}
 	}
 

@@ -118,9 +118,9 @@ namespace pengine
 		int flipHeight = (int)height * -1;//for adapt glm:perspective ;https://www.saschawillems.de/blog/2019/03/29/flipping-the-vulkan-viewport/
 		VkViewport viewport = {};
 		viewport.x = 0.0f;
-		viewport.y = static_cast<float>(height);
+		viewport.y = 0.0f;// static_cast<float>(height);
 		viewport.width = static_cast<float>(width);
-		viewport.height = static_cast<float>(flipHeight);
+		viewport.height = static_cast<float>(height);
 		viewport.minDepth = 0.0f;
 		viewport.maxDepth = 1.0f;
 

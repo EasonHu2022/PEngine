@@ -86,6 +86,7 @@ namespace pengine
 			dirty = true;
 			localOrientation = glm::eulerAngles(rotation);
 		}
+		
 		auto Transform::lookAt(const glm::vec3& target) -> void
 		{
 			localMatrix = glm::lookAt(localPosition, target, getUpDirection());
