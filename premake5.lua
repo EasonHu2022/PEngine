@@ -13,7 +13,7 @@ workspace "PEngine"
 		{
 			"PENGINE_VULKAN",
 			"GLM_FORCE_DEPTH_ZERO_TO_ONE",
-			--"GLM_FORCE_LEFT_HANDED",
+			"GLM_FORCE_LEFT_HANDED",
 		}
 	
 thirdparty = "%{wks.location}/project/thirdparty"
@@ -33,3 +33,4 @@ group "ThirdParty"
 	include "project/thirdparty/openFBX"
 	include "project/thirdparty/SPIRV-Cross"
 	include "project/thirdparty/tracy"
+	include "project/thirdparty/meshoptimizer"

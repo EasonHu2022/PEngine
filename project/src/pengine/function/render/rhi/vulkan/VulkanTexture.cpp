@@ -271,7 +271,7 @@ namespace pengine
 			mipLevels = 1;
 		}
 		this->name = fileName;
-		VKHelper::createImage(width, height, mipLevels, VkConverter::textureFormatToVK(parameters.format, parameters.srgb),
+		VKHelper::createImage(width, height,1, mipLevels, VkConverter::textureFormatToVK(parameters.format, parameters.srgb),
 			VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
 			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 1, 0, allocation);
 		VKHelper::transitionImageLayout(textureImage, VkConverter::textureFormatToVK(parameters.format, parameters.srgb),
@@ -303,7 +303,7 @@ namespace pengine
 		vkFormat = VkConverter::textureFormatToVK(internalformat, srgb);
 		parameters.format = internalformat;
 		parameters.srgb = srgb;
-		VKHelper::createImage(width, height, mipLevels, vkFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL,
+		VKHelper::createImage(width, height,1, mipLevels, vkFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL,
 			VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT | 
 			VK_IMAGE_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 1, 0, allocation);
 		textureImageView = VKHelper::createImageView(textureImage, vkFormat, mipLevels, VK_IMAGE_VIEW_TYPE_2D, VK_IMAGE_ASPECT_COLOR_BIT, 1);
@@ -312,7 +312,7 @@ namespace pengine
 			VkConverter::textureWrapToVK(parameters.wrap), VkConverter::textureWrapToVK(parameters.wrap), VkConverter::textureWrapToVK(parameters.wrap)
 			);
 
-		PLOGE("build image");
+		//PLOGE("build image");
 		imageLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 		transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 		updateDescriptor();
@@ -410,7 +410,7 @@ namespace pengine
 		}
 		auto image = textureImage;
 		auto alloc = allocation;
-		deletionQueue.emplace([image, alloc] { PLOGE("delete depth image"); vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc); });
+		deletionQueue.emplace([image, alloc] {  vmaDestroyImage(VulkanDevice::get()->getAllocator(), image, alloc); });
 	}
 
 	auto VulkanTextureDepth::resize(uint32_t width, uint32_t height, CommandBuffer* commandBuffer) -> void
@@ -432,7 +432,7 @@ namespace pengine
 	{
 		vkFormat = VKHelper::getDepthFormat(stencil);
 		format = TextureFormat::DEPTH;
-		VKHelper::createImage(width, height, 1, vkFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 1, 0, allocation);
+		VKHelper::createImage(width, height,1, 1, vkFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 1, 0, allocation);
 		textureImageView = VKHelper::createImageView(textureImage, vkFormat, 1, VK_IMAGE_VIEW_TYPE_2D, VK_IMAGE_ASPECT_DEPTH_BIT, 1);
 		transitionImage(VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, (VulkanCommandBuffer*)commandBuffer);
 		textureSampler = VKHelper::createTextureSampler(VK_FILTER_LINEAR, VK_FILTER_LINEAR, 0.0f, 1.0f, true,
@@ -604,7 +604,7 @@ namespace pengine
 		vkFormat = VkConverter::textureFormatToVK(parameters.format);
 
 
-		VKHelper::createImage(width, height, numMips, vkFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 6, VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT, allocation);
+		VKHelper::createImage(width, height,1, numMips, vkFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 6, VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT, allocation);
 
 
 		/*
@@ -679,7 +679,7 @@ namespace pengine
 		auto depthFormat = VKHelper::getDepthFormat();
 
 
-		VKHelper::createImage(width, height, 1, depthFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+		VKHelper::createImage(width, height,1, 1, depthFormat, VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
 			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, count, 0, allocation);
 
 		textureImageView = VKHelper::createImageView(textureImage, depthFormat, 1, VK_IMAGE_VIEW_TYPE_2D_ARRAY, VK_IMAGE_ASPECT_DEPTH_BIT, count);
@@ -734,6 +734,14 @@ namespace pengine
 	/*#########################VulkanTexture3D######################################*/
 	VulkanTexture3D :: VulkanTexture3D(uint32_t width, uint32_t height, uint32_t depth, TextureParameters parameters, TextureLoadOptions loadOptions)
 	{
+		//if in the limitation
+		auto maxDimension3D = VulkanDevice::get()->getPhysicalDevice()->getProperties().limits.maxImageDimension3D;
+		if (width > maxDimension3D || height > maxDimension3D || depth > maxDimension3D)
+		{
+			PLOGE("Error: One of the requested texture dimensions w:{0}, h: {1}, depth:{2} is greater than supported 3D texture dimension : {3}!"
+				,width,height,depth,maxDimension3D);			
+			return;
+		}
 		init();
 	}
 	VulkanTexture3D::~VulkanTexture3D() 
@@ -741,14 +749,67 @@ namespace pengine
 		release();
 	};
 
+	auto VulkanTexture3D::updateDescriptor() -> void
+	{
+		descriptor.sampler = textureSampler;
+		descriptor.imageView = textureImageView;
+		descriptor.imageLayout = imageLayout;
+	}
+
+	auto VulkanTexture3D::transitionImage(VkImageLayout newLayout, const VulkanCommandBuffer* commandBuffer) -> void
+	{
+		if (newLayout != imageLayout)
+		{
+			VKHelper::transitionImageLayout(textureImage,vkFormat, imageLayout, newLayout, 1, count, commandBuffer ? commandBuffer->getCommandBuffer() : nullptr);
+		}
+		imageLayout = newLayout;
+		updateDescriptor();
+	}
+
 	void VulkanTexture3D::init()
 	{
-		PLOGE("didn't impl");
+		this->width = width;
+		this->height = height;
+		this->depth = depth;
+		constexpr uint32_t FLAGS = VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT |
+			VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+		vkFormat = VkConverter::textureFormatToVK(format);
+		VKHelper::createImage(width, height,depth, 1, vkFormat, VK_IMAGE_TYPE_3D, VK_IMAGE_TILING_OPTIMAL,
+			VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
+			VK_IMAGE_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory, 1, 0, allocation);
+		textureImageView = VKHelper::createImageView(textureImage, vkFormat, 1, VK_IMAGE_VIEW_TYPE_3D, VK_IMAGE_ASPECT_COLOR_BIT, 1);
+		textureSampler = VKHelper::createTextureSampler(VK_FILTER_LINEAR, VK_FILTER_LINEAR, 0.0f, 1.0f, true,
+			VulkanDevice::get()->getPhysicalDevice()->getProperties().limits.maxSamplerAnisotropy,
+			VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+			VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+			VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE);
+		imageLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+		transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+		updateDescriptor();
 	}
 	void VulkanTexture3D::release()
 	{
-		PLOGE("didn't impl");
+		auto& queue = VulkanContext::getDeletionQueue();
+
+		auto textureImageView = this->textureImageView;
+		auto textureImage = this->textureImage;
+		auto textureImageMemory = this->textureImageMemory;
+		auto textureSampler = this->textureSampler;
+		auto imageViews = this->imageViews;
+		auto size = count;
+
+		queue.emplace([textureImageView, textureSampler, imageViews, size]() {
+			vkDestroyImageView(*VulkanDevice::get(), textureImageView, nullptr);
+
+			if (textureSampler)
+				vkDestroySampler(*VulkanDevice::get(), textureSampler, nullptr);
+
+			for (uint32_t i = 0; i < size; i++)
+			{
+				vkDestroyImageView(*VulkanDevice::get(), imageViews[i], nullptr);
+			}
+			});
+		auto alloc = allocation;
+		queue.emplace([textureImage, alloc] { vmaDestroyImage(VulkanDevice::get()->getAllocator(), textureImage, alloc); });
 	}
-
-
 };

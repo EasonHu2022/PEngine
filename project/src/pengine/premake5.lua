@@ -41,6 +41,7 @@ project "pengine"
 		thirdparty .. "/SPIRV-Cross",
 		thirdparty .. "/tracy",
 		thirdparty .. "/Eigen",
+		thirdparty .. "/meshoptimizer/include",
 		assetsdir,
 	}
 
@@ -74,6 +75,7 @@ project "pengine"
 		"OFBX",
 		"spirv-cross",
 		"tracy",
+		"meshoptimizer"
 	}
 	postbuildcommands
 		{

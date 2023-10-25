@@ -104,76 +104,76 @@ namespace pengine
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureDepth>(width, height, stencil);
-#endif        // MAPLE_OPENGL
+#endif        
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureDepth>(width, height, stencil);
-#endif        // MAPLE_VULKAN
+#endif        
 	}
 	/*--------------------------------------TextureCube--------------------------------------------*/
 	auto TextureCube::create(uint32_t size) -> std::shared_ptr<TextureCube>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureCube>(size);
-#endif        // MAPLE_OPENGL
+#endif        
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureCube>(size);
-#endif        // MAPLE_VULKAN
+#endif       
 	}
 
 	auto TextureCube::create(uint32_t size, TextureFormat format, int32_t numMips) -> std::shared_ptr<TextureCube>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureCube>(size, format, numMips);
-#endif        // MAPLE_OPENGL
+#endif        
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureCube>(size, format, numMips);
-#endif        // MAPLE_VULKAN
+#endif        
 	}
 	auto TextureCube::createFromFile(const std::string& filePath) -> std::shared_ptr<TextureCube>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureCube>(filePath);
-#endif        // MAPLE_OPENGL
+#endif        
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureCube>(filePath);
-#endif        // MAPLE_VULKAN
+#endif       
 	}
 	auto TextureCube::createFromFiles(const std::array<std::string, 6>& files) -> std::shared_ptr<TextureCube>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureCube>(files);
-#endif        // MAPLE_OPENGL
+#endif      
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureCube>(files);
-#endif        // MAPLE_VULKAN
+#endif        
 	}
 	auto TextureCube::createFromVCross(const std::vector<std::string>& files, uint32_t mips, TextureParameters params, TextureLoadOptions loadOptions, InputFormat format) -> std::shared_ptr<TextureCube>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureCube>(files, mips, params, loadOptions, format);
-#endif        // MAPLE_OPENGL
+#endif      
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureCube>(files, mips, params, loadOptions, format);
-#endif        // MAPLE_VULKAN
+#endif        
 	}
 	/*--------------------------------------TextureDepthArray--------------------------------------------*/
 	auto TextureDepthArray::create(uint32_t width, uint32_t height, uint32_t count) -> std::shared_ptr<TextureDepthArray>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared<GLTextureDepthArray>(width, height, count);
-#endif        // MAPLE_OPENGL
+#endif        
 #ifdef PENGINE_VULKAN
 		return std::make_shared<VulkanTextureDepthArray>(width, height, count);
-#endif        // MAPLE_VULKAN
+#endif        
 	}
 	/*--------------------------------------TextureDepthArray--------------------------------------------*/
 	auto Texture3D::create(uint32_t width, uint32_t height, uint32_t depth, TextureParameters parameters, TextureLoadOptions loadOptions) -> std::shared_ptr<Texture3D>
 	{
 #ifdef PENGINE_OPENGL
 		return std::make_shared <GLTexture3D>(width, height, depth, parameters, loadOptions);
-#endif        // MAPLE_OPENGL
+#endif        
 #ifdef PENGINE_VULKAN
 		return std::make_shared <VulkanTexture3D>(width, height, depth, parameters, loadOptions);
-#endif        // MAPLE_VULKAN
+#endif        
 	}
 };

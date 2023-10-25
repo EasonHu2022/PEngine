@@ -17,6 +17,7 @@ namespace pengine
 		virtual auto getHandle() const -> void* = 0;
 		virtual auto getWidth() const->uint32_t = 0;
 		virtual auto getHeight() const->uint32_t = 0;
+		virtual auto getDepth() const->uint32_t = 0;
 		virtual auto getType() const->TextureType = 0;
 		virtual auto getFormat() const->TextureFormat = 0;
 

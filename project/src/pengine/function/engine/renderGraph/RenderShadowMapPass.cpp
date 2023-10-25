@@ -228,9 +228,6 @@ namespace pengine
 			auto cameraPos = cameraTransform.getWorldPosition();
 			glm::vec3 wsFrustumCenter = cameraPos + glm::normalize(cameraTransform.getForwardDirection()) * length2Camera * -1.0f;
 			glm::vec4 homoWsFrustumCenter = { wsFrustumCenter.x,wsFrustumCenter.y,wsFrustumCenter.z,1.0f };
-			
-			
-#if 1
 			////fix frustum center		
 			////https://zhuanlan.zhihu.com/p/515385379
 			//keep trans in same space
@@ -253,24 +250,14 @@ namespace pengine
 			//get frustumcenter back to world space
 			auto& lightWorldMat = lightTransform.getWorldMatrix();
 			homoWsFrustumCenter = lightWorldMat * homoLsFrustumCenter;
-			frustumCenter = { homoWsFrustumCenter.x,homoWsFrustumCenter.y,homoWsFrustumCenter.z };
-#else
-			frustumCenter = wsFrustumCenter;
-#endif // 1
-#if 0
-			//texel-sized-increments
-			//https://learn.microsoft.com/en-us/windows/win32/dxtecharts/common-techniques-to-improve-shadow-depth-maps#moving-the-light-in-texel-sized-increments
-
-#endif // 0
-
-			
+			frustumCenter = { homoWsFrustumCenter.x,homoWsFrustumCenter.y,homoWsFrustumCenter.z };	
 			//calculate light vp
 			auto& worldOrientation = lightTransform.getWorldOrientation();			
 			auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD) * 1.0f;
-			lightTransform.setLocalPosition(frustumCenter - lightDir * radius * 10.0f);
+			lightTransform.setLocalPosition(frustumCenter - lightDir * radius * 5.0f);
 			lightTransform.setWorldMatrix(glm::mat4{ 1.f });
 			glm::mat4 lightViewMatrix = lightTransform.getWorldMatrixInverse();
-			glm::mat4 lightOrthoMatrix = glm::ortho(-radius, radius, radius, -radius, 0.f, 2.0f* radius *10 );
+			glm::mat4 lightOrthoMatrix = glm::ortho(-radius, radius, -radius, radius, 0.f, 2.0f* radius *10 );
 			m_localData.splitDepth[l] = glm::vec4(nearClip + splitDist * clipRange) * -1.f;
 			m_localData.shadowProjView[l] = lightOrthoMatrix * lightViewMatrix;
 			lastSplitDist = splitDist;

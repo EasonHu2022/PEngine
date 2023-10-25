@@ -44,7 +44,10 @@ namespace pengine
 		{
 			return height;
 		}
-
+		inline auto getDepth() const -> uint32_t override
+		{
+			return 1;
+		}
 		inline auto getMipMapLevels() const -> uint32_t override
 		{
 			return mipLevels;
@@ -209,6 +212,10 @@ namespace pengine
 		{
 			return height;
 		}
+		inline auto getDepth() const -> uint32_t override
+		{
+			return 1;
+		}
 		auto updateDescriptor() -> void;
 
 		inline auto getVkFormat() const
@@ -292,6 +299,10 @@ namespace pengine
 		inline auto getHeight() const -> uint32_t override
 		{
 			return height;
+		}
+		inline auto getDepth() const -> uint32_t override
+		{
+			return 1;
 		}
 		inline auto getFilePath() const -> const std::string & override
 		{
@@ -399,6 +410,12 @@ namespace pengine
 		{
 			return height;
 		}
+		inline auto getDepth() const -> uint32_t override
+		{
+			return 1;
+		}
+		
+
 		inline auto getFilePath() const -> const std::string & override
 		{
 			return name;
@@ -494,6 +511,10 @@ namespace pengine
 		{
 			return height;
 		}
+		inline auto getDepth() const -> uint32_t override
+		{
+			return depth;
+		}
 		inline auto getFilePath() const -> const std::string & override
 		{
 			return name;
@@ -501,7 +522,7 @@ namespace pengine
 
 		inline auto getType() const -> TextureType override
 		{
-			return TextureType::DepthArray;
+			return TextureType::Color3D;
 		}
 
 		inline auto getFormat() const -> TextureFormat override
@@ -523,21 +544,30 @@ namespace pengine
 		{
 			return imageLayout;
 		}
-		auto updateDescriptor() -> void {};
-		auto transitionImage(VkImageLayout newLayout, const VulkanCommandBuffer* commandBuffer) -> void override {};
+
+		inline auto getVkFormat() const
+		{
+			return vkFormat;
+		}
+		auto updateDescriptor() -> void ;
+		auto transitionImage(VkImageLayout newLayout, const VulkanCommandBuffer* commandBuffer = nullptr) -> void override;
 		virtual auto generateMipmaps() -> void {};
 	protected:
 		auto init() -> void override;
 		auto release() -> void;
+
+
 	private:
 		uint32_t      handle{};
 		uint32_t      width = 0;
 		uint32_t      height = 0;
+		uint32_t      depth  = 0;
 		uint32_t      count = 0;
 		TextureFormat format;
 
 		VkImageLayout            imageLayout;
 		VkImage                  textureImage{};
+		VkFormat				 vkFormat;
 		VkDeviceMemory           textureImageMemory{};
 		VkImageView              textureImageView{};
 		VkSampler                textureSampler{};

@@ -1,8 +1,8 @@
 #include "GraphicsContext.h"
 #include "SwapChain.h"
 #include "Application.h"
-
-
+#include "UniformBuffer.h"
+#include "StorageBuffer.h"
 #ifdef PENGINE_VULKAN
 #include "vulkan/VulkanContext.h"
 #include "vulkan/VulkanSwapChain.h"
@@ -13,6 +13,7 @@
 #include "vulkan/VulkanPipeline.h"
 #include "vulkan/VulkanRenderPass.h"
 #include "vulkan/VulkanUniformBuffer.h"
+#include "vulkan/VulkanStorageBuffer.h"
 #include "vulkan/VulkanVertexBuffer.h"
 #include "imgui/VulkanImGuiRenderer.h"
 #endif
@@ -270,6 +271,28 @@ namespace pengine
 	{
 #ifdef PENGINE_VULKAN
 		auto buffer = std::make_shared<VulkanUniformBuffer>();
+#endif
+#ifdef PENGINE_OPENGL
+		auto buffer = std::make_shared<GLUniformBuffer>();
+#endif
+		buffer->setData(size, data);
+		return buffer;
+	}
+
+	auto StorageBuffer::create() -> std::shared_ptr<StorageBuffer>
+	{
+#ifdef PENGINE_VULKAN
+		return std::make_shared<VulkanStorageBuffer>();
+#endif
+#ifdef PENGINE_OPENGL
+		return std::make_shared<GLUniformBuffer>();
+#endif
+	}
+
+	auto StorageBuffer::create(uint32_t size, const void* data) -> std::shared_ptr<StorageBuffer>
+	{
+#ifdef PENGINE_VULKAN
+		auto buffer = std::make_shared<VulkanStorageBuffer>();
 #endif
 #ifdef PENGINE_OPENGL
 		auto buffer = std::make_shared<GLUniformBuffer>();

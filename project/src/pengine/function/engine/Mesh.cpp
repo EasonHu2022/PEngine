@@ -1,6 +1,7 @@
 #include "Mesh.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "meshoptimizer.h"
 namespace pengine {
 
 	Mesh::Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer) :
@@ -11,14 +12,18 @@ namespace pengine {
 
 	Mesh::Mesh(const std::vector<uint32_t>& indices, const std::vector<Vertex>& vertices)
 	{
+		//do mesh optimization here
+		std::vector<uint32_t> indexedIndices;
+		std::vector<Vertex> indexedVertices;
+		MeshOptimization(indices,vertices, indexedIndices, indexedVertices);
 		boundingBox = std::make_shared<BoundingBox>();
 		for (auto& vertex : vertices)
 		{
 			boundingBox->merge(vertex.pos);
 		}
 		vertexBuffer = VertexBuffer::create();
-		vertexBuffer->setData(sizeof(Vertex) * vertices.size(), vertices.data());
-		indexBuffer = IndexBuffer::create(indices.data(), indices.size());
+		vertexBuffer->setData(sizeof(Vertex) * indexedVertices.size(), indexedVertices.data());
+		indexBuffer = IndexBuffer::create(indexedIndices.data(), indexedIndices.size());
 	}
 
 	Mesh::~Mesh()
@@ -540,5 +545,46 @@ namespace pengine {
 
 		return std::make_shared<Mesh>(indices, data);
 	}
+	//https://github.com/zeux/meshoptimizer
+	auto Mesh::MeshOptimization(const std::vector<uint32_t>& indices, const std::vector<Vertex>& vertices, 
+		std::vector<uint32_t>& indicesOut, std::vector<Vertex>& verticesOut) -> void
+	{
+		size_t index_count = indices.size();
+		size_t unindexedvertex_count = vertices.size();
+		std::vector<unsigned int> remap(index_count); // allocate temporary memory for the remap table
+		size_t vertex_count = meshopt_generateVertexRemap(&remap[0], &indices[0], index_count, &vertices[0], unindexedvertex_count, sizeof(Vertex));
+		verticesOut.resize(vertex_count);
+		indicesOut.resize(index_count);
+		//indexing optimization
+		meshopt_remapIndexBuffer(&indicesOut[0], &indices[0], index_count, &remap[0]);
+		meshopt_remapVertexBuffer(&verticesOut[0], &vertices[0], unindexedvertex_count, sizeof(Vertex), &remap[0]);
+		//Vertex cache optimization	
+		meshopt_optimizeVertexCache(&indicesOut[0], &indicesOut[0], index_count, vertex_count);
+		//Overdraw optimization
+		meshopt_optimizeOverdraw(&indicesOut[0], &indicesOut[0], index_count, &verticesOut[0].pos.x, vertex_count, sizeof(Vertex), 1.05f);
+		//Vertex fetch optimization
+		meshopt_optimizeVertexFetch(&verticesOut[0], &indicesOut[0], index_count, &verticesOut[0], vertex_count, sizeof(Vertex));
+		//meshlets
+		const size_t max_vertices = 64;
+		const size_t max_triangles = 124;
+		const float cone_weight = 0.0f;
+		size_t max_meshlets = meshopt_buildMeshletsBound(indicesOut.size(), max_vertices, max_triangles);
+		std::vector<meshopt_Meshlet> meshlets(max_meshlets);
+		meshlet_vertices.resize(max_meshlets * max_vertices);
+		meshlet_triangles.resize(max_meshlets * max_triangles * 3);
+		size_t meshlet_count = meshopt_buildMeshlets(meshlets.data(), meshlet_vertices.data(), meshlet_triangles.data(), indicesOut.data(),
+			indicesOut.size(), &verticesOut[0].pos.x, verticesOut.size(), sizeof(Vertex), max_vertices, max_triangles, cone_weight);
+		//build data
+		clusterData.resize(max_meshlets);
+		for (int i = 0; i < meshlet_count; i++)
+		{
+			auto& m = meshlets[i];
+			meshopt_Bounds bounds = meshopt_computeMeshletBounds(&meshlet_vertices[m.vertex_offset], &meshlet_triangles[m.triangle_offset],
+				m.triangle_count, &verticesOut[0].pos.x, verticesOut.size(), sizeof(Vertex));
+			clusterData[i] = { m.vertex_offset,m.triangle_offset,m.vertex_count,m.triangle_count,{bounds.center[0],bounds.center[1],bounds.center[2],bounds.radius} };
+		}
+		
+	}
+
 	
 }

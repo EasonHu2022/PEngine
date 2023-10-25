@@ -609,14 +609,14 @@ namespace pengine
 		vmaCreateImage(VulkanDevice::get()->getAllocator(), &imageInfo, &allocInfovma, &image, &allocation, nullptr);
 	}
 
-	void VKHelper::createImage(uint32_t width, uint32_t height, uint32_t mipLevels, VkFormat format,
+	void VKHelper::createImage(uint32_t width, uint32_t height,uint32_t depth, uint32_t mipLevels, VkFormat format,
 		VkImageType imageType, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, 
 		VkImage& image, VkDeviceMemory& imageMemory, uint32_t arrayLayers, VkImageCreateFlags flags, VmaAllocation& allocation) 
 	{
 	VkImageCreateInfo imageInfo = {};
 	imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
 	imageInfo.imageType = imageType;
-	imageInfo.extent = { width, height, 1 };
+	imageInfo.extent = { width, height, depth };
 	imageInfo.mipLevels = mipLevels;
 	imageInfo.format = format;
 	imageInfo.tiling = tiling;

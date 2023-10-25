@@ -418,10 +418,14 @@ namespace pengine
 				{
 					((VulkanTexture2D*)texture.get())->transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, commandBuffer);
 				}
-				/*else if (texture->getType() == TextureType::Cube)
+				else if (texture->getType() == TextureType::Cube)
 				{
 					((VulkanTextureCube *) texture.get())->transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, commandBuffer);
-				}*/
+				}
+				else if (texture->getType() == TextureType::Color3D)
+				{
+					((VulkanTexture3D*)texture.get())->transitionImage(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, commandBuffer);
+				}
 			}
 		}
 	}

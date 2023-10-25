@@ -51,7 +51,7 @@ namespace pengine
 		SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface);
 		bool checkDeviceExtensionSupport(VkPhysicalDevice device, const std::vector<const char*>& deviceExtensions);
 		bool checkValidationLayerSupport(const std::vector<const char*>& layerNames);
-		void createImage(uint32_t width, uint32_t height, uint32_t mipLevels,
+		void createImage(uint32_t width, uint32_t height, uint32_t depth, uint32_t mipLevels,
 			VkFormat format, VkImageType imageType, VkImageTiling tiling,
 			VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, 
 			VkDeviceMemory& imageMemory, uint32_t arrayLayers, VkImageCreateFlags flags, VmaAllocation& allocation);

@@ -6,10 +6,23 @@
 #include "function/render/rhi/IndexBuffer.h"
 #include "function/render/rhi/VertexBuffer.h"
 #include "function/engine/BoundingBox.h"
+struct meshopt_Meshlet;
 namespace pengine
 {
 	class DescriptorSet;
 	class Material;
+	struct MeshCluster
+	{
+		/* offsets within meshlet_vertices and meshlet_triangles arrays with meshlet data */
+		unsigned int vertex_offset;
+		unsigned int triangle_offset;
+
+		/* number of vertices and triangles used in the meshlet; data is stored in consecutive range defined by offset and count */
+		unsigned int vertex_count;
+		unsigned int triangle_count;
+		// bounding sphere x,y,z,r
+		float boundingSphere[4];
+	};
 
 	class PENGINE_API Mesh 
 	{
@@ -98,7 +111,8 @@ namespace pengine
 		static auto createPyramid() -> std::shared_ptr<Mesh>;
 		static auto createSphere(uint32_t xSegments = 64, uint32_t ySegments = 64) -> std::shared_ptr<Mesh>;
 		static auto createPlane(float w, float h, const glm::vec3& normal) -> std::shared_ptr<Mesh>;
-
+	private:
+		auto MeshOptimization(const std::vector<uint32_t>& indices, const std::vector<Vertex>& vertices, std::vector<uint32_t>& indicesOut, std::vector<Vertex>& verticesOut) -> void;
 	protected:
 		static glm::vec3 generateTangent(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c, const glm::vec2& ta, const glm::vec2& tb, const glm::vec2& tc);
 		std::string name;
@@ -111,6 +125,9 @@ namespace pengine
 		std::shared_ptr<DescriptorSet> descriptorSet;
 		uint32_t subMeshCount = 0;
 		std::vector<uint32_t> subMeshIndex;
+		std::vector<unsigned int> meshlet_vertices;
+		std::vector<unsigned char> meshlet_triangles;	
+		std::vector<MeshCluster> clusterData;
 	};
 }
 
