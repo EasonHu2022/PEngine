@@ -6,7 +6,7 @@
 #include "function/profile/profiler.h"
 namespace pengine
 {
-	Application::Application()
+	Application::Application(std::string executablePath)
 	{
 		//init very first to ensure log
 		PLogger::init();
@@ -17,6 +17,7 @@ namespace pengine
 		renderDevice								= RenderDevice::create();
 		
 		/*############# platform independent ######################*/
+		assetsManager								= std::make_unique<AssetsManager>(executablePath);
 		cache										= std::make_shared<Cache>();
 		loaderFactory								= std::make_shared<ModelLoaderFactory>();
 		systemManager								= std::make_unique<SystemManager>();

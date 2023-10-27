@@ -3,7 +3,7 @@
 #include "view/viewManager.h"
 namespace peditor
 {
-	Editor::Editor() 
+	Editor::Editor(std::string executablePath) : Application(executablePath)
 	{
 		viewManager = std::make_unique<ViewManager>();
 	}
@@ -40,7 +40,7 @@ namespace peditor
 	}
 }
 
-Application* createApplication()
+Application* createApplication(std::string executablePath)
 {
-	return new peditor::Editor();
+	return new peditor::Editor(executablePath);
 }

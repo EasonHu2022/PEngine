@@ -162,7 +162,7 @@ namespace pengine
 	{
 		//deferredLightShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredLight.shader");
 		std::string tmpPath = "shaders/DeferredLight.shader";
-		deferredLightShader = Shader::create(ASSETS_ABSOLUTE_PATH + tmpPath);
+		deferredLightShader = Shader::create(Application::getAssetsManager()->GetInternalAssetsPath() + tmpPath);
 		descriptorLightSet.resize(1);
 		DescriptorInfo info{};
 		info.shader = deferredLightShader.get();

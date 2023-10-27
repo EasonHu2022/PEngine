@@ -20,7 +20,7 @@ namespace pengine
 	{
 		//deferredColorShader = Shader::create("F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/DeferredColor.shader");
 		std::string tempPath = "shaders/DeferredColor.shader";
-		deferredColorShader = Shader::create(ASSETS_ABSOLUTE_PATH + tempPath);
+		deferredColorShader = Shader::create(Application::getAssetsManager()->GetInternalAssetsPath() + tempPath);
 		MaterialProperties properties;
 		properties.albedoColor = glm::vec4(1.f, 1.f, 1.f, 1.f);
 		properties.roughnessColor = glm::vec4(0);

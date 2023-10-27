@@ -5,6 +5,7 @@
 #include "function/render/rhi/GraphicsContext.h"
 #include "function/render/rhi/RenderDevice.h"
 #include "function/resource/Cache.h"
+#include "function/resource/AssetsManager.h"
 #include "function/render/rhi/imgui/ImGuiRenderer.h"
 #include "function/ecs/system/SystemManager.h"
 #include "function/sceneManagement/SceneManager.h"
@@ -22,7 +23,7 @@ namespace pengine
 	class PENGINE_API Application
 	{
 	public:
-		Application();
+		Application(std::string executablePath);
 		~Application();
 		int32_t start();
 
@@ -85,11 +86,16 @@ namespace pengine
 		{
 			return get()->engineOptions;
 		}
+
+		inline static auto& getAssetsManager()
+		{
+			return get()->assetsManager;
+		}
 	protected:
 		std::unique_ptr<Window>				window;
 		std::unique_ptr<SystemManager>      systemManager;
 		std::unique_ptr<SceneManager>		sceneManager;
-
+		std::unique_ptr<AssetsManager>		assetsManager;
 		
 		std::shared_ptr<ImGuiSystem>		imGuiSystem;
 		std::shared_ptr<Cache>              cache;

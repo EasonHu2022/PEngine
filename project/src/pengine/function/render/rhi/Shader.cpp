@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include "core/utils/StringUtils.h"
+#include "Application.h"
 namespace pengine
 {
 	namespace
@@ -36,6 +37,7 @@ namespace pengine
 			{
 				auto path = StringUtils::split(str, " ");
 				auto type = getShaderTypeByName(path[0]);
+				path[1] = Application::getAssetsManager()->GetInternalAssetsPath() + path[1];
 				if (type != ShaderType::Unknown)
 				{
 					StringUtils::trim(path[1], "\r");

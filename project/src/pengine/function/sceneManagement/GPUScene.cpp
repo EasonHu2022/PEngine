@@ -20,6 +20,8 @@ namespace pengine
 
 	void GPUScene::BuildSceneVertexBuffer()
 	{
+		//merge all meshes' VB
+
 	}
 
 	void GPUScene::BuildSceneIndexBuffer()

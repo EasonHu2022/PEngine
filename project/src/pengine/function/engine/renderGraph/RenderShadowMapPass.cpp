@@ -268,7 +268,7 @@ namespace pengine
 	{	
 		cascadeSplitLambda = 0.995f;
 		std::string tempPath = "shaders/CascadeShadow.shader";
-		shader = Shader::create(ASSETS_ABSOLUTE_PATH + tempPath);
+		shader = Shader::create(Application::getAssetsManager()->GetInternalAssetsPath() + tempPath);
 		DescriptorInfo createInfo{};
 		createInfo.layoutIndex = 0;
 		createInfo.shader = shader.get();

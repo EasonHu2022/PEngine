@@ -89,6 +89,6 @@ namespace pengine
 		addScene(currentName, new Scene(currentName,width,height,renderTarget));
 		currentScene = allScenes[currentName].get();
 		std::string testpath = "models/sponza/sponza.obj";
-		currentScene->addModel(ASSETS_ABSOLUTE_PATH+testpath);
+		currentScene->addModel(Application::getAssetsManager()->GetInternalAssetsPath()+testpath);
 	}
 };

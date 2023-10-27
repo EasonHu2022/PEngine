@@ -9,7 +9,7 @@ namespace peditor
 	class Editor final : public Application
 	{
 	public:
-		Editor();
+		Editor(std::string executablePath);
 		void init() override;
 		void onImGui() override;
 		void onUpdate(const float &delta) override;

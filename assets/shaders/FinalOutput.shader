@@ -1,2 +1,2 @@
-#Vertex F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/FinalOutput.vert.spv
-#Fragment F:/workspace/YizhouHu/PEngine/PEngine/assets/shaders/spv/FinalOutput.frag.spv
+#Vertex shaders/spv/FinalOutput.vert.spv
+#Fragment shaders/spv/FinalOutput.frag.spv

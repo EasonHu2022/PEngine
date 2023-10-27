@@ -92,7 +92,7 @@ namespace pengine
 	OutputPassData::OutputPassData()
 	{
 		std::string tmpPath = "shaders/FinalOutput.shader";
-		outputShader = Shader::create(ASSETS_ABSOLUTE_PATH + tmpPath);
+		outputShader = Shader::create(Application::getAssetsManager()->GetInternalAssetsPath() + tmpPath);
 		DescriptorInfo info{};
 		descriptorOutputSet.resize(1);
 		info.shader = outputShader.get();
