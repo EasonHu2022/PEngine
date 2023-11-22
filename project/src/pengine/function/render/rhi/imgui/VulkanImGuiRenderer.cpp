@@ -123,9 +123,7 @@ namespace pengine
 	}
 	void VulkanImGuiRenderer::rebuildFontTexture()
 	{
-		auto cb = VKHelper::beginSingleTimeCommands();
-		ImGui_ImplVulkan_CreateFontsTexture(cb);
-		VKHelper::endSingleTimeCommands(cb);
+		ImGui_ImplVulkan_CreateFontsTexture();
 	}
 
 	ImTextureID VulkanImGuiRenderer::addTexture(Texture2D* texture)

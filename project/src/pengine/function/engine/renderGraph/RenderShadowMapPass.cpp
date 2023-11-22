@@ -147,7 +147,14 @@ namespace pengine
 	}
 	auto RenderShadowMapPass::onResize(uint32_t width, uint32_t height, uint32_t displayWidth, uint32_t displayHeight) -> void 
 	{
-		
+		for (int i = 0; i < outputs.size(); i++)
+		{
+			auto res = outputs[i];
+			res->onResize(SHADOW_MAP_MAX_SIZE, SHADOW_MAP_MAX_SIZE);
+			res->type = RenderResouceType::Res_DepthArray;
+			res->format = TextureFormat::DEPTH;
+			res->layer = SHADOW_MAP_CASCADE_COUNT;
+		}
 	}
 	auto RenderShadowMapPass::createVResource() -> void
 	{
@@ -170,7 +177,7 @@ namespace pengine
 		auto& worldOrientation = lightTransform.getWorldOrientation();
 		auto& lightDir = glm::normalize(worldOrientation * pengine::FORWARD);
 		glm::mat4 lightViewMatrix = glm::lookAt(glm::vec3(0.0f) - lightDir * 5000.0f, glm::vec3(0.0f), pengine::UP);
-		glm::mat4 lightOrthoMatrix = glm::ortho(-1024.0f, 1024.0f, -1024.0f, 1024.0f, 0.1f, (2048) * 3.0f);
+		glm::mat4 lightOrthoMatrix = glm::ortho(-SHADOW_MAP_MAX_SIZE/2.0f, SHADOW_MAP_MAX_SIZE/2.0f, -SHADOW_MAP_MAX_SIZE/2.0f, SHADOW_MAP_MAX_SIZE/2.0f, 0.1f, (SHADOW_MAP_MAX_SIZE) * 3.0f);
 		m_localData.splitDepth[0] = glm::vec4(1.0f) * -1.f;
 		m_localData.shadowProjView[0] = lightOrthoMatrix * lightViewMatrix;
 	}

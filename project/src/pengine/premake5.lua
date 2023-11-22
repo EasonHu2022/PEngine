@@ -18,6 +18,9 @@ project "pengine"
 		thirdparty .. "/glm/include/**.inl",
 		thirdparty .. "/vulkanmemoryallocator/include/*.h",
 		thirdparty .. "/vulkanmemoryallocator/src/*.cpp",
+		thirdparty .. "/ImGui/**.h",
+		thirdparty .. "/ImGui/**.hpp",
+		thirdparty .. "/ImGui/**.cpp",
 	}
 	
 	includedirs
@@ -68,7 +71,6 @@ project "pengine"
 	links
 	{
 		"GLFW",
-		"ImGui",
 		"spdlog",
 		"Glad",
 		"volk",

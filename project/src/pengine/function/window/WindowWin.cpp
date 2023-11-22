@@ -83,7 +83,7 @@ namespace pengine
 	void WindowWin::setTitle(const std::string& title)
 	{
 #ifdef PENGINE_VULKAN// PENGINE_VULKAN
-		auto t = title + "(Vulkan)";
+		auto t = title + " (Vulkan)";
 #elif PENGINE_OPENGL
 		auto t = title + "(OpenGL)";
 		//gl

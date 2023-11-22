@@ -15,7 +15,7 @@ namespace peditor
 		auto release() -> void;
 		void onUpdate(const Timestep& delta);
 		template<class T>
-		inline void addView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags = 0)
+		inline void addView(char* _name, ImGuiWindowFlags _flags = 0)
 		{
 			editorViews.emplace(typeid(T).hash_code(), std::make_shared<T>(_name,_flags));
 			editorViews[typeid(T).hash_code()]->onAdd();

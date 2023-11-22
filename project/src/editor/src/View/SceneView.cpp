@@ -3,18 +3,17 @@
 #include "EditorUIConfig.h"
 #include "function/engine/Input.h"
 #include "function/sceneManagement/Scene.h"
-
+#include "imgui.h"
 namespace peditor
 {
-	SceneView::SceneView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags) : EditorView(_name,_flags)
+	SceneView::SceneView(char* _name, ImGuiWindowFlags _flags) : EditorView(_name,_flags)
 	{
 	}
 	auto SceneView::init() -> void
 	{
-		flags = PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoScrollWithMouse |
-			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoScrollbar |
-			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoMove |
-			PEngineGUIWindowFlags_::PEngineGUIWindowFlags_NoCollapse;
+		flags = ImGuiWindowFlags_NoScrollWithMouse |
+			ImGuiWindowFlags_NoScrollbar |
+			ImGuiWindowFlags_NoCollapse;
 			
 		//set init size and pos
 		pos.x = VIEWMARGINCOMMON;
@@ -126,10 +125,10 @@ namespace peditor
 	auto SceneView::onImGui() -> void	
 	{
 		//update state
-		m_bFocused = PEngineGUI::isWindowFocused();
-		m_bHovered = PEngineGUI::isWindowHovered();
-		auto newsize = PEngineGUI::getWindowSize();
-		pos = PEngineGUI::getWindowPos();
+		m_bFocused = ImGui::IsWindowFocused();
+		m_bHovered = ImGui::IsWindowHovered();
+		glm::vec2 newsize = ImGui::GetWindowSize();
+		pos = ImGui::GetWindowPos();
 		if (size != newsize)
 		{
 			size = newsize;
@@ -142,6 +141,6 @@ namespace peditor
 		glm::vec2 uv_max = { 1.0f, 1.0f };                 // top-right
 		glm::vec4 tint_col = { 1.0f, 1.0f, 1.0f, 1.0f };   // No tint
 		glm::vec4 border_col = { 1.0f, 1.0f, 1.0f, 0.5f }; // 50% opaque white
-		PEngineGUI::image(sceneRenderTargetImId, glm::vec2(size.x, size.y), uv_min, uv_max);
+		ImGui::Image(sceneRenderTargetImId, glm::vec2(size.x, size.y), uv_min, uv_max);
 	}
 };

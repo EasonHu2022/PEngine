@@ -379,10 +379,7 @@ void main()
 {
 	float _z = texture(uDepthSampler, fragTexCoord).r;
 	vec2 uv = fragTexCoord.xy;
-	//uv.y = 1 - uv.y;
-	//because we use minus viewport height
 	vec4 Pos = (ubo.inverseVP * vec4((uv.xy * 2.0f - 1.0),_z,1.0f));
-	//uv.y = 1 - uv.y;
 	Pos/=Pos.w;
 	vec3 wsPos = Pos .xyz;
 

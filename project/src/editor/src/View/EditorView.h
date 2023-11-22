@@ -1,6 +1,5 @@
 #pragma once
-#include "function/ImGui/PEngineGUI.h"
-#include "function/ImGui/PEngineGUIDefs.h"
+#include "imgui.h"
 #include "function/engine/Timestep.h"
 using namespace pengine;
 namespace peditor
@@ -12,7 +11,7 @@ namespace peditor
 	class EditorView
 	{
 	public:
-		EditorView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags = 0)
+		EditorView(char* _name, ImGuiWindowFlags _flags = 0)
 			: name(_name), flags(_flags) {};
 		virtual ~EditorView() = default;
 		virtual void init() = 0;
@@ -27,15 +26,15 @@ namespace peditor
 		virtual void drawSizeAndPos()
 		{
 			//set size and pos
-			PEngineGUI::setNextWindowPos(pos);
-			PEngineGUI::setNextWindowSize(size);
+			ImGui::SetNextWindowPos(pos);
+			ImGui::SetNextWindowSize(size);
 		};
 		virtual void drawView() final 
 		{
 			drawSizeAndPos();
-			PEngineGUI::beginWindow(name, &p_open, flags);
+			ImGui::Begin(name, &p_open, flags);
 			onImGui();
-			PEngineGUI::endWindow();
+			ImGui::End();
 		}
 		virtual char* getName() { return name; };
 		virtual void setName(char* newName) { name = newName; };
@@ -52,7 +51,7 @@ namespace peditor
 		//if you don't override updateSizeAndPos() the view will be drawed in these params
 		glm::vec2 pos = glm::vec2(0,0);
 		glm::vec2 size = glm::vec2(10,10);
-		PEngineGUI::PEngineGUIWindowFlags flags = 0;
+		ImGuiWindowFlags flags = 0;
 	};
 
 

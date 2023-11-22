@@ -1,13 +1,14 @@
 #pragma once
 #include "EditorView.h"
 #include "function/render/rhi/Texture.h"
+#include "imgui.h"
 using namespace pengine;
 namespace peditor
 {
 	class SceneView : public EditorView
 	{
 	public:
-		SceneView(char* _name, PEngineGUI::PEngineGUIWindowFlags _flags = 0);
+		SceneView(char* _name, ImGuiWindowFlags _flags = 0);
 		auto init() -> void  override;
 		auto onAdd() -> void override;
 		auto onRemove() -> void override;

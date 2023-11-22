@@ -302,6 +302,8 @@ namespace pengine
 			swapChainBuffers[i].reset();
 		}
 		swapChainBuffers.clear();
+		currentBuffer = 0;
+		acquireImageIndex = -1;
 		oldSwapChain = swapChain;
 		swapChain = VK_NULL_HANDLE;
 

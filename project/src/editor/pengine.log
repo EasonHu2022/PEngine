@@ -1,114 +1,1494 @@
-[17:49:55] [info] pengine: Vulkan : 1.3.242
-[17:49:55] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
-[17:49:55] [info] pengine: Vendor ID : 4318
-[17:49:55] [info] pengine: Device Type : Discrete GPU
-[17:49:55] [info] pengine: Driver Version : 536.396.0
-[17:49:55] [info] pengine: Selected physical device has 191 extensions
-[17:49:55] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.250.1\Bin\.\VkLayer_khronos_validation.dll)
-[17:49:55] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_RTSS" (C:\Program Files (x86)\RivaTuner Statistics Server\Vulkan\.\RTSSVkLayer64.dll)
-[17:49:55] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_FPSMonitor" (C:\Program Files (x86)\FPS Monitor\tools\.\fpsmonvk64.dll)
-[17:49:55] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_1ddf203f8d876fdf\.\nvoglv64.dll)
-[17:49:55] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_1ddf203f8d876fdf\.\nvoglv64.dll"
-[17:49:55] [info] pengine: Create the VulkanCommandBuffer
-[17:49:55] [info] pengine: Create the VulkanCommandBuffer
-[17:49:55] [info] pengine: Create the VulkanCommandBuffer
-[17:49:55] [info] pengine: Add System: class pengine::ImGuiSystem
-[17:49:55] [info] pengine: add eidtor view : Scene
-[17:49:55] [info] pengine: Add Task: class pengine::RenderGBufferPass
-[17:49:55] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredColor.vert.spv
-[17:49:55] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredColor.frag.spv
-[17:49:55] [info] pengine: Loading Shader : DeferredColor.shader
-[17:49:55] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
-[17:49:55] [info] pengine: UniformBufferObject.projView - Size 64, offset 0
-[17:49:55] [info] pengine: UniformBufferObject.view - Size 64, offset 64
-[17:49:55] [info] pengine: UniformBufferObject.projViewOld - Size 64, offset 128
-[17:49:55] [info] pengine: 	Accessing Member 0 offset 0, size 64
-[17:49:55] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
-[17:49:55] [info] pengine: Uniform UniformMaterialData at set = 1, binding = 6
-[17:49:55] [info] pengine: UniformMaterialData.albedoColor - Size 16, offset 0
-[17:49:55] [info] pengine: UniformMaterialData.roughnessColor - Size 16, offset 16
-[17:49:55] [info] pengine: UniformMaterialData.metallicColor - Size 16, offset 32
-[17:49:55] [info] pengine: UniformMaterialData.emissiveColor - Size 16, offset 48
-[17:49:55] [info] pengine: UniformMaterialData.usingAlbedoMap - Size 4, offset 64
-[17:49:55] [info] pengine: UniformMaterialData.usingMetallicMap - Size 4, offset 68
-[17:49:55] [info] pengine: UniformMaterialData.usingRoughnessMap - Size 4, offset 72
-[17:49:55] [info] pengine: UniformMaterialData.usingNormalMap - Size 4, offset 76
-[17:49:55] [info] pengine: UniformMaterialData.usingAOMap - Size 4, offset 80
-[17:49:55] [info] pengine: UniformMaterialData.usingEmissiveMap - Size 4, offset 84
-[17:49:55] [info] pengine: UniformMaterialData.workflow - Size 4, offset 88
-[17:49:55] [info] pengine: UniformMaterialData.padding - Size 4, offset 92
-[17:49:55] [info] pengine: Found Sampled Image uAlbedoMap at set = 1, binding = 0
-[17:49:55] [info] pengine: Found Sampled Image uMetallicMap at set = 1, binding = 1
-[17:49:55] [info] pengine: Found Sampled Image uRoughnessMap at set = 1, binding = 2
-[17:49:55] [info] pengine: Found Sampled Image uAOMap at set = 1, binding = 4
-[17:49:55] [info] pengine: Found Sampled Image uNormalMap at set = 1, binding = 3
-[17:49:55] [info] pengine: Found Sampled Image uEmissiveMap at set = 1, binding = 5
-[17:49:55] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
-[17:49:55] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
-[17:49:55] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
-[17:49:55] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
-[17:49:55] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
-[17:49:55] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
-[17:49:55] [info] pengine: Add Task: class pengine::RenderDeferredLightingPass
-[17:49:55] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredLight.vert.spv
-[17:49:55] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredLight.frag.spv
-[17:49:55] [info] pengine: Loading Shader : DeferredLight.shader
-[17:49:55] [info] pengine: Uniform UniformBufferLight at set = 0, binding = 6
-[17:49:55] [info] pengine: UniformBufferLight.lights - Size 2048, offset 0
-[17:49:55] [info] pengine: UniformBufferLight.viewMatrix - Size 64, offset 2048
-[17:49:55] [info] pengine: UniformBufferLight.shadowTransform - Size 256, offset 2112
-[17:49:55] [info] pengine: UniformBufferLight.biasMatrix - Size 64, offset 2368
-[17:49:55] [info] pengine: UniformBufferLight.inverseVP - Size 64, offset 2432
-[17:49:55] [info] pengine: UniformBufferLight.cameraPosition - Size 16, offset 2496
-[17:49:55] [info] pengine: UniformBufferLight.splitDepths - Size 64, offset 2512
-[17:49:55] [info] pengine: UniformBufferLight.shadowMapSize - Size 4, offset 2576
-[17:49:55] [info] pengine: UniformBufferLight.maxShadowDistance - Size 4, offset 2580
-[17:49:55] [info] pengine: UniformBufferLight.lightCount - Size 4, offset 2584
-[17:49:55] [info] pengine: UniformBufferLight.mode - Size 4, offset 2588
-[17:49:55] [info] pengine: UniformBufferLight.enableIndirectLight - Size 4, offset 2592
-[17:49:55] [info] pengine: UniformBufferLight.shadowCount - Size 4, offset 2596
-[17:49:55] [info] pengine: UniformBufferLight.padding2 - Size 4, offset 2600
-[17:49:55] [info] pengine: Found Sampled Image uShadowMap at set = 0, binding = 4
-[17:49:55] [info] pengine: Found Sampled Image uDepthSampler at set = 0, binding = 5
-[17:49:55] [info] pengine: Found Sampled Image uColorSampler at set = 0, binding = 0
-[17:49:55] [info] pengine: Found Sampled Image uPositionSampler at set = 0, binding = 1
-[17:49:55] [info] pengine: Found Sampled Image uNormalSampler at set = 0, binding = 2
-[17:49:55] [info] pengine: Found Sampled Image uPBRSampler at set = 0, binding = 3
-[17:49:55] [info] pengine: Add Task: class pengine::OutputPass
-[17:49:55] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/FinalOutput.vert.spv
-[17:49:55] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/FinalOutput.frag.spv
-[17:49:55] [info] pengine: Loading Shader : FinalOutput.shader
-[17:49:55] [info] pengine: Found Sampled Image outputColor at set = 0, binding = 0
-[17:49:55] [info] pengine: Add Task: class pengine::RenderShadowMapPass
-[17:49:55] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/CascadeShadow.vert.spv
-[17:49:55] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/CascadeShadow.frag.spv
-[17:49:55] [info] pengine: Loading Shader : CascadeShadow.shader
-[17:49:55] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
-[17:49:55] [info] pengine: UniformBufferObject.projView - Size 256, offset 0
-[17:49:55] [info] pengine: 	Accessing Member 1 offset 64, size 4
-[17:49:55] [info] pengine: 	Accessing Member 0 offset 0, size 64
-[17:49:55] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_column_b_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_curtain_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_curtain_blue_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_flagpole_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_column_c_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_curtain_green_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_floor_a_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/spnza_bricks_a_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_column_a_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_details_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_hanging.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/chain_texture.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_arch_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_ceiling_a_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_fabric_green_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_fabric_blue_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_thorn_diff.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_round.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_plant.tga
-[17:49:57] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/background.tga
-[17:49:58] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_fabric_diff.tga
-[17:49:58] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/lion.tga
-[17:49:58] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_dif.tga
-[17:49:58] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_roof_diff.tga
+[17:37:43] [info] pengine: Vulkan : 1.3.242
+[17:37:43] [info] pengine: GPU : NVIDIA GeForce RTX 4070 Ti
+[17:37:43] [info] pengine: Vendor ID : 4318
+[17:37:43] [info] pengine: Device Type : Discrete GPU
+[17:37:43] [info] pengine: Driver Version : 536.396.0
+[17:37:43] [info] pengine: Selected physical device has 191 extensions
+[17:37:43] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.3.250.1\Bin\.\VkLayer_khronos_validation.dll)
+[17:37:43] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_RTSS" (C:\Program Files (x86)\RivaTuner Statistics Server\Vulkan\.\RTSSVkLayer64.dll)
+[17:37:43] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_FPSMonitor" (C:\Program Files (x86)\FPS Monitor\tools\.\fpsmonvk64.dll)
+[17:37:43] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  : Inserted device layer "VK_LAYER_NV_optimus" (C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_1ddf203f8d876fdf\.\nvoglv64.dll)
+[17:37:43] [warning] pengine: [VULKAN] - INFO : [Loader Message] Code 0  :        Using "NVIDIA GeForce RTX 4070 Ti" with driver: "C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_1ddf203f8d876fdf\.\nvoglv64.dll"
+[17:37:43] [info] pengine: Create the VulkanCommandBuffer
+[17:37:43] [info] pengine: Create the VulkanCommandBuffer
+[17:37:43] [info] pengine: Create the VulkanCommandBuffer
+[17:37:43] [info] pengine: Add System: class pengine::ImGuiSystem
+[17:37:43] [info] pengine: add eidtor view : Scene
+[17:37:43] [info] pengine: Add Task: class pengine::RenderGBufferPass
+[17:37:43] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredColor.vert.spv
+[17:37:43] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredColor.frag.spv
+[17:37:43] [info] pengine: Loading Shader : DeferredColor.shader
+[17:37:43] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
+[17:37:43] [info] pengine: UniformBufferObject.projView - Size 64, offset 0
+[17:37:43] [info] pengine: UniformBufferObject.view - Size 64, offset 64
+[17:37:43] [info] pengine: UniformBufferObject.projViewOld - Size 64, offset 128
+[17:37:43] [info] pengine: 	Accessing Member 0 offset 0, size 64
+[17:37:43] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
+[17:37:43] [info] pengine: Uniform UniformMaterialData at set = 1, binding = 6
+[17:37:43] [info] pengine: UniformMaterialData.albedoColor - Size 16, offset 0
+[17:37:43] [info] pengine: UniformMaterialData.roughnessColor - Size 16, offset 16
+[17:37:43] [info] pengine: UniformMaterialData.metallicColor - Size 16, offset 32
+[17:37:43] [info] pengine: UniformMaterialData.emissiveColor - Size 16, offset 48
+[17:37:43] [info] pengine: UniformMaterialData.usingAlbedoMap - Size 4, offset 64
+[17:37:43] [info] pengine: UniformMaterialData.usingMetallicMap - Size 4, offset 68
+[17:37:43] [info] pengine: UniformMaterialData.usingRoughnessMap - Size 4, offset 72
+[17:37:43] [info] pengine: UniformMaterialData.usingNormalMap - Size 4, offset 76
+[17:37:43] [info] pengine: UniformMaterialData.usingAOMap - Size 4, offset 80
+[17:37:43] [info] pengine: UniformMaterialData.usingEmissiveMap - Size 4, offset 84
+[17:37:43] [info] pengine: UniformMaterialData.workflow - Size 4, offset 88
+[17:37:43] [info] pengine: UniformMaterialData.padding - Size 4, offset 92
+[17:37:43] [info] pengine: Found Sampled Image uAlbedoMap at set = 1, binding = 0
+[17:37:43] [info] pengine: Found Sampled Image uMetallicMap at set = 1, binding = 1
+[17:37:43] [info] pengine: Found Sampled Image uRoughnessMap at set = 1, binding = 2
+[17:37:43] [info] pengine: Found Sampled Image uAOMap at set = 1, binding = 4
+[17:37:43] [info] pengine: Found Sampled Image uNormalMap at set = 1, binding = 3
+[17:37:43] [info] pengine: Found Sampled Image uEmissiveMap at set = 1, binding = 5
+[17:37:43] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
+[17:37:43] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
+[17:37:43] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
+[17:37:43] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
+[17:37:43] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
+[17:37:43] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/textures/default.png
+[17:37:43] [info] pengine: Add Task: class pengine::RenderDeferredLightingPass
+[17:37:43] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredLight.vert.spv
+[17:37:43] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/DeferredLight.frag.spv
+[17:37:43] [info] pengine: Loading Shader : DeferredLight.shader
+[17:37:43] [info] pengine: Uniform UniformBufferLight at set = 0, binding = 6
+[17:37:43] [info] pengine: UniformBufferLight.lights - Size 2048, offset 0
+[17:37:43] [info] pengine: UniformBufferLight.viewMatrix - Size 64, offset 2048
+[17:37:43] [info] pengine: UniformBufferLight.shadowTransform - Size 256, offset 2112
+[17:37:43] [info] pengine: UniformBufferLight.biasMatrix - Size 64, offset 2368
+[17:37:43] [info] pengine: UniformBufferLight.inverseVP - Size 64, offset 2432
+[17:37:43] [info] pengine: UniformBufferLight.cameraPosition - Size 16, offset 2496
+[17:37:43] [info] pengine: UniformBufferLight.splitDepths - Size 64, offset 2512
+[17:37:43] [info] pengine: UniformBufferLight.shadowMapSize - Size 4, offset 2576
+[17:37:43] [info] pengine: UniformBufferLight.maxShadowDistance - Size 4, offset 2580
+[17:37:43] [info] pengine: UniformBufferLight.lightCount - Size 4, offset 2584
+[17:37:43] [info] pengine: UniformBufferLight.mode - Size 4, offset 2588
+[17:37:43] [info] pengine: UniformBufferLight.enableIndirectLight - Size 4, offset 2592
+[17:37:43] [info] pengine: UniformBufferLight.shadowCount - Size 4, offset 2596
+[17:37:43] [info] pengine: UniformBufferLight.padding2 - Size 4, offset 2600
+[17:37:43] [info] pengine: Found Sampled Image uShadowMap at set = 0, binding = 4
+[17:37:43] [info] pengine: Found Sampled Image uDepthSampler at set = 0, binding = 5
+[17:37:43] [info] pengine: Found Sampled Image uColorSampler at set = 0, binding = 0
+[17:37:43] [info] pengine: Found Sampled Image uPositionSampler at set = 0, binding = 1
+[17:37:43] [info] pengine: Found Sampled Image uNormalSampler at set = 0, binding = 2
+[17:37:43] [info] pengine: Found Sampled Image uPBRSampler at set = 0, binding = 3
+[17:37:43] [info] pengine: Add Task: class pengine::OutputPass
+[17:37:43] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/FinalOutput.vert.spv
+[17:37:43] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/FinalOutput.frag.spv
+[17:37:43] [info] pengine: Loading Shader : FinalOutput.shader
+[17:37:43] [info] pengine: Found Sampled Image outputColor at set = 0, binding = 0
+[17:37:43] [info] pengine: Add Task: class pengine::RenderShadowMapPass
+[17:37:43] [info] pengine: #Vertex : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/CascadeShadow.vert.spv
+[17:37:43] [info] pengine: #Fragment : F:\workspace\YizhouHu\PEngine\PEngine\assets/shaders/spv/CascadeShadow.frag.spv
+[17:37:43] [info] pengine: Loading Shader : CascadeShadow.shader
+[17:37:43] [info] pengine: Uniform UniformBufferObject at set = 0, binding = 0
+[17:37:43] [info] pengine: UniformBufferObject.projView - Size 256, offset 0
+[17:37:43] [info] pengine: 	Accessing Member 1 offset 64, size 4
+[17:37:43] [info] pengine: 	Accessing Member 0 offset 0, size 64
+[17:37:43] [info] pengine: Push Constant pushConsts at set = 0, binding = 0
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_column_b_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_curtain_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_curtain_blue_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_flagpole_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_column_c_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_curtain_green_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_floor_a_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/spnza_bricks_a_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_column_a_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_details_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_hanging.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/chain_texture.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_arch_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_ceiling_a_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_fabric_green_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_fabric_blue_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_thorn_diff.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_round.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_plant.tga
+[17:37:45] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/background.tga
+[17:37:46] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_fabric_diff.tga
+[17:37:46] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/lion.tga
+[17:37:46] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/vase_dif.tga
+[17:37:46] [info] pengine: load image : F:\workspace\YizhouHu\PEngine\PEngine\assets/models/sponza/textures/sponza_roof_diff.tga
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: Pipeline clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:48] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: Pipeline clear Immediately
+[17:37:49] [info] pengine: Pipeline clear Immediately
+[17:37:49] [info] pengine: Pipeline clear Immediately
+[17:37:49] [info] pengine: Pipeline clear Immediately
+[17:37:49] [info] pengine: Pipeline clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:49] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: Pipeline clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [info] pengine: FrameBuffer clear Immediately
+[17:37:56] [error] pengine: delete image : Scene
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: delete image :  
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:56] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: Pipeline clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [info] pengine: FrameBuffer clear Immediately
+[17:37:57] [error] pengine: delete image : Scene
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: use count : 1
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:57] [error] pengine: delete image :  
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [error] pengine: delete image : Scene
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [error] pengine: delete image : Scene
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [error] pengine: delete image : Scene
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [error] pengine: delete image : Scene
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: Pipeline clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [info] pengine: FrameBuffer clear Immediately
+[17:37:58] [error] pengine: delete image : Scene
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: use count : 1
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:37:58] [error] pengine: delete image :  
+[17:38:10] [info] pengine: Pipeline clear
+[17:38:10] [info] pengine: Pipeline clear
+[17:38:10] [info] pengine: FrameBuffer clear
+[17:38:10] [info] pengine: FrameBuffer clear
