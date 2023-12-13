@@ -15430,7 +15430,7 @@ namespace ImGui
 // - DockContextPruneUnusedSettingsNodes()
 // - DockContextBuildNodesFromSettings()
 // - DockContextBuildAddWindowsToNodes()
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------- 
 
 void ImGui::DockContextInitialize(ImGuiContext* ctx)
 {

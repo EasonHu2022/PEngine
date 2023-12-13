@@ -73,6 +73,9 @@ namespace pengine
 
 				imGuiSystem->onRender();
 
+				//Update platform viewports
+				imGuiSystem->updatePlatformWindows();
+				//imGuiSystem->RenderPlatformWindowsDefault();
 				//end command and submit and swapchain present
 				renderDevice->present();     
 

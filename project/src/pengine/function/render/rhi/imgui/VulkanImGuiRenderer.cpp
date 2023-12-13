@@ -172,6 +172,12 @@ namespace pengine
 			});
 	}
 
+	void VulkanImGuiRenderer::updatePlatformWindows()
+	{
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+	}
+
 
 	auto VulkanImGuiRenderer::setupVulkanWindowData(ImGui_ImplVulkanH_Window* wd, VkSurfaceKHR surface, int32_t width, int32_t height) -> void
 	{

@@ -1,5 +1,6 @@
 #include "viewManager.h"
 #include "SceneView.h"
+#include "InspectorView.h"
 namespace peditor
 {
 	ViewManager::ViewManager()
@@ -12,7 +13,7 @@ namespace peditor
 	{
 
 		addView<SceneView>("Scene");
-
+		addView<InspectorView>("Inspector");
 		for (auto it = editorViews.begin(); it != editorViews.end(); ++it) {
 			it->second->init();
 		}

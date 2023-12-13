@@ -1,6 +1,7 @@
 #pragma once
 #include "imgui.h"
 #include "function/engine/Timestep.h"
+#include "imgui.h"
 using namespace pengine;
 namespace peditor
 {
@@ -26,7 +27,7 @@ namespace peditor
 		virtual void drawSizeAndPos()
 		{
 			//set size and pos
-			ImGui::SetNextWindowPos(pos);
+			//ImGui::SetNextWindowPos(pos);
 			ImGui::SetNextWindowSize(size);
 		};
 		virtual void drawView() final 

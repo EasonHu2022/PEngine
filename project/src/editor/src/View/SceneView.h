@@ -1,7 +1,6 @@
 #pragma once
 #include "EditorView.h"
 #include "function/render/rhi/Texture.h"
-#include "imgui.h"
 using namespace pengine;
 namespace peditor
 {

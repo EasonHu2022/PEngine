@@ -20,6 +20,7 @@ namespace pengine
 		auto onRender() -> void;
 		auto onResize(uint32_t w, uint32_t h) -> void;
 		auto setTheme() -> void  {};
+		auto updatePlatformWindows() -> void;
 		inline auto& getImguiRenderer() { return imguiRender; }
 	private:
 		bool clearScreen;

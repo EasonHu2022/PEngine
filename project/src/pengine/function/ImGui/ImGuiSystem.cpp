@@ -25,6 +25,8 @@ namespace pengine
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = "";
 		ImGui::StyleColorsDark();
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 		io.DisplaySize = ImVec2(
 			static_cast<float>(Application::getWindow()->getWidth()),
 			static_cast<float>(Application::getWindow()->getHeight()));
@@ -57,5 +59,9 @@ namespace pengine
 	auto ImGuiSystem::onResize(uint32_t w, uint32_t h) -> void
 	{		
 		imguiRender->onResize(w, h);
+	}
+	auto ImGuiSystem::updatePlatformWindows() -> void
+	{
+		imguiRender->updatePlatformWindows();
 	}
 };

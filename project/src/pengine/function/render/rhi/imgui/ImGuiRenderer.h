@@ -19,5 +19,6 @@ namespace pengine
 		virtual void release() = 0;
 		virtual ImTextureID addTexture(Texture2D* texture) = 0;
 		virtual void removeTexture(ImTextureID img) = 0;
+		virtual void updatePlatformWindows() = 0;
 	};
 }
